@@ -1,0 +1,31 @@
+<UserData>
+  <Properties>
+    <Item Key="PackageParamsKey">
+      <Value ctype="PackageParams">
+        <LuaIsEncrypt Value="False" />
+        <LuaEncryptKey Value="" />
+        <LuaEncryptSign Value="" />
+        <Android_PackageName Value="org.cocos.perplex" />
+        <AndroidkeyStore Value="" />
+        <AndroidVersion Value="android-20" />
+        <iOS_Target Value="perplex iOS" />
+        <iOS_BundleID Value="" />
+        <Platform Value="Android" />
+        <PublishSetting Value="VS" />
+        <FrameworkVersion Value="cocos2d-x-3.5" />
+        <IsDebugKeystore Value="True" />
+        <KeystorePassword Value="" />
+        <KeystoreAliasName Value="" />
+        <KeystoreAliasPassword Value="" />
+      </Value>
+    </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="MainScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="MainScene.csd" />
+      </Value>
+    </Item>
+  </Properties>
+</UserData>
