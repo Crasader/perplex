@@ -1,0 +1,449 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor
+END
+MainFrame.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/MainFrame.java
+END
+BRDBSetter.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BRDBSetter.java
+END
+Operation.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Operation.java
+END
+ScrollablePanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/ScrollablePanel.java
+END
+AutoMoveMode.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/AutoMoveMode.java
+END
+UnitMove.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitMove.java
+END
+CheckList.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/CheckList.java
+END
+EventManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/EventManager.java
+END
+Explore.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Explore.java
+END
+Event.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Event.java
+END
+XListItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/XListItem.java
+END
+SingleImage.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/SingleImage.java
+END
+BRPropPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BRPropPanel.java
+END
+SwingUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/SwingUtil.java
+END
+SpriteUndoManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/SpriteUndoManager.java
+END
+OperationSetter.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/OperationSetter.java
+END
+UnitPath.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitPath.java
+END
+Building.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Building.java
+END
+SpriteManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/SpriteManager.java
+END
+UnitChooser.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitChooser.java
+END
+Trigger.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Trigger.java
+END
+XList.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/XList.java
+END
+MouseInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/MouseInfo.java
+END
+UnitAppear.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitAppear.java
+END
+XImage.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/XImage.java
+END
+SpriteSelection.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/SpriteSelection.java
+END
+Unit.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Unit.java
+END
+TriggerCreator.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/TriggerCreator.java
+END
+OtherEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/OtherEvent.java
+END
+UnitFire.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitFire.java
+END
+Camera.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Camera.java
+END
+UnitRes.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitRes.java
+END
+Operation.java.bak
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Operation.java.bak
+END
+OperationList.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/OperationList.java
+END
+Tree.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Tree.java
+END
+Painter.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Painter.java
+END
+UnitPropTrigger.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitPropTrigger.java
+END
+XUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/XUtil.java
+END
+Sprite.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Sprite.java
+END
+URPropPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/URPropPanel.java
+END
+RandomMove.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/RandomMove.java
+END
+CommonDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/CommonDialog.java
+END
+BarrackMode.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BarrackMode.java
+END
+UnitMoveMode.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitMoveMode.java
+END
+EventList.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/EventList.java
+END
+Test.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Test.java
+END
+BuildingChooser.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BuildingChooser.java
+END
+URDBSetter.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/URDBSetter.java
+END
+OperationSetter.java.bak
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/OperationSetter.java.bak
+END
+DropItemMode.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/DropItemMode.java
+END
+Delay.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Delay.java
+END
+TriggerList.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/TriggerList.java
+END
+Switch.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Switch.java
+END
+StringManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/StringManager.java
+END
+PlayerChangeProp.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/PlayerChangeProp.java
+END
+BuildingChangeProp.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BuildingChangeProp.java
+END
+MapArea.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/MapArea.java
+END
+BuildingRes.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BuildingRes.java
+END
+EventSetter.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/EventSetter.java
+END
+OtherEvent.java.bak
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/OtherEvent.java.bak
+END
+Counter.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Counter.java
+END
+Animation.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Animation.java
+END
+Random.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/Random.java
+END
+OperationCreator.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/OperationCreator.java
+END
+BuildingPropTrigger.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/BuildingPropTrigger.java
+END
+RectSprite.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/RectSprite.java
+END
+UnitChangeProp.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitChangeProp.java
+END
+MapPoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/MapPoint.java
+END
+WalkArea.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/WalkArea.java
+END
+MapInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/MapInfo.java
+END
+UnitFireMode.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/UnitFireMode.java
+END
+TriggerSetter.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/TriggerSetter.java
+END
+AnimPlayPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/AnimPlayPanel.java
+END
+MapPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/Soldier/!svn/ver/396/branches/soldier_l7_m/Tools/GunFireEditor/src/editor/MapPanel.java
+END

@@ -1,0 +1,204 @@
+package editor;
+
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class MapInfo {
+	private int width;
+	private int height;
+	private String name;
+	private Color color;
+
+	public MapInfo(int width, int height, String name) {
+		this.width = width;
+		this.height = height;
+		this.name = name;
+		this.color = Color.WHITE;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public void saveMobileData() throws Exception {
+		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + name + "_MapInfo_Mobile.dat");
+		DataOutputStream out = 
+				  new DataOutputStream(
+						new BufferedOutputStream(
+							  new FileOutputStream(f)));
+		SL.writeInt(width, out);
+		SL.writeInt(height, out);
+		SL.writeInt(color.getRGB(), out);
+		out.flush();
+		out.close();
+	}
+
+	public void save() throws Exception {
+		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + name + "_MapInfo.dat");
+		DataOutputStream out = 
+				  new DataOutputStream(
+						new BufferedOutputStream(
+							  new FileOutputStream(f)));
+		out.writeInt(width);
+		out.writeInt(height);
+		out.writeInt(color.getRGB());
+		out.flush();
+		out.close();
+	}
+
+	public void load(String name) throws Exception {
+		this.name = name;
+		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + name + "_MapInfo.dat");
+		if(!f.exists()) return;
+		DataInputStream in = 
+				  new DataInputStream(
+						new BufferedInputStream(
+							  new FileInputStream(f)));
+		width = in.readInt();
+		height = in.readInt();
+		color = new Color(in.readInt(), true);
+		in.close();
+	}
+}
+
+class NewMapDialog extends OKCancelDialog {
+	private JTextField nameText;
+	private NumberSpinner widthSpinner;
+	private NumberSpinner heightSpinner;
+	private JButton colorButton;
+	private JColorChooser colorChooser;
+
+	public NewMapDialog(JFrame owner) {
+		super(owner);
+		init();
+	}
+
+	private void init() {
+		nameText = new JTextField(XUtil.getDefPropStr("DefMapName"));
+		widthSpinner = new NumberSpinner();
+		widthSpinner.setIntValue(XUtil.getDefPropInt("DefMapWidth"));
+		heightSpinner = new NumberSpinner();
+		heightSpinner.setIntValue(XUtil.getDefPropInt("DefMapHeight"));
+		colorButton = new JButton("设置颜色");
+		colorChooser = new JColorChooser();
+		colorButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chooseColor();
+			}
+		});
+
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.weighty = 0;
+		c.insets = new Insets(5, 5, 5, 5);
+
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 0;
+		centerPanel.add(new JLabel("名称："), c);
+
+		c.gridx = 1;
+		c.weightx = 1;
+		centerPanel.add(nameText, c);
+
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 0;
+		centerPanel.add(new JLabel("宽："), c);
+
+		c.gridx = 1;
+		c.weightx = 1;
+		centerPanel.add(widthSpinner, c);
+
+		c.gridx = 0;
+		c.gridy = 2;
+		c.weightx = 0;
+		centerPanel.add(new JLabel("高："), c);
+
+		c.gridx = 1;
+		c.weightx = 1;
+		centerPanel.add(heightSpinner, c);
+
+		c.gridx = 0;
+		c.gridy = 3;
+		c.weightx = 0;
+		centerPanel.add(new JLabel("背景色："), c);
+
+		c.gridx = 1;
+		c.weightx = 1;
+		centerPanel.add(colorButton, c);
+
+		buttonPanel.add(okButton);
+		buttonPanel.add(cancelButton);
+
+		Container cp = this.getContentPane();
+		cp.setLayout(new BorderLayout());
+		cp.add(centerPanel, BorderLayout.CENTER);
+		cp.add(buttonPanel, BorderLayout.SOUTH);
+	}
+
+	private void chooseColor() {
+		Color color = colorChooser.showDialog(this, "选择颜色", colorButton.getBackground());
+		if(color != null) {
+			colorButton.setBackground(color);
+		}
+	}
+
+	public String getName() {
+		return nameText.getText();
+	}
+
+	public int getWidth() {
+		return widthSpinner.getIntValue();
+	}
+
+	public int getHeight() {
+		return heightSpinner.getIntValue();
+	}
+
+	public Color getColor() {
+		return colorButton.getBackground();
+	}
+
+	public void okPerformed() {
+		closeType = OK_PERFORMED;
+		dispose();
+	}
+
+	public void cancelPerformed() {
+		dispose();
+	}
+}
