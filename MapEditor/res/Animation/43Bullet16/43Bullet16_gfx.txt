@@ -1,0 +1,8 @@
+START GROUP	43Bullet16
+SOURCEPATH	.\
+SOURCE		0xf0f	敌人小导弹弹头001_x.bmp
+SOURCE		0xf0f	敌人小导弹弹头003_x.bmp
+SOURCE		0xf0f	敌人小导弹弹头005_x.bmp
+SOURCE		0xf0f	敌人小导弹弹头007_x.bmp
+SOURCE		0xf0f	敌人小导弹弹头009_x.bmp
+END

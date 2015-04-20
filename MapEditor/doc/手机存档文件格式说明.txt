@@ -1,0 +1,415 @@
+1、作战单位资源存档：save\unitres\UnitRes_Mobile.dat
+	int urCount;//表示有多少种作战单位	
+	for 0 ~ urCount:
+	
+		int id;//表示该作战单位的ID
+		int hp;
+		int animID;该单位全部图片资源
+		
+		for 0 ~ 5://8方向移动的动画range，只有5方向数据，顺序为 D, DL, L, UL, U
+			int start;//每个方向的起始帧
+			int end;//每个方向的结束帧
+		end for
+		
+		for 0 ~ 8://8方向移动速度，8方向数据都有，顺序为 D, DL, L, LU, U, UR, R, RD
+			int speedX;
+			int speedY;
+		end for
+		
+		int gridCount;//表示占地格数组的大小
+		for 0 ~ gridCount://每个占地格相对作战单位基准点的偏移
+			int offsetX;
+			int offsetY;
+		end for
+		
+		for 0 ~ 9://16方向站立的动画range，只有9方向数据，顺序为 D, DDL, DL, DLL, L, LLU, LU, LUU, U
+			int start;
+			int end;
+		end for
+		
+		for 0 ~ 16://16方向身体中心点的位置，16方向数据都有，顺序为D, DDL, DL, DLL, L, LLU, LU, LUU, U, UUR, UR, URR, R, RRD, RD, RDD
+			int centerX;//中心点相对基准点的偏移量
+			int centerY;
+		end for
+		
+		for 0~ 16://16方向攻击范围，16方向数据都有，顺序同上
+			int rectCount;//每个方向攻击矩形的个数
+			for 0 ~ rectCount://每个攻击矩形的数据
+				int left;//矩形相对作战单位基准点的偏移
+				int top;//同上
+				int width;
+				int height;
+			end for
+		end for
+		
+		for 0 ~ 9://16方向死亡的动画range，只有9方向数据，顺序同上
+			int start;
+			int end;
+		end for
+		
+		for 0 ~ 16://16方向的死亡爆炸数据
+			int exploreCount;//每个方向上死亡爆炸效果的个数
+			for 0 ~ exploreCount://每个死亡爆炸的数据
+				int animID;//该爆炸的动画ID
+				int x;//爆炸效果相对作战单位基准点的偏移量
+				int y;
+				int start;//这个爆炸动画的播放range
+				int end;
+				int beginIndex;//表示从机器人的死亡动画开始计算直到经过了beginIndex这么多帧之后开始播放这个爆炸效果
+			end for
+		end for
+		
+		int weaponPosCount;//武器挂接点的个数
+		for 0 ~ weaponPosCount://每个武器挂接点的数据
+			int id;//该挂接点的ID
+			int weapon;//武器的种类
+			for 0 ~ 16://该挂接点在16方向上的具体位置，16方向数据都有，顺序同上
+				int cover;//遮挡关系，0表示遮挡UNIT，1表示被UNIT遮挡
+				int x;//该挂接点在该方向上的位置相对作战单位基准点的偏移
+				int y;
+			end for
+		end for
+	end for
+
+
+
+
+
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+
+
+2、作战单位存档：save\unit\<地图名>_Unit_Mobile.dat
+	int unitCount;//表示该地图上作战单位的个数
+	for 0 ~ unitCount://每个作战单位的数据
+		int urID;//表示该单位使用的哪一种作战单位资源
+		int id;//该作战单位的ID；
+		int x;//该作战单位的坐标；
+		int y;
+		int dir;//初始方向
+		int ai;//AI
+		int alignment;//阵营
+		int moveMode;//移动模式
+		int moveDataLength;//移动模式的数据长度
+		if(moveMode == RANDOM_MOVE) {//随机移动
+			for 0 ~ 8:
+				int prob;//8个移动方向的概率
+			end for
+			
+			int gotoPlayerDataLength;//往Player方向移动的概率的数据长度
+			int tickDataLength;//移动的tick的概率的数据长度
+			
+			for 0 ~ gotoPlayerDataLength:
+				int dist;//距离player的距离的平方
+				int prob;//概率
+			end for
+			
+			for 0 ~ tickDataLength
+				int tick;//移动的tick
+				int prob;//该tick的概率
+			end for
+		}
+		else if(moveMode == PATH_MOVE) {//按路径移动
+			for 0 ~ moveDataLength
+				int x;
+				int y;
+			end for
+			
+		}
+		
+		int fireDataLength;//开火几率的数据长度
+		for 0 ~ fireDataLength:
+			int weapon;//武器种类
+			int prob;//该武器的概率
+		end for
+		
+		//掉落道具模式
+		int itemCount;//掉落道具的可能性总数
+		for 0 ~ itemCount://每种可能的数据
+			int type;//类型：0表示血包，1表示武器A，2表示武器B，3表示任意情况
+			int min;//表示类型对应的玩家属性在某个范围内，范围取值为 min <= prop < max，如果type == 3那么这两个属性无效
+			int max;
+			int prob;//掉落对应道具的可能性，如果type == 3那么就是任意道具，采用百分比概率
+		end for
+		
+		//自动控制
+		int itemCount;//指令数
+		for 0 ~ itemCount://
+			int dir;//方向 0 －－下 1－－左 2－－上 3－－右
+			int speed;//速度
+			int tick;//
+			int bulletType;//子弹类型
+			int firelogic;//发射逻辑
+		end for		
+	end for
+	
+	
+	
+	
+
+
+
+
+
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+	
+3、建筑资源存档：save\buildingres\BuildingRes_Mobile.dat
+	int brCount;//表示有多少种建筑资源
+	for 0 ~ brCount:
+	
+		int type;//表示该建筑资源的类型；分为：普通可摧毁建筑、可半毁的建筑、兵营
+		int id;//该建筑资源的ID；
+		
+		byte shake;//是否震屏：0表示否，1表示是
+		
+		int originX;//该建筑的排序点相对与图片正中心点的偏移量
+		int originY;
+		
+		int rectCount;//该建筑攻击矩形的个数
+		for 0 ~ rectCount://每个攻击矩形的数据
+			int left;//矩形相对建筑图片正中心点的偏移量
+			int top;
+			int width;
+			int height;
+		end for
+		
+		//后面的数据对于不同类型的建筑并不相同
+		
+		//对于普通可摧毁的建筑和可半毁的建筑
+		
+			int normalImageID;//表示普通状态下该建筑的图片ID；
+			int halfImageID;//表示半毁状态下该建筑的图片ID；如果是普通可摧毁的建筑那么这个数据为-1
+			int deadImageID;//表示摧毁状态下该建筑的图片ID；
+			
+			int hp;//建筑的血量；如果可以半毁的话那么半毁的标准就是hp/2
+			
+			int exploreCount;//死亡爆炸效果的个数
+			for 0 ~ exploreCount://每个死亡爆炸的数据
+				int animID;//该爆炸的动画ID
+				int x;//爆炸效果相对该建筑图片正中心的偏移量
+				int y;
+				int start;//这个爆炸动画的播放range
+				int end;
+				int beginIndex;//表示从建筑的死亡时刻开始计算直到经过了beginIndex这么多毫秒之后开始播放这个爆炸效果
+			end for
+			
+			int interval;//爆炸持续的毫秒数
+			
+		//普通可摧毁的建筑和可半毁的建筑数据完毕
+		
+		
+	end for
+
+
+
+
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+
+	
+4、建筑存档：save\building\<地图名>_Building_Mobile.dat
+	int buildingCount;//表示的图上建筑的个数
+	for 0 ~ buildingCount://每个建筑的数据
+		int brID;//表示该建筑使用的那个资源
+		int id;//该建筑的ID；
+		int x;//该建筑的基准点的坐标；注意：不是正中心点
+		int y;
+		int state;//初始状态。0表示完好；1表示半毁；2表示全毁
+		int flip;//0表示无水平翻转；1表示水平翻转
+		
+		//出兵模式
+		int barrackCount;//一共出多少次兵
+		for 0 ~ barrackCount://每次出兵的数据		
+			int unitType;//兵种类型
+			int left;//出兵的地图范围，使用实际地图坐标
+			int top;
+			int width;
+			int height;
+			int unitCount;//出兵数量
+			int interval;//此次出兵之后需要冷却的时间
+		end for
+		
+		//掉落道具模式
+		int itemCount;//掉落道具的可能性总数
+		for 0 ~ itemCount://每种可能的数据
+			int type;//类型：0表示血包，1表示武器A，2表示武器B，3表示任意情况
+			int min;//表示类型对应的玩家属性在某个范围内，范围取值为 min <= prop < max，如果type == 3那么这两个属性无效
+			int max;
+			int prob;//掉落对应道具的可能性，如果type == 3那么就是任意道具，采用百分比概率
+		end for
+	end for
+
+
+
+
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+	
+5、地板存档：save\floor\<地图名>_Floor_Mobile.dat
+	int floorCount;//地板图片的数量
+	for 0 ~ floorCount://每个地板的数据
+		int id;
+		int x;
+		int y;
+		int flip;//同上
+	end for
+
+
+
+
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+
+6、可遮挡物存档：save\tree\<地图名>_Tree_Mobile.dat
+	int floorCount;//遮挡物图片的数量
+	for 0 ~ floorCount://每个遮挡物的数据
+		int id;
+		int x;
+		int y;
+		int flip;//同上
+	end for
+	
+
+
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+
+
+
+7、地图性可攻击范围：save\rect\<地图名>_Rect_Mobile.dat
+	int rectCount;//可攻击范围的个数
+	for 0 ~ rectCount://每个可攻击范围的数据
+		int x;
+		int y;
+		int width;
+		int height;
+	end for
+	
+	
+	
+	
+——————————————————————————————————————超级无敌分割线—————————————————————————————————————————————
+
+
+
+
+8、事件：save\event\<地图名>_Event_Mobile.dat
+	int eventCount;//事件个数
+	for 0 ~ eventCount://每个事件的数据
+	
+		int triggerCount;//触发器的个数
+		for 0 ~ triggerCount://每个触发器的数据
+			int type;//触发器的类型
+			//此处数据根据不同的触发器类型而不同
+		end for
+		
+		int operationCount;//操作的个数
+		for 0 ~ operationCount://每个操作的数据
+			int type;//操作的类型
+			//此处数据根据不同的操作类型而不同
+		end for
+	end for
+	
+	触发器的数据
+		1、开关量满足条件
+			int switchID;//开关量ID
+			int On/Off;//0表示Off，1表示On
+			
+		2、计数器满足条件
+			int counterID;//计数器ID
+			int relation;//关系编号: 0表示<，1表示<=，2表示==，3表示>=，4表示>
+			int value;//用于比较的数值
+			
+		3、随机数在某个范围内
+			int value;//用于产生随机数的基准值
+			int min;//随机数的范围
+			int max;
+			
+		4、Unit位于某个矩形范围内
+			int unitID;//作战单位的ID
+			int left;//矩形范围
+			int top;
+			int width;
+			int height;
+			
+		5、Unit的HP在某个范围内：
+			int unitID;//作战单位的ID
+			int min;//HP的范围
+			int max;
+			
+		6、建筑的HP在某个范围内：
+			int buildingID;//建筑的ID
+			int min;//HP的范围
+			int max;
+			
+	操作的数据
+		0、改变开关量
+			int switchID;
+			int On/Off;
+		
+		1、改变计数器
+			int counterID;
+			int operator;//操作符的编号:5表示=，6表示+，7表示-
+			int value;
+		
+		2、对话
+			int headID;//头像ID
+			int position;//位置：0表示左，1表示右
+			int stringID;//字符串ID，字符串文本：save\string\<地图名>_String_Mobile.txt
+		
+		3、延迟
+			int second;//秒数
+			
+		4、Unit出现
+			int unitID;
+			int x;
+			int y;
+			
+		5、Unit消失
+			int unitID;
+			
+		6、Unit按照固定路线移动:
+			int unitID;
+			int pointCount;
+			IntPair[pointCount] points;
+		
+		7、Unit使用某种武器攻击:
+			int unitID;
+			int weaponID;
+			int times;
+		
+		8、Unit爆炸:
+			int unitID;
+			
+		9、Unit改变AI:
+			int unitID;
+			int AI;
+		
+		10、Unit改变HP:
+			int unitID;
+			int operator;
+			int value;
+			
+		11、Player是否接收按键
+			int On/Off;
+			
+		12、Player能否走出屏幕
+			int On/Off;
+		
+		13、建筑爆炸
+			int buildingID;
+			
+		14、镜头淡入到某点
+			int x;
+			int y;
+			int rgb;
+			
+		15、镜头淡出
+			int rgb;

@@ -1,0 +1,5 @@
+START GROUP	30Bullet08
+SOURCEPATH	.\
+SOURCE		0xf0f	tankะกลฺตฏ01_x.bmp
+SOURCE		0xf0f	tankะกลฺตฏ02_x.bmp
+END

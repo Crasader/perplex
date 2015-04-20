@@ -1,0 +1,8 @@
+START GROUP	28Flame03
+SOURCEPATH	.\
+SOURCE		0xf0f	Ç¹»ð001_x.bmp
+SOURCE		0xf0f	Ç¹»ð002_x.bmp
+SOURCE		0xf0f	Ç¹»ð003_x.bmp
+SOURCE		0xf0f	Ç¹»ð004_x.bmp
+SOURCE		0xf0f	Ç¹»ð005_x.bmp
+END

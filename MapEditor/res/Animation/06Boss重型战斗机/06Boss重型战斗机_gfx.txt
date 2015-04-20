@@ -1,0 +1,8 @@
+START GROUP	06Boss重型战斗机
+SOURCEPATH	.\
+SOURCE		0xf0f	000_x.bmp
+SOURCE		0xf0f	001_x.bmp
+SOURCE		0xf0f	002_x.bmp
+SOURCE		0xf0f	003_x.bmp
+SOURCE		0xf0f	004_x.bmp
+END

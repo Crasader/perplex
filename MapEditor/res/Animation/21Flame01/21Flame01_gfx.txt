@@ -1,0 +1,5 @@
+START GROUP	21Flame01
+SOURCEPATH	.\
+SOURCE		0xf0f	ป๚วนวนป๐001_x.bmp
+SOURCE		0xf0f	ป๚วนวนป๐002_x.bmp
+END

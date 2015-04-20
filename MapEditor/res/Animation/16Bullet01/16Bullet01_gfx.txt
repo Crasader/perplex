@@ -1,0 +1,4 @@
+START GROUP	16Bullet01
+SOURCEPATH	.\
+SOURCE		0xf0f	»úÇ¹×Óµ¯_x.bmp
+END

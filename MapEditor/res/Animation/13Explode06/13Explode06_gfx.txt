@@ -1,0 +1,7 @@
+START GROUP	13Explode06
+SOURCEPATH	.\
+SOURCE		0xf0f	激光花01_x.bmp
+SOURCE		0xf0f	激光花02_x.bmp
+SOURCE		0xf0f	激光花03_x.bmp
+SOURCE		0xf0f	激光花04_x.bmp
+END

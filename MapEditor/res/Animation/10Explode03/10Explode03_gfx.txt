@@ -1,0 +1,7 @@
+START GROUP	10Explode03
+SOURCEPATH	.\
+SOURCE		0xf0f	枪花001_x.bmp
+SOURCE		0xf0f	枪花002_x.bmp
+SOURCE		0xf0f	枪花003_x.bmp
+SOURCE		0xf0f	枪花004_x.bmp
+END

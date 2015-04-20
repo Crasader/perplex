@@ -1,0 +1,5 @@
+START GROUP	51ToolMG
+SOURCEPATH	.\
+SOURCE		0xf0f	01_x.bmp
+SOURCE		0xf0f	02_x.bmp
+END

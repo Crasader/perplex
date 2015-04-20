@@ -1,0 +1,4 @@
+START GROUP	32Bullet10
+SOURCEPATH	.\
+SOURCE		0xf0f	╨ДлЛезс╟вс_x.bmp
+END

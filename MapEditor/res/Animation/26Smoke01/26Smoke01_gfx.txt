@@ -1,0 +1,13 @@
+START GROUP	26Smoke01
+SOURCEPATH	.\
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ001_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ002_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ003_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ004_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ005_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ006_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ007_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ008_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ009_x.rwa
+SOURCE		0xf0f	playerµ¼µ¯Î²ÑÌ010_x.rwa
+END

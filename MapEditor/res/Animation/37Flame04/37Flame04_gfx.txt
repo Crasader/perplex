@@ -1,0 +1,7 @@
+START GROUP	37Flame04
+SOURCEPATH	.\
+SOURCE		0xf0f	tankÅÚµ¯»ğÉà01_x.bmp
+SOURCE		0xf0f	tankÅÚµ¯»ğÉà02_x.bmp
+SOURCE		0xf0f	tankÅÚµ¯»ğÉà03_x.bmp
+SOURCE		0xf0f	tankÅÚµ¯»ğÉà04_x.bmp
+END

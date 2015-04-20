@@ -1,0 +1,9 @@
+START GROUP	45Smoke02
+SOURCEPATH	.\
+SOURCE		0xf0f	н╡ял001_x.rwa
+SOURCE		0xf0f	н╡ял002_x.rwa
+SOURCE		0xf0f	н╡ял003_x.rwa
+SOURCE		0xf0f	н╡ял004_x.rwa
+SOURCE		0xf0f	н╡ял005_x.rwa
+SOURCE		0xf0f	н╡ял006_x.rwa
+END

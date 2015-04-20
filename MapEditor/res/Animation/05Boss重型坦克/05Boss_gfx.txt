@@ -1,0 +1,17 @@
+START GROUP	05Boss
+SOURCEPATH	.\
+SOURCE		0xf0f	000_x.bmp
+SOURCE		0xf0f	001_x.bmp
+SOURCE		0xf0f	002_x.bmp
+SOURCE		0xf0f	003_x.bmp
+SOURCE		0xf0f	004_x.bmp
+SOURCE		0xf0f	005_x.bmp
+SOURCE		0xf0f	006_x.bmp
+SOURCE		0xf0f	007_x.bmp
+SOURCE		0xf0f	008_x.bmp
+SOURCE		0xf0f	009_x.bmp
+SOURCE		0xf0f	010_x.bmp
+SOURCE		0xf0f	011_x.bmp
+SOURCE		0xf0f	012_x.bmp
+SOURCE		0xf0f	013_x.bmp
+END

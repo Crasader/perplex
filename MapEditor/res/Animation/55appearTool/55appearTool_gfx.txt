@@ -1,0 +1,10 @@
+START GROUP	55appearTool
+SOURCEPATH	.\
+SOURCE		0xf0f	001_x.rwa
+SOURCE		0xf0f	002_x.rwa
+SOURCE		0xf0f	003_x.rwa
+SOURCE		0xf0f	004_x.rwa
+SOURCE		0xf0f	005_x.rwa
+SOURCE		0xf0f	006_x.rwa
+SOURCE		0xf0f	007_x.rwa
+END

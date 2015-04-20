@@ -1,0 +1,9 @@
+START GROUP	18Bullet03
+SOURCEPATH	.\
+SOURCE		0xf0f	旋转机枪子弹001_x.bmp
+SOURCE		0xf0f	旋转机枪子弹002_x.bmp
+SOURCE		0xf0f	旋转机枪子弹004_x.bmp
+SOURCE		0xf0f	旋转机枪子弹005_x.bmp
+SOURCE		0xf0f	旋转机枪子弹006_x.bmp
+SOURCE		0xf0f	旋转机枪子弹008_x.bmp
+END

@@ -1,0 +1,5 @@
+START GROUP	19Bullet04
+SOURCEPATH	.\
+SOURCE		0xf0f	大机枪子弹001_x.bmp
+SOURCE		0xf0f	大机枪子弹002_x.bmp
+END

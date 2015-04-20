@@ -1,0 +1,15 @@
+START GROUP	12Explode05
+SOURCEPATH	.\
+SOURCE		0xf0f	01_x.rwa
+SOURCE		0xf0f	02_x.rwa
+SOURCE		0xf0f	03_x.rwa
+SOURCE		0xf0f	04_x.rwa
+SOURCE		0xf0f	05_x.rwa
+SOURCE		0xf0f	06_x.rwa
+SOURCE		0xf0f	07_x.rwa
+SOURCE		0xf0f	08_x.rwa
+SOURCE		0xf0f	09_x.rwa
+SOURCE		0xf0f	10_x.rwa
+SOURCE		0xf0f	11_x.rwa
+SOURCE		0xf0f	12_x.rwa
+END

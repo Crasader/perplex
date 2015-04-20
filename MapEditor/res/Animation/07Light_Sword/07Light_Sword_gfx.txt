@@ -1,0 +1,7 @@
+START GROUP	07Light_Sword
+SOURCEPATH	.\
+SOURCE		0xf0f	刀光00psd_x.bmp
+SOURCE		0xf0f	刀光01psd_x.bmp
+SOURCE		0xf0f	刀光03psd_x.bmp
+SOURCE		0xf0f	刀光04psd_x.bmp
+END

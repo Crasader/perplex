@@ -1,0 +1,5 @@
+START GROUP	20Bullet05
+SOURCEPATH	.\
+SOURCE		0xf0f	É¢µ¯Î²001_x.bmp
+SOURCE		0xf0f	É¢µ¯Î²002_x.bmp
+END

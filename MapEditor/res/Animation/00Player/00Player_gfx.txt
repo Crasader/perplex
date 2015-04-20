@@ -1,0 +1,19 @@
+START GROUP	00Player
+SOURCEPATH	.\
+SOURCE		0xf0f	0001_站立_x.bmp
+SOURCE		0xf0f	0002_走001_x.bmp
+SOURCE		0xf0f	0003_走002_x.bmp
+SOURCE		0xf0f	0004_走003_x.bmp
+SOURCE		0xf0f	0005_走004_x.bmp
+SOURCE		0xf0f	0006_走005_x.bmp
+SOURCE		0xf0f	0007_走006_x.bmp
+SOURCE		0xf0f	0009_站立开枪02_x.bmp
+SOURCE		0xf0f	0010_出刀001_x.bmp
+SOURCE		0xf0f	0011_出刀002_x.bmp
+SOURCE		0xf0f	0012_出刀003_x.bmp
+SOURCE		0xf0f	0013_死001_x.bmp
+SOURCE		0xf0f	0014_死002_x.bmp
+SOURCE		0xf0f	0015_死003_x.bmp
+SOURCE		0xf0f	0016_死004_x.bmp
+SOURCE		0xf0f	0017_死005_x.bmp
+END

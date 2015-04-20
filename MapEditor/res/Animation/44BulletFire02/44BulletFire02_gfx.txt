@@ -1,0 +1,13 @@
+START GROUP	44BulletFire02
+SOURCEPATH	.\
+SOURCE		0xf0f	敌人小导弹火001-1_x.bmp
+SOURCE		0xf0f	敌人小导弹火001-2_x.bmp
+SOURCE		0xf0f	敌人小导弹火003-1_x.bmp
+SOURCE		0xf0f	敌人小导弹火003-2_x.bmp
+SOURCE		0xf0f	敌人小导弹火005-1_x.bmp
+SOURCE		0xf0f	敌人小导弹火005-2_x.bmp
+SOURCE		0xf0f	敌人小导弹火007-1_x.bmp
+SOURCE		0xf0f	敌人小导弹火007-2_x.bmp
+SOURCE		0xf0f	敌人小导弹火009-1_x.bmp
+SOURCE		0xf0f	敌人小导弹火009-2_x.bmp
+END

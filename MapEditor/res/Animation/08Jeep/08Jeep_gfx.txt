@@ -1,0 +1,6 @@
+START GROUP	08Jeep
+SOURCEPATH	.\
+SOURCE		0xf0f	000_x.bmp
+SOURCE		0xf0f	001_x.bmp
+SOURCE		0xf0f	002_x.bmp
+END

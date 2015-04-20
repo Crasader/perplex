@@ -1,0 +1,7 @@
+START GROUP	38Flame05
+SOURCEPATH	.\
+SOURCE		0xf0f	轰天炮火舌01_x.bmp
+SOURCE		0xf0f	轰天炮火舌02_x.bmp
+SOURCE		0xf0f	轰天炮火舌03_x.bmp
+SOURCE		0xf0f	轰天炮火舌04_x.bmp
+END

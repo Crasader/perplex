@@ -1,0 +1,10 @@
+START GROUP	25Explode08
+SOURCEPATH	.\
+SOURCE		0xf0f	player导弹小爆炸001_x.bmp
+SOURCE		0xf0f	player导弹小爆炸002_x.bmp
+SOURCE		0xf0f	player导弹小爆炸003_x.bmp
+SOURCE		0xf0f	player导弹小爆炸004_x.bmp
+SOURCE		0xf0f	player导弹小爆炸005_x.bmp
+SOURCE		0xf0f	player导弹小爆炸006_x.bmp
+SOURCE		0xf0f	player导弹小爆炸007_x.bmp
+END

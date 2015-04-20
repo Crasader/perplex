@@ -1,0 +1,15 @@
+START GROUP	08Explode01
+SOURCEPATH	.\
+SOURCE		0xf0f	±¬Õ¨2-01_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-02_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-03_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-04_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-05_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-06_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-07_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-08_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-09_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-10_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-11_x.bmp
+SOURCE		0xf0f	±¬Õ¨2-12_x.bmp
+END

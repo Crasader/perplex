@@ -1,0 +1,5 @@
+START GROUP	24BulletFire01
+SOURCEPATH	.\
+SOURCE		0xf0f	000_x.bmp
+SOURCE		0xf0f	001_x.bmp
+END

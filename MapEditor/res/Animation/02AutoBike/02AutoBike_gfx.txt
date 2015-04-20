@@ -1,0 +1,6 @@
+START GROUP	02AutoBike
+SOURCEPATH	.\
+SOURCE		0xf0f	0000_x.bmp
+SOURCE		0xf0f	0001_x.bmp
+SOURCE		0xf0f	0003_x.bmp
+END

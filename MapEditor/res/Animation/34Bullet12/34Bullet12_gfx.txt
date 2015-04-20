@@ -1,0 +1,5 @@
+START GROUP	34Bullet12
+SOURCEPATH	.\
+SOURCE		0xf0f	×Óµ¯02-001_x.bmp
+SOURCE		0xf0f	×Óµ¯02-002_x.bmp
+END

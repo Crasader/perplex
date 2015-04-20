@@ -1,0 +1,8 @@
+START GROUP	39Bullet15
+SOURCEPATH	.\
+SOURCE		0xf0f	敌人机枪01子弹001_x.bmp
+SOURCE		0xf0f	敌人机枪01子弹002_x.bmp
+SOURCE		0xf0f	敌人机枪01子弹003_x.bmp
+SOURCE		0xf0f	敌人机枪01子弹004_x.bmp
+SOURCE		0xf0f	敌人机枪01子弹005_x.bmp
+END

@@ -1,0 +1,7 @@
+START GROUP	22Flame02
+SOURCEPATH	.\
+SOURCE		0xf0f	ез╩П009-1_x.bmp
+SOURCE		0xf0f	ез╩П009-2_x.bmp
+SOURCE		0xf0f	ез╩П009-3_x.bmp
+SOURCE		0xf0f	ез╩П009-4_x.bmp
+END

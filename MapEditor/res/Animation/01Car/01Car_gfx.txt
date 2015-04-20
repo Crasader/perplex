@@ -1,0 +1,7 @@
+START GROUP	01Car
+SOURCEPATH	.\
+SOURCE		0xf0f	0000_∏«_x.bmp
+SOURCE		0xf0f	0001_…Ì01_x.bmp
+SOURCE		0xf0f	0002_…Ì02_x.bmp
+SOURCE		0xf0f	0013_≤–∫°_x.bmp
+END
