@@ -1710,8 +1710,9 @@ class SpriteInfoPanel
 			setMapInfo(null);
 		}
 		else {
-			setMapInfo("¿í£º" + scrollablePanel.getBasicWidth() +
-					   "  ¸ß£º" + scrollablePanel.getBasicHeight() +
+			MapInfo info = MainFrame.self.getMapInfo();
+			setMapInfo("¿í£º" + info.getRealWidth() +
+					   "  ¸ß£º" + info.getRealHeight() +
 					   "  ±ÈÀý£º" + (int) (scrollablePanel.getScale() * 100) + "%");
 		}
 	}
@@ -1729,8 +1730,9 @@ class SpriteInfoPanel
 				}
 			}
 			if (!setted) {
-				setMouseInfo("X£º" + spriteManager.getMouseX() +
-							 "  Y£º" + spriteManager.getMouseY());
+				MapInfo info = MainFrame.self.getMapInfo();
+				setMouseInfo("X£º" + info.changeToMobileX(spriteManager.getMouseX()) +
+							 "  Y£º" + info.changeToMobileY(spriteManager.getMouseY(), 0));
 			}
 		}
 	}
@@ -1796,6 +1798,10 @@ abstract class SpriteManagerPanel
 	public void reset(int basicWidth, int basicHeight) {
 		super.reset(basicWidth, basicHeight);
 		manager.reset();
+	}
+	
+	public void setMapSize(int basicWidth, int basicHeight) {
+		super.reset(basicWidth, basicHeight);
 	}
 	
 	public SpriteManager getManager() {
@@ -1928,6 +1934,7 @@ abstract class SpriteManagerPanel
 	}
 
 	public void saveMobileData(String name, Object[] resManagers) throws Exception {
+		
 		File f = new File(getFilePath() + "\\" + name + "_" + getClassName() + "_Mobile.dat");
 		DataOutputStream out =
 			new DataOutputStream(

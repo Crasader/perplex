@@ -158,8 +158,10 @@ public class ScrollablePanel
 	}
 
 	public void reset(int basicWidth, int basicHeight) {
+		setScale(1);
 		initReset(basicWidth, basicHeight);
 		sizeChanged();
+		repaint();
 	}
 
 	public int getMouseX(MouseEvent e) {

@@ -275,12 +275,16 @@ public class Animation {
 
 		width = right - left;
 		height = bottom - top;
+		if (originX == -MAX_INT && originY == -MAX_INT) {
+			originX = width / 2;
+			originY = height / 2;
+		}
 	}
 
 	private void loadBasicInfo(File animFolder) throws Exception {
 		maskColor = new Color(0xFF00FF);
-		originX = 0;
-		originY = 0;
+		originX = -MAX_INT;
+		originY = -MAX_INT;
 		intervals = new int[1];
 		intervals[0] = DEFAULT_INTERVAL;
 

@@ -2,8 +2,11 @@ package editor;
 
 import java.io.*;
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.event.*;
+
 import javax.swing.event.*;
 
 class URPainter
@@ -205,7 +208,9 @@ public class Unit
 						"  方向：" + Dir.DESCRIPTIONS[getDir()] +
 						"  层：" + layer + 
 						"  AI：" + AI.getDescription(ai) + 
-						"  阵营：" + Alignment.getDescription(alignment);
+						"  阵营：" + Alignment.getDescription(alignment)+
+						"  位置: " + getMobileX() + "," + getMobileY();
+				
 
 		return result;
 	}

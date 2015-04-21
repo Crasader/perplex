@@ -7,6 +7,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import sun.net.www.content.audio.x_aiff;
+
+import com.sun.javafx.geom.Vec2d;
+
 public class MapInfo {
 	private int width;
 	private int height;
@@ -94,8 +98,35 @@ public class MapInfo {
 		this.realHeight = realHeight;
 	}
 	
+	Vec2d changeMobilePoint(int x, int y, int h)
+	{
+		return new Vec2d(changeToMobileX(x),changeToMobileY(y,h));
+	}
+	
+	int changeToMobileX(int x)
+	{
+		x -= realLeft;
+		return x;
+	}
+	
+	int changeToMobileY(int y, int height)
+	{
+		y = realHeight - (y - realTop + height);
+		return y;
+	}
+	
+	int changeToMapEditorX(int x)
+	{
+		return (x+realLeft);
+	}
+	
+	int changeToMapEditorY(int y, int height)
+	{
+		return (realHeight - y + realTop - height);
+	}
+	
 	public void saveMobileData() throws Exception {
-		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + name + "_MapInfo_Mobile.dat");
+		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + name + "_mapinfo_mobile.dat");
 		DataOutputStream out = 
 				  new DataOutputStream(
 						new BufferedOutputStream(

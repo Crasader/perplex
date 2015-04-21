@@ -3,6 +3,8 @@ package editor;
 import java.io.*;
 import java.awt.*;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 interface Sprite
 	extends Comparable {
 
@@ -71,7 +73,8 @@ abstract class BasicSprite
 	private int id, x, y, movingX, movingY;
 	private boolean selected, moving;
 	private String name;
-
+	MapInfo info = MainFrame.self.getMapInfo();
+	
 	public BasicSprite(int id, int x, int y, String name) {
 		init(id, x, y, name);
 	}
@@ -131,6 +134,27 @@ abstract class BasicSprite
 
 	public int getY() {
 		return y;
+	}
+
+	public int getMobileY()
+	{
+		int my = info.getRealHeight() - (y - info.getRealTop() + getHeight());
+		return  my;
+	}
+	
+	public int getMobileX()
+	{
+		return  (x - info.getRealLeft());
+	}
+	
+	public int getMobileCenterX()
+	{
+		return getMobileX() + getWidth() / 2;
+	}
+	
+	public int getMobileCenterY()
+	{
+		return getMobileY() + getHeight() / 2;
 	}
 
 	public int getMovingX() {
@@ -231,6 +255,7 @@ abstract class BasicSprite
 	public void paintSelected(Graphics g) {
 		paintIdle(g);
 		paintBorder(g, getSelectedBorderColor());
+		paintArchor(g, Color.CYAN);
 	}
 
 	public Color getSelectedBorderColor() {
@@ -266,10 +291,17 @@ abstract class BasicSprite
 		g.setColor(oldColor);
 	}
 
+	public void paintArchor(Graphics g, Color color)
+	{
+		Color oldColor = g.getColor();
+		g.setColor(color);
+		g.fillOval(getX(), getY(), 5, 5);
+		g.setColor(oldColor);
+	}
 	public final static void saveMobileData(BasicSprite sprite, DataOutputStream out) throws Exception {
 		SL.writeInt(sprite.id, out);
-		SL.writeInt(sprite.x, out);
-		SL.writeInt(sprite.y, out);
+		SL.writeInt(sprite.getMobileX(), out);
+		SL.writeInt(sprite.getMobileY(), out);
 	}
 
 	public final static void save(BasicSprite sprite, DataOutputStream out) throws Exception {

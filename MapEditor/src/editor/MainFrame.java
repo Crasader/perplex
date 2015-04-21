@@ -763,7 +763,7 @@ public class MainFrame
 		if (setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
 			setter.updateMapInfo(mapInfo);
 			for (int i = 0; i < panels.length; ++i) {
-				panels[i].reset(mapInfo.getWidth(), mapInfo.getHeight());
+				panels[i].setMapSize(mapInfo.getWidth(), mapInfo.getHeight());
 			}
 			setMapName(mapInfo.getName());
 		}

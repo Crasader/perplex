@@ -1,12 +1,14 @@
 package editor;
 
 import java.util.*;
-
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+
+import sun.applet.Main;
 
 public class UnitPath {
 	public final static String getPathDescription(UnitPath up) {
@@ -365,16 +367,18 @@ class UnitPathSetter
 	}
 
 	private void addRow() {
+		MapInfo info = MainFrame.self.getMapInfo();
 		tableModel.addRow(new Object[] {
-						  new Integer(0),
-						  new Integer(0)
+				info.changeToMobileX(new Integer(0)),
+				info.changeToMobileY(new Integer(0),0)
 		});
 	}
 
 	private void addRow(IntPair row) {
+		MapInfo info = MainFrame.self.getMapInfo();
 		tableModel.addRow(new Object[] {
-						  new Integer(row.x),
-						  new Integer(row.y)
+				info.changeToMobileX(new Integer(row.x)),
+				info.changeToMobileY(new Integer(row.y),0)
 		});
 	}
 
@@ -419,66 +423,8 @@ class UnitPathSetter
 
 	private void mouseSetPath(MouseEvent e) {
 		IntPair endPoint = unitPath.getEndPoint(startPoint);
-		addRow(new IntPair(pathPanel.getMouseX(e), pathPanel.getMouseY(e)));
-//		int x = pathPanel.getMouseX(e) - endPoint.x;
-//		int y = pathPanel.getMouseY(e) - endPoint.y;
-//		if (x == 0 && y == 0) { //¶¼Îª0
-//			return;
-//		}
-//
-//		int ax = Math.abs(x);
-//		int ay = Math.abs(y);
-//		int dist = ax;
-//		if (ax >= ay * 2) {
-//			y = 0;
-//		}
-//		else if (ax > ay / 2) { // ay/2 < ax < ay * 2
-//			if (y >= 0) {
-//				y = ax;
-//			}
-//			else {
-//				y = -ax;
-//			}
-//		}
-//		else { // ax <= ay/2
-//			x = 0;
-//			dist = ay;
-//		}
-//
-//		int dir = -1;
-//		if (x > 0) {
-//			if (y > 0) {
-//				dir = Dir.RD;
-//			}
-//			else if (y == 0) {
-//				dir = Dir.R;
-//			}
-//			else { // y < 0
-//				dir = Dir.RU;
-//			}
-//		}
-//		else if (x == 0) {
-//			if (y > 0) {
-//				dir = Dir.D;
-//			}
-//			else { // y < 0
-//				dir = Dir.U;
-//			}
-//		}
-//		else { // x < 0
-//			if (y > 0) {
-//				dir = Dir.LD;
-//			}
-//			else if (y == 0) {
-//				dir = Dir.L;
-//			}
-//			else {
-//				dir = Dir.LU;
-//			}
-//		}
-//		if (dir >= 0 && dist > 0) {
-//			addRow(new IntPair(dir, dist));
-//		}
+		addRow(new IntPair(pathPanel.getMouseX(e),
+				pathPanel.getMouseY(e)));
 	}
 
 	private void scrollToVisiable() {
@@ -521,14 +467,14 @@ class UnitPathSetter
 		while (tableModel.getRowCount() > 0) {
 			tableModel.removeRow(0);
 		}
-
+		MapInfo info = MainFrame.self.getMapInfo();
 		IntPair[] path = unitPath.getPath();
 		if (path != null) {
 			for (int i = 0; i < path.length; ++i) {
 				if (path[i] != null) {
 					tableModel.addRow(new Object[] {
-									  new Integer(path[i].x),
-									  new Integer(path[i].y)});
+									  info.changeToMobileX(new Integer(path[i].x)),
+									  info.changeToMobileY(new Integer(path[i].y), 0)});
 				}
 			}
 		}
@@ -538,6 +484,7 @@ class UnitPathSetter
 	}
 
 	private void readPathTable() {
+		MapInfo info = MainFrame.self.getMapInfo();
 		ArrayList tmp = new ArrayList();
 		for (int i = 0; i < tableModel.getRowCount(); ++i) {
 			int x = 0; //((Integer)(tableModel.getValueAt(i, 0))).intValue();
@@ -563,7 +510,7 @@ class UnitPathSetter
 			}
 			y = ( (Integer) yObj).intValue();
 
-			tmp.add(new IntPair(x, y));
+			tmp.add(new IntPair(info.changeToMapEditorX(x), info.changeToMapEditorY(y, 0)));
 		}
 
 		IntPair[] path = null;

@@ -166,7 +166,8 @@ class Building
 						"  ID£º" + getID() +
 						"  ¿í£º" + getWidth() +
 						"  ¸ß£º" + getHeight() + 
-						"  " + ExploreBR.DESCS[state];
+						"  " + ExploreBR.DESCS[state]+
+						" Î»ÖÃ£º" + getMobileX() + ","+getMovingY();
 		return result;
 	}
 
