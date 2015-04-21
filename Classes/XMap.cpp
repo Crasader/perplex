@@ -7,7 +7,7 @@
 void XMap::AnalyzeRectDataL()
 {
 	char f[256];
-	sprintf(f, "map/l%d_rect_mobile.dat", iID);
+	sprintf(f, "l%d_rect_mobile.dat", iID);
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
@@ -36,7 +36,7 @@ void XMap::AnalyzeBuildingDataL()
 {
 	//解析建筑数据
 	char f[256];
-	sprintf(f, "map/l%d_building_mobile.dat", iID);
+	sprintf(f, "l%d_building_mobile.dat", iID);
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
@@ -105,13 +105,13 @@ void XMap::AnalyzeBuildingDataL()
 void XMap::AnalyzeInfDataL()
 {
 	char f[256];
-	sprintf(f, "map/l%d_mapinfo_mobile.dat", iID);
+	sprintf(f, "l%d_mapinfo_mobile.dat", iID);
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
 		dis >> iWidth >> iHeight >> iBackColor;
-		iWidth *= CC_CONTENT_SCALE_FACTOR();
-		iHeight *= CC_CONTENT_SCALE_FACTOR();
+		/*	iWidth *= CC_CONTENT_SCALE_FACTOR();
+			iHeight *= CC_CONTENT_SCALE_FACTOR();*/
 		/*byte r, g, b;
 		r = (iBackColor & 0xff0000) >> 16;
 		g = (iBackColor & 0xff00) >> 8;
@@ -123,7 +123,7 @@ void XMap::AnalyzeInfDataL()
 void XMap::AnalyzeFloorDataL()
 {
 	char f[256];
-	sprintf(f, "map/l%d_floor_mobile.dat", iID);
+	sprintf(f, "l%d_floor_mobile.dat", iID);
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
@@ -146,8 +146,6 @@ void XMap::AnalyzeFloorDataL()
 			dis >> temp;
 			dis >> iMapFloor[i].iX;
 			dis >> iMapFloor[i].iY;
-			iMapFloor[i].iX *= CC_CONTENT_SCALE_FACTOR();
-			iMapFloor[i].iY *= CC_CONTENT_SCALE_FACTOR();
 			int flip;
 			dis >> flip;
 			iMapFloor[i].iFlipH = flip > 0 ? true : false;
@@ -159,7 +157,7 @@ void XMap::AnalyzeFloorDataL()
 void XMap::AnalyzeTopDataL()
 {
 	char f[256];
-	sprintf(f, "map/l%d_tree_mobile.dat", iID);
+	sprintf(f, "l%d_tree_mobile.dat", iID);
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
@@ -186,7 +184,7 @@ void XMap::AnalyzeTopDataL()
 void XMap::AnalyzeUnitDataL()
 {
 	char f[256];
-	sprintf(f, "map/l%d_unit_mobile.dat", iID);
+	sprintf(f, "l%d_unit_mobile.dat", iID);
 	Ifstream dis(f);
 	if (!dis.fail())
 	{

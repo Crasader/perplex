@@ -32,12 +32,14 @@ USING_NS_CC;
 
 using namespace cocostudio;
 
+class IState;
+
 class GameEntity : public Node
 {
 public:
 	GameEntity();
 	GameEntity(int type, int shadowType, int radius, const Vec3& oriention = Vec3::ZERO, const Rect& moveRect = Rect::ZERO);
-	virtual ~GameEntity(){};
+	virtual ~GameEntity();;
     CREATE_FUNC(GameEntity);
     Node *getModel();
     void remove();
@@ -60,6 +62,7 @@ protected:
     int _type;
 	int _shadowType;
     float _radius;
+	IState* _curState;
 };
 
 

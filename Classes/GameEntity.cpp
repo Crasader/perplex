@@ -24,6 +24,7 @@
 
 #include "GameEntity.h"
 #include "Sprite3DEffect.h"
+#include "IState.h"
 
 USING_NS_CC_MATH;
 
@@ -94,6 +95,7 @@ GameEntity::GameEntity()
 , _orientation(0, 0, 0)
 , _type(0)
 , _shadowType(-1)
+, _curState(nullptr)
 {
 
 }
@@ -104,6 +106,12 @@ GameEntity::GameEntity(int type, int shadowType, int radius, const Vec3& orienti
 , _radius(radius)
 , _orientation(oriention)
 , _moveRect(moveRect)
+,_curState(nullptr)
 {
 
+}
+
+GameEntity::~GameEntity()
+{
+	CC_SAFE_DELETE(_curState);
 }

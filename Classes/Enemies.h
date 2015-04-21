@@ -30,33 +30,10 @@
 #include "Rotor.h"
 #include "Launcher.h"
 #include "MoveMode.h"
+#include "Fodder.h"
 
 class TurretOne;
 class TurretTwo;
-
-enum moveMode{
-    kDefault,
-    kTurn,
-	kTrunAndRoll,
-};
-
-class Fodder : public Unit
-{
-public:
-    CREATE_FUNC(Fodder);
-    bool init();
-    virtual void reset();
-    virtual void move(float y, float dt);
-    CC_SYNTHESIZE(int, _moveMode, MoveMode);
-    CC_PROPERTY(float, _turn, TurnRate);
-    CC_SYNTHESIZE(Unit*, _target, Target);
-    virtual void shoot(float dt);
-	Fodder();
-	~Fodder();
-protected:
-	ActionInterval* action1;
-	bool isRoll;
-};
 
 class FodderLeader : public Fodder
 {

@@ -108,6 +108,8 @@
     <ClCompile Include="..\Classes\Airplane.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\FodderIdle.cpp" />
+    <ClCompile Include="..\Classes\Fodder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -235,6 +237,8 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IState.h" />
+    <ClInclude Include="..\Classes\FodderIdle.h" />
+    <ClInclude Include="..\Classes\Fodder.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -1,13 +1,21 @@
 package editor;
 
-import java.io.*;
-import java.util.*;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.metal.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.metal.DefaultMetalTheme;
 
 class FileExtFilter
 	implements java.io.FileFilter {
@@ -762,15 +770,29 @@ class SL {
 	}
 
 	public static void writeShort(int data, DataOutputStream out) throws Exception {
-		basicWriteByte( (data & 0xFF), out);
-		basicWriteByte( ( (data & 0xFF00) >> 8), out);
+		if (XUtil.getDefPropInt("Type") == 0) {// Symbian
+			basicWriteByte((data & 0xFF), out);
+			basicWriteByte(((data & 0xFF00) >> 8), out);
+		}
+		else {// Java
+			basicWriteByte(((data & 0xFF00) >> 8), out);
+			basicWriteByte((data & 0xFF), out);
+		}
 	}
 
 	public static void writeInt(int data, DataOutputStream out) throws Exception {
-		basicWriteByte( (data & 0xFF), out);
-		basicWriteByte( ( (data & 0xFF00) >> 8), out);
-		basicWriteByte( ( (data & 0xFF0000) >> 16), out);
-		basicWriteByte( ( (data & 0xFF000000) >> 24), out);
+		if (XUtil.getDefPropInt("Type") == 0) {// Symbian
+			basicWriteByte((data & 0xFF), out);
+			basicWriteByte(((data & 0xFF00) >> 8), out);
+			basicWriteByte(((data & 0xFF0000) >> 16), out);
+			basicWriteByte(((data & 0xFF000000) >> 24), out);
+		}
+		else {// Java
+			basicWriteByte(((data & 0xFF000000) >> 24), out);
+			basicWriteByte(((data & 0xFF0000) >> 16), out);
+			basicWriteByte(((data & 0xFF00) >> 8), out);
+			basicWriteByte((data & 0xFF), out);
+		}
 	}
 
 	public static void writeDouble(double data, DataOutputStream out) throws Exception {

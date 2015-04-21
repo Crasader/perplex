@@ -63,14 +63,17 @@ bool GameLayer::init()
 	_camera->setPlayer(_player);
 
     addChild(_player, kZOrderSky);
+
+	auto mapmanager = new MapManager(nullptr);
+	mapmanager->LoadMapImg(0);
+	mapmanager->RequestMap(0, true);
+	addChild(mapmanager->getFloor());
     //EffectManager::setLayer(this);
 
     this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5, -1, 2.0);
 
     //BulletController::init(this);
     //EnemyController::init(this);
-
-	//mapmnamger->createUnits();
 
     scheduleUpdate();
     
@@ -216,127 +219,18 @@ void GameLayer::gameMaster(float dt)
     }
     _elapsed+=dt;
     int enemyCount =EnemyController::enemies.size();
-    //if(_elapsed < 10 && enemyCount < 5)
-   // if(enemyCount < 5 &&_elapsed < 60)
-   // {
-   //     Vec2 random = Vec2(100*CCRANDOM_MINUS1_1(), BOUND_RECT.size.height/2+200);
-   //     for(int i=0; i < 4; i++)
-   //     {
-			//auto enemy1 = EnemyController::spawnEnemy(kEnemyFodder);
-   //         enemy1->setPosition(random + Vec2(60,60)*(i+1));
-   //         static_cast<Fodder*>(enemy1)->setMoveMode(moveMode::kDefault);
-			//auto enemy2 = EnemyController::spawnEnemy(kEnemyFodder);
-   //         enemy2->setPosition(random - Vec2(60,60)*(i+1));
-   //         static_cast<Fodder*>(enemy2)->setMoveMode(moveMode::kDefault);
-   //        /* enemy1->setRotation3D(Vec3::ZERO);
-   //         enemy2->setRotation3D(Vec3::ZERO);*/
-   //     }
-   //     auto leader = EnemyController::spawnEnemy(kEnemyFodderL);
-   //     leader->setPosition(random);
-   //     leader->setRotation3D(Vec3::ZERO);
-   //     static_cast<FodderLeader*>(leader)->setTarget(_player);
-   //     static_cast<FodderLeader*>(leader)->setMoveMode(moveMode::kDefault);
-   // }
-    ////else if(_elapsed < 20 && enemyCount <5)
 	
 	if (enemyCount < 1)
 	{
 		Vec2 random = _camera->GetMapVisibleBound().origin + Vec2(0, 400 * CCRANDOM_MINUS1_1() + 10);
-	//Vec2 random = Vec2(-240, _spr->getPositionY() + 100);
-	for (int i = 0; i < 2; i++)
-	{
-		float randomAngle =  CCRANDOM_MINUS1_1() * 0;
-		//auto enemy = EnemyController::spawnEnemy(kEnemyTank);
-		////enemy->setPosition(random + Vec2(60, 0)*(i + 1));
-		//enemy->setPosition(Director::getInstance()->convertToGL(random));
-		//static_cast<Tank*>(enemy)->setTurnRate(randomAngle*0.5);
-		//enemy->setRotation(-randomAngle - 90);
-		//auto enemy2 = EnemyController::spawnEnemy(kEnemyTurret);
-		//enemy2->setPosition(random + Vec2(160, 60)*(i + 1));
-		///*enemy2->schedule(schedule_selector(Tank::shoot), 0, kRepeatForever, 0);*/
-		//static_cast<Turret*>(enemy2)->setTarget(_player);
-	/*	addEnemy(i);*/
 
-
-		//static_cast<Fodder*>(enemy2)->setTurnRate(randomAngle*0.5);
-		/*enemy2->setRotation(-randomAngle - 90);*/
+		
 	}
-	}
-	/*auto leader = EnemyController::spawnEnemy(kEnemyFodder);
-	leader->setPosition(200, 400);*/
-  //      static_cast<FodderLeader*>(leader)->setTurnRate(45);
-  //      leader->setRotation(-45);
-  //      //enemy->runAction(EaseBackOut::create(MoveTo::create(2, _player->getPosition())));
-  //      static_cast<FodderLeader*>(leader)->setTarget(_player);
-  //      leader->schedule(schedule_selector(FodderLeader::shoot),CCRANDOM_0_1()*1+1,90,0);
-        
-    //}
-    //if(_elapsed > 10 && enemyCount < 4 &&_elapsed < 60 )
-    //{
-    //    for(int q = 0; q< 2; q++)
-    //    {
-    //        //random if its from the top, left, or bottom
-    //        int direction = CCRANDOM_0_1()*4;
-    //        float rX, rY;
-    //        switch(direction)
-    //        {
-    //            case 0://top
-    //                rY = BOUND_RECT.size.height/2+200;
-    //                rX = ENEMY_BOUND_RECT.size.width*CCRANDOM_0_1();
-    //                break;
-    //            case 1://bottom
-    //                rY = -200;
-    //                rX = ENEMY_BOUND_RECT.size.width*CCRANDOM_0_1();
-    //                break;
-    //            case 2://left
-    //                rY = ENEMY_BOUND_RECT.size.height*CCRANDOM_0_1();
-    //                rX = ENEMY_BOUND_RECT.origin.x;
-    //                break;
-    //            case 3://right
-    //                rY = ENEMY_BOUND_RECT.size.height*CCRANDOM_0_1();
-    //                rX = ENEMY_BOUND_RECT.size.width;
-    //                break;
-    //        }
-    //        auto enemy = EnemyController::showCaseEnemy(kEnemyBigDude);
-    //        //enemy->setPosition(Vec2(100*CCRANDOM_MINUS1_1(), BOUND_RECT.size.height/2+200));
-    //        enemy->setPosition(rX,rY);
-    //        Vec2 targetPos =Vec2(BOUND_RECT.size.width/3*CCRANDOM_MINUS1_1(),BOUND_RECT.size.height/3*CCRANDOM_0_1());
-    //        enemy->setScale(2*CCRANDOM_MINUS1_1()+2);
-    //        float randomTime = CCRANDOM_0_1()*1+1;
-    //        enemy->setRotation3D(Vec3(300,0,-CC_RADIANS_TO_DEGREES((enemy->getPosition()-targetPos).getAngle())+90));
-    //        enemy->runAction(
-    //                         Sequence::create(
-    //                                          Spawn::create(
-    //                                                        EaseSineOut::create(MoveTo::create(randomTime, targetPos)),
-    //                                                        EaseSineOut::create(ScaleTo::create(randomTime,1)),//TODO: replace with move 3d when possible
-    //                                                        EaseBackOut::create(RotateBy::create(randomTime+0.2,Vec3(-300,0,0))),
-    //                                                        nullptr
-    //                                                        ),
-    //                                          CallFunc::create(CC_CALLBACK_0(BigDude::showFinished, static_cast<BigDude*>(enemy))),
-    //                                          nullptr
-    //                         ));
-    //    }
-    //}
-    //if(_elapsed > 65 && !_bossOut)
-    //{
-    //    //spawn boss
-    //    _bossOut = true;
-    //    auto boss = EnemyController::spawnEnemy(kEnemyBoss);
-    //    boss->setPosition(0,800);
-    //    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-    //    // Music By Matthew Pable (http://www.matthewpablo.com/)
-    //    // Licensed under CC-BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
-    //    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Orbital Colossus_0.mp3", true);
-    //}
+	
 }
 
 void GameLayer::update(float dt)
 {
-	//updatePositions(camera);
- //   xscroll += speed*dt;
-	////_spr->settexturerect(rect(0,((int)xscroll)%2048,512,1200));
-	//_spr->settexturerect(rect(0, ((int)xscroll) % 2048, 512, 1280));
-    //_cloud->setTextureRect(Rect(0,((int)xScroll)%1024, 256, 1024));
     if (!isDie) {
 		ShadowController::update(dt);
         GameController::update(dt, _player);
@@ -354,7 +248,6 @@ void GameLayer::update(float dt)
             _streak=NULL;
             removeChild(_emissionPart);
             _emissionPart=NULL;
-            //scheduleOnce(schedule_selector(GameLayer::removeBulletAndEnmeys), 1/60);
             stopAllActions();
             unscheduleAllCallbacks();
         }

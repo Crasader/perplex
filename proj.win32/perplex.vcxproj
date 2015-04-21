@@ -143,6 +143,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Effects.cpp" />
     <ClCompile Include="..\Classes\Enemies.cpp" />
     <ClCompile Include="..\Classes\Explosion.cpp" />
+    <ClCompile Include="..\Classes\Fodder.cpp" />
+    <ClCompile Include="..\Classes\FodderIdle.cpp" />
     <ClCompile Include="..\Classes\GameControllers.cpp" />
     <ClCompile Include="..\Classes\GameEntity.cpp" />
     <ClCompile Include="..\Classes\GameLayer.cpp" />
@@ -180,6 +182,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Effects.h" />
     <ClInclude Include="..\Classes\Enemies.h" />
     <ClInclude Include="..\Classes\Explosion.h" />
+    <ClInclude Include="..\Classes\Fodder.h" />
+    <ClInclude Include="..\Classes\FodderIdle.h" />
     <ClInclude Include="..\Classes\GameControllers.h" />
     <ClInclude Include="..\Classes\GameEntity.h" />
     <ClInclude Include="..\Classes\GameGlobe.h" />

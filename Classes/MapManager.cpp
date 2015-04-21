@@ -8,12 +8,9 @@ void MapManager::AnalyzeMap()
 {
 	if (iLoadState == MapLayer::EIdle)
 	{
-		do
-		{
-			AnalyzeDataL();
-			iLoadState++;
-		} while (iLoadState <= MapLayer::ELoadMapImg);
-
+	
+		AnalyzeDataL();
+		iLoadState = MapLayer::ELoadMapImg;
 		CC_SAFE_RELEASE(iActiveMap);
 		iActiveMap = iPrepareLoadMap;
 		iGetMap = true;
@@ -59,34 +56,34 @@ bool MapManager::LoadMapImg(int aMapID)
 bool MapManager::AnalyzeDataL()
 {
 	bool result = true;
-	switch (iLoadState)
-	{
-	case MapManager::MapLayer::EIdle:
-		break;
-	case MapManager::MapLayer::ELoadMapInf:
+	/*switch (iLoadState)
+	{*/
+	//case MapManager::MapLayer::EIdle:
+		//break;
+	//case MapManager::MapLayer::ELoadMapInf:
 		iPrepareLoadMap->AnalyzeInfDataL();
-		break;
-	case MapManager::MapLayer::ELoadMapFloor:
+		//break;
+	//case MapManager::MapLayer::ELoadMapFloor:
 		iPrepareLoadMap->AnalyzeFloorDataL();
-		break;
-	case MapManager::MapLayer::ELoadMapTop:
+		//break;
+	//case MapManager::MapLayer::ELoadMapTop:
 		iPrepareLoadMap->AnalyzeTopDataL();
-		break;
-	case MapManager::MapLayer::ELoadMapBuilding:
+		//break;
+	//case MapManager::MapLayer::ELoadMapBuilding:
 		iPrepareLoadMap->AnalyzeBuildingDataL();
-		break;
-	case MapManager::MapLayer::ELoadMapUnit:
+		//break;
+	//case MapManager::MapLayer::ELoadMapUnit:
 		iPrepareLoadMap->AnalyzeUnitDataL();
-		break;
-	case MapManager::MapLayer::ELoadMapWalkRect:
+		//break;
+	//case MapManager::MapLayer::ELoadMapWalkRect:
 		iPrepareLoadMap->AnalyzeRectDataL();
-		break;
-	case MapManager::MapLayer::ELoadMapImg:
+		//break;
+	//case MapManager::MapLayer::ELoadMapImg:
 		/*result = LoadMapImg(iRequestMapID);*/
-		break;
-	default:
-		break;
-	}
+		//break;
+		/*default:
+			break;
+			}*/
 	return result;
 }
 
@@ -104,21 +101,24 @@ bool MapManager::RequestMap(int aMapID, bool aLocal)
 		iActiveMapID = aMapID;
 		return true;
 	}
-
-	if (iRequestMapID == aMapID)
+	else
 	{
+
+		CC_SAFE_DELETE(iActiveMap);
+		iLocalMap = aLocal;
+		iGetMap = false;
+		CC_SAFE_DELETE(iPrepareLoadMap);
+		iPrepareLoadMap = new XMap(aMapID);
+		iLoadingMap = true;
+		iLoadState = MapLayer::EIdle;
+		iRequestMapID = aMapID;
+
 		AnalyzeMap();
 		return false;
+
 	}
+
 	
-	CC_SAFE_DELETE(iActiveMap);
-	iLocalMap = aLocal;
-	iGetMap = false;
-	CC_SAFE_DELETE(iPrepareLoadMap);
-	iPrepareLoadMap = new XMap(aMapID);
-	iLoadingMap = true;
-	iLoadState = MapLayer::EIdle;
-	iRequestMapID = aMapID;
 
 	return false;
 }
