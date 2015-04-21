@@ -1,0 +1,58 @@
+﻿生成启动时间为 2015/4/20 18:14:43。
+     1>项目“D:\projects\perplex\proj.win32\perplex.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\audio\include" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\external" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\external\chipmunk\include\chipmunk" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\extensions" /I..\Classes /I.. /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos\editor-support" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos\platform" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos\platform\desktop" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\external\glfw3\include\win32" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /ZI /nologo /W3 /WX- /MP /Od /Oy- /D WIN32 /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D COCOS2D_DEBUG=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\Player.cpp
+         Player.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics\ccphysicsjoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+     1>d:\projects\perplex\classes\player.cpp(44): warning C4305: “初始化”: 从“double”到“const float”截断
+     1>d:\projects\perplex\classes\player.cpp(83): warning C4305: “参数”: 从“double”到“float”截断
+     1>d:\projects\perplex\classes\player.cpp(298): warning C4305: “参数”: 从“double”到“float”截断
+     1>d:\projects\perplex\classes\player.cpp(299): warning C4305: “参数”: 从“double”到“float”截断
+       PreLinkEvent:
+         if not exist "D:\projects\perplex\proj.win32\Debug.win32\" mkdir "D:\projects\perplex\proj.win32\Debug.win32\"
+         xcopy /Y /Q "D:\projects\cocos\frameworks\cocos2d-x-3.5\prebuilt\win32\*.*" "D:\projects\perplex\proj.win32\Debug.win32\"
+         xcopy "D:\projects\perplex\proj.win32\..\Resources" "D:\projects\perplex\proj.win32\Debug.win32\" /D /E /I /F /Y
+         
+         :VCEnd
+         复制了 51 个文件
+         复制了 0 个文件
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\projects\perplex\proj.win32\Debug.win32\perplex.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\projects\perplex\proj.win32\Debug.win32\ /LIBPATH:D:\projects\perplex\proj.win32\Debug.win32\ /LIBPATH:"d:\Program Files (x86)\Visual Leak Detector\lib\Win32" opengl32.lib glew32.lib libzlib.lib libpng.lib libjpeg.lib libtiff.lib libwebp.lib libiconv.lib glfw3.lib freetype250.lib winmm.lib ws2_32.lib libchipmunk.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\projects\perplex\proj.win32\Debug.win32\perplex.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\projects\perplex\proj.win32\Debug.win32\perplex.lib" /MACHINE:X86 /SAFESEH Debug.win32\game.res
+         Debug.win32\AnimationManager.obj
+         Debug.win32\AppDelegate.obj
+         Debug.win32\Bullets.obj
+         Debug.win32\CameraExt.obj
+         Debug.win32\CAnimationData.obj
+         Debug.win32\Effects.obj
+         Debug.win32\Enemies.obj
+         Debug.win32\Explosion.obj
+         Debug.win32\GameControllers.obj
+         Debug.win32\GameEntity.obj
+         Debug.win32\GameLayer.obj
+         Debug.win32\GameOverLayer.obj
+         Debug.win32\HelloWorldScene.obj
+         Debug.win32\Ifstream.obj
+         Debug.win32\LicenseLayer.obj
+         Debug.win32\LoadingScene.obj
+         Debug.win32\LoadMap.obj
+         Debug.win32\MainMenuScene.obj
+         Debug.win32\MapManager.obj
+         Debug.win32\ParticleManager.obj
+         Debug.win32\Airplane.obj
+         Debug.win32\Player.obj
+         Debug.win32\PublicApi.obj
+         Debug.win32\RotateWithAction.obj
+         Debug.win32\ShadowController.obj
+         Debug.win32\Sprite3DEffect.obj
+         Debug.win32\Turret.obj
+         Debug.win32\Unit.obj
+         Debug.win32\UnitRes.obj
+         Debug.win32\Weapon.obj
+         Debug.win32\XMap.obj
+         Debug.win32\main.obj
+         perplex.vcxproj -> D:\projects\perplex\proj.win32\Debug.win32\perplex.exe
+     1>已完成生成项目“D:\projects\perplex\proj.win32\perplex.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:24.94
