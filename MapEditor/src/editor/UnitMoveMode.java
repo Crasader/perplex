@@ -3,8 +3,11 @@ package editor;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
+import jdk.internal.util.xml.impl.Input;
 
 
 public class UnitMoveMode {
@@ -221,7 +224,19 @@ public class UnitMoveMode {
 	
 	public void saveMobileData(DataOutputStream out) throws Exception {
 		SL.writeInt(mode, out);
-		SL.writeIntPairArrayMobile(data, out);
+		if (mode == PATH && data != null) {
+			IntPair[] temp = new IntPair[ data.length];
+			MapInfo info = MainFrame.self.getMapInfo();
+			for (int i = 0; i < data.length; i++) {
+				temp[i] = new IntPair();
+				temp[i].x = info.changeToMobileX(data[i].x);
+				temp[i].y = info.changeToMobileY(data[i].y,0);
+			}
+			SL.writeIntPairArrayMobile(temp, out);
+		}
+		else {
+			SL.writeIntPairArrayMobile(data, out);
+		}
 	}
 
 	public void save(DataOutputStream out) throws Exception {

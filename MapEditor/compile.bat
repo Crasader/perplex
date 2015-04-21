@@ -6,6 +6,7 @@ cls
 
 @echo on
 javac -deprecation -classpath class src\editor\%TARGET% -d class 
+javac -deprecation -classpath class src\editoradd\%TARGET% -d class
 @echo off
 
 pause

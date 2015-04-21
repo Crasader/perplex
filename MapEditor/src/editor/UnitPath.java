@@ -20,11 +20,12 @@ public class UnitPath {
 	}
 	
 	public final static String getPathDescription(IntPair[] path) {
+		MapInfo info = MainFrame.self.getMapInfo();
 		String result = "Â·¾¶[";
 		if (path != null) {
 			for (int i = 0; i < path.length; ++i) {
 //				result = result + Dir.DESCRIPTIONS[path[i].x] + "£º" + path[i].y;
-				result = result + "(" + path[i].x + ", " + path[i].y + ")";
+				result = result + "(" + info.changeToMobileX(path[i].x) + ", " + info.changeToMobileY(path[i].y, 0) + ")";
 				result = result + "£»";
 			}
 		}
