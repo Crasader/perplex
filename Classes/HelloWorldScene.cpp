@@ -22,10 +22,10 @@ Scene* HelloWorld::createScene()
     scene->addChild(layer, 2);
 
 	//add waring layer;
-	/*auto warningLayer = LayerColor::create(Color4B(255, 0, 0, 60));
-	warningLayer->setOpacity(255);
+	auto warningLayer = LayerColor::create(Color4B(255, 0, 0, 60));
+	warningLayer->setOpacity(0);
 	warningLayer->setTag(LAYER_TAG_WARNING);
-	scene->addChild(warningLayer, 7);*/
+	scene->addChild(warningLayer, 7);
     // return the scene
     return scene;
 }

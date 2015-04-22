@@ -21,10 +21,6 @@ void XMap::AnalyzeRectDataL()
 			{
 				dis >> l >> t >> w >> h;
 				ibWalkRectActive[n] = false;
-				l *= CC_CONTENT_SCALE_FACTOR();
-				t *= CC_CONTENT_SCALE_FACTOR();
-				w *= CC_CONTENT_SCALE_FACTOR();
-				h *= CC_CONTENT_SCALE_FACTOR();
 				iMapWalkRect[n].setRect(l, t, w, h);
 			}
 		}
@@ -41,56 +37,54 @@ void XMap::AnalyzeBuildingDataL()
 	if (!dis.fail())
 	{
 		dis >> iBuildingCount;
-		iMapBuilding = new SMapBuilding[iBuildingCount];
-		for (int i = 0; i < iBuildingCount; i++)
+		if (iBuildingCount > 0)
 		{
-			int brID, id, x, y, state, bflip, factoryCount;
-			dis >> brID >> id >> x >> y >> state >> bflip >> factoryCount;
-			x *= CC_CONTENT_SCALE_FACTOR();
-			y *= CC_CONTENT_SCALE_FACTOR();
-			iMapBuilding[i].brID = brID;
-			iMapBuilding[i].id = id;
-			iMapBuilding[i].x = x;
-			iMapBuilding[i].y = y;
-			iMapBuilding[i].state = state;
-			iMapBuilding[i].bflip = bflip == 0 ? false : true;
-			iMapBuilding[i].bcasern = false;
-			iMapBuilding[i].tool = -1;//当等于-1时，不产生道具
-			iMapBuilding[i].add = 0;
-			iMapBuilding[i].iUnitFactoryCount = factoryCount;
-			if (factoryCount > 0)
+			iMapBuilding = new SMapBuilding[iBuildingCount];
+			for (int i = 0; i < iBuildingCount; i++)
 			{
-				iMapBuilding[i].iUnitFactoryData = new XUnitFactory[factoryCount];
-				for (int k = 0; k < factoryCount; ++k)
+				int brID, id, x, y, state, bflip, factoryCount;
+				dis >> brID >> id >> x >> y >> state >> bflip >> factoryCount;
+				iMapBuilding[i].brID = brID;
+				iMapBuilding[i].id = id;
+				iMapBuilding[i].x = x;
+				iMapBuilding[i].y = y;
+				iMapBuilding[i].state = state;
+				iMapBuilding[i].bflip = bflip == 0 ? false : true;
+				iMapBuilding[i].bcasern = false;
+				iMapBuilding[i].tool = -1;//当等于-1时，不产生道具
+				iMapBuilding[i].add = 0;
+				iMapBuilding[i].iUnitFactoryCount = factoryCount;
+				if (factoryCount > 0)
 				{
-					int unitType, left, top, width, height, unitCount, interval;
-					dis >> unitType >> left >> top >> width >> height >> unitCount >> interval;
-					left *= CC_CONTENT_SCALE_FACTOR();
-					top *= CC_CONTENT_SCALE_FACTOR();
-					width *= CC_CONTENT_SCALE_FACTOR();
-					height *= CC_CONTENT_SCALE_FACTOR();
-					iMapBuilding[i].iUnitFactoryData[k].unitType = unitType;
-					iMapBuilding[i].iUnitFactoryData[k].left = left;
-					iMapBuilding[i].iUnitFactoryData[k].top = top;
-					iMapBuilding[i].iUnitFactoryData[k].width = width;
-					iMapBuilding[i].iUnitFactoryData[k].height = height;
-					iMapBuilding[i].iUnitFactoryData[k].unitCount = unitCount;
-					iMapBuilding[i].iUnitFactoryData[k].interval = interval;
+					iMapBuilding[i].iUnitFactoryData = new XUnitFactory[factoryCount];
+					for (int k = 0; k < factoryCount; ++k)
+					{
+						int unitType, left, top, width, height, unitCount, interval;
+						dis >> unitType >> left >> top >> width >> height >> unitCount >> interval;
+					
+						iMapBuilding[i].iUnitFactoryData[k].unitType = unitType;
+						iMapBuilding[i].iUnitFactoryData[k].left = left;
+						iMapBuilding[i].iUnitFactoryData[k].top = top;
+						iMapBuilding[i].iUnitFactoryData[k].width = width;
+						iMapBuilding[i].iUnitFactoryData[k].height = height;
+						iMapBuilding[i].iUnitFactoryData[k].unitCount = unitCount;
+						iMapBuilding[i].iUnitFactoryData[k].interval = interval;
+					}
 				}
-			}
-
-			dis >> iMapBuilding[i].iDropToolCount;
-			if (iMapBuilding[i].iDropToolCount > 0)
-			{
-				iMapBuilding[i].iDropToolData = new XDropTool[iMapBuilding[i].iDropToolCount];
-				for (int k = 0; k < iMapBuilding[i].iDropToolCount; ++k)
+	
+				dis >> iMapBuilding[i].iDropToolCount;
+				if (iMapBuilding[i].iDropToolCount > 0)
 				{
-					int type, min, max, prob;
-					dis >> type >> min >> max >> prob;
-					iMapBuilding[i].iDropToolData[k].type = type;
-					iMapBuilding[i].iDropToolData[k].min = min;
-					iMapBuilding[i].iDropToolData[k].max = max;
-					iMapBuilding[i].iDropToolData[k].prob = prob;
+					iMapBuilding[i].iDropToolData = new XDropTool[iMapBuilding[i].iDropToolCount];
+					for (int k = 0; k < iMapBuilding[i].iDropToolCount; ++k)
+					{
+						int type, min, max, prob;
+						dis >> type >> min >> max >> prob;
+						iMapBuilding[i].iDropToolData[k].type = type;
+						iMapBuilding[i].iDropToolData[k].min = min;
+						iMapBuilding[i].iDropToolData[k].max = max;
+						iMapBuilding[i].iDropToolData[k].prob = prob;
+					}
 				}
 			}
 		}
@@ -112,10 +106,10 @@ void XMap::AnalyzeInfDataL()
 		dis >> iWidth >> iHeight >> iBackColor;
 		/*	iWidth *= CC_CONTENT_SCALE_FACTOR();
 			iHeight *= CC_CONTENT_SCALE_FACTOR();*/
-		/*byte r, g, b;
+		byte r, g, b;
 		r = (iBackColor & 0xff0000) >> 16;
 		g = (iBackColor & 0xff00) >> 8;
-		b = (iBackColor & 0xff);*/
+		b = (iBackColor & 0xff);
 	}
 	dis.close();
 }
@@ -169,8 +163,7 @@ void XMap::AnalyzeTopDataL()
 			{
 				int imageID, temp, ix, iy, ifliph;
 				dis >> imageID >> temp >> ix >> iy >> ifliph;
-				ix *= CC_CONTENT_SCALE_FACTOR();
-				iy *= CC_CONTENT_SCALE_FACTOR();
+		
 				iMapTop[i].iImageID = imageID;
 				iMapTop[i].iX = ix;
 				iMapTop[i].iY = iy;
@@ -207,8 +200,7 @@ void XMap::AnalyzeUnitDataL()
 			dis >> aitype;
 			dis >> camptype;
 			dis >> movetype;
-			x *= CC_CONTENT_SCALE_FACTOR();
-			y *= CC_CONTENT_SCALE_FACTOR();
+		
 			iMapUnit[i].urID = urID;
 			iMapUnit[i].id = id;
 			iMapUnit[i].x = x;
@@ -237,8 +229,8 @@ void XMap::AnalyzeUnitDataL()
 				for (int k = 0; k < iMapUnit[i].iMoveItemCount; k++)
 				{
 					//iMapUnit[i]->iMoveItemData[k] = new Vec2();
-					iMapUnit[i].iMoveItemData[k].x = 25 * CC_CONTENT_SCALE_FACTOR();;
-					iMapUnit[i].iMoveItemData[k].y = 20 * k * CC_CONTENT_SCALE_FACTOR();;
+					iMapUnit[i].iMoveItemData[k].x = 25;
+					iMapUnit[i].iMoveItemData[k].y = 20 * k ;
 				}
 			}
 
@@ -265,8 +257,7 @@ void XMap::AnalyzeUnitDataL()
 						int x, y;
 						dis >> x;
 						dis >> y;
-						x *= CC_CONTENT_SCALE_FACTOR();
-						y *= CC_CONTENT_SCALE_FACTOR();
+					
 						iMapUnit[i].iDistItemData[k].x = x;
 						iMapUnit[i].iDistItemData[k].y = y;
 					}
@@ -281,8 +272,7 @@ void XMap::AnalyzeUnitDataL()
 						int x, y;
 						dis >> x;
 						dis >> y;
-						x *= CC_CONTENT_SCALE_FACTOR();
-						y *= CC_CONTENT_SCALE_FACTOR();
+					
 						iMapUnit[i].iMoveItemData[k].x = x;
 						iMapUnit[i].iMoveItemData[k].y = y;
 					}
@@ -299,8 +289,7 @@ void XMap::AnalyzeUnitDataL()
 					{
 						int x, y;
 						dis >> x >> y;
-						x *= CC_CONTENT_SCALE_FACTOR();
-						y *= CC_CONTENT_SCALE_FACTOR();
+						
 						iMapUnit[i].iMoveItemData[k].x = x;
 						iMapUnit[i].iMoveItemData[k].y = y;
 					}
@@ -319,8 +308,7 @@ void XMap::AnalyzeUnitDataL()
 					int x, y;
 					dis >> x;
 					dis >> y;
-					x *= CC_CONTENT_SCALE_FACTOR();
-					y *= CC_CONTENT_SCALE_FACTOR();
+					
 					iMapUnit[i].iFireItemData[k].x = x;
 					iMapUnit[i].iFireItemData[k].y = y;
 				}
@@ -370,30 +358,6 @@ void XMap::AnalyzeUnitDataL()
 					iMapUnit[i].iOrderData[k].Addition = addition;
 				}
 			}
-			////循环指令
-			//int recycleCount;
-			//dis >> recycleCount;
-			//iMapUnit[i].iRecycleOrderCount = recycleCount;
-			//if (recycleCount > 0)
-			//{
-			//	iMapUnit[i].iRecycleOrderData = new XUnitOrder[recycleCount];
-			//	for (int j = 0; j < recycleCount; j++)
-			//	{
-			//		int direct, speed, time, bulletypte, firelogic, addition;
-			//		dis >> direct;
-			//		dis >> speed;
-			//		dis >> time;
-			//		dis >> bulletypte;
-			//		dis >> firelogic;
-			//		dis >> addition;
-			//		iMapUnit[i].iRecycleOrderData[j].Direct = direct;
-			//		iMapUnit[i].iRecycleOrderData[j].Speed = speed;
-			//		iMapUnit[i].iRecycleOrderData[j].Time = time;
-			//		iMapUnit[i].iRecycleOrderData[j].BulletType = bulletypte;
-			//		iMapUnit[i].iRecycleOrderData[j].FireLogic = firelogic;
-			//		iMapUnit[i].iRecycleOrderData[j].Addition = 0;
-			//	}
-			//}
 		}
 		
 	}

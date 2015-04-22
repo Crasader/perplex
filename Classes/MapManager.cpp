@@ -101,25 +101,20 @@ bool MapManager::RequestMap(int aMapID, bool aLocal)
 		iActiveMapID = aMapID;
 		return true;
 	}
-	else
+	if (iRequestMapID == aMapID)
 	{
-
-		CC_SAFE_DELETE(iActiveMap);
-		iLocalMap = aLocal;
-		iGetMap = false;
-		CC_SAFE_DELETE(iPrepareLoadMap);
-		iPrepareLoadMap = new XMap(aMapID);
-		iLoadingMap = true;
-		iLoadState = MapLayer::EIdle;
-		iRequestMapID = aMapID;
-
 		AnalyzeMap();
 		return false;
-
 	}
 
-	
-
+	CC_SAFE_DELETE(iActiveMap);
+	iLocalMap = aLocal;
+	iGetMap = false;
+	CC_SAFE_DELETE(iPrepareLoadMap);
+	iPrepareLoadMap = new XMap(aMapID);
+	iLoadingMap = true;
+	iLoadState = MapLayer::EIdle;
+	iRequestMapID = aMapID;
 	return false;
 }
 

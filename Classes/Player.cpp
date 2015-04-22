@@ -307,7 +307,7 @@ bool Player::hurt(float damage){
     auto hpView = ((HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
     
     auto to = ProgressFromTo::create(0.5, PublicApi::hp2percent(fromHP), PublicApi::hp2percent(toHP));
-    hpView->runAction(to);
+    if(hpView)hpView->runAction(to);
     
     if(_HP <= 0  && _alive)
     {

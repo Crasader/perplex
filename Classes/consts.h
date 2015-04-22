@@ -36,6 +36,11 @@ const static Rect ENEMY_BOUND_RECT = Rect(0, PLAYER_LIMIT_BOT, PLAYER_LIMIT_RIGH
 
 enum entityTypes
 {
+    kEnemyFodder,
+    kEnemyFodderL,
+    kEnemyBigDude,
+    kEnemyBoss,
+
     kPlayerBullet,
     kPlayerMissiles,
     kEnemyBullet,
@@ -46,10 +51,6 @@ enum entityTypes
 	kEnemyTank,
 	kEnemyTurret,
 
-    kEnemyFodder,
-    kEnemyFodderL,
-    kEnemyBigDude,
-    kEnemyBoss
 };
 
 enum zOrder

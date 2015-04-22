@@ -250,7 +250,7 @@ Unit* EnemyController::spawnEnemy(int type)
     {
         enemies.pushBack(enemy);
         _enemyLayer->addChild(enemy, enemy->getShadowType() == kShadowLand? kZOrderLand : kZOrderSky);
-		ShadowController::createShadow(enemy, Point(10, -10));
+		//ShadowController::createShadow(enemy, Point(10, -10));
         return enemy;
     }
     return nullptr;
@@ -294,7 +294,7 @@ void EnemyController::erase(int i)
 			_turretPool.pushBack(static_cast<TurretOne*>(e));
 			break;
 		}
-		ShadowController::erase(e);
+		//ShadowController::erase(e);
 		enemies.erase(i);
 		e->removeFromParentAndCleanup(false);
 		e->reset();

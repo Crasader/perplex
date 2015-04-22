@@ -56,24 +56,31 @@ bool GameLayer::init()
 
     _player = Player::create();
 
-	_camera = CameraExt::getInstance();
-	_camera->setTarget(this);
-	_camera->setMapSize(Size(320, 480));
-	_camera->StartCmdCamera(0, 480, 0, 20);
-	_camera->setPlayer(_player);
 
     addChild(_player, kZOrderSky);
+    EnemyController::init(this);
 
 	auto mapmanager = new MapManager(nullptr);
 	mapmanager->LoadMapImg(0);
-	mapmanager->RequestMap(0, true);
+	if (!mapmanager->RequestMap(0, true))
+	{
+		mapmanager->RequestMap(0, true);
+		mapmanager->createFloor();
+		mapmanager->createUnits();
+	}
 	addChild(mapmanager->getFloor());
+
+	_camera = CameraExt::getInstance();
+	_camera->setTarget(this);
+	_camera->setMapSize(mapmanager->getMapSize());
+	_camera->StartCmdCamera(0, 480, 0, 20);
+	_camera->setPlayer(_player);
+
     //EffectManager::setLayer(this);
 
     this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5, -1, 2.0);
 
     //BulletController::init(this);
-    //EnemyController::init(this);
 
     scheduleUpdate();
     

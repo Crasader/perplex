@@ -40,24 +40,20 @@ bool Unit::hurt(float damage)
 void Unit::die()
 {
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("explodeEffect.mp3");
-	//EffectManager::createBigExplosion(getPosition());
-	/*EffectManager::createBulletTwoExplosion(getPosition());*/
-	//EffectManager::createBulletTwoExplosion(getPosition() + Point(20, 20));
-	//EffectManager::createBulletTwoExplosion(getPosition() + Point(-20, -20));
-    auto helloworld = (HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100);
-    int score = helloworld->getScore();
-    helloworld->setScore(score+=_score);
-    std::stringstream ss;
-    std::string str;
-    ss<<score;
-    ss>>str;
-    const char *p = str.c_str();
-    helloworld->getScoreLabel()->setString(p);
-    _alive = false;
-    auto scale = ScaleTo::create(0.1, 1.2);
-    auto scaleBack = ScaleTo::create(0.1, 1);
-    auto label =helloworld->getScoreLabel();
-    label->runAction(Sequence::create(scale, scaleBack,NULL));
+	/* auto helloworld = (HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100);
+	 int score = helloworld->getScore();
+	 helloworld->setScore(score+=_score);
+	 std::stringstream ss;
+	 std::string str;
+	 ss<<score;
+	 ss>>str;
+	 const char *p = str.c_str();
+	 helloworld->getScoreLabel()->setString(p);
+	 _alive = false;
+	 auto scale = ScaleTo::create(0.1, 1.2);
+	 auto scaleBack = ScaleTo::create(0.1, 1);
+	 auto label =helloworld->getScoreLabel();
+	 label->runAction(Sequence::create(scale, scaleBack,NULL));*/
     //removeFromParent();
 }
 

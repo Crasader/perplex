@@ -34,6 +34,7 @@ public:
 	void createUnits();
 	int getXMapW();
 	int getXMapH();
+	Size getMapSize(){ return Size(getXMapW(), getXMapH()); }
 private:
 	 GameScene*           iGameScene;
 	 bool                 iLoadingMap;    //是否正在载入地图
