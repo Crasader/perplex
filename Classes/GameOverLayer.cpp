@@ -52,7 +52,7 @@ bool GameOverLayer::init()
     if (!LayerColor::initWithColor(Color4B(255, 255, 255, 50))) {
         return false;
     }
-    
+	return true;
     auto visibleSize=Director::getInstance()->getVisibleSize();
     
     auto score_bk=Sprite::createWithSpriteFrameName("gameover_score_bk.png");

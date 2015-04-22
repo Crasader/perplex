@@ -20,13 +20,14 @@ bool CameraExt::init()
 
 
 	auto _visiableSize = Director::getInstance()->getVisibleSize();
-	_cameraLeft = 0;
-	_cameraTop = 0;
+	auto origin = Director::getInstance()->getVisibleOrigin();
+	_cameraLeft = origin.x;
+	_cameraTop = origin.y;
 	_cameraRight = _cameraLeft + _visiableSize.width;
 	_cameraBottom = _cameraTop + _visiableSize.height;
 
 	_cameraSize = _visiableSize;
-	setCameraPostion(0, 0);
+	setCameraPostion((_mapSize.width - _cameraSize.width) / 2, 0);
 	SetCameraReady();
 	_schedulerHandler = Director::getInstance()->getScheduler();
 	_schedulerHandler->retain();
@@ -260,6 +261,15 @@ void CameraExt::StartCmdCamera(float left, float top, float speedX, float speedY
 	_speedX = speedX;
 	_speedY = speedY;
 	_cameraState = ECameraCmdMoving;
+	startCamera();
+}
+
+void CameraExt::StartCmdCamera(float speedX, float speedY)
+{
+	auto l = (_mapSize.width - _cameraSize.width) / 2;
+	auto t = _mapSize.height;
+
+	StartCmdCamera(l, t, speedX, speedY);
 }
 
 void CameraExt::update(float dt)
@@ -302,6 +312,12 @@ void CameraExt::update(float dt)
 	}
 	else if (_cameraState == ECameraCmdMoveEnd)
 	{
+	}
+	else if (_cameraState == ECameraMovecenter)
+	{
+		moveCameraCenter();
+		_cameraState = ECameraNormal;
+		stopCamera();
 	}
 
 	/*setCameraPostion(_cameraLeft, _cameraTop);
@@ -348,7 +364,7 @@ void CameraExt::revise(float &x, float &y)
 
 void CameraExt::moveCameraCenter()
 {
-	setCameraPostion(_cameraSize.width / 2, 0);
+	setCameraPostion((_mapSize.width - _cameraSize.width) / 2, 0);
 }
 
 CameraExt* CameraExt::getInstance()
@@ -410,3 +426,12 @@ Vec2 CameraExt::GetCameraOriginToGL()
 {
 	return Vec2(_cameraLeft, _cameraBottom - _cameraSize.height);
 }
+
+void CameraExt::setTarget(Node* aTarget)
+{
+	_target = aTarget;
+	_cameraState = ECameraMovecenter;
+	moveCameraCenter();
+	startCamera();
+}
+

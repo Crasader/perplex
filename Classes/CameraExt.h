@@ -13,6 +13,7 @@ enum CameraType
 	ECameraCmdMoving = 1,
 	ECameraCmdMoveEnd = 2,
 	ECameraReturnPlayer = 3,
+	ECameraMovecenter = 4,
 };
 
 enum CameraMovingType
@@ -38,7 +39,7 @@ public:
 	void setSpeedX(float aSpeedX) { _speedX = aSpeedX; }
 
 	Node* getTarget() const { return _target; }
-	void setTarget(Node* aTarget) { _target = aTarget; }
+	void setTarget(Node* aTarget);
 
 	void setCameraPostion(float x, float y);
 	void moveCameraCenter();
@@ -67,6 +68,7 @@ public:
 	void SetCameraReady();
 	void ResetCameraAnchor();
 	void StartCmdCamera(float left, float top, float speedX, float speedY);
+	void StartCmdCamera(float speedX = 0, float speedY = 20);
 	void CameraReturnPlayer(float speedx, float speedy);
 	Point CameraAnchorPlayer(float speedx, float speedy);
 	Rect getCameraVisibleSize(){ return Rect(_cameraLeft, _cameraTop, _cameraSize.width, _cameraSize.height); }

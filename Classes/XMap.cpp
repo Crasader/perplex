@@ -20,6 +20,10 @@ void XMap::AnalyzeRectDataL()
 			for (int n = 0; n < iWalkRectCount; n++)
 			{
 				dis >> l >> t >> w >> h;
+				l *= CC_CONTENT_SCALE_FACTOR();
+				t *= CC_CONTENT_SCALE_FACTOR();
+				w *= CC_CONTENT_SCALE_FACTOR();
+				h *= CC_CONTENT_SCALE_FACTOR();
 				ibWalkRectActive[n] = false;
 				iMapWalkRect[n].setRect(l, t, w, h);
 			}
@@ -46,8 +50,8 @@ void XMap::AnalyzeBuildingDataL()
 				dis >> brID >> id >> x >> y >> state >> bflip >> factoryCount;
 				iMapBuilding[i].brID = brID;
 				iMapBuilding[i].id = id;
-				iMapBuilding[i].x = x;
-				iMapBuilding[i].y = y;
+				iMapBuilding[i].x = x * CC_CONTENT_SCALE_FACTOR();
+				iMapBuilding[i].y = y * CC_CONTENT_SCALE_FACTOR();
 				iMapBuilding[i].state = state;
 				iMapBuilding[i].bflip = bflip == 0 ? false : true;
 				iMapBuilding[i].bcasern = false;
@@ -63,10 +67,10 @@ void XMap::AnalyzeBuildingDataL()
 						dis >> unitType >> left >> top >> width >> height >> unitCount >> interval;
 					
 						iMapBuilding[i].iUnitFactoryData[k].unitType = unitType;
-						iMapBuilding[i].iUnitFactoryData[k].left = left;
-						iMapBuilding[i].iUnitFactoryData[k].top = top;
-						iMapBuilding[i].iUnitFactoryData[k].width = width;
-						iMapBuilding[i].iUnitFactoryData[k].height = height;
+						iMapBuilding[i].iUnitFactoryData[k].left = left * CC_CONTENT_SCALE_FACTOR();
+						iMapBuilding[i].iUnitFactoryData[k].top = top * CC_CONTENT_SCALE_FACTOR();
+						iMapBuilding[i].iUnitFactoryData[k].width = width * CC_CONTENT_SCALE_FACTOR();
+						iMapBuilding[i].iUnitFactoryData[k].height = height * CC_CONTENT_SCALE_FACTOR();
 						iMapBuilding[i].iUnitFactoryData[k].unitCount = unitCount;
 						iMapBuilding[i].iUnitFactoryData[k].interval = interval;
 					}
@@ -104,8 +108,8 @@ void XMap::AnalyzeInfDataL()
 	if (!dis.fail())
 	{
 		dis >> iWidth >> iHeight >> iBackColor;
-		/*	iWidth *= CC_CONTENT_SCALE_FACTOR();
-			iHeight *= CC_CONTENT_SCALE_FACTOR();*/
+		iWidth *= CC_CONTENT_SCALE_FACTOR();
+		iHeight *= CC_CONTENT_SCALE_FACTOR();
 		byte r, g, b;
 		r = (iBackColor & 0xff0000) >> 16;
 		g = (iBackColor & 0xff00) >> 8;
@@ -140,6 +144,8 @@ void XMap::AnalyzeFloorDataL()
 			dis >> temp;
 			dis >> iMapFloor[i].iX;
 			dis >> iMapFloor[i].iY;
+			iMapFloor[i].iX *= CC_CONTENT_SCALE_FACTOR();
+			iMapFloor[i].iY *= CC_CONTENT_SCALE_FACTOR();
 			int flip;
 			dis >> flip;
 			iMapFloor[i].iFlipH = flip > 0 ? true : false;
@@ -159,14 +165,14 @@ void XMap::AnalyzeTopDataL()
 		if (iTopCount > 0)
 		{
 			iMapTop = new SMapFloor[iTopCount];
-			for (int i = 0; i < iFloorCount; ++i)
+			for (int i = 0; i < iTopCount; ++i)
 			{
 				int imageID, temp, ix, iy, ifliph;
 				dis >> imageID >> temp >> ix >> iy >> ifliph;
 		
 				iMapTop[i].iImageID = imageID;
-				iMapTop[i].iX = ix;
-				iMapTop[i].iY = iy;
+				iMapTop[i].iX = ix * CC_CONTENT_SCALE_FACTOR();
+				iMapTop[i].iY = iy * CC_CONTENT_SCALE_FACTOR();
 				iMapTop[i].iFlipH = ifliph > 0 ? true : false;
 			}
 		}
@@ -200,7 +206,8 @@ void XMap::AnalyzeUnitDataL()
 			dis >> aitype;
 			dis >> camptype;
 			dis >> movetype;
-		
+			x *= CC_CONTENT_SCALE_FACTOR();
+			y *= CC_CONTENT_SCALE_FACTOR();
 			iMapUnit[i].urID = urID;
 			iMapUnit[i].id = id;
 			iMapUnit[i].x = x;
@@ -213,7 +220,7 @@ void XMap::AnalyzeUnitDataL()
 			int moveDataLength = 0;
 			dis >> moveDataLength;
 
-			//站岗
+			//行走路径
 			if (iMapUnit[i].MoveType == STAND_MOVE)
 			{
 				//移动方向概率
@@ -229,8 +236,8 @@ void XMap::AnalyzeUnitDataL()
 				for (int k = 0; k < iMapUnit[i].iMoveItemCount; k++)
 				{
 					//iMapUnit[i]->iMoveItemData[k] = new Vec2();
-					iMapUnit[i].iMoveItemData[k].x = 25;
-					iMapUnit[i].iMoveItemData[k].y = 20 * k ;
+					iMapUnit[i].iMoveItemData[k].x = 25 * CC_CONTENT_SCALE_FACTOR();
+					iMapUnit[i].iMoveItemData[k].y = 20 * k  * CC_CONTENT_SCALE_FACTOR();
 				}
 			}
 
@@ -254,12 +261,12 @@ void XMap::AnalyzeUnitDataL()
 					iMapUnit[i].iDistItemData = new Vec2[tmpCount1];
 					for (int k = 0; k < tmpCount1; k++)
 					{
-						int x, y;
-						dis >> x;
-						dis >> y;
+						int tempx, tempy;
+						dis >> tempx;
+						dis >> tempy;
 					
-						iMapUnit[i].iDistItemData[k].x = x;
-						iMapUnit[i].iDistItemData[k].y = y;
+						iMapUnit[i].iDistItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
+						iMapUnit[i].iDistItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
 					}
 				}
 				//移动时间概率
@@ -269,12 +276,12 @@ void XMap::AnalyzeUnitDataL()
 					iMapUnit[i].iMoveItemData = new Vec2[tmpCount2];
 					for (int k = 0; k < tmpCount2; k++)
 					{
-						int x, y;
-						dis >> x;
-						dis >> y;
+						int tempx, tempy;
+						dis >> tempx;
+						dis >> tempy;
 					
-						iMapUnit[i].iMoveItemData[k].x = x;
-						iMapUnit[i].iMoveItemData[k].y = y;
+						iMapUnit[i].iMoveItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
+						iMapUnit[i].iMoveItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
 					}
 				}
 			}
@@ -287,11 +294,11 @@ void XMap::AnalyzeUnitDataL()
 					iMapUnit[i].iMoveItemData = new Vec2[moveDataLength];
 					for (int k = 0; k < moveDataLength; k++)
 					{
-						int x, y;
-						dis >> x >> y;
+						int tempx, tempy;
+						dis >> tempx >> tempy;
 						
-						iMapUnit[i].iMoveItemData[k].x = x;
-						iMapUnit[i].iMoveItemData[k].y = y;
+						iMapUnit[i].iMoveItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
+						iMapUnit[i].iMoveItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
 					}
 				}
 			}
@@ -305,12 +312,12 @@ void XMap::AnalyzeUnitDataL()
 				iMapUnit[i].iFireItemData = new Vec2[tmpCount3];
 				for (int k = 0; k < tmpCount3; k++)
 				{
-					int x, y;
-					dis >> x;
-					dis >> y;
+					int tempx, tempy;
+					dis >> tempx;
+					dis >> tempy;
 					
-					iMapUnit[i].iFireItemData[k].x = x;
-					iMapUnit[i].iFireItemData[k].y = y;
+					iMapUnit[i].iFireItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
+					iMapUnit[i].iFireItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
 				}
 			}
 			//掉落道具
@@ -349,17 +356,41 @@ void XMap::AnalyzeUnitDataL()
 					dis >> time;
 					dis >> bulletypte;
 					dis >> firelogic;
-					dis >> addition;
+					
 					iMapUnit[i].iOrderData[k].Direct = direct;
 					iMapUnit[i].iOrderData[k].Speed = speed;
 					iMapUnit[i].iOrderData[k].Time = time;
 					iMapUnit[i].iOrderData[k].BulletType = bulletypte;
 					iMapUnit[i].iOrderData[k].FireLogic = firelogic;
-					iMapUnit[i].iOrderData[k].Addition = addition;
+					iMapUnit[i].iOrderData[k].Addition = 0;
+				}
+			}
+
+			//循环指令
+			int recycleCount;
+			dis >> recycleCount;
+			iMapUnit[i].iRecycleOrderCount = recycleCount;
+			if (recycleCount > 0)
+			{
+				iMapUnit[i].iRecycleOrderData = new XUnitOrder[recycleCount];
+				for (int j = 0; j < recycleCount; j++)
+				{
+					int direct, speed, time, bulletypte, firelogic, addition;
+					dis >> direct;
+					dis >> speed;
+					dis >> time;
+					dis >> bulletypte;
+					dis >> firelogic;
+				
+					iMapUnit[i].iRecycleOrderData[j].Direct = direct;
+					iMapUnit[i].iRecycleOrderData[j].Speed = speed;
+					iMapUnit[i].iRecycleOrderData[j].Time = time;
+					iMapUnit[i].iRecycleOrderData[j].BulletType = bulletypte;
+					iMapUnit[i].iRecycleOrderData[j].FireLogic = firelogic;
+					iMapUnit[i].iRecycleOrderData[j].Addition = 0;
 				}
 			}
 		}
-		
 	}
 	dis.close();
 }
@@ -381,7 +412,7 @@ XMap::~XMap()
 }
 
 XMap::XMap(int aID)
-:iID(0)                   // 地图ID，全球唯一
+:iID(aID)                   // 地图ID，全球唯一
 ,iWidth(0)                // 宽像素点
 ,iHeight(0)               // 高像素点
 , iBackColor(0) 		// 背景色

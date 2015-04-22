@@ -48,7 +48,7 @@ bool GameLayer::isDie=false;
 bool GameLayer::init()
 {    
 	xScroll = 0.0f;
-    speed = -60.0f;
+    speed = 60.0f;
 	_elapsed = 20; //testing purpose, this was set to near boss timer
     _bossOut = false;
 
@@ -62,20 +62,18 @@ bool GameLayer::init()
 
 	auto mapmanager = new MapManager(nullptr);
 	mapmanager->LoadMapImg(0);
-	if (!mapmanager->RequestMap(0, true))
+	if (!mapmanager->RequestMap(1, true))
 	{
-		mapmanager->RequestMap(0, true);
+		mapmanager->RequestMap(1, true);
 		mapmanager->createFloor();
 		mapmanager->createUnits();
 	}
 	addChild(mapmanager->getFloor());
 
 	_camera = CameraExt::getInstance();
-	_camera->setTarget(this);
 	_camera->setMapSize(mapmanager->getMapSize());
-	_camera->StartCmdCamera(0, 480, 0, 20);
+	_camera->setTarget(this);
 	_camera->setPlayer(_player);
-
     //EffectManager::setLayer(this);
 
     this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5, -1, 2.0);
@@ -87,12 +85,12 @@ bool GameLayer::init()
     _player->setPosition(Vec2(_camera->GetCameraCenter().x,-1000));
     _player->runAction(Sequence::create(
                                         DelayTime::create(0.75),
-                       //Spawn::create(
 					   EaseBackOut::create(MoveTo::create(1.7, Vec2(_camera->GetCameraCenter().x, 100))),
-                       //              EaseSineOut::create(RotateBy::create(1.7,Vec3(0,720,0))),
-                       //              nullptr
-                       //              ),
-                       CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer,this)),nullptr));
+					   Spawn::create(CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer, this)),
+					   CallFunc::create([this](){
+		_camera->StartCmdCamera(0, speed);
+	}))
+                      ,nullptr));
 
 	auto keyListener = EventListenerKeyboard::create();
 	keyListener->onKeyPressed = CC_CALLBACK_2(GameLayer::onKeyPressed, this);

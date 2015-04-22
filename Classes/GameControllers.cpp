@@ -390,22 +390,24 @@ void GameController::update(float dt, Player* player)
                 static_cast<Boss*>(enemy)->update(dt, player);
                 break;
             default:
-                enemy->move(enemyMoveDist, dt);
+                //enemy->move(enemyMoveDist, dt);
                 break;
         }
 		auto enemyMoveRect = enemy->getMoveRect();
 		if (!CameraExt::getInstance()->GetMapVisibleBound().containsPoint(Point(enemy->getPositionX() + (enemy->getPositionX() >= 0 ? enemyMoveRect.getMinX() : enemyMoveRect.getMaxX()), enemy->getPositionY() + enemyMoveRect.getMaxY())) && enemy->getType() != kEnemyBoss)
         {
             //enemy went out side, kill it
-            EnemyController::erase(k);
+            //EnemyController::erase(k);
         }
         //if colliding with player
         else if(enemy->getPosition().getDistance(player->getPosition()) <(enemy->getRadius() + player->getRadius()) && enemy->getShadowType() != kShadowLand)
         {
             player->hurt(50);
             enemy->hurt(50);
-            if(enemy->getType() != kEnemyBoss && enemy->getType() != kEnemyBigDude)
-            EnemyController::erase(k);
+			/*if (enemy->getType() != kEnemyBoss && enemy->getType() != kEnemyBigDude)
+			{
+			EnemyController::erase(k);
+			}*/
         }
         //TODO: if enemy collide with player
         //if(enemy->getPosition().getDistance(<#const cocos2d::Point &other#>))

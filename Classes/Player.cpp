@@ -63,8 +63,16 @@ bool Player::init()
 		_shadowType = kShadowSky;
 
 		_curState = new PlayerIdleState(this);
-
 		_curState->execute();
+
+		auto rect = _Model->getBoundingBox();
+		setMoveRect(rect);
+
+#if COCOS2D_DEBUG
+		auto bound = DrawNode::create();
+		bound->drawRect(rect.origin, Vec2(rect.getMaxX(), rect.getMaxY()), Color4F::RED);
+		addChild(bound);
+#endif
 
 		/*ShadowController::createShadow(this);*/
 
@@ -307,7 +315,7 @@ bool Player::hurt(float damage){
     auto hpView = ((HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
     
     auto to = ProgressFromTo::create(0.5, PublicApi::hp2percent(fromHP), PublicApi::hp2percent(toHP));
-    if(hpView)hpView->runAction(to);
+   if(hpView) hpView->runAction(to);
     
     if(_HP <= 0  && _alive)
     {

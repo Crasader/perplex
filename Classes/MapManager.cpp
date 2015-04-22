@@ -201,13 +201,14 @@ void MapManager::createUnits()
 		{
 			continue;
 		}
+	
 		pUnit->setUnitID(iMapUnit[n].id);
 		pUnit->setPosition(iMapUnit[n].x, iMapUnit[n].y);
 		pUnit->setMoveType(iMapUnit[n].MoveType);
 		pUnit->setWalkDir(unitWDir);
 		pUnit->setCampType(campType);
 		pUnit->setMoveProb(iMapUnit[n].iMoveProb, 8);
-		pUnit->setAnchorPoint(Vec2(1,0));
+		pUnit->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		if (iMapUnit[n].MoveType == PATH_MOVE)
 		{
