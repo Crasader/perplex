@@ -770,29 +770,31 @@ class SL {
 	}
 
 	public static void writeShort(int data, DataOutputStream out) throws Exception {
-		if (XUtil.getDefPropInt("Type") == 0) {// Symbian
-			basicWriteByte((data & 0xFF), out);
-			basicWriteByte(((data & 0xFF00) >> 8), out);
-		}
-		else {// Java
-			basicWriteByte(((data & 0xFF00) >> 8), out);
-			basicWriteByte((data & 0xFF), out);
-		}
+//		if (XUtil.getDefPropInt("Type") == 0) {// Symbian
+//			basicWriteByte((data & 0xFF), out);
+//			basicWriteByte(((data & 0xFF00) >> 8), out);
+//		}
+//		else {// Java
+//			basicWriteByte(((data & 0xFF00) >> 8), out);
+//			basicWriteByte((data & 0xFF), out);
+//		}
+		out.writeShort(data);
 	}
 
 	public static void writeInt(int data, DataOutputStream out) throws Exception {
-		if (XUtil.getDefPropInt("Type") == 0) {// Symbian
-			basicWriteByte((data & 0xFF), out);
-			basicWriteByte(((data & 0xFF00) >> 8), out);
-			basicWriteByte(((data & 0xFF0000) >> 16), out);
-			basicWriteByte(((data & 0xFF000000) >> 24), out);
-		}
-		else {// Java
-			basicWriteByte(((data & 0xFF000000) >> 24), out);
-			basicWriteByte(((data & 0xFF0000) >> 16), out);
-			basicWriteByte(((data & 0xFF00) >> 8), out);
-			basicWriteByte((data & 0xFF), out);
-		}
+//		if (XUtil.getDefPropInt("Type") == 0) {// Symbian
+//			basicWriteByte((data & 0xFF), out);
+//			basicWriteByte(((data & 0xFF00) >> 8), out);
+//			basicWriteByte(((data & 0xFF0000) >> 16), out);
+//			basicWriteByte(((data & 0xFF000000) >> 24), out);
+//		}
+//		else {// Java
+//			basicWriteByte(((data & 0xFF000000) >> 24), out);
+//			basicWriteByte(((data & 0xFF0000) >> 16), out);
+//			basicWriteByte(((data & 0xFF00) >> 8), out);
+//			basicWriteByte((data & 0xFF), out);
+//		}
+		out.writeInt(data);
 	}
 
 	public static void writeDouble(double data, DataOutputStream out) throws Exception {
