@@ -138,7 +138,12 @@ abstract class BasicSprite
 
 	public int getMobileY()
 	{
-		int my = info.getRealHeight() - (y - info.getRealTop() + getHeight());
+		return getMobileY(getHeight());
+	}
+	
+	public int getMobileY(int height)
+	{
+		int my = info.getRealHeight() - (y - info.getRealTop() + height);
 		return  my;
 	}
 	
@@ -300,8 +305,10 @@ abstract class BasicSprite
 	}
 	public final static void saveMobileData(BasicSprite sprite, DataOutputStream out) throws Exception {
 		SL.writeInt(sprite.id, out);
-		SL.writeInt(sprite.getMobileX(), out);
-		SL.writeInt(sprite.getMobileY(), out);
+		int x = sprite.getMobileX();
+		int y = sprite.getMobileY();
+		SL.writeInt(x, out);
+		SL.writeInt(y, out);
 	}
 
 	public final static void save(BasicSprite sprite, DataOutputStream out) throws Exception {

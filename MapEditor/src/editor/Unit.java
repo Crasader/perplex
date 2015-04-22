@@ -209,7 +209,7 @@ public class Unit
 						"  ≤„£∫" + layer + 
 						"  AI£∫" + AI.getDescription(ai) + 
 						"  ’Û”™£∫" + Alignment.getDescription(alignment)+
-						"  Œª÷√: " + getMobileX() + "," + getMobileY();
+						"  Œª÷√: " + getMobileX() + "," + getMobileY(0);
 				
 
 		return result;
@@ -217,7 +217,11 @@ public class Unit
 
 	public void saveMobileData(DataOutputStream out) throws Exception {
 		SL.writeInt(ur.getID(), out);
-		BasicSprite.saveMobileData(this, out);
+		SL.writeInt(getID(), out);
+		int x = getMobileX();
+		int y = getMobileY(0);
+		SL.writeInt(x, out);
+		SL.writeInt(y, out);
 		SL.writeInt(dir, out);
 		SL.writeInt(ai, out);
 		SL.writeInt(alignment, out);
