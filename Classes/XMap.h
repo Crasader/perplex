@@ -3,8 +3,10 @@
 
 #include "Head.h"
 #include "XDropTool.h"
+#include "mapconst.h"
 
-class SMapFloor : public Ref{
+class SMapFloor
+{
 public:
 	SMapFloor() :iImageID(0), iFlipH(0), iX(0), iY(0){};
 	int iImageID;
@@ -13,7 +15,7 @@ public:
 	int iY;
 };
 
-class SMapUnit : public Ref
+class SMapUnit
 {
 public:
 	SMapUnit();
@@ -35,13 +37,13 @@ public:
 	short           iDropToolCount;//掉落道具
 	short           iOrderCount;   //指令数
 	short           iRecycleOrderCount; //循环指令数
-	int*			iMoveProb;  //8方向随机移动的概率
-	Vec2*			iMoveItemData;
-	Vec2*			iFireItemData;
-	Vec2*			iDistItemData;
-	XDropTool*      iDropToolData;
-	XUnitOrder*     iOrderData;
-	XUnitOrder*     iRecycleOrderData;
+	std::vector<int>			iMoveProb;  //8方向随机移动的概率
+	std::vector<Vec2>			iMoveItemData;
+	std::vector<Vec2>			iFireItemData;
+	std::vector<Vec2>			iDistItemData;
+	std::vector<XDropTool>      iDropToolData;
+	std::vector<XUnitOrder>    iOrderData;
+	std::vector<XUnitOrder>    iRecycleOrderData;
 };
 
 class SMapBuilding{
@@ -60,23 +62,13 @@ public:
 	short   add;    //附加信息
 	int    iUnitFactoryCount;//出兵次数
 	int    iDropToolCount;//掉落道具情况数
-	XUnitFactory* iUnitFactoryData;
-	XDropTool* iDropToolData;
+	std::vector<XUnitFactory> iUnitFactoryData;
+	std::vector<XDropTool> iDropToolData;
 };
 
-//地图图像开始索引值
-static const int MAP_IMAGE_START_INDEX[] = {
-	100, 300, 200, 300, 100 };
-//地图图像的数目
-static const int MAP_IMAGE_COUNT[] = {
-	34, 29, 32, 29, 34 };
-//地图ID对应的关卡
-static const int MAPID_TO_STAGE[] = {
-	0, 0, 1, 1, 2, 2, 3, 3, 4, 4 };
-//地图缓冲区的高度
-static const int PART_HEIGHT = 24;
 
-class XMap : public cocos2d::Ref
+
+class XMap
 {
 private:
 
@@ -98,11 +90,16 @@ public:
 	void setID(int aID) { iID = aID; }
 	int getTopCount() const { return iTopCount; }
 	int getFloorCount() const { return iFloorCount; }
-	SMapFloor* getMapFloor() const { return iMapFloor; }
+	std::vector<SMapFloor> getMapFloor() const { return iMapFloor; }
 	int getWidth() const { return iWidth; }
 	int getHeight() const { return iHeight; }
 	int getUnitCount() { return iUnitCount; }
-	const SMapUnit* getSMapUnit() const { return iMapUnit; }
+	std::vector<SMapUnit> getSMapUnit() const { return iMapUnit; }
+	std::vector<cocos2d::Rect> getWalkRect() {
+		return iMapWalkRect;
+	}
+	void setWalkRectActive(int index, bool active) { ibWalkRectActive[index] = active; }
+	bool isWalkRectActive(int index) { return ibWalkRectActive[index]; }
 private:
 	int             	iID;                    // 地图ID，全球唯一v
 	int					iActivist;
@@ -118,12 +115,12 @@ private:
 	int            		iBuildingCount;         //建筑数
 	int            		iWalkRectCount;         //不可行走矩形的个数
 	int            		iTopCount;				//顶层地板数
-	SMapFloor*     		iMapTop;                //顶层地板数据
-	SMapFloor*      	iMapFloor;				//地板数据
-	SMapUnit*			iMapUnit;               //Unit数据
-	SMapBuilding*   	iMapBuilding;           //建筑数据
-	bool*	          	ibWalkRectActive;		//不可行走区域是否活跃
-	Rect*	          	iMapWalkRect;           //不可行走矩形
+	std::vector<SMapFloor>    		iMapTop;                //顶层地板数据
+	std::vector<SMapFloor>    	iMapFloor;				//地板数据
+	std::vector<SMapUnit>			iMapUnit;               //Unit数据
+	std::vector<SMapBuilding>   	iMapBuilding;           //建筑数据
+	std::vector<bool>          	ibWalkRectActive;		//不可行走区域是否活跃
+	std::vector<Rect>	          	iMapWalkRect;           //不可行走矩形
 };
 
 #endif // __XMap_h__

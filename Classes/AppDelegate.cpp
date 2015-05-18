@@ -1,8 +1,8 @@
 #include "AppDelegate.h"
-#include "SimpleAudioEngine.h"
-#include "HelloWorldScene.h"
-#include "LoadingScene.h"
-#include "MainMenuScene.h"
+ #include "SimpleAudioEngine.h"
+ //#include "GameScene.h"
+// #include "LoadingScene.h"
+ #include "MainMenuScene.h"
 
 USING_NS_CC;
 
@@ -46,11 +46,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("map");
 	FileUtils::getInstance()->addSearchPath("mapdat");
 
-    // create a scene. it's an autorelease object
-    auto scene = MainMenuScene::createScene();
-
-    // run
-    director->runWithScene(scene);
+     // create a scene. it's an autorelease object
+     auto scene = MainMenuScene::createScene();
+ 
+     // run
+     director->runWithScene(scene);
 
     return true;
 }
@@ -69,7 +69,7 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
-	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
-	CocosDenshion::SimpleAudioEngine::getInstance()->resumeAllEffects();
+ 	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+ 	CocosDenshion::SimpleAudioEngine::getInstance()->resumeAllEffects();
 
 }

@@ -4,7 +4,7 @@
 #include "consts.h"
 #include "SimpleAudioEngine.h"
 #include "Effects.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "GameLayer.h"
 #include "Sprite3DEffect.h"
 #include "Turret.h"

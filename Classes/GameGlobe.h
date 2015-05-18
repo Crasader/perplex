@@ -38,11 +38,4 @@
  static const int D_W_RIGHT = 6;
  static const int D_W_RIGHT_DOWN = 7;
 
- static const int MAPID_EVENT[][2] = {
-	 { 0, 1 },
-	 { 2, 3 },
-	 { 4, 5 },
-	 { 6, 7 },
-	 { 8, 9 } 
- };
 #endif // __GameGlobe_h__

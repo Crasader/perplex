@@ -34,6 +34,25 @@ const static Rect BOUND_RECT = Rect(0, PLAYER_LIMIT_BOT, PLAYER_LIMIT_RIGHT, PLA
 const static Rect ENEMY_BOUND_RECT = Rect(0, PLAYER_LIMIT_BOT, PLAYER_LIMIT_RIGHT, 800);
 #endif
 
+static const int MAX_STAGE_COUNT = 5;
+static const int MAX_MAP_SECTION = 2;
+static const int MAPID_EVENT[MAX_STAGE_COUNT][MAX_MAP_SECTION] = {
+	{ 0,1 },
+	{ 2,3 },
+	{ 4,5 },
+	{ 6,7 },
+	{ 8,9 },
+};
+
+static const int UNIT_DIE_SCORE[] = { 
+	80,5000,400,200,
+	3000,4000,6000,300,
+	1200,500,200,200,
+	200,1000,10,100,
+	0,200,150,150,
+	0,0,0,0 
+};
+
 enum entityTypes
 {
     kEnemyFodder,
@@ -70,4 +89,11 @@ enum shadowType
 	kShadowWater,
 	kShadowLand,
 	kShadowSky,
+};
+
+enum CampType
+{
+	Enemy,
+	Ally,
+	Neutral
 };

@@ -28,7 +28,7 @@
 #include "consts.h"
 #include "SimpleAudioEngine.h"
 #include "Effects.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "GameLayer.h"
 #include "Sprite3DEffect.h"
 #include "Turret.h"
@@ -43,7 +43,7 @@ bool FodderLeader::init()
 	_Model = Sprite::create("n1.png");
     if(_Model)
     {
-        _Model->setScale(0.6);
+        _Model->setScale(0.6f);
         addChild(_Model);
         //_Model->setRotation3D(Vec3(90,0,0));
         //GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02, Color3B(255,0,0));
@@ -73,7 +73,7 @@ bool BigDude::init()
         addChild(_Model);
         //_Model->setRotation3D(Vec3(90,0,0));
         //static_cast<Sprite3D*>(_Model)->setOutline(0.2, Color3B::BLACK);
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02, Color3B::BLACK);
+        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02f, Color3B::BLACK);
         _type = kEnemyBigDude;
         _HP = 30;
         _radius = 40;
@@ -139,8 +139,8 @@ void BigDude::showMuzzle()
 {
     muzzle1 = Sprite::create("muzzle.png");
     muzzle2 = Sprite::create("muzzle.png");
-    muzzle1->setScale(0.4);
-    muzzle2->setScale(0.4);
+    muzzle1->setScale(0.4f);
+    muzzle2->setScale(0.4f);
     
     Vec2 offset1 = Vec2::ZERO;
     Vec2 offset2 = offset1;
@@ -157,7 +157,7 @@ void BigDude::showMuzzle()
     muzzle2->setRotation(-35.0f);
     this->addChild(muzzle1);
     this->addChild(muzzle2);
-    this->scheduleOnce(schedule_selector(BigDude::dismissMuzzle), 0.1);
+    this->scheduleOnce(schedule_selector(BigDude::dismissMuzzle), 0.1f);
 }
 
 void BigDude::dismissMuzzle(float dt)
@@ -182,7 +182,7 @@ void BigDude::die()
                      Sequence::create(
                                       Spawn::create(
                                                     EaseSineOut::create(MoveTo::create(2, targetPos)),
-                                                    EaseSineOut::create(ScaleTo::create(2,0.3)),//TODO: replace with move 3d when possible
+                                                    EaseSineOut::create(ScaleTo::create(2,0.3f)),//TODO: replace with move 3d when possible
                                                     //EaseBackOut::create(RotateBy::create(2,Vec3(CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle()),CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle())+45,-CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle())+90))),
                                                     RotateBy::create(2, Vec3(360+CCRANDOM_0_1()*600, 360+CCRANDOM_0_1()*600, 360+CCRANDOM_0_1()*600)),
                                                     nullptr
@@ -198,7 +198,7 @@ void BigDude::fall()
 {
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("explodeEffect.mp3");
     EffectManager::createBigExplosion(getPosition());
-    auto helloworld = (HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100);
+    auto helloworld = (GameScene*)Director::getInstance()->getRunningScene()->getChildByTag(100);
     int score = helloworld->getScore();
     helloworld->setScore(score+=_score);
     std::stringstream ss;
@@ -208,8 +208,8 @@ void BigDude::fall()
     const char *p = str.c_str();
     helloworld->getScoreLabel()->setString(p);
     _alive = false;
-    auto scale = ScaleTo::create(0.1, 1.2);
-    auto scaleBack = ScaleTo::create(0.1, 1);
+    auto scale = ScaleTo::create(0.1f, 1.2f);
+    auto scaleBack = ScaleTo::create(0.1f, 1);
     auto label = helloworld->getScoreLabel();
     label->runAction(Sequence::create(scale, scaleBack,NULL));
     this->removeFromParentAndCleanup(false);
@@ -229,7 +229,7 @@ bool Boss::init()
         _Model->setScale(28);
         addChild(_Model);
        // _Model->setRotation3D(Vec3(90,0,0));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02, Color3B::BLACK);
+        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02f, Color3B::BLACK);
         _type = kEnemyBoss;
         _HP = 5000;
         _radius = 150;
@@ -240,7 +240,7 @@ bool Boss::init()
         cannon1->setScale(28);
         //cannon1->setRotation3D(Vec3(90,0,0));
         _Cannon1->setPosition3D(Vec3(40,-100, 10));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(cannon1), 0.02, Color3B(0,0,0));
+        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(cannon1), 0.02f, Color3B(0,0,0));
         auto cannon2 = EffectSprite3D::createFromObjFileAndTexture("bossCannon.c3b", "boss.png");
         _Cannon2 = Node::create();
         addChild(_Cannon2);
@@ -248,7 +248,7 @@ bool Boss::init()
         cannon2->setScale(28);
         //cannon2->setRotation3D(Vec3(90,0,0));
         _Cannon2->setPosition3D(Vec3(-40,-100, 10));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(cannon2), 0.02, Color3B(0,0,0));
+        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(cannon2), 0.02f, Color3B(0,0,0));
         //addChild(_Cannon2);
         //_Cannon2->setPosition(-20,-200);
         
@@ -264,13 +264,13 @@ bool Boss::init()
 void Boss::enterTheBattle()
 {
     setRotation3D(Vec3(100,0,0));
-    setScale(0.2);
+    setScale(0.2f);
     runAction(
               Sequence::create(
                                Spawn::create(
                                              EaseSineOut::create(MoveTo::create(4, Vec2(0,300))),
                                              EaseSineOut::create(ScaleTo::create(4,1)),//TODO: replace with move 3d when possible
-                                             EaseBackOut::create(RotateBy::create(4+0.5,Vec3(-100,0,0))),
+                                             EaseBackOut::create(RotateBy::create(4+0.5f,Vec3(-100,0,0))),
                                              nullptr
                                              ),                                             CallFunc::create(std::bind(static_cast<void(Boss::*)(void)>(&Boss::startShooting), this)),
                                CallFunc::create(CC_CALLBACK_0(Boss::_turns,this)),
@@ -354,7 +354,7 @@ void Boss::_dash()
 void Boss::startShooting()
 {
     log("startShooting");
-     schedule(schedule_selector(Boss::shoot),0.15, 6, 0);
+     schedule(schedule_selector(Boss::shoot),0.15f, 6, 0);
 
 }
 
@@ -385,7 +385,7 @@ void Boss::dying()
 
 void Boss::dead()
 {
-    auto helloworld = (HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100);
+    auto helloworld = (GameScene*)Director::getInstance()->getRunningScene()->getChildByTag(100);
     int score = helloworld->getScore();
     helloworld->setScore(score+=_score);
     std::stringstream ss;
@@ -394,8 +394,8 @@ void Boss::dead()
     ss>>str;
     const char *p = str.c_str();
     helloworld->getScoreLabel()->setString(p);
-    auto scale = ScaleTo::create(0.1, 1.2);
-    auto scaleBack = ScaleTo::create(0.1, 1);
+    auto scale = ScaleTo::create(0.1f, 1.2f);
+    auto scaleBack = ScaleTo::create(0.1f, 1);
     auto label =helloworld->getScoreLabel();
     label->runAction(Sequence::create(scale, scaleBack,NULL));
     EnemyController::showCaseEnemies.eraseObject(this);
@@ -473,15 +473,15 @@ void Boss::showMuzzle()
 {
     muzzle1 = Sprite::create("muzzle.png");
     muzzle2 = Sprite::create("muzzle.png");
-    muzzle1->setScale(0.4);
-    muzzle2->setScale(0.4);
+    muzzle1->setScale(0.4f);
+    muzzle2->setScale(0.4f);
     muzzle1->setPosition(3,-30);
     muzzle2->setPosition(3,-30);
     muzzle1->setRotation(-35.0f);
     muzzle2->setRotation(-35.0f);
     _Cannon1->addChild(muzzle1);
     _Cannon2->addChild(muzzle2);
-    this->scheduleOnce(schedule_selector(Boss::dismissMuzzle), 0.1);
+    this->scheduleOnce(schedule_selector(Boss::dismissMuzzle), 0.1f);
 }
 
 void Boss::dismissMuzzle(float dt){
@@ -568,7 +568,7 @@ void Tank::reset()
 void Tank::setTurnRate(float aTurn)
 {
 	setMoveMode(moveMode::kTurn);
-	setRotation(fabsf(aTurn)*0.15);
+	setRotation(fabsf(aTurn)*0.15f);
 	_turn = aTurn;
 }
 

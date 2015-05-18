@@ -28,20 +28,35 @@
 #include "cocos2d.h"
 #include "GameEntity.h"
 
-
+class WeaponPos;
+class GameScene;
+class WeaponRes;
 
 class Bullet : public GameEntity
 {
 public:
     CREATE_FUNC(Bullet);
+	static Bullet* create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir);
+	bool init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir);
     bool init();
     void setVector(Vec2 vec);
     Vec2 getVector();
     virtual void reset();
     CC_SYNTHESIZE(float, _damage, Damage);
     CC_SYNTHESIZE(int, _owner, Owner)
+	bool getDrawFlip() const { return _drawFlip; }
+	void setDrawFlip(bool aDrawFlip) { _drawFlip = aDrawFlip; }
+	bool getBump() const { return _bump; }
+	void setBump(bool aBump) { _bump = aBump; }
+	bool isCastoff();
+	bool isBump();
 protected:
+	bool _drawFlip;
+	bool _bump;
+	std::shared_ptr<WeaponRes> _weaponRes;
+	GameScene* _gameScene;
     Vec2 _vector;
+	bool _castoff;
 };
 
 class PlayerBullet : public Bullet

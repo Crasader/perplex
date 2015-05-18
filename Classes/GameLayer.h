@@ -25,12 +25,15 @@
 #ifndef __Moon3d__GameLayer__
 #define __Moon3d__GameLayer__
 #include "cocos2d.h"
+#include "gamestate.h"
 USING_NS_CC;
 class Player;
 //class QuadTree;
 class Unit;
 class GameEntity;
 class CameraExt;
+class MapManager;
+
 
 
 class GameLayer : public Layer
@@ -40,6 +43,8 @@ public:
     void update(float dt);
     CREATE_FUNC(GameLayer);
     static bool isDie;
+	MapManager* getManManger();
+	void setMapSwitch(int activeMapID, int eventID);
     //virtual void onEnter();
 protected:
     float xScroll;

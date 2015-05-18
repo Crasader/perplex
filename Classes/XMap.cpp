@@ -3,6 +3,7 @@
 #include "GameGlobe.h"
 #include "GameControllers.h"
 #include "Unit.h"
+#include "GameScene.h"
 
 void XMap::AnalyzeRectDataL()
 {
@@ -14,8 +15,10 @@ void XMap::AnalyzeRectDataL()
 		dis >> iWalkRectCount;
 		if (iWalkRectCount > 0)
 		{
-			ibWalkRectActive = new bool[iWalkRectCount];
-			iMapWalkRect = new Rect[iWalkRectCount];
+			ibWalkRectActive.clear();
+			iMapWalkRect.clear();
+			ibWalkRectActive.resize(iWalkRectCount);
+			iMapWalkRect.resize(iWalkRectCount);
 			int l, t, w, h;
 			for (int n = 0; n < iWalkRectCount; n++)
 			{
@@ -43,7 +46,8 @@ void XMap::AnalyzeBuildingDataL()
 		dis >> iBuildingCount;
 		if (iBuildingCount > 0)
 		{
-			iMapBuilding = new SMapBuilding[iBuildingCount];
+			iMapBuilding.clear();
+			iMapBuilding.resize(iBuildingCount);
 			for (int i = 0; i < iBuildingCount; i++)
 			{
 				int brID, id, x, y, state, bflip, factoryCount;
@@ -60,7 +64,8 @@ void XMap::AnalyzeBuildingDataL()
 				iMapBuilding[i].iUnitFactoryCount = factoryCount;
 				if (factoryCount > 0)
 				{
-					iMapBuilding[i].iUnitFactoryData = new XUnitFactory[factoryCount];
+					iMapBuilding[i].iUnitFactoryData.clear();
+					iMapBuilding[i].iUnitFactoryData.resize(factoryCount);
 					for (int k = 0; k < factoryCount; ++k)
 					{
 						int unitType, left, top, width, height, unitCount, interval;
@@ -79,7 +84,8 @@ void XMap::AnalyzeBuildingDataL()
 				dis >> iMapBuilding[i].iDropToolCount;
 				if (iMapBuilding[i].iDropToolCount > 0)
 				{
-					iMapBuilding[i].iDropToolData = new XDropTool[iMapBuilding[i].iDropToolCount];
+					iMapBuilding[i].iDropToolData.clear();
+					iMapBuilding[i].iDropToolData.resize(iMapBuilding[i].iDropToolCount);
 					for (int k = 0; k < iMapBuilding[i].iDropToolCount; ++k)
 					{
 						int type, min, max, prob;
@@ -126,7 +132,8 @@ void XMap::AnalyzeFloorDataL()
 	if (!dis.fail())
 	{
 		dis >> iFloorCount;
-		iMapFloor = new SMapFloor[iFloorCount];
+		iMapFloor.clear();
+		iMapFloor.resize(iFloorCount);
 		for (int i = 0; i < iFloorCount; i++)
 		{
 			int id;
@@ -164,7 +171,7 @@ void XMap::AnalyzeTopDataL()
 		dis >> iTopCount;
 		if (iTopCount > 0)
 		{
-			iMapTop = new SMapFloor[iTopCount];
+			iMapTop.resize(iTopCount);
 			for (int i = 0; i < iTopCount; ++i)
 			{
 				int imageID, temp, ix, iy, ifliph;
@@ -193,8 +200,8 @@ void XMap::AnalyzeUnitDataL()
 			dis.close();
 			return;
 		}
-
-		iMapUnit = new SMapUnit[iUnitCount];
+		iMapUnit.clear();
+		iMapUnit.resize(iUnitCount);
 		for (int i = 0; i < iUnitCount; i++)
 		{
 			int urID, id, x, y, dir, aitype, camptype, movetype;
@@ -224,7 +231,8 @@ void XMap::AnalyzeUnitDataL()
 			if (iMapUnit[i].MoveType == STAND_MOVE)
 			{
 				//移动方向概率
-				iMapUnit[i].iMoveProb = new int[8];
+				iMapUnit[i].iMoveProb.clear();
+				iMapUnit[i].iMoveProb.resize(8);
 				for (int k = 0; k < 8; k++)
 				{
 					iMapUnit[i].iMoveProb[k] = 10;
@@ -232,7 +240,8 @@ void XMap::AnalyzeUnitDataL()
 
 				iMapUnit[i].iDistItemCount = 0;
 				iMapUnit[i].iMoveItemCount = 4;
-				iMapUnit[i].iMoveItemData = new Vec2[iMapUnit[i].iMoveItemCount];
+				iMapUnit[i].iMoveItemData.clear();
+				iMapUnit[i].iMoveItemData.resize(iMapUnit[i].iMoveItemCount);
 				for (int k = 0; k < iMapUnit[i].iMoveItemCount; k++)
 				{
 					//iMapUnit[i]->iMoveItemData[k] = new Vec2();
@@ -245,7 +254,8 @@ void XMap::AnalyzeUnitDataL()
 			if (iMapUnit[i].MoveType == RANDOM_MOVE || iMapUnit[i].MoveType == ORDER_MOVE)
 			{
 				//移动方向概率
-				iMapUnit[i].iMoveProb = new int[8];
+				iMapUnit[i].iMoveProb.clear();
+				iMapUnit[i].iMoveProb.resize(8);
 				for (int k = 0; k < 8; k++)
 				{
 					dis >> iMapUnit[i].iMoveProb[k];
@@ -258,7 +268,8 @@ void XMap::AnalyzeUnitDataL()
 				//根据目标距离，向目标方向移动概率
 				if (iMapUnit[i].iDistItemCount > 0)
 				{
-					iMapUnit[i].iDistItemData = new Vec2[tmpCount1];
+					iMapUnit[i].iDistItemData.clear();
+					iMapUnit[i].iDistItemData.resize(tmpCount1);
 					for (int k = 0; k < tmpCount1; k++)
 					{
 						int tempx, tempy;
@@ -273,7 +284,8 @@ void XMap::AnalyzeUnitDataL()
 				iMapUnit[i].iMoveItemCount = tmpCount2;
 				if (tmpCount2 > 0)
 				{
-					iMapUnit[i].iMoveItemData = new Vec2[tmpCount2];
+					iMapUnit[i].iMoveItemData.clear();
+					iMapUnit[i].iMoveItemData.resize(tmpCount2);
 					for (int k = 0; k < tmpCount2; k++)
 					{
 						int tempx, tempy;
@@ -291,7 +303,8 @@ void XMap::AnalyzeUnitDataL()
 				iMapUnit[i].iMoveItemCount = moveDataLength;
 				if (iMapUnit[i].iMoveItemCount > 0)
 				{
-					iMapUnit[i].iMoveItemData = new Vec2[moveDataLength];
+					iMapUnit[i].iMoveItemData.clear();
+					iMapUnit[i].iMoveItemData.resize(moveDataLength);
 					for (int k = 0; k < moveDataLength; k++)
 					{
 						int tempx, tempy;
@@ -309,7 +322,8 @@ void XMap::AnalyzeUnitDataL()
 			iMapUnit[i].iFireItemCount = tmpCount3;
 			if (tmpCount3 > 0)
 			{
-				iMapUnit[i].iFireItemData = new Vec2[tmpCount3];
+				iMapUnit[i].iFireItemData.clear();
+				iMapUnit[i].iFireItemData.resize(tmpCount3);
 				for (int k = 0; k < tmpCount3; k++)
 				{
 					int tempx, tempy;
@@ -326,7 +340,8 @@ void XMap::AnalyzeUnitDataL()
 			iMapUnit[i].iDropToolCount = toolCount;
 			if (toolCount > 0)
 			{
-				iMapUnit[i].iDropToolData = new XDropTool[toolCount];
+				iMapUnit[i].iDropToolData.clear();
+				iMapUnit[i].iDropToolData.resize(toolCount);
 				for (int k = 0; k < toolCount; k++)
 				{
 					int type, min, max, prob;
@@ -347,10 +362,11 @@ void XMap::AnalyzeUnitDataL()
 			iMapUnit[i].iOrderCount = orderCount;
 			if (orderCount > 0)
 			{
-				iMapUnit[i].iOrderData = new XUnitOrder[orderCount];
+				iMapUnit[i].iOrderData.clear();
+				iMapUnit[i].iOrderData.resize(orderCount);
 				for (int k = 0; k < orderCount; k++)
 				{
-					int direct, speed, time, bulletypte, firelogic, addition;
+					int direct, speed, time, bulletypte, firelogic;
 					dis >> direct;
 					dis >> speed;
 					dis >> time;
@@ -372,10 +388,11 @@ void XMap::AnalyzeUnitDataL()
 			iMapUnit[i].iRecycleOrderCount = recycleCount;
 			if (recycleCount > 0)
 			{
-				iMapUnit[i].iRecycleOrderData = new XUnitOrder[recycleCount];
+				iMapUnit[i].iRecycleOrderData.clear();
+				iMapUnit[i].iRecycleOrderData.resize(recycleCount);
 				for (int j = 0; j < recycleCount; j++)
 				{
-					int direct, speed, time, bulletypte, firelogic, addition;
+					int direct, speed, time, bulletypte, firelogic;
 					dis >> direct;
 					dis >> speed;
 					dis >> time;
@@ -424,12 +441,6 @@ XMap::XMap(int aID)
 , iUnitCount(0)            //Unit数
 , iBuildingCount(0)        //建筑数
 , iWalkRectCount(0)        //不可行走矩形的个数
-, iMapTop(nullptr)
-, iMapFloor(nullptr) 			//地板数据
-, iMapUnit(nullptr)              //Unit数据
-, iMapBuilding(nullptr)          //建筑数据
-, ibWalkRectActive(nullptr) 		//不可行走区域是否活跃
-, iMapWalkRect(nullptr)           //不可行走矩形
 {
 
 }
@@ -442,11 +453,7 @@ XMap::XMap()
 void XMap::Release()
 {
 
-	CC_SAFE_DELETE_ARRAY(iMapTop);
-	CC_SAFE_DELETE_ARRAY(iMapFloor);
-	CC_SAFE_DELETE_ARRAY(iMapUnit);
-	CC_SAFE_DELETE_ARRAY(iMapBuilding);
-	CC_SAFE_DELETE_ARRAY(iMapWalkRect);
+
 }
 
 SMapUnit::SMapUnit()
@@ -466,13 +473,6 @@ SMapUnit::SMapUnit()
 ,iDropToolCount(0)//掉落道具
 ,iOrderCount(0)   //指令数
 ,iRecycleOrderCount(0) //循环指令数
-, iMoveProb(nullptr)  //8方向随机移动的概率
-, iMoveItemData(nullptr)
-, iFireItemData(nullptr)
-, iDistItemData(nullptr)
-, iDropToolData(nullptr)
-, iOrderData(nullptr)
-,iRecycleOrderData(nullptr)
 {
 
 }
@@ -500,13 +500,6 @@ void SMapUnit::release()
 	iDropToolCount = 0;//掉落道具
 	iOrderCount = 0;   //指令数
 	iRecycleOrderCount = 0; //循环指令数
-	CC_SAFE_DELETE_ARRAY(iMoveProb);
-	CC_SAFE_DELETE_ARRAY(iMoveItemData);
-	CC_SAFE_DELETE_ARRAY(iFireItemData);
-	CC_SAFE_DELETE_ARRAY(iDistItemData);
-	CC_SAFE_DELETE_ARRAY(iDropToolData);
-	CC_SAFE_DELETE_ARRAY(iOrderData);
-	CC_SAFE_DELETE_ARRAY(iRecycleOrderData);
 }
 
 SMapBuilding::SMapBuilding()
@@ -521,8 +514,6 @@ SMapBuilding::SMapBuilding()
 ,add(0)    //附加信息
 ,iUnitFactoryCount(0)//出兵次数
 ,iDropToolCount(0)//掉落道具情况数
-,iUnitFactoryData(nullptr)
-,iDropToolData(nullptr)
 {
 
 }
@@ -544,7 +535,4 @@ void SMapBuilding::release()
 	tool = 0;
 	add = 0;
 	iUnitFactoryCount = 0;
-	iDropToolCount = 0;
-	CC_SAFE_DELETE_ARRAY(iUnitFactoryData);
-	CC_SAFE_DELETE_ARRAY(iDropToolData);
 }

@@ -25,15 +25,34 @@
 #ifndef __Moon3d__AirCraft__
 #define __Moon3d__AirCraft__
 
-#include "cocos2d.h"
 #include "GameEntity.h"
-#include "UnitRes.h"
 #include "XDropTool.h"
-#include "Weapon.h"
+
 
 USING_NS_CC;
 
 using namespace std;
+
+class UnitRes;
+class XDropTool;
+class Weapon;
+class ShotLogic;
+class ShotLogicManager;
+class Player;
+class XUnitOrder;
+class GameScene;
+
+enum UnitSDIR
+{
+	D_S_DOWN = 0,
+	D_S_LEFT_DOWN = 1,
+	D_S_LEFT = 2,
+	D_S_LEFT_UP = 3,
+	D_S_UP = 4,
+	D_S_RIGHT_UP = 5,
+	D_S_RIGHT = 6,
+	D_S_RIGHT_DOWN = 7,
+};
 
 class Unit : public GameEntity
 {
@@ -45,7 +64,7 @@ public:
     virtual bool hurt(float damage);
     virtual void die();
     void shoot();
-    //CC_SYNTHESIZE(float, _HP, HP);
+    CC_SYNTHESIZE(float, _HP, HP);
     bool alive();
     virtual void move(float y, float dt);
     virtual void reset();
@@ -70,30 +89,53 @@ public:
 	int getCampType() const { return _campType; }
 	void setCampType(int aCampType) { _campType = aCampType; }
 	vector<int> getMoveProb() const;
-	void setMoveProb(int* aMoveProb, int len);
+	void setMoveProb(std::vector<int> aMoveProb);
 	vector<Vec2> getMoveItemData() const;
-	void setMoveItemData(Vec2* aMoveItemData, int len);
+	void setMoveItemData(vector<Vec2> aMoveItemData);
 	vector<Vec2> getPointItemData() const { return _pointItemData; }
-	void setPointItemData(Vec2* aPointItemData, int len);
+	void setPointItemData(vector<Vec2> aPointItemData);
 	vector<Vec2> getFireItemData() const { return _fireItemData; }
-	void setFireItemData(Vec2* aFireItemData, int len);
+	void setFireItemData(vector<Vec2> aFireItemData);
 	vector<Vec2> getDistItemData() const { return _distItemData; }
-	void setDistItemData(Vec2* aDistItemData, int len);
+	void setDistItemData(vector<Vec2> aDistItemData);
 	vector<XDropTool> getDropToolData() const { return _dropToolData; }
-	void setDropToolData(XDropTool* aDropToolData, int len);
+	void setDropToolData(vector<XDropTool> aDropToolData);
 	vector<XUnitOrder> getUnitRecycleOrder() const { return _unitRecycleOrder; }
-	void setUnitRecycleOrder(XUnitOrder* aUnitRecycleOrder, int len);
+	void setUnitRecycleOrder(vector<XUnitOrder> aUnitRecycleOrder);
 	Rect getWalkRect() const { return _walkRect; }
 	void setWalkRect(Rect aWalkRect) { _walkRect = aWalkRect; }
 	Rect getMoveRect() const { return _moveRect; }
 	void setMoveRect(Rect aMoveRect) { _moveRect = aMoveRect; }
-	UnitRes getUnitRes() const { return _unitRes; }
-	void setUnitRes(UnitRes aUnitRes) { _unitRes = aUnitRes; }
+	std::shared_ptr<UnitRes> getUnitRes() const { return _unitRes; }
+	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes) { _unitRes = aUnitRes; }
+	void perfrom();
+
+	bool isNeedDelete();
+	void AI();
+	void analyzeOrder();
+	void analyzeRecycleOrder();
+	void setMotionAndDIR(int motion, int wdir);
+	void fireRequire(int logicType, int weaponResID);
+	void processDie();
+	void processTool();
+	void unitMove();
+	bool enableMove(int newX, int newY);
+	int getCastoffStage() { return _castoffStage; }
+	void setEventUnit(bool eventUnit);
+	int getPower();
+	void setPower(int power) { _power = power; }
+	void setNewRoad(std::vector<cocos2d::Vec2> _roads);
+	int beAttack(const cocos2d::Rect rect, int power);
+	int getShotDir();
 protected:
-    float		_HP;
     bool		_alive;
+	bool		_castoff;
 	bool		_active;//是否被激活
 	bool		_eventUnit;//是否事件Unit;
+	bool		_unitFireRequire;
+	bool		_die;//死亡闪烁状态
+	bool		_endableMove;
+	int			_power;
     int			_score;
 	int			_iDieExplodCount;//死亡爆炸动画个数
 	int			_startExplodeTick;//爆炸开始时间
@@ -102,6 +144,12 @@ protected:
 	int			_moveType;	//运动方式
 	int			_maxHP;		//血的最大值
 	int			_BodyLevel;//身体的重量级数
+	//指令集
+	int			_orderType;//指令类型 0 －－ 初始指令    1 －－ 循环指令
+	int			_currentOrderIndex;
+	int			_orderDelay;
+	int			_orderCount;
+
 	//移动速度
 	int			_moveX;
 	int			_moveY;
@@ -111,20 +159,23 @@ protected:
 	int			_beAttackTick;//被攻击延迟，用于蒙色
 	int			_diaphaneity;//透明度
 	int			_dieTick;
-	bool		_die;//死亡闪烁状态
 	//行动方向
 	int        	 _walkDir;       //决定下半身方向，不可以上下转身的Unit由iWalkDir决定方向
 	//AI
 	int			_AIType;
 	//fire
-	bool		_unitFireRequire;
 	int			_shotPosIndex;//发射点索引
 	int			_shotLogicType;
 	int			_weaponResID;
 	int			_fireTick;//轻武器涉及延迟
+	int			_castoffStage;//被处理的状态， 当大于等于1时被删除
+	//判断可行走范围
+	Rect		_walkRect;//行走碰撞判断矩形
+	Rect		_moveRect;//有效行走矩形
+	GameScene* _gameScene;
+	Player* _player;
 	vector<bool>	 _dieExplode;//记录是否爆炸
-	//vector<Weapon>	 _weaponList; //此Unit的武器表Weapon
-
+	vector<XUnitOrder> _unitOrder;
 	//8方向随机移动的概率
 	vector<int>		_moveProb;
 	//移动时间和概率
@@ -139,11 +190,8 @@ protected:
 	vector<XDropTool> _dropToolData;
 	//循环指令
 	vector<XUnitOrder>	_unitRecycleOrder;
-	//判断可行走范围
-	bool		_endableMove;
-	Rect		_walkRect;//行走碰撞判断矩形
-	Rect		_moveRect;//有效行走矩形
-	UnitRes		 _unitRes;
+	std::shared_ptr<UnitRes>		 _unitRes;
+	std::vector<std::shared_ptr<Weapon>> _weapons;//此Unit的武器表Weapon
 };
 
 #endif /* defined(__Moon3d__AirCraft__) */

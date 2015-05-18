@@ -24,7 +24,7 @@
 
 #include "GameOverLayer.h"
 #include "MainMenuScene.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "GameLayer.h"
 #include "GameControllers.h"
 #include "Unit.h"
@@ -187,7 +187,7 @@ void GameOverLayer::menu_playagain()
     {
         BulletController::erase(i);
     }
-    Director::getInstance()->replaceScene(HelloWorld::createScene());
+    Director::getInstance()->replaceScene(GameScene::createScene());
 }
 
 bool GameOverLayer::onTouchBegan(Touch *touch, Event *event)

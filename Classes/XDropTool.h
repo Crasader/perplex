@@ -1,8 +1,6 @@
 #ifndef __XDropTool_h__
 #define __XDropTool_h__
 
-#include "Head.h"
-
 class XDropTool
 {
 public:

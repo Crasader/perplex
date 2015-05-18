@@ -32,7 +32,7 @@ Node *GameEntity::getModel(){
     return _Model;
 }
 
-Vec3 GameEntity::getOrientation(){
+Vec2 GameEntity::getOrientation(){
     return _orientation;
 }
 
@@ -83,6 +83,11 @@ void GameEntity::UseOutlineEffect(Sprite3D* sprite, float width, Color3B color)
 //    effect->setOutlineWidth(width);
 }
 
+
+void GameEntity::perfrom()
+{
+}
+
 const Rect GameEntity::getMoveRect()
 {
 	_moveRect.origin = Point(getPositionX() - _moveRect.size.width / 2, this->getPositionY() - _moveRect.size.height / 2);
@@ -92,7 +97,7 @@ const Rect GameEntity::getMoveRect()
 GameEntity::GameEntity()
 :_Model(nullptr)
 , _radius(0)
-, _orientation(0, 0, 0)
+, _orientation(0, 0)
 , _type(0)
 , _shadowType(-1)
 , _curState(nullptr)
@@ -100,7 +105,7 @@ GameEntity::GameEntity()
 
 }
 
-GameEntity::GameEntity(int type, int shadowType, int radius, const Vec3& oriention /*= Vec3::ZERO*/, const Rect& moveRect /*= Rect::ZERO*/)
+GameEntity::GameEntity(int type, int shadowType, int radius, const Vec2& oriention /*= Vec3::ZERO*/, const Rect& moveRect /*= Rect::ZERO*/)
 :_type(type)
 , _shadowType(shadowType)
 , _radius(radius)

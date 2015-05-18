@@ -23,7 +23,7 @@
  ****************************************************************************/
 
 #include "LoadingScene.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "Unit.h"
 #include "Enemies.h"
 #include "Bullets.h"
@@ -116,7 +116,7 @@ void LoadingScene::InitCoco()
     {
 		coco->setRotation3D(Vec3(90,0,180));
         coco->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2-150));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(coco), 0.03, Color3B(0,0,0));
+        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(coco), 0.03f, Color3B(0,0,0));
         
         addChild(coco,1);
         coco->runAction(RepeatForever::create(RotateBy::create(0.8f,Vec3(0,360,0))));
@@ -203,7 +203,7 @@ void LoadingScene::GotoNextScene()
 void LoadingScene::RunNextScene(float dt)
 {
     this->removeAllChildren();
-    auto helloworldScene=HelloWorld::createScene();
+    auto helloworldScene=GameScene::createScene();
     Director::getInstance()->replaceScene(TransitionZoomFlipX::create(1.0f,helloworldScene));
 
 }

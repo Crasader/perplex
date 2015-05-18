@@ -3,11 +3,12 @@
 
 #include "Head.h"
 #include "GameGlobe.h"
+#include "mapconst.h"
 
 class GameScene;
 class XMap;
 
-class MapManager : public Ref
+class MapManager
 {
 public:
 	enum MapLayer
@@ -24,17 +25,20 @@ public:
 
 	MapManager(GameScene* scene);
 	~MapManager();
-	bool RequestMap(int aMapID, bool aLocal);
-	bool IsMapOk(int aMapID);
-	bool AnalyzeDataL();
-	bool LoadMapImg(int aMapID);
-	void AnalyzeMap();
+	bool requestMap(int aMapID, bool aLocal);
+	bool isMapOk(int aMapID);
+	bool analyzeDataL();
+	bool loadMapImg(int aMapID);
+	void analyzeMap();
 	bool createFloor();
 	Node* getFloor() { return _floor; }
 	void createUnits();
 	int getXMapW();
 	int getXMapH();
 	Size getMapSize(){ return Size(getXMapW(), getXMapH()); }
+	bool isLoadingMap() { return iLoadingMap; }
+	int getActiveMapID() { return iActiveMapID; }
+	std::shared_ptr<XMap> getActiveMap() { return iActiveMap; }
 private:
 	 GameScene*           iGameScene;
 	 bool                 iLoadingMap;    //是否正在载入地图
@@ -43,11 +47,10 @@ private:
 	 int                  iRequestMapID;
 	 int                  iActiveMapID;   //当前活跃的地图ID
 	 int 				  iLastCameraY;	//上次摄像机的Y坐标
-	 int 				  iScreenPartCount; //屏幕内容纳的缓冲区个数
 	 int				  iImgCounts;
 	 int				  iLoadState;     //载入进度
-	 XMap*                iPrepareLoadMap;//准备载入的地图大
-	 XMap*                iActiveMap;     //当前活跃的地图
+	 std::shared_ptr<XMap>               iPrepareLoadMap;//准备载入的地图大
+	 std::shared_ptr<XMap>                iActiveMap;     //当前活跃的地图
 	 Texture2D** 		  iMapImgs;		//地图图像
 	 std::string          iFileName;      //地图包名
 	 Node*				 _floor;//地板

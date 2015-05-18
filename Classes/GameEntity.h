@@ -38,12 +38,12 @@ class GameEntity : public Node
 {
 public:
 	GameEntity();
-	GameEntity(int type, int shadowType, int radius, const Vec3& oriention = Vec3::ZERO, const Rect& moveRect = Rect::ZERO);
+	GameEntity(int type, int shadowType, int radius, const Vec2& oriention = Vec2::ZERO, const Rect& moveRect = Rect::ZERO);
 	virtual ~GameEntity();;
     CREATE_FUNC(GameEntity);
     Node *getModel();
     void remove();
-    Vec3 getOrientation();
+    Vec2 getOrientation();
     void setType(int type){_type = type;};
     int getType(){return _type;};
     float getRadius(){return _radius;};
@@ -53,16 +53,23 @@ public:
 	const Rect getMoveRect();
 	int getShadowType() const { return _shadowType; }
 	void setShadowType(int aShadowType) { _shadowType = aShadowType; }
+	bool getCastoff() const { return _castoff; }
+	void setCastoff(bool aCastoff) { _castoff = aCastoff; }
+	int getCastoffStage() const { return _castoffStage; }
+	void setCastoffStage(int aCastoffStage) { _castoffStage = aCastoffStage; }
 public:
     static void UseOutlineEffect(Sprite3D* sprite, float width, Color3B color);
+	virtual void perfrom();
 protected:
-    Node *_Model;
-    Vec3 _orientation;
-	Rect _moveRect;
-    int _type;
+	bool _castoff;
+	int _castoffStage;
+	int _type;
 	int _shadowType;
-    float _radius;
+	float _radius;
+    Node *_Model;
 	IState* _curState;
+    Vec2 _orientation;
+	Rect _moveRect;
 };
 
 

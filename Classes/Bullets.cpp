@@ -30,6 +30,35 @@
 #include "Enemies.h"
 #include "ParticleManager.h"
 #include "Sprite3DEffect.h"
+#include "WeaponRes.h"
+
+Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
+{
+	auto bullet = new Bullet();
+	if (bullet && bullet->init(gameScene, weaponRes, pos, move, dir))
+	{
+		bullet->autorelease();
+		return bullet;
+	}
+	CC_SAFE_DELETE(bullet);
+	return nullptr;
+}
+
+
+bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
+{
+	_gameScene = gameScene;
+	_weaponRes = weaponRes;
+	setPosition(pos);
+	_vector = move;
+	_orientation = dir;
+	_radius = 10;
+	_type = kEnemyBullet;
+	_owner = kEnemy;
+	_damage = 0;
+
+	return true;
+}
 
 bool Bullet::init()
 {
@@ -92,6 +121,18 @@ void Bullet::reset()
     setRotation(0);
 }
 
+
+bool Bullet::isCastoff()
+{
+	return _castoff;
+}
+
+
+bool Bullet::isBump()
+{
+	return _bump;
+}
+
 bool Missile::init()
 {
     //_Model = EffectSprite3D::createFromObjFileAndTexture("daodanv001.c3b", "daodan_32.png");
@@ -110,7 +151,7 @@ bool Missile::init()
         _type = kPlayerMissiles;
         _owner = kPlayer;
 		_Model->setRotation(180);
-        _Model->setScale(0.3);
+        _Model->setScale(0.3f);
         //_Model->setRotation3D(Vec3(0,0,180));
         _damage = 20;
 		_target = nullptr;

@@ -36,7 +36,7 @@ const float Airplane::pZA = 7.0f;
 
 bool Airplane::init(){
 
-	pRate = 3.1415926/2;
+	pRate = 3.1415926f/2;
     originX = -15.0f - 90.f;
     originY = 159.0f;
     originZ = 9.0f;
@@ -55,6 +55,6 @@ bool Airplane::init(){
 }
 
 void Airplane::update(float dt){
-    pRate+=0.01;
+    pRate+=0.01f;
     _Model->setRotation3D(Vec3(0-pXA*sin(pXW*pRate),0,0-pZA*sin(pZW*pRate)));
 }

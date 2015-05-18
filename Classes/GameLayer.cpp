@@ -61,10 +61,10 @@ bool GameLayer::init()
     EnemyController::init(this);
 
 	auto mapmanager = new MapManager(nullptr);
-	mapmanager->LoadMapImg(0);
-	if (!mapmanager->RequestMap(1, true))
+	mapmanager->loadMapImg(0);
+	if (!mapmanager->requestMap(1, true))
 	{
-		mapmanager->RequestMap(1, true);
+		mapmanager->requestMap(1, true);
 		mapmanager->createFloor();
 		mapmanager->createUnits();
 	}
@@ -76,7 +76,7 @@ bool GameLayer::init()
 	_camera->setPlayer(_player);
     //EffectManager::setLayer(this);
 
-    this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5, -1, 2.0);
+    this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5f, -1, 2.0f);
 
     //BulletController::init(this);
 
@@ -84,8 +84,8 @@ bool GameLayer::init()
     
     _player->setPosition(Vec2(_camera->GetCameraCenter().x,-1000));
     _player->runAction(Sequence::create(
-                                        DelayTime::create(0.75),
-					   EaseBackOut::create(MoveTo::create(1.7, Vec2(_camera->GetCameraCenter().x, 100))),
+                                        DelayTime::create(0.75f),
+					   EaseBackOut::create(MoveTo::create(1.7f, Vec2(_camera->GetCameraCenter().x, 100))),
 					   Spawn::create(CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer, this)),
 					   CallFunc::create([this](){
 		_camera->StartCmdCamera(0, speed);
@@ -328,5 +328,17 @@ void GameLayer::addEnemy(int i)
 	enemy1->setPosition(random + Vec2(160, 60)*(i + 1));
 	/*enemy2->schedule(schedule_selector(Tank::shoot), 0, kRepeatForever, 0);*/
 	static_cast<Tank*>(enemy1)->setTarget(_player);
+}
+
+MapManager* GameLayer::getManManger()
+{
+	//TODO
+
+	return nullptr;
+}
+
+void GameLayer::setMapSwitch(int activeMapID, int eventID)
+{
+	//TODO
 }
 

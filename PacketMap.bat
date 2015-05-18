@@ -1,5 +1,7 @@
 
 
+copy .\MapEditor\save\unitres\UnitRes_Mobile.dat .\Resources\mapdat\unitres_mobile.dat
+
 copy .\MapEditor\save\building\l0_building_mobile.dat .\Resources\mapdat\l0_building_mobile.dat
 copy .\MapEditor\save\floor\l0_floor_mobile.dat .\Resources\mapdat\l0_floor_mobile.dat
 copy .\MapEditor\save\unit\l0_unit_mobile.dat .\Resources\mapdat\l0_unit_mobile.dat

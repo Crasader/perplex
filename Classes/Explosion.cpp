@@ -44,9 +44,9 @@ bool SmallExplosion::init(){
     part2->setTextureWithRect(part2_frame->getTexture(), part2_frame->getRect());
     this->addChild(part2);
     part1->setTotalParticles(10);
-    part1->setEmissionRate(9999999999);
+    part1->setEmissionRate(9999999999.0f);
     part2->setTotalParticles(3);
-    part2->setEmissionRate(9999999999);
+    part2->setEmissionRate(9999999999.0f);
     part1->setRotation3D(Vec3(30,0,0));
     part2->setRotation3D(Vec3(30,0,0));
     return true;
@@ -55,15 +55,15 @@ bool SmallExplosion::init(){
 void SmallExplosion::createExplosion(Node* _effectLayer, Vec2 pos){
     
     part1->setTotalParticles(8);
-    part1->setEmissionRate(9999999999);
-    part1->setScale(0.7);
+    part1->setEmissionRate(9999999999.0f);
+    part1->setScale(0.7f);
     part2->setTotalParticles(5);
-    part2->setEmissionRate(9999999999);
+    part2->setEmissionRate(9999999999.0f);
 	_effectLayer->addChild(this, kZorderExplosion);
     part1->setRotation3D(Vec3(30,0,0));
     part2->setRotation3D(Vec3(30,0,0));
     this->setPosition(pos);
-    this->scheduleOnce(schedule_selector(SmallExplosion::recycle), 1.5);
+    this->scheduleOnce(schedule_selector(SmallExplosion::recycle), 1.5f);
 }
 
 void SmallExplosion::recycle(float dt){
@@ -91,11 +91,11 @@ bool BigExplosion::init(){
     part3->setTextureWithRect(part3_frame->getTexture(), part3_frame->getRect());
     this->addChild(part3);
     part1->setTotalParticles(10);
-    part1->setEmissionRate(9999999999);
+    part1->setEmissionRate(9999999999.0f);
     part2->setTotalParticles(3);
-    part2->setEmissionRate(9999999999);
+    part2->setEmissionRate(9999999999.0f);
     part3->setTotalParticles(20);
-    part3->setEmissionRate(9999999999);
+    part3->setEmissionRate(9999999999.0f);
     part3->setScale(1.5);
     part1->setRotation3D(Vec3(30,0,0));
     part2->setRotation3D(Vec3(30,0,0));
@@ -111,7 +111,7 @@ void BigExplosion::createExplosion(Node *_effectLayer, Vec2 pos){
     part3->resetSystem();
     setPosition(pos);
 
-    this->scheduleOnce(schedule_selector(BigExplosion::recycle), 1.2);
+    this->scheduleOnce(schedule_selector(BigExplosion::recycle), 1.2f);
 }
 
 void BigExplosion::recycle(float dt){
@@ -134,8 +134,8 @@ void BulletExplosion::showExplosion(Vec2 point){
     this->runAction(Sequence::create(animate,
                                      CallFuncN::create(CC_CALLBACK_1(BulletExplosion::explosionFinished,this)),                                  NULL));
     this->setScale(0.5);
-    this->runAction(ScaleBy::create(0.4, 2));
-    this->runAction(FadeOut::create(0.4));
+    this->runAction(ScaleBy::create(0.4f, 2));
+    this->runAction(FadeOut::create(0.4f));
     this->setPosition(point);
     this->setRotation3D(Vec3(30,0,0));
     this->setBlendFunc(BlendFunc::ADDITIVE);
@@ -203,7 +203,7 @@ void TestExplosion::createExplosion(Node* _effectLayer, cocos2d::Vec2 pos)
 	part1->setEmissionRate(part1->getEmissionRate());
 	_effectLayer->addChild(this, kZorderExplosion);
 	this->setPosition(pos);
-	this->scheduleOnce(schedule_selector(TestExplosion::recycle), 1.5);
+	this->scheduleOnce(schedule_selector(TestExplosion::recycle), 1.5f);
 }
 
 void TestExplosion::recycle(float dt)

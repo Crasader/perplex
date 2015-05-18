@@ -1,0 +1,175 @@
+﻿生成启动时间为 2015/4/20 16:37:39。
+     1>项目“D:\projects\perplex\proj.win32\perplex.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\audio\include" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\external" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\external\chipmunk\include\chipmunk" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\extensions" /I..\Classes /I.. /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos\editor-support" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos\platform" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\cocos\platform\desktop" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\external\glfw3\include\win32" /I"D:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\2d\..\..\external\win32-specific\gles\include\OGLES" /Zi /nologo /W3 /WX- /MP /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D _VARIADIC_MAX=10 /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release.win32\\" /Fd"Release.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\AnimationManager.cpp ..\Classes\AppDelegate.cpp ..\Classes\Bullets.cpp ..\Classes\CameraExt.cpp ..\Classes\CAnimationData.cpp ..\Classes\Effects.cpp ..\Classes\Enemies.cpp ..\Classes\Explosion.cpp ..\Classes\GameControllers.cpp ..\Classes\GameEntity.cpp ..\Classes\GameLayer.cpp ..\Classes\GameOverLayer.cpp ..\Classes\HelloWorldScene.cpp ..\Classes\Ifstream.cpp ..\Classes\LicenseLayer.cpp ..\Classes\LoadingScene.cpp ..\Classes\LoadMap.cpp ..\Classes\MainMenuScene.cpp ..\Classes\MapManager.cpp ..\Classes\ParticleManager.cpp ..\Classes\Airplane.cpp ..\Classes\Player.cpp ..\Classes\PublicApi.cpp ..\Classes\RotateWithAction.cpp ..\Classes\ShadowController.cpp ..\Classes\Sprite3DEffect.cpp ..\Classes\Turret.cpp ..\Classes\Unit.cpp ..\Classes\UnitRes.cpp ..\Classes\Weapon.cpp ..\Classes\XMap.cpp main.cpp
+         AnimationManager.cpp
+         AppDelegate.cpp
+         Bullets.cpp
+         CameraExt.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\AnimationManager.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\AppDelegate.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\CameraExt.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Bullets.cpp)
+     1>..\Classes\Bullets.cpp(113): warning C4305: “参数”: 从“double”到“float”截断
+         CAnimationData.cpp
+         Effects.cpp
+         Enemies.cpp
+         Explosion.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\CAnimationData.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Effects.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Enemies.cpp)
+     1>..\Classes\Enemies.cpp(165): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(195): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(261): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(262): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(279): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(304): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(330): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(331): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(351): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(362): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(370): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(386): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(476): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(516): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(517): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(595): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(596): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Enemies.cpp(603): warning C4305: “参数”: 从“double”到“float”截断
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Explosion.cpp)
+     1>..\Classes\Explosion.cpp(47): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(49): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(58): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(59): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Explosion.cpp(61): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(94): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(96): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(98): warning C4305: “参数”: 从“__int64”到“float”截断
+     1>..\Classes\Explosion.cpp(114): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Explosion.cpp(137): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Explosion.cpp(138): warning C4305: “参数”: 从“double”到“float”截断
+         GameControllers.cpp
+         GameEntity.cpp
+         GameLayer.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\GameEntity.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\GameControllers.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\GameLayer.cpp)
+         GameOverLayer.cpp
+     1>..\Classes\GameLayer.cpp(81): warning C4305: “参数”: 从“double”到“float”截断
+         HelloWorldScene.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\GameOverLayer.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\HelloWorldScene.cpp)
+         Ifstream.cpp
+         LicenseLayer.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Ifstream.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\LicenseLayer.cpp)
+         LoadingScene.cpp
+         LoadMap.cpp
+         MainMenuScene.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\LoadingScene.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\LoadMap.cpp)
+     1>..\Classes\LoadingScene.cpp(119): warning C4305: “参数”: 从“double”到“float”截断
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\MainMenuScene.cpp)
+         MapManager.cpp
+     1>..\Classes\MainMenuScene.cpp(57): warning C4305: “=”: 从“double”到“float”截断
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\MapManager.cpp)
+         ParticleManager.cpp
+         Airplane.cpp
+         Player.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\ParticleManager.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Player.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Airplane.cpp)
+     1>..\Classes\Airplane.cpp(39): warning C4305: “=”: 从“double”到“float”截断
+     1>..\Classes\Airplane.cpp(58): warning C4305: “+=”: 从“double”到“float”截断
+     1>..\Classes\Player.cpp(44): warning C4305: “初始化”: 从“double”到“const float”截断
+     1>..\Classes\Player.cpp(95): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Player.cpp(310): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Player.cpp(311): warning C4305: “参数”: 从“double”到“float”截断
+         PublicApi.cpp
+         RotateWithAction.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\PublicApi.cpp)
+         ShadowController.cpp
+         Sprite3DEffect.cpp
+     1>..\Classes\PublicApi.cpp(33): warning C4305: “=”: 从“double”到“float”截断
+     1>..\Classes\PublicApi.cpp(35): warning C4305: “=”: 从“double”到“float”截断
+     1>..\Classes\PublicApi.cpp(37): warning C4305: “=”: 从“double”到“float”截断
+     1>..\Classes\PublicApi.cpp(39): warning C4305: “=”: 从“double”到“float”截断
+     1>..\Classes\PublicApi.cpp(41): warning C4305: “=”: 从“double”到“float”截断
+     1>..\Classes\PublicApi.cpp(43): warning C4305: “=”: 从“double”到“float”截断
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\RotateWithAction.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\ShadowController.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Sprite3DEffect.cpp)
+         Turret.cpp
+         Unit.cpp
+         UnitRes.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Unit.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Turret.cpp)
+         Weapon.cpp
+     1>..\Classes\Unit.cpp(57): warning C4305: “参数”: 从“double”到“float”截断
+     1>..\Classes\Unit.cpp(58): warning C4305: “参数”: 从“double”到“float”截断
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\UnitRes.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\Weapon.cpp)
+         XMap.cpp
+         main.cpp
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (..\Classes\XMap.cpp)
+     1>d:\projects\cocos\frameworks\cocos2d-x-3.5\cocos\physics/CCPhysicsJoint.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失 (main.cpp)
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Release.win32\game.res" game.rc 
+       PreLinkEvent:
+         if not exist "D:\projects\perplex\proj.win32\Release.win32\" mkdir "D:\projects\perplex\proj.win32\Release.win32\"
+         xcopy /Y /Q "D:\projects\cocos\frameworks\cocos2d-x-3.5\prebuilt\win32\*.*" "D:\projects\perplex\proj.win32\Release.win32\"
+         xcopy "D:\projects\perplex\proj.win32\..\Resources" "D:\projects\perplex\proj.win32\Release.win32\" /D /E /I /F /Y
+         
+         :VCEnd
+         复制了 51 个文件
+         D:\projects\perplex\Resources\changjing01-01.jpg -> D:\projects\perplex\proj.win32\Release.win32\changjing01-01.jpg
+         D:\projects\perplex\Resources\mplane0_0.png -> D:\projects\perplex\proj.win32\Release.win32\mplane0_0.png
+         D:\projects\perplex\Resources\mscrew0_0.png -> D:\projects\perplex\proj.win32\Release.win32\mscrew0_0.png
+         D:\projects\perplex\Resources\mscrew0_1.png -> D:\projects\perplex\proj.win32\Release.win32\mscrew0_1.png
+         D:\projects\perplex\Resources\res\HelloWorld.png -> D:\projects\perplex\proj.win32\Release.win32\res\HelloWorld.png
+         D:\projects\perplex\Resources\res\MainScene.csb -> D:\projects\perplex\proj.win32\Release.win32\res\MainScene.csb
+         D:\projects\perplex\Resources\res\Default\defaultParticle.plist -> D:\projects\perplex\proj.win32\Release.win32\res\Default\defaultParticle.plist
+         复制了 7 个文件
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\projects\perplex\proj.win32\Release.win32\perplex.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:D:\projects\perplex\proj.win32\Release.win32\ /LIBPATH:D:\projects\perplex\proj.win32\Release.win32\ /LIBPATH:"d:\Program Files (x86)\Visual Leak Detector\lib\Win32" libcurl_imp.lib websockets.lib opengl32.lib glew32.lib libzlib.lib libpng.lib libjpeg.lib libtiff.lib libwebp.lib libiconv.lib glfw3.lib freetype250.lib winmm.lib ws2_32.lib libchipmunk.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\projects\perplex\proj.win32\Release.win32\perplex.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\projects\perplex\proj.win32\Release.win32\perplex.lib" /MACHINE:X86 /SAFESEH Release.win32\game.res
+         Release.win32\AnimationManager.obj
+         Release.win32\AppDelegate.obj
+         Release.win32\Bullets.obj
+         Release.win32\CameraExt.obj
+         Release.win32\CAnimationData.obj
+         Release.win32\Effects.obj
+         Release.win32\Enemies.obj
+         Release.win32\Explosion.obj
+         Release.win32\GameControllers.obj
+         Release.win32\GameEntity.obj
+         Release.win32\GameLayer.obj
+         Release.win32\GameOverLayer.obj
+         Release.win32\HelloWorldScene.obj
+         Release.win32\Ifstream.obj
+         Release.win32\LicenseLayer.obj
+         Release.win32\LoadingScene.obj
+         Release.win32\LoadMap.obj
+         Release.win32\MainMenuScene.obj
+         Release.win32\MapManager.obj
+         Release.win32\ParticleManager.obj
+         Release.win32\Airplane.obj
+         Release.win32\Player.obj
+         Release.win32\PublicApi.obj
+         Release.win32\RotateWithAction.obj
+         Release.win32\ShadowController.obj
+         Release.win32\Sprite3DEffect.obj
+         Release.win32\Turret.obj
+         Release.win32\Unit.obj
+         Release.win32\UnitRes.obj
+         Release.win32\Weapon.obj
+         Release.win32\XMap.obj
+         Release.win32\main.obj
+            正在创建库 D:\projects\perplex\proj.win32\Release.win32\perplex.lib 和对象 D:\projects\perplex\proj.win32\Release.win32\perplex.exp
+         正在生成代码
+         已完成代码的生成
+         perplex.vcxproj -> D:\projects\perplex\proj.win32\Release.win32\perplex.exe
+     1>已完成生成项目“D:\projects\perplex\proj.win32\perplex.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:03:52.63

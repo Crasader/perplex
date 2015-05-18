@@ -4,28 +4,29 @@
 #include "cocos2d.h"
 #include "Unit.h"
 
-void MapManager::AnalyzeMap()
+void MapManager::analyzeMap()
 {
 	if (iLoadState == MapLayer::EIdle)
 	{
-	
-		AnalyzeDataL();
-		iLoadState = MapLayer::ELoadMapImg;
-		CC_SAFE_RELEASE(iActiveMap);
-		iActiveMap = iPrepareLoadMap;
-		iGetMap = true;
-		iPrepareLoadMap = nullptr;
+		iLoadState++;
+	}
+	else if (iLoadState <= ELoadMapImg)
+	{
+		if (analyzeDataL())
+		{
+			iLoadState++;
+		}
 	}
 	else
 	{
-		CC_SAFE_RELEASE(iActiveMap);
 		iActiveMap = iPrepareLoadMap;
+		iActiveMapID = iRequestMapID;
 		iGetMap = true;
 		iPrepareLoadMap = nullptr;
 	}
 }
 
-bool MapManager::LoadMapImg(int aMapID)
+bool MapManager::loadMapImg(int aMapID)
 {
 	bool result = true;
 	int count = MAP_IMAGE_COUNT[MAPID_TO_STAGE[aMapID]];
@@ -53,7 +54,7 @@ bool MapManager::LoadMapImg(int aMapID)
 	return result;
 }
 
-bool MapManager::AnalyzeDataL()
+bool MapManager::analyzeDataL()
 {
 	bool result = true;
 	/*switch (iLoadState)
@@ -87,14 +88,14 @@ bool MapManager::AnalyzeDataL()
 	return result;
 }
 
-bool MapManager::IsMapOk(int aMapID)
+bool MapManager::isMapOk(int aMapID)
 {
 	return iActiveMap != nullptr && iActiveMap->getID() == aMapID;
 }
 
-bool MapManager::RequestMap(int aMapID, bool aLocal)
+bool MapManager::requestMap(int aMapID, bool aLocal)
 {
-	if (IsMapOk(aMapID))
+	if (isMapOk(aMapID))
 	{
 		iRequestMapID = -1;
 		iLoadState = MapLayer::EIdle;
@@ -103,15 +104,14 @@ bool MapManager::RequestMap(int aMapID, bool aLocal)
 	}
 	if (iRequestMapID == aMapID)
 	{
-		AnalyzeMap();
+		analyzeMap();
 		return false;
 	}
 
-	CC_SAFE_DELETE(iActiveMap);
 	iLocalMap = aLocal;
 	iGetMap = false;
-	CC_SAFE_DELETE(iPrepareLoadMap);
-	iPrepareLoadMap = new XMap(aMapID);
+	iActiveMap = nullptr;
+	iPrepareLoadMap = std::make_shared<XMap>(XMap(aMapID));
 	iLoadingMap = true;
 	iLoadState = MapLayer::EIdle;
 	iRequestMapID = aMapID;
@@ -120,8 +120,6 @@ bool MapManager::RequestMap(int aMapID, bool aLocal)
 
 MapManager::~MapManager()
 {
-	CC_SAFE_DELETE(iPrepareLoadMap);
-	CC_SAFE_DELETE(iActiveMap);
 	for (int i = 0; i < iImgCounts; i++)
 	{
 		CC_SAFE_RELEASE(iMapImgs[i]);
@@ -137,8 +135,7 @@ MapManager::MapManager(GameScene* scene)
 ,iGetMap(0)
 ,iRequestMapID(-1)
 ,iActiveMapID(-1)   //当前活跃的地图ID
-,iLastCameraY(0)	//上次摄像机的Y坐标
-,iScreenPartCount(0) //屏幕内容纳的缓冲区个数
+,iLastCameraY(-1000)	//上次摄像机的Y坐标
 ,iImgCounts(0)
 ,iLoadState(0)     //载入进度
 ,iPrepareLoadMap(nullptr)//准备载入的地图大
@@ -148,7 +145,6 @@ MapManager::MapManager(GameScene* scene)
 , _floor(nullptr)
 {
 	iGameScene = scene;
-	//CC_SAFE_RETAIN(iGameScene);
 }
 
 bool MapManager::createFloor()
@@ -207,23 +203,22 @@ void MapManager::createUnits()
 		pUnit->setMoveType(iMapUnit[n].MoveType);
 		pUnit->setWalkDir(unitWDir);
 		pUnit->setCampType(campType);
-		pUnit->setMoveProb(iMapUnit[n].iMoveProb, 8);
+		pUnit->setMoveProb(iMapUnit[n].iMoveProb);
 		pUnit->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		if (iMapUnit[n].MoveType == PATH_MOVE)
 		{
-			pUnit->setPointItemData(iMapUnit[n].iMoveItemData, iMapUnit[n].iMoveItemCount);
+			pUnit->setPointItemData(iMapUnit[n].iMoveItemData);
 		}
 		else
 		{
-			pUnit->setMoveItemData(iMapUnit[n].iMoveItemData, iMapUnit[n].iMoveItemCount);
+			pUnit->setMoveItemData(iMapUnit[n].iMoveItemData);
 		}
-		pUnit->setFireItemData(iMapUnit[n].iFireItemData, iMapUnit[n].iFireItemCount);
-		pUnit->setDistItemData(iMapUnit[n].iDistItemData, iMapUnit[n].iDistItemCount);
-		pUnit->setDropToolData(iMapUnit[n].iDropToolData, iMapUnit[n].iDropToolCount);
-		pUnit->setUnitRecycleOrder(iMapUnit[n].iRecycleOrderData, iMapUnit[n].iRecycleOrderCount);
+		pUnit->setFireItemData(iMapUnit[n].iFireItemData);
+		pUnit->setDistItemData(iMapUnit[n].iDistItemData);
+		pUnit->setDropToolData(iMapUnit[n].iDropToolData);
+		pUnit->setUnitRecycleOrder(iMapUnit[n].iRecycleOrderData);
 		pUnit->setAIType(iMapUnit[n].AIType);
 	}
-	CC_SAFE_DELETE_ARRAY(iMapUnit);
 	iUnitCount = 0;
 }

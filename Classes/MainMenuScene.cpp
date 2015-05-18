@@ -27,7 +27,7 @@
 #include "PublicApi.h"
 #include "Airplane.h"
 #include "GameLayer.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "LicenseLayer.h"
 USING_NS_CC;
 
@@ -54,7 +54,7 @@ bool MainMenuScene::init()
         return false;
     }
 	
-	pRate = 3.1415926/2;
+	pRate = 3.1415926f/2;
 
     //CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Star_Chaser.mp3");
     
@@ -132,7 +132,7 @@ void MainMenuScene::startgame_callback()
     //CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     GameLayer::isDie=false;
     //auto scene = (LoadingScene::audioloaded) ? HelloWorld::createScene() :LoadingScene::createScene();
-	auto scene = HelloWorld::createScene();
+	auto scene = GameScene::createScene();
 	Director::getInstance()->replaceScene(scene);
 }
 

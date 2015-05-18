@@ -26,7 +26,7 @@
 #include "Bullets.h"
 #include "GameControllers.h"
 #include "consts.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "PublicApi.h"
 #include "GameLayer.h"
 #include "ParticleManager.h"
@@ -38,10 +38,10 @@
 #define visible_size_macro Director::getInstance()->getVisibleSize()
 #define origin_point Director::getInstance()->getVisibleOrigin();
 
-const float Player::rollSpeed = 1.5;// recommended 1.5
+const float Player::rollSpeed = 1.5f;// recommended 1.5
 const float Player::returnSpeed = 10;// recommended 4
 const float Player::maxRoll = 75;
-const float Player::rollReturnThreshold = 1.02;
+const float Player::rollReturnThreshold = 1.02f;
 
 bool Player::init()
 {
@@ -87,8 +87,8 @@ bool Player::init()
         //scheduleUpdate();
         //GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02, Color3B(0,0,0));
         
-        schedule(schedule_selector(Player::shootMissile), 1.5, -1, 0);
-        schedule(schedule_selector(Player::shoot), 0.075, -1, 0);
+        schedule(schedule_selector(Player::shootMissile), 1.5f, -1, 0);
+        schedule(schedule_selector(Player::shoot), 0.075f, -1, 0);
         
         // engine trail
 		/*    auto part_frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("engine2.jpg");
@@ -303,8 +303,8 @@ bool Player::hurt(float damage){
     float fromHP = _HP;
     float toHP = _HP-=damage;
     
-    auto fade = FadeTo::create(0.2, 40);
-    auto fadeBack = FadeTo::create(0.2, 0);
+    auto fade = FadeTo::create(0.2f, 40);
+    auto fadeBack = FadeTo::create(0.2f, 0);
     auto warningLayer = Director::getInstance()->getRunningScene()->getChildByTag(456);
     warningLayer->setVisible(true);
     warningLayer->runAction(Sequence::create(fade,fadeBack,
@@ -312,7 +312,7 @@ bool Player::hurt(float damage){
                                                               CC_CALLBACK_0(Player::hideWarningLayer, this, warningLayer)
                                                               ),NULL));
     
-    auto hpView = ((HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
+    auto hpView = ((GameScene*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
     
     auto to = ProgressFromTo::create(0.5, PublicApi::hp2percent(fromHP), PublicApi::hp2percent(toHP));
    if(hpView) hpView->runAction(to);

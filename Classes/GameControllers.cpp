@@ -31,7 +31,7 @@
 #include "SimpleAudioEngine.h"
 #include "Enemies.h"
 #include "Player.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 #include "CameraExt.h"
 #include "ShadowController.h"
 #include "Turret.h"
