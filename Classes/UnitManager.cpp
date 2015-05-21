@@ -13,17 +13,20 @@
 #include "weaponresmanager.h"
 #include "consts.h"
 #include "GameEntity.h"
+#include "Player.h"
+#include "Fodder.h"
+#include "Enemies.h"
 
-std::vector<GameEntity*> UnitManager::_tools;
-std::vector<GameEntity*> UnitManager::_buildings;
-std::vector<GameEntity*> UnitManager::_sprites;
-std::vector<GameEntity*> UnitManager::_sortSprites;
-std::vector<GameEntity*> UnitManager::_allys;
-std::vector<GameEntity*> UnitManager::_enemies;
-std::vector<GameEntity*> UnitManager::_enemyBullets;
-std::vector<GameEntity*> UnitManager::_allyBullets;
-std::vector<Explode*> UnitManager::_explodes;
-std::vector<GameEntity*> UnitManager::_explodeReals;
+cocos2d::Vector<GameEntity*> UnitManager::_tools;
+cocos2d::Vector<GameEntity*> UnitManager::_buildings;
+cocos2d::Vector<GameEntity*> UnitManager::_sprites;
+cocos2d::Vector<GameEntity*> UnitManager::_sortSprites;
+cocos2d::Vector<GameEntity*> UnitManager::_allys;
+cocos2d::Vector<GameEntity*> UnitManager::_enemies;
+cocos2d::Vector<GameEntity*> UnitManager::_enemyBullets;
+cocos2d::Vector<GameEntity*> UnitManager::_allyBullets;
+//cocos2d::Vector<Explosion*> UnitManager::_explodes;
+cocos2d::Vector<GameEntity*> UnitManager::_explodeReals;
 
 UnitManager::UnitManager(GameScene* gameScene)
 :_gameScene(gameScene)
@@ -38,6 +41,11 @@ Unit* UnitManager::createUnit(int unitID, int type, int x, int y, int moveType, 
 	{
 	case 0:
 		pUnit = createRedHeader(unitID, type, x, y, moveType, dir, campType);
+		_gameScene->addLevelEnemy(-1);
+		break;
+	case 1:
+	case 5:
+		pUnit = spawnEnemy(unitID, type, x, y, moveType, dir, campType);
 		break;
 	default:
 		break;
@@ -47,15 +55,25 @@ Unit* UnitManager::createUnit(int unitID, int type, int x, int y, int moveType, 
 
 Unit* UnitManager::createRedHeader(int unitID, int type, int x, int y, int moveType, int dir, int campType)
 {
-	Unit* unit = nullptr;
-	unit->setPosition(x, y);
-	unit->setMoveType(moveType);
-	unit->setCampType(campType);
-	/*_gameScene->setPlayer(unit);*/
+	auto unit = Player::create();
+	assert(unit != nullptr);
+	if (unit != nullptr)
+	{
+		unit->setUnitID(unitID);
+		unit->setType(type);
+		unit->setWalkDir(dir);
+		unit->setPosition(Vec2(x, y));
+		unit->setMoveType(moveType);
+		unit->setCampType(campType);
+		unit->setCampType(Ally);
 
-	_sprites.push_back(unit);
-	_sortSprites.push_back(unit);
-	_allys.push_back(unit);
+		_gameScene->setPlayer(unit);
+		_gameScene->addChild(unit);
+
+		_sprites.pushBack(unit);
+		_sortSprites.pushBack(unit);
+		_allys.pushBack(unit);
+	}
 
 	return unit;
 }
@@ -91,8 +109,8 @@ Building* UnitManager::findBuildingFromID(int buildingID)
 Tool* UnitManager::createTool(int appearAnimaID, int generalAnimID, int disappearAnimID, int x, int y, int type)
 {
 	auto tool = Tool::create(_gameScene, appearAnimaID, generalAnimID, disappearAnimID, x, y, type);
-	_tools.push_back(tool);
-	_sprites.push_back(tool);
+	_tools.pushBack(tool);
+	_sprites.pushBack(tool);
 	return tool;
 }
 
@@ -167,13 +185,66 @@ Unit* UnitManager::createDefaultUnit(int type, int x, int y)
 	return unit;
 }
 
+Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType)
+{
+	Unit* pUnit = getOrCreate(type);
+	if (pUnit)
+	{
+		pUnit->setPosition(Vec2(x, y));
+		pUnit->setMoveType(moveType);
+		pUnit->setType(type);
+		pUnit->setWalkDir(dir);
+		pUnit->setCampType(campType);
+		_sprites.pushBack(pUnit);
+		_sortSprites.pushBack(pUnit);
+		if (campType == Ally)
+		{
+			_allys.pushBack(pUnit);
+		}
+		else
+		{
+			_enemies.pushBack(pUnit);
+		}
+		_gameScene->addChild(pUnit);
+	}
+	return pUnit;
+}
+
+Unit* UnitManager::getOrCreate(int type)
+{
+	Unit *enemy = nullptr;
+	switch (type)
+	{
+	case kEnemyFodder:
+		enemy = Fodder::create();
+		enemy->retain();
+	case kEnemyFodderL:
+		
+		break;
+	case kEnemyBigDude:
+	
+		break;
+	case kEnemyBoss:
+		
+		break;
+	case kEnemyTank:
+		enemy = Tank::create();
+		enemy->retain();
+		break;
+	case kEnemyTurret:
+		
+		break;
+	}
+	return enemy;
+}
+
 Building* UnitManager::createBuilding(int buildType, int BuildiID, int x, int y, int state, bool fliph)
 {
 	auto pBuildingRes = _gameScene->getBuildingResManager()->getBuildingResFromID(buildType);
 	auto pBuilding = Building::create(_gameScene, pBuildingRes, BuildiID, state, fliph);
 	pBuilding->setPosition(x, y);
-	_buildings.push_back(pBuilding);
-	_sprites.push_back(pBuilding);
+	_buildings.pushBack(pBuilding);
+	_sprites.pushBack(pBuilding);
 	return pBuilding;
 }
 
@@ -196,14 +267,14 @@ Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, i
 		pBullet = Bullet::create(_gameScene, weaponRes, Vec2(x, y), Vec2(moveX, moveY), Vec2::ZERO);
 		break;
 	}
-	_sprites.push_back(pBullet);
+	_sprites.pushBack(pBullet);
 	if (campType != Enemy)
 	{
-		_allyBullets.push_back(pBullet);
+		_allyBullets.pushBack(pBullet);
 	}
 	else
 	{
-		_enemyBullets.push_back(pBullet);
+		_enemyBullets.pushBack(pBullet);
 	}
 	return pBullet;
 }

@@ -55,21 +55,20 @@ static const int UNIT_DIE_SCORE[] = {
 
 enum entityTypes
 {
+    kPlayer,
+
     kEnemyFodder,
     kEnemyFodderL,
     kEnemyBigDude,
     kEnemyBoss,
+	kEnemyTank,
+	kEnemyTurret,
 
     kPlayerBullet,
     kPlayerMissiles,
     kEnemyBullet,
     
-    kPlayer,
     kEnemy,
-    
-	kEnemyTank,
-	kEnemyTurret,
-
 };
 
 enum zOrder

@@ -15,6 +15,7 @@ class XMap;
 class MapManager;
 class Victory;
 class CameraExt;
+class Player;
 
 class GameScene : public cocos2d::Layer
 {
@@ -35,7 +36,7 @@ public:
 	int getSceneHeight();
 	cocos2d::Size getSceneSize();
 	std::shared_ptr<MapManager> getMapManager();
-	std::shared_ptr<UnitManager> getSpriteManager() { return _spriteManager; }
+	std::shared_ptr<UnitManager> getSpriteManager() { return _unitManager; }
 	void MoveCamera(int x, int y);
 
 	int getMapWidth();
@@ -50,7 +51,7 @@ public:
 	void ShowGameOver(Ref* pObj);
 	void gameInitPerform();
 	bool changeMap(int mapID);
-	void loadEvent(int _state, int _mapSectonID);
+	void loadEvent(int stage, int mapSectonID);
 	void deleteCastoffPoint();
 	void gamePlayingPerform(float dt);
 	void MapWalkRectActive();
@@ -72,9 +73,12 @@ public:
 	void startGameState();
 	void startGameEnd();
 	void startGameOver();
-	void doPeroidicTick();
+	void doPeroidicTick(float dt);
 	void gameLoadMapPerform();
 	void unitFollowCamer(Unit* _player, bool center);
+	UnitManager& getUnitManager() const;
+	void setPlayer(Player* unit);
+	UnitResManager& getUnitResManager() const;
 private:
 	bool _game1stStart;
 	bool _victory;
@@ -136,13 +140,13 @@ private:
 	long _totalSecond;
 	long _totalPauseTime;
 
-	Unit* _cameraUnit;
-	Unit* _player;
+	Player* _cameraUnit;
+	Player* _player;
 	std::shared_ptr<UnitResManager> _unitResManager;
 	std::shared_ptr<BuildingResManager> _buildingResManager;
 	std::shared_ptr<WeaponResManager> _weaponResManager;
 	std::shared_ptr<AnimResManager> _AnimResManager;
-	std::shared_ptr<UnitManager> _spriteManager;
+	std::shared_ptr<UnitManager> _unitManager;
 	std::shared_ptr<EventManager> _eventManager;
 	std::shared_ptr<XMap> _activeMap;
 	std::shared_ptr<MapManager> _mapManager;

@@ -12,6 +12,7 @@ void XMap::AnalyzeRectDataL()
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
+		auto iWalkRectCount = 0;
 		dis >> iWalkRectCount;
 		if (iWalkRectCount > 0)
 		{
@@ -43,11 +44,12 @@ void XMap::AnalyzeBuildingDataL()
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
+		auto iBuildingCount = 0;
 		dis >> iBuildingCount;
+		iMapBuilding.clear();
+		iMapBuilding.resize(iBuildingCount);
 		if (iBuildingCount > 0)
 		{
-			iMapBuilding.clear();
-			iMapBuilding.resize(iBuildingCount);
 			for (int i = 0; i < iBuildingCount; i++)
 			{
 				int brID, id, x, y, state, bflip, factoryCount;
@@ -61,7 +63,7 @@ void XMap::AnalyzeBuildingDataL()
 				iMapBuilding[i].bcasern = false;
 				iMapBuilding[i].tool = -1;//当等于-1时，不产生道具
 				iMapBuilding[i].add = 0;
-				iMapBuilding[i].iUnitFactoryCount = factoryCount;
+		
 				if (factoryCount > 0)
 				{
 					iMapBuilding[i].iUnitFactoryData.clear();
@@ -80,13 +82,13 @@ void XMap::AnalyzeBuildingDataL()
 						iMapBuilding[i].iUnitFactoryData[k].interval = interval;
 					}
 				}
-	
-				dis >> iMapBuilding[i].iDropToolCount;
-				if (iMapBuilding[i].iDropToolCount > 0)
+				auto iDropToolCount = 0;
+				dis >> iDropToolCount;
+				if (iDropToolCount > 0)
 				{
 					iMapBuilding[i].iDropToolData.clear();
-					iMapBuilding[i].iDropToolData.resize(iMapBuilding[i].iDropToolCount);
-					for (int k = 0; k < iMapBuilding[i].iDropToolCount; ++k)
+					iMapBuilding[i].iDropToolData.resize(iDropToolCount);
+					for (int k = 0; k < iDropToolCount; ++k)
 					{
 						int type, min, max, prob;
 						dis >> type >> min >> max >> prob;
@@ -131,6 +133,7 @@ void XMap::AnalyzeFloorDataL()
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
+		auto iFloorCount = 0;
 		dis >> iFloorCount;
 		iMapFloor.clear();
 		iMapFloor.resize(iFloorCount);
@@ -168,10 +171,12 @@ void XMap::AnalyzeTopDataL()
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
+		auto iTopCount = 0;
 		dis >> iTopCount;
+		iMapTop.clear();
+		iMapTop.resize(iTopCount);
 		if (iTopCount > 0)
 		{
-			iMapTop.resize(iTopCount);
 			for (int i = 0; i < iTopCount; ++i)
 			{
 				int imageID, temp, ix, iy, ifliph;
@@ -194,6 +199,7 @@ void XMap::AnalyzeUnitDataL()
 	Ifstream dis(f);
 	if (!dis.fail())
 	{
+		auto iUnitCount = 0;
 		dis >> iUnitCount;
 		if (iUnitCount <= 0)
 		{
@@ -436,11 +442,10 @@ XMap::XMap(int aID)
 //地图摄像机
 , iCameraX(0) 				//摄像机X坐标
 , iCameraY(0) 				//摄像机Y坐标
-, iFloorCount(0)           //地板数
-, iTopCount(0)
-, iUnitCount(0)            //Unit数
-, iBuildingCount(0)        //建筑数
-, iWalkRectCount(0)        //不可行走矩形的个数
+, iMapBuilding()
+, iMapFloor()
+, iMapUnit()
+, iMapTop()
 {
 
 }
@@ -512,8 +517,6 @@ SMapBuilding::SMapBuilding()
 ,state(0)  //初始状态。0表示完好；1表示半毁；2表示全毁
 ,tool(0)   //爆炸后出现的工具
 ,add(0)    //附加信息
-,iUnitFactoryCount(0)//出兵次数
-,iDropToolCount(0)//掉落道具情况数
 {
 
 }
@@ -534,5 +537,4 @@ void SMapBuilding::release()
 	state = 0;
 	tool = 0;
 	add = 0;
-	iUnitFactoryCount = 0;
 }

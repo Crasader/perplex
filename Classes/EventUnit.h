@@ -51,8 +51,8 @@ private:
 	int _activeEffect;
 	bool _castoff;
 	bool _triggerOK;
-	std::vector<Trigger*> _triggers;
-	std::vector<Effect*> _effects;
+	std::vector<std::shared_ptr<Trigger>> _triggers;
+	std::vector<std::shared_ptr<Effect>> _effects;
 	EventManager* _eventManager;
 };
 #endif // __EventUnit_h__

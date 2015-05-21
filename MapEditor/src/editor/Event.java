@@ -3,6 +3,8 @@ package editor;
 import java.io.*;
 import java.awt.*;
 
+import sun.applet.Main;
+
 /**
  事件。
  id：		在某个地图内事件之间唯一标志性的ID。不同地图之间可能有相同ID的事件。
@@ -88,19 +90,43 @@ public class Event {
 	}
 
 	public static String getAreaDescription(int[] data) {
+		MapInfo info = MainFrame.self.getMapInfo();
 		String result = "区域[";
 		if (data != null) {
-			if (data.length >= 1) {
-				result = result + data[0];
+			if(data.length == 4)
+			{
+				int l, t, w, h;
+				w = data[2];
+				h = data[3];
+				l = info.changeToMobileX(data[0]);
+				t = info.changeToMobileY(data[1], h);
+				
+				if (data.length >= 1) {
+					result = result + l;
+				}
+				if (data.length >= 2) {
+					result = result + "," + t;
+				}
+				if (data.length >= 3) {
+					result = result + "," + data[2];
+				}
+				if (data.length >= 4) {
+					result = result + "," + data[3];
+				}
 			}
-			if (data.length >= 2) {
-				result = result + "," + data[1];
-			}
-			if (data.length >= 3) {
-				result = result + "," + data[2];
-			}
-			if (data.length >= 4) {
-				result = result + "," + data[3];
+			else {
+					if (data.length >= 1) {
+						result = result + data[0];
+					}
+					if (data.length >= 2) {
+						result = result + "," + data[1];
+					}
+					if (data.length >= 3) {
+						result = result + "," + data[2];
+					}
+					if (data.length >= 4) {
+						result = result + "," + data[3];
+					}
 			}
 		}
 		result = result + "]";
@@ -117,12 +143,13 @@ public class Event {
 
 	public static String getPointDescription(int[] data) {
 		String result = "地点[";
+		MapInfo info = MainFrame.self.getMapInfo();
 		if (data != null) {
 			if (data.length >= 1) {
-				result = result + data[0];
+				result = result + info.changeToMobileX(data[0]);
 			}
 			if (data.length >= 2) {
-				result = result + "," + data[1];
+				result = result + "," + info.changeToMobileY(data[1],0);
 			}
 		}
 		result = result + "]";

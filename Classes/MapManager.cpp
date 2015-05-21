@@ -3,6 +3,9 @@
 #include "GameControllers.h"
 #include "cocos2d.h"
 #include "Unit.h"
+#include "GameScene.h"
+#include "UnitManager.h"
+#include "building.h"
 
 void MapManager::analyzeMap()
 {
@@ -57,34 +60,37 @@ bool MapManager::loadMapImg(int aMapID)
 bool MapManager::analyzeDataL()
 {
 	bool result = true;
-	/*switch (iLoadState)
-	{*/
-	//case MapManager::MapLayer::EIdle:
-		//break;
-	//case MapManager::MapLayer::ELoadMapInf:
+	switch (iLoadState)
+	{
+	case MapManager::MapLayer::EIdle:
+		break;
+	case MapManager::MapLayer::ELoadMapInf:
 		iPrepareLoadMap->AnalyzeInfDataL();
-		//break;
-	//case MapManager::MapLayer::ELoadMapFloor:
+		break;
+	case MapManager::MapLayer::ELoadMapFloor:
 		iPrepareLoadMap->AnalyzeFloorDataL();
-		//break;
-	//case MapManager::MapLayer::ELoadMapTop:
+		createFloor();
+		break;
+	case MapManager::MapLayer::ELoadMapTop:
 		iPrepareLoadMap->AnalyzeTopDataL();
-		//break;
-	//case MapManager::MapLayer::ELoadMapBuilding:
+		break;
+	case MapManager::MapLayer::ELoadMapBuilding:
 		iPrepareLoadMap->AnalyzeBuildingDataL();
-		//break;
-	//case MapManager::MapLayer::ELoadMapUnit:
+		createBuilding();
+		break;
+	case MapManager::MapLayer::ELoadMapUnit:
 		iPrepareLoadMap->AnalyzeUnitDataL();
-		//break;
-	//case MapManager::MapLayer::ELoadMapWalkRect:
+		createUnits();
+		break;
+	case MapManager::MapLayer::ELoadMapWalkRect:
 		iPrepareLoadMap->AnalyzeRectDataL();
-		//break;
-	//case MapManager::MapLayer::ELoadMapImg:
+		break;
+	case MapManager::MapLayer::ELoadMapImg:
 		/*result = LoadMapImg(iRequestMapID);*/
-		//break;
-		/*default:
-			break;
-			}*/
+		break;
+	default:
+		break;
+	}
 	return result;
 }
 
@@ -111,7 +117,7 @@ bool MapManager::requestMap(int aMapID, bool aLocal)
 	iLocalMap = aLocal;
 	iGetMap = false;
 	iActiveMap = nullptr;
-	iPrepareLoadMap = std::make_shared<XMap>(XMap(aMapID));
+	iPrepareLoadMap = std::shared_ptr<XMap>(new XMap(aMapID));
 	iLoadingMap = true;
 	iLoadState = MapLayer::EIdle;
 	iRequestMapID = aMapID;
@@ -149,16 +155,16 @@ MapManager::MapManager(GameScene* scene)
 
 bool MapManager::createFloor()
 {
-	if (iActiveMap == nullptr)
+	if (iPrepareLoadMap == nullptr)
 	{
 		return false;
 	}
 	CC_SAFE_RELEASE(_floor);
 	_floor = Node::create();
-	auto count = iActiveMap->getFloorCount();
+	auto count = iPrepareLoadMap->getFloorCount();
 	for (int i = 0; i < count; i++)
 	{
-		SMapFloor mapFloor = iActiveMap->getMapFloor()[i];
+		SMapFloor mapFloor = iPrepareLoadMap->getMapFloor()[i];
 		char f[256];
 		sprintf(f, "map/%d.jpg", mapFloor.iImageID);
 		auto img = Director::getInstance()->getTextureCache()->addImage(f);
@@ -172,7 +178,9 @@ bool MapManager::createFloor()
 			sprite->setFlippedX(true);
 		}
 		_floor->addChild(sprite);
+		_floor->retain();
 	}
+	iGameScene->addChild(_floor);
 	return true;
 }
 
@@ -181,9 +189,8 @@ int MapManager::getXMapH() { return iActiveMap->getHeight(); }
 
 void MapManager::createUnits()
 {
-	assert(iActiveMap);
-	auto iUnitCount = iActiveMap->getUnitCount();
-	auto iMapUnit = iActiveMap->getSMapUnit();
+	auto iUnitCount = iPrepareLoadMap->getUnitCount();
+	auto iMapUnit = iPrepareLoadMap->getSMapUnit();
 	//Éú³ÉUnit
 	int unitWDir;
 	int campType;
@@ -192,17 +199,15 @@ void MapManager::createUnits()
 		unitWDir = (iMapUnit[n].dir >> 1);
 		campType = iMapUnit[n].CampType;
 		//TODO
-		auto pUnit = EnemyController::spawnEnemy(iMapUnit[n].urID);
-		if (pUnit == nullptr)
-		{
-			continue;
-		}
-	
-		pUnit->setUnitID(iMapUnit[n].id);
-		pUnit->setPosition(iMapUnit[n].x, iMapUnit[n].y);
-		pUnit->setMoveType(iMapUnit[n].MoveType);
-		pUnit->setWalkDir(unitWDir);
-		pUnit->setCampType(campType);
+		auto pUnit = iGameScene->getUnitManager().createUnit(
+			iMapUnit[n].id,
+			iMapUnit[n].urID,
+			iMapUnit[n].x,
+			iMapUnit[n].y,
+			iMapUnit[n].MoveType,
+			unitWDir,
+			campType);
+		if (pUnit == nullptr) continue;
 		pUnit->setMoveProb(iMapUnit[n].iMoveProb);
 		pUnit->setAnchorPoint(Vec2(0.5f, 0.5f));
 
@@ -221,4 +226,25 @@ void MapManager::createUnits()
 		pUnit->setAIType(iMapUnit[n].AIType);
 	}
 	iUnitCount = 0;
+}
+
+
+void MapManager::createBuilding()
+{
+	Building *pBuilding = nullptr;
+	auto count = iPrepareLoadMap->getBuildingCount();
+	auto mapBuilding = iPrepareLoadMap->getMapBuilding();
+	for (auto n = 0; n < count; n++)
+	{
+		pBuilding = iGameScene->getUnitManager().createBuilding(
+			mapBuilding[n].brID,
+			mapBuilding[n].id,
+			mapBuilding[n].x,
+			mapBuilding[n].y,
+			mapBuilding[n].state,
+			mapBuilding[n].bflip
+			);
+		pBuilding->setUnitFactory(mapBuilding[n].iUnitFactoryData);
+		pBuilding->setDropTool(mapBuilding[n].iDropToolData);
+	}
 }

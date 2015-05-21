@@ -129,8 +129,8 @@ void TurretOne::rotated()
 
 void TurretOne::update(float dt)
 {
-	Unit::update(dt);
-	startRotate(dt);
+	/*Unit::update(dt);
+	startRotate(dt);*/
 }
 
 void TurretOne::startShoot(float dt)

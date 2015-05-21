@@ -41,6 +41,7 @@ class ShotLogicManager;
 class Player;
 class XUnitOrder;
 class GameScene;
+class MotionImpl;
 
 enum UnitSDIR
 {
@@ -58,10 +59,11 @@ class Unit : public GameEntity
 {
 public:
 	Unit();
+	Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
 	Unit(bool alive, float hp, int score);
 	Unit(int type, int shadowType, int radius, bool alive, float hp, int score);
-	virtual ~Unit(){};
-    virtual bool hurt(float damage);
+	bool init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
+	virtual bool hurt(float damage);
     virtual void die();
     void shoot();
     CC_SYNTHESIZE(float, _HP, HP);
@@ -107,7 +109,7 @@ public:
 	Rect getMoveRect() const { return _moveRect; }
 	void setMoveRect(Rect aMoveRect) { _moveRect = aMoveRect; }
 	std::shared_ptr<UnitRes> getUnitRes() const { return _unitRes; }
-	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes) { _unitRes = aUnitRes; }
+	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes);
 	void perfrom();
 
 	bool isNeedDelete();
@@ -188,10 +190,12 @@ protected:
 	vector<Vec2>	_distItemData;
 	//掉落道具
 	vector<XDropTool> _dropToolData;
+	std::vector<std::shared_ptr<Weapon>> _weapons;//此Unit的武器表Weapon
 	//循环指令
 	vector<XUnitOrder>	_unitRecycleOrder;
 	std::shared_ptr<UnitRes>		 _unitRes;
-	std::vector<std::shared_ptr<Weapon>> _weapons;//此Unit的武器表Weapon
+	std::shared_ptr<ShotLogicManager> _shotLogicManager;
+	MotionImpl* _curMotion;
 };
 
 #endif /* defined(__Moon3d__AirCraft__) */

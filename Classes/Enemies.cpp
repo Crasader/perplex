@@ -547,7 +547,7 @@ bool Tank::init()
 		_turret = TurretTwo::create();
 		addChild(_Model);
 		addChild(_turret);
-		this->scheduleUpdate();
+		//this->scheduleUpdate();
 		return true;
 	}
 	

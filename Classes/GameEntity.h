@@ -32,7 +32,7 @@ USING_NS_CC;
 
 using namespace cocostudio;
 
-class IState;
+class MotionImpl;
 
 class GameEntity : public Node
 {
@@ -67,7 +67,7 @@ protected:
 	int _shadowType;
 	float _radius;
     Node *_Model;
-	IState* _curState;
+	MotionImpl* _curState;
     Vec2 _orientation;
 	Rect _moveRect;
 };

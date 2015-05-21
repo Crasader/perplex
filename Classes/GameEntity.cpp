@@ -24,7 +24,7 @@
 
 #include "GameEntity.h"
 #include "Sprite3DEffect.h"
-#include "IState.h"
+#include "MotionImpl.h"
 
 USING_NS_CC_MATH;
 

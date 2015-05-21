@@ -19,7 +19,7 @@ void BuildingResManager::loadRes(const std::string& res)
 			_buildingResList.resize(count);
 			for (int n = 0; n = count; n++)
 			{
-				auto pBuildingRes = std::make_shared<BuildingRes>(BuildingRes());
+				auto pBuildingRes = std::shared_ptr<BuildingRes>(new BuildingRes());
 				int type, ID, shake, x, y, rectCount;
 				int left, top, width, height;
 				int stateImageID, hp, exploreCount;

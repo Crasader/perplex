@@ -3,6 +3,7 @@
  //#include "GameScene.h"
 // #include "LoadingScene.h"
  #include "MainMenuScene.h"
+#include "TestScene.h"
 
 USING_NS_CC;
 
@@ -45,9 +46,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res");
 	FileUtils::getInstance()->addSearchPath("map");
 	FileUtils::getInstance()->addSearchPath("mapdat");
+	FileUtils::getInstance()->addSearchPath("anim");
 
      // create a scene. it's an autorelease object
-     auto scene = MainMenuScene::createScene();
+     auto scene = TestScene::createScene();
  
      // run
      director->runWithScene(scene);

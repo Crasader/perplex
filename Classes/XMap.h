@@ -60,8 +60,6 @@ public:
 	short   state;  //初始状态。0表示完好；1表示半毁；2表示全毁
 	short   tool;   //爆炸后出现的工具
 	short   add;    //附加信息
-	int    iUnitFactoryCount;//出兵次数
-	int    iDropToolCount;//掉落道具情况数
 	std::vector<XUnitFactory> iUnitFactoryData;
 	std::vector<XDropTool> iDropToolData;
 };
@@ -88,18 +86,21 @@ public:
 	void AnalyzeTopDataL();
 	int getID() const { return iID; }
 	void setID(int aID) { iID = aID; }
-	int getTopCount() const { return iTopCount; }
-	int getFloorCount() const { return iFloorCount; }
+	int getTopCount() const { return iMapTop.size(); }
+	std::vector<SMapFloor> getMapTop() const { return iMapTop; }
+	int getFloorCount() const { return iMapFloor.size(); }
 	std::vector<SMapFloor> getMapFloor() const { return iMapFloor; }
 	int getWidth() const { return iWidth; }
 	int getHeight() const { return iHeight; }
-	int getUnitCount() { return iUnitCount; }
+	int getUnitCount() { return iMapUnit.size(); }
 	std::vector<SMapUnit> getSMapUnit() const { return iMapUnit; }
 	std::vector<cocos2d::Rect> getWalkRect() {
 		return iMapWalkRect;
 	}
 	void setWalkRectActive(int index, bool active) { ibWalkRectActive[index] = active; }
 	bool isWalkRectActive(int index) { return ibWalkRectActive[index]; }
+	int getBuildingCount() const { return iMapBuilding.size(); }
+	std::vector<SMapBuilding> getMapBuilding() { return iMapBuilding; }
 private:
 	int             	iID;                    // 地图ID，全球唯一v
 	int					iActivist;
@@ -110,17 +111,12 @@ private:
 	int					iCameraX;				//摄像机X坐标
 	int 				iCameraY;				//摄像机Y坐标
 
-	int            		iFloorCount;            //地板数
-	int            		iUnitCount;             //Unit数
-	int            		iBuildingCount;         //建筑数
-	int            		iWalkRectCount;         //不可行走矩形的个数
-	int            		iTopCount;				//顶层地板数
-	std::vector<SMapFloor>    		iMapTop;                //顶层地板数据
+	std::vector<SMapFloor>    	iMapTop;                //顶层地板数据
 	std::vector<SMapFloor>    	iMapFloor;				//地板数据
-	std::vector<SMapUnit>			iMapUnit;               //Unit数据
-	std::vector<SMapBuilding>   	iMapBuilding;           //建筑数据
+	std::vector<SMapUnit>		iMapUnit;               //Unit数据
+	std::vector<SMapBuilding>   iMapBuilding;           //建筑数据
 	std::vector<bool>          	ibWalkRectActive;		//不可行走区域是否活跃
-	std::vector<Rect>	          	iMapWalkRect;           //不可行走矩形
+	std::vector<Rect>	        iMapWalkRect;           //不可行走矩形
 };
 
 #endif // __XMap_h__

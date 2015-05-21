@@ -25,7 +25,7 @@ def copyFiles(sourceDir, targetDir):
             copyFileCounts += 1 
                
             #文件不存在，或者存在但是大小不同，覆盖  
-            if not os.path.exists(targetF) or (os.path.exists(targetF) and (os.path.getsize(targetF) != os.path.getsize(sourceF))):  
+            if not os.path.exists(targetF) or (os.path.exists(targetF)):  
                 #2进制文件  
                 open(targetF, "wb").write(open(sourceF, "rb").read())  
                 print u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF)  

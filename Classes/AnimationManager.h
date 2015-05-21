@@ -2,12 +2,12 @@
 #define __AnimationManager_h__
 
 #include "CAnimationData.h"
+#include "AnimationLoader.h"
 
 class AnimationManage
 {
 public:
 	AnimationManage(const char* name);
-	~AnimationManage();
 
 private:
 	bool LoadRes(const char* name);

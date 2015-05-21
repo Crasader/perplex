@@ -5,12 +5,7 @@
 
 AnimationManage::AnimationManage(const char* name)
 {
-	LoadRes(name);
-}
-
-AnimationManage::~AnimationManage()
-{
-
+	/*LoadRes(name);*/
 }
 
 bool AnimationManage::LoadRes(const char* name)

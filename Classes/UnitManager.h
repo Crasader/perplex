@@ -12,6 +12,7 @@ class Unit;
 class WeaponRes;
 class GameScene;
 class GameEntity;
+class Explosion;
 
 class UnitManager
 {
@@ -26,17 +27,20 @@ public:
 	Bullet* createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, int y, int moveX, int moveY, int dir, int campType);
 	void processDropItem(Unit* unit);
 	Unit* createDefaultUnit(int type, int x, int y);
+	Unit* spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType);
+	Unit* spawnEnemy(int type);
+	Unit* getOrCreate(int type);
 public:
-	static std::vector<GameEntity*> _tools;
-	static std::vector<GameEntity*> _buildings;
-	static std::vector<GameEntity*> _sprites;
-	static std::vector<GameEntity*> _sortSprites;
-	static std::vector<GameEntity*> _allys;
-	static std::vector<GameEntity*> _enemies;
-	static std::vector<GameEntity*> _enemyBullets;
-	static std::vector<GameEntity*> _allyBullets;
-	static std::vector<Explode*> _explodes;
-	static std::vector<GameEntity*> _explodeReals;
+	static cocos2d::Vector<GameEntity*> _tools;
+	static cocos2d::Vector<GameEntity*> _buildings;
+	static cocos2d::Vector<GameEntity*> _sprites;
+	static cocos2d::Vector<GameEntity*> _sortSprites;
+	static cocos2d::Vector<GameEntity*> _allys;
+	static cocos2d::Vector<GameEntity*> _enemies;
+	static cocos2d::Vector<GameEntity*> _enemyBullets;
+	static cocos2d::Vector<GameEntity*> _allyBullets;
+	//static cocos2d::Vector<Explosion*> _explodes;
+	static cocos2d::Vector<GameEntity*> _explodeReals;
 private:
 	GameScene* _gameScene;
 };

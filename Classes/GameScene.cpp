@@ -20,6 +20,7 @@
 #include "buildingresmanager.h"
 #include "consts.h"
 #include "MyTime.h"
+#include "Player.h"
 
 USING_NS_CC;
 
@@ -75,7 +76,7 @@ GameScene::GameScene()
 	, _buildingResManager(nullptr)
 	, _weaponResManager(nullptr)
 	, _AnimResManager(nullptr)
-	, _spriteManager(nullptr)
+	, _unitManager(nullptr)
 	, _eventManager(nullptr)
 	, _activeMap(nullptr)
 {
@@ -202,11 +203,11 @@ int GameScene::getSceneWidth()
 	return Director::getInstance()->getVisibleSize().width;
 }
 
-void GameScene::loadEvent(int _state, int _mapSectonID)
+void GameScene::loadEvent(int stage, int mapSectonID)
 {
 	char filename[256];
-	sprintf(filename, "/mapdat/l%d_event_mobile.dat", MAPID_EVENT[_state][_mapSectonID]);
-	_eventManager = std::make_shared<EventManager>(EventManager(this, filename));
+	sprintf(filename, "/mapdat/l%d_event_mobile.dat", MAPID_EVENT[stage][mapSectonID]);
+	_eventManager = std::shared_ptr<EventManager>(new EventManager(this, filename));
 }
 
 void GameScene::MapWalkRectActive()
@@ -279,28 +280,28 @@ void GameScene::gameInitPerform()
 	case 1:
 		if (_unitResManager == nullptr)
 		{
-			_unitResManager = std::make_shared<UnitResManager>(UnitResManager("/mapdat/unitres_mobile.dat"));
+			_unitResManager = std::shared_ptr<UnitResManager>(new UnitResManager("/mapdat/unitres_mobile.dat"));
 		}
 		if (_buildingResManager == nullptr)
 		{
-			_buildingResManager = std::make_shared<BuildingResManager>(BuildingResManager("mapdat/buidingres_mobile.dat"));
+			_buildingResManager = std::shared_ptr<BuildingResManager>(new BuildingResManager("mapdat/buidingres_mobile.dat"));
 		}
 
 		break;
 	case 2:
 		if (_weaponResManager == nullptr)
 		{
-			_weaponResManager = std::make_shared<WeaponResManager>(WeaponResManager());
+			_weaponResManager = std::shared_ptr<WeaponResManager>(new WeaponResManager());
 		}
 		_levelEnemyCount = 0;
-		_spriteManager = nullptr;
-		_spriteManager = std::make_shared<UnitManager>(UnitManager(this));
+		_unitManager = nullptr;
+		_unitManager = std::shared_ptr<UnitManager>(new UnitManager(this));
 		break;
 	case 4:
 		_mapManager = nullptr;
-		_mapManager = std::make_shared<MapManager>(MapManager(this));
+		_mapManager = std::shared_ptr<MapManager>(new MapManager(this));
 		_camera = nullptr;
-		_camera = std::make_shared<CameraExt>(CameraExt(this, _mapManager));
+		_camera = std::shared_ptr<CameraExt>(new CameraExt(this, _mapManager));
 		break;
 	case 5:
 		//载入地图数据，第一步
@@ -344,7 +345,7 @@ void GameScene::gameInitPerform()
 
 		break;
 	case 13:
-		loadEvent(_state, _mapSectonID);
+		loadEvent(_stage, _mapSectonID);
 		break;
 	case 18:
 		_gameEnd = false;
@@ -546,10 +547,13 @@ int GameScene::getMapHeight()
 	return _mapManager->getXMapH();
 }
 
-void GameScene::doPeroidicTick()
+void GameScene::doPeroidicTick(float dt)
 {
 	switch (_state)
 	{
+	case EGS_GamePlaying:
+		gamePlayingPerform(dt);
+		break;
 	case EGS_LoadMap:
 		gameLoadMapPerform();
 		break;
@@ -586,7 +590,7 @@ void GameScene::gameLoadMapPerform()
 	case 1:
 		_levelEnemyCount = 0;
 		_cameraUnit = nullptr;
-		_spriteManager = std::make_shared<UnitManager>(UnitManager(this));
+		_unitManager = std::shared_ptr<UnitManager>(new UnitManager(this));
 		break;
 	case 2:
 		if (!changeMap(MAPID_EVENT[_stage][_mapSectonID]))
@@ -624,7 +628,22 @@ void GameScene::unitFollowCamer(Unit* _player, bool center)
 
 void GameScene::update(float delta)
 {
-	doPeroidicTick();
+	doPeroidicTick(delta);
+}
+
+UnitManager& GameScene::getUnitManager() const
+{
+	return *_unitManager;
+}
+
+void GameScene::setPlayer(Player* unit)
+{
+	_player = unit;
+}
+
+UnitResManager& GameScene::getUnitResManager() const
+{
+	return *_unitResManager;
 }
 
 

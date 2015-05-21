@@ -58,8 +58,8 @@ public class UnitAppear
 	public void saveMobileData(DataOutputStream out, StringManager stringManager) throws Exception {
 		super.saveMobileData(out, stringManager);
 		SL.writeInt(unitID, out);
-		SL.writeInt(x, out);
-		SL.writeInt(y, out);
+		SL.writeInt(MainFrame.self.getMapInfo().changeToMobileX(x), out);
+		SL.writeInt(MainFrame.self.getMapInfo().changeToMobileY(y, 0), out);
 	}
 
 	public void save(DataOutputStream out, StringManager stringManager) throws Exception {

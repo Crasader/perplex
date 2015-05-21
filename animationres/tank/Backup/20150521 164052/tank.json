@@ -1,0 +1,387 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "tank",
+      "bone_data": [
+        {
+          "name": "Layer2",
+          "parent": "",
+          "dI": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 1,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 23.8575478,
+          "kY": -23.8575478,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": true,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "坦克001/tank_body0_0.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": -6.987713,
+                  "y": -1.08258724,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 1.27518737,
+                  "kY": -1.27518725
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer4",
+          "parent": "Layer2",
+          "dI": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 3,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -22.2826118,
+          "kY": 22.2826118,
+          "arrow_x": 39.000003814697266,
+          "arrow_y": -1.1350682143529411E-05,
+          "effectbyskeleton": true,
+          "bl": 39,
+          "display_data": [
+            {
+              "name": "坦克001/tank_turret0_1.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 13.0,
+                  "y": 1.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 4.712389,
+                  "kY": 1.57079637
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer3",
+          "parent": "Layer2",
+          "dI": -1000,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -22.32562,
+          "kY": 22.32562,
+          "arrow_x": 53.009433746337891,
+          "arrow_y": 4.7069361244211905E-06,
+          "effectbyskeleton": true,
+          "bl": 53,
+          "display_data": [
+            {
+              "name": "坦克001/tank_turret0_0.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 7.67089844,
+                  "y": 0.325163722,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 4.69352341,
+                  "kY": 1.58966208
+                }
+              ]
+            },
+            {
+              "name": "坦克001/tank_turret0_1.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "tank",
+      "mov_data": [
+        {
+          "name": "idle",
+          "dr": 26,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer4",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer3",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": -1000,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 12.5983315,
+                  "kY": -12.5983315,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer2",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 4.0,
+                  "y": -1.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 15,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 25,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "walk",
+          "dr": 26,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer4",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer3",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": -1000,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 12.5983315,
+                  "kY": -12.5983315,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer2",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 4.0,
+                  "y": -1.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 15,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 25,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "坦克001/tank_body0_0",
+      "width": 74.0,
+      "height": 86.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": "",
+      "contour_data": [
+        {
+          "vertex": [
+            {
+              "x": 37.0,
+              "y": 47.0
+            },
+            {
+              "x": 37.0,
+              "y": -38.0
+            },
+            {
+              "x": -36.0,
+              "y": -38.0
+            },
+            {
+              "x": -36.0,
+              "y": 47.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "坦克001/tank_turret0_1",
+      "width": 74.0,
+      "height": 86.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "坦克001/tank_turret0_0",
+      "width": 74.0,
+      "height": 86.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [],
+  "config_png_path": []
+}

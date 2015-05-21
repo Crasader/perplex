@@ -124,7 +124,23 @@ public class Trigger {
 		SL.writeInt(targetID, out);
 		if(data != null) {
 			for(int i = 0; i < data.length; ++i) {
-				SL.writeInt(data[i], out);
+				if (data.length == 4) {
+					if (i == 0) {
+						SL.writeInt(MainFrame.self.getMapInfo().changeToMobileX(data[0]), out);
+					}
+					else if(i == 1)
+					{
+						SL.writeInt(MainFrame.self.getMapInfo().changeToMobileY(data[1], data[3]), out);
+					}
+					else
+					{
+						SL.writeInt(data[i], out);
+					}
+				}
+				else
+				{
+					SL.writeInt(data[i], out);
+				}
 			}
 		}
 	}

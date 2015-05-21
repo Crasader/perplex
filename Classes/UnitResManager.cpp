@@ -27,7 +27,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			//TInt end;//每个方向的结束帧
 			for (int i = 0; i < 5; i++)
 			{
-				pUnitRes->_moveAnimRanges[i] = std::make_shared<Vec2>(Vec2());
+				pUnitRes->_moveAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				int x, y;
 				in >> x >> y;
 				pUnitRes->_moveAnimRanges[i]->x = x;
@@ -36,7 +36,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			//补充其它3个方向的数据
 			for (int i = 5; i < 8; i++)
 			{
-				pUnitRes->_moveAnimRanges[i] = std::make_shared<Vec2>(Vec2());
+				pUnitRes->_moveAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_moveAnimRanges[i] = pUnitRes->_moveAnimRanges[8 - i];
 			}
 			//        =========================================================================================
@@ -65,7 +65,7 @@ UnitResManager::UnitResManager(const std::string& file)
 				{
 					int x, y;
 					in >> x >> y;
-					pUnitRes->_moveGrids[i] = std::make_shared<Vec2>(Vec2());
+					pUnitRes->_moveGrids[i] = std::shared_ptr<Vec2>(new Vec2());
 					pUnitRes->_moveGrids[i]->x = x;
 					pUnitRes->_moveGrids[i]->y = y;
 				}
@@ -79,7 +79,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			{
 				int x, y;
 				in >> x >> y;
-				pUnitRes->_standAnimRanges[i] = std::make_shared<Vec2>(Vec2());
+				pUnitRes->_standAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_standAnimRanges[i]->x = x;
 				pUnitRes->_standAnimRanges[i]->y = y;
 			}		
@@ -88,7 +88,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			{
 				int x, y;
 				in >> x >> y;
-				pUnitRes->_standAnimRanges[i] = std::make_shared<Vec2>(Vec2());
+				pUnitRes->_standAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_standAnimRanges[i] = pUnitRes->_standAnimRanges[16 - i];
 			}
 			//for 0 ~16://16方向身体中心点的位置，16方向数据都有，顺序为D, DDL, DL, DLL, L, LLU, LU, LUU, U, UUR, UR, URR, R, RRD, RD, RDD
@@ -97,7 +97,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			pUnitRes->_centerPoints.resize(STAND_DIR_COUNT);
 			for (int i = 0; i < 16; i++)
 			{
-				pUnitRes->_centerPoints[i] = std::make_shared<Vec2>(Vec2());
+				pUnitRes->_centerPoints[i] = std::shared_ptr<Vec2>(new Vec2());
 				int x, y;
 				in >> x >> y;
 				pUnitRes->_centerPoints[i]->x = x;
@@ -123,7 +123,7 @@ UnitResManager::UnitResManager(const std::string& file)
 				for (int j = 0; j < rectCount; j++)
 				{
 					in >> left >> top >> width >> height;
-					pUnitRes->_bodyRect[i][j] = std::make_shared<Rect>(Rect());
+					pUnitRes->_bodyRect[i][j] = std::shared_ptr<Rect>(new Rect());
 					pUnitRes->_bodyRect[i][j]->size.width = width;
 					pUnitRes->_bodyRect[i][j]->size.height = height;
 					pUnitRes->_bodyRect[i][j]->origin.x = left;
@@ -139,7 +139,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			{
 				int x, y;
 				in >> x >> y;
-				pUnitRes->_dieAnimRanges[i] = std::make_shared<Vec2>(Vec2());
+				pUnitRes->_dieAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_dieAnimRanges[i]->x = x;
 				pUnitRes->_dieAnimRanges[i]->y = y;
 			}
@@ -169,7 +169,7 @@ UnitResManager::UnitResManager(const std::string& file)
 				//  for 0 ~ exploreCount://每个死亡爆炸的数据
 				for (int j = 0; j < exploreCount; j++)
 				{
-					pUnitRes->_explode[i][j] = std::make_shared<Explode>(Explode());
+					pUnitRes->_explode[i][j] = std::shared_ptr<Explode>(new Explode());
 					int animID, add, x, y, start, end, beginIndex;
 					in >> animID >> add >> x >> y >> start >> end >> beginIndex;
 					pUnitRes->_explode[i][j]->iAnimID = animID;
@@ -202,7 +202,7 @@ UnitResManager::UnitResManager(const std::string& file)
 					//for 0 ~ 7://该挂接点在8方向上的具体位置，8方向数据都有，顺序同上
 					for (int i = 0; i < 16; i++)
 					{
-						pUnitRes->_weaponPos[i][j] = std::make_shared<WeaponPos>(WeaponPos());
+						pUnitRes->_weaponPos[i][j] = std::shared_ptr<WeaponPos>(new WeaponPos());
 						pUnitRes->_weaponPos[i][j]->id = id;
 						pUnitRes->_weaponPos[i][j]->type = weaponType;
 						pUnitRes->_weaponPos[i][j]->cover = cover;

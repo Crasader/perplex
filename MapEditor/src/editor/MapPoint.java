@@ -2,9 +2,12 @@ package editor;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
+
+import com.sun.xml.internal.bind.unmarshaller.InfosetScanner;
 
 interface MapPointChangeListener {
 	public void pointChanged();
@@ -126,11 +129,15 @@ class MapPointSetter
 	private MapPointPanel pointPanel;
 	private NumberSpinner pointXSpinner;
 	private NumberSpinner pointYSpinner;
-
+	private int x, y;
+	private MapInfo info;
 	public MapPointSetter(JDialog owner, MainFrame mainFrame,
 						 int pointX, int pointY) {
 		super(owner);
 		this.mainFrame = mainFrame;
+		info = mainFrame.getMapInfo();
+		x = pointX;
+		y = pointY;
 		setTitle("设置地图点");
 
 		pointPanel = new MapPointPanel(this, mainFrame, pointX, pointY);
@@ -143,7 +150,7 @@ class MapPointSetter
 		});
 
 		pointXSpinner = new NumberSpinner();
-		pointXSpinner.setIntValue(pointX);
+		pointXSpinner.setIntValue(info.changeToMobileX(pointX));
 		pointXSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				pointXSpinnerChanged();
@@ -151,7 +158,7 @@ class MapPointSetter
 		});
 
 		pointYSpinner = new NumberSpinner();
-		pointYSpinner.setIntValue(pointY);
+		pointYSpinner.setIntValue(info.changeToMobileY(pointY,0));
 		pointYSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				pointYSpinnerChanged();
@@ -201,8 +208,9 @@ class MapPointSetter
 	private void pointXSpinnerChanged() {
 		try {
 			int value = pointXSpinner.getIntValue();
-			if (value != pointPanel.getPointX()) {
-				pointPanel.setPointX(value);
+			x = info.changeToMapEditorX(value);
+			if (x != pointPanel.getPointX()) {
+				pointPanel.setPointX(x);
 			}
 		}
 		catch (Exception e) {
@@ -212,8 +220,9 @@ class MapPointSetter
 	private void pointYSpinnerChanged() {
 		try {
 			int value = pointYSpinner.getIntValue();
-			if (value != pointPanel.getPointY()) {
-				pointPanel.setPointY(value);
+			y = info.changeToMapEditorY(value, 0);
+			if (y != pointPanel.getPointY()) {
+				pointPanel.setPointY(y);
 			}
 		}
 		catch (Exception e) {
@@ -221,13 +230,13 @@ class MapPointSetter
 	}
 
 	private void selfPointChanged() {
-		int x = pointPanel.getPointX();
-		int y = pointPanel.getPointY();
+		x = pointPanel.getPointX();
+		y = pointPanel.getPointY();
 		if (x != pointXSpinner.getIntValue()) {
-			pointXSpinner.setIntValue(x);
+			pointXSpinner.setIntValue(info.changeToMobileX(x));
 		}
 		if (y != pointYSpinner.getIntValue()) {
-			pointYSpinner.setIntValue(y);
+			pointYSpinner.setIntValue(info.changeToMobileY(y,0));
 		}
 	}
 
@@ -253,7 +262,8 @@ class MapPointSetPanel
 	private NumberSpinner pointXSpinner;
 	private NumberSpinner pointYSpinner;
 	private JButton setButton;
-
+	private int x, y;
+	private MapInfo info;
 	public MapPointSetPanel(JDialog owner, MainFrame mainFrame,
 						   int pointX, int pointY) {
 		super();
@@ -265,16 +275,19 @@ class MapPointSetPanel
 					  int pointX, int pointY) {
 
 		this.mainFrame = mainFrame;
+		info = mainFrame.getMapInfo();
+		x = pointX;
+		y = pointY;
 		TitledBorder border = BorderFactory.createTitledBorder(
 			BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 			"设置地图点");
 		setBorder(border);
 
 		pointXSpinner = new NumberSpinner();
-		pointXSpinner.setIntValue(pointX);
+		pointXSpinner.setIntValue(info.changeToMobileX(pointX));
 
 		pointYSpinner = new NumberSpinner();
-		pointYSpinner.setIntValue(pointY);
+		pointYSpinner.setIntValue(info.changeToMobileY(pointY, 0));
 
 		setButton = new JButton("...");
 		add(setButton);
@@ -313,21 +326,25 @@ class MapPointSetPanel
 	}
 
 	private void setMapPoint() {
+		x = info.changeToMapEditorX(pointXSpinner.getIntValue());
+		y = info.changeToMapEditorY(pointYSpinner.getIntValue(),0);
 		MapPointSetter setter = new MapPointSetter(owner, mainFrame,
-													pointXSpinner.getIntValue(),
-												    pointYSpinner.getIntValue());
+													x,
+												    y);
 		setter.show();
 		if (setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
-			pointXSpinner.setIntValue(setter.getPointX());
-			pointYSpinner.setIntValue(setter.getPointY());
+			x = setter.getPointX();
+			y = setter.getPointY();
+			pointXSpinner.setIntValue(info.changeToMobileX(setter.getPointX()));
+			pointYSpinner.setIntValue(info.changeToMobileY(setter.getPointY(),0));
 		}
 	}
 
 	public int getPointX() {
-		return pointXSpinner.getIntValue();
+		return x;
 	}
 
 	public int getPointY() {
-		return pointYSpinner.getIntValue();
+		return y;
 	}
 }

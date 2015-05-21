@@ -1,7 +1,7 @@
 #ifndef __IState_h__
 #define __IState_h__
 
-class IState
+class MotionImpl
 {
 public:
 	virtual void execute() = 0;
@@ -11,7 +11,7 @@ public:
 #endif // __IState_h__
 
 
-class IdleState : public IState
+class IdleState : public MotionImpl
 {
 public:
 

@@ -11,7 +11,7 @@ void WeaponResManager::loadRes()
 {
 	for (int i = 0; i < WeaponRes::MAX_WEAPONRES_COUNT; i++)
 	{
-		std::shared_ptr<WeaponRes> pWeaponRes = std::make_shared<WeaponRes>(WeaponRes(i));
+		std::shared_ptr<WeaponRes> pWeaponRes = std::shared_ptr<WeaponRes>(new WeaponRes(i));
 		_weaponResList.push_back(pWeaponRes);
 	}
 }

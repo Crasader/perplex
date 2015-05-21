@@ -36,7 +36,7 @@ std::shared_ptr<EventUnit> EventManager::getEventUnitFromID(int id)
 
 std::shared_ptr<EventUnit> EventManager::createEventUnit(int ID)
 {
-	auto eventUnit = std::make_shared<EventUnit>(EventUnit(this, _gameLayer, ID));
+	auto eventUnit = std::shared_ptr<EventUnit>(new EventUnit(this, _gameLayer, ID));
 	_eventUnits.push_back(eventUnit);
 	_eventCount++;
 	return eventUnit;

@@ -1,0 +1,360 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "test",
+      "bone_data": [
+        {
+          "name": "Layer23",
+          "parent": "",
+          "dI": 0,
+          "x": 99.0,
+          "y": 132.67333984375,
+          "z": 5,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.50510156,
+          "kY": 1.50510156,
+          "arrow_x": 76.164299011230469,
+          "arrow_y": 4.5233246055431664E-06,
+          "effectbyskeleton": true,
+          "bl": 76,
+          "display_data": [
+            {
+              "name": "001.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": -20.02251,
+                  "y": -0.315105021,
+                  "cX": 1.00000012,
+                  "cY": 1.00000012,
+                  "kX": 1.50510156,
+                  "kY": -1.50510192
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer24",
+          "parent": "Layer23",
+          "dI": 0,
+          "x": -47.620681762695312,
+          "y": 7.8908448219299316,
+          "z": 1,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 3.075898,
+          "kY": -3.075898,
+          "arrow_x": 40.000007629394531,
+          "arrow_y": -1.4935016224626452E-05,
+          "effectbyskeleton": true,
+          "bl": 40,
+          "display_data": [
+            {
+              "name": "001.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 22.0,
+                  "y": 1.00000763,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -1.57079637,
+                  "kY": 1.57079637
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer27",
+          "parent": "Layer24",
+          "dI": 0,
+          "x": 60.000030517578125,
+          "y": -17.999992370605469,
+          "z": 6,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0487418175,
+          "kY": -0.0487418175,
+          "arrow_x": 41.048755645751953,
+          "arrow_y": 1.9308568880660459E-05,
+          "effectbyskeleton": true,
+          "bl": 41,
+          "display_data": [
+            {
+              "name": "001.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 17.9298973,
+                  "y": 1.87581635,
+                  "cX": 0.9999999,
+                  "cY": 0.9999999,
+                  "kX": 4.663647,
+                  "kY": 1.6195389
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer26",
+          "parent": "Layer24",
+          "dI": 0,
+          "x": 3.0517578125E-05,
+          "y": -24.0,
+          "z": 4,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0285636187,
+          "kY": -0.0285636187,
+          "arrow_x": 35.0142707824707,
+          "arrow_y": -3.9635542634641752E-06,
+          "effectbyskeleton": true,
+          "bl": 35,
+          "display_data": [
+            {
+              "name": "001.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 18.9636917,
+                  "y": 1.54223061,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 4.68382549,
+                  "kY": 1.59936082
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer25",
+          "parent": "Layer24",
+          "dI": 0,
+          "x": 1.0000152587890625,
+          "y": 27.999992370605469,
+          "z": 3,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0249947309,
+          "kY": -0.0249947309,
+          "arrow_x": 40.012485504150391,
+          "arrow_y": 2.1652987925335765E-05,
+          "effectbyskeleton": true,
+          "bl": 40,
+          "display_data": [
+            {
+              "name": "001.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 22.9928131,
+                  "y": 0.5748291,
+                  "cX": 0.9999999,
+                  "cY": 0.9999999,
+                  "kX": 4.687394,
+                  "kY": 1.59579086
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer28",
+          "parent": "Layer24",
+          "dI": 0,
+          "x": 57.000022888183594,
+          "y": 28.000007629394531,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0256353617,
+          "kY": -0.0256353617,
+          "arrow_x": 39.012844085693359,
+          "arrow_y": -5.0125432608183473E-05,
+          "effectbyskeleton": true,
+          "bl": 39,
+          "display_data": [
+            {
+              "name": "001.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 19.01939,
+                  "y": -0.512657166,
+                  "cX": 0.9999999,
+                  "cY": 0.9999999,
+                  "kX": 4.68675375,
+                  "kY": 1.596432
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "test",
+      "mov_data": [
+        {
+          "name": "Animation1",
+          "dr": 0,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Layer23",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer27",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer26",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer25",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer28",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Layer24",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "001",
+      "width": 17.0,
+      "height": 49.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [],
+  "config_png_path": []
+}

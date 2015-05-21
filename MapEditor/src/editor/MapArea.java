@@ -160,13 +160,18 @@ class MapAreaSetter
 	private NumberSpinner areaTopSpinner;
 	private NumberSpinner areaWidthSpinner;
 	private NumberSpinner areaHeightSpinner;
-
+	private int l, t, w, h;
+	private MapInfo info;
 	public MapAreaSetter(JDialog owner, MainFrame mainFrame,
 						 int areaLeft, int areaTop, int areaWidth, int areaHeight) {
 		super(owner);
 		this.mainFrame = mainFrame;
+		info = mainFrame.getMapInfo();
 		setTitle("选择一个矩形区域");
-
+		l = areaLeft;
+		t = areaTop;
+		w = areaWidth;
+		h = areaHeight;
 		areaPanel = new MapAreaPanel(this, mainFrame, areaLeft, areaTop, areaWidth, areaHeight);
 		areaPanel.scrollRectToVisible(
 			new Rectangle(areaLeft - 25, areaTop - 25,
@@ -176,9 +181,8 @@ class MapAreaSetter
 				selfAreaChanged();
 			}
 		});
-
 		areaLeftSpinner = new NumberSpinner();
-		areaLeftSpinner.setIntValue(areaLeft);
+		areaLeftSpinner.setIntValue(info.changeToMobileX(areaLeft));
 		areaLeftSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				areaLeftSpinnerChanged();
@@ -186,7 +190,7 @@ class MapAreaSetter
 		});
 
 		areaTopSpinner = new NumberSpinner();
-		areaTopSpinner.setIntValue(areaTop);
+		areaTopSpinner.setIntValue(info.changeToMobileY(areaTop, h));
 		areaTopSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				areaTopSpinnerChanged();
@@ -247,7 +251,8 @@ class MapAreaSetter
 
 	private void areaLeftSpinnerChanged() {
 		try {
-			int value = areaLeftSpinner.getIntValue();
+			int value = info.changeToMapEditorX(areaLeftSpinner.getIntValue());
+			l = value;
 			if (value != areaPanel.getAreaLeft()) {
 				areaPanel.setAreaLeft(value);
 			}
@@ -258,7 +263,8 @@ class MapAreaSetter
 
 	private void areaTopSpinnerChanged() {
 		try {
-			int value = areaTopSpinner.getIntValue();
+			int value = info.changeToMapEditorY(areaTopSpinner.getIntValue(), h);
+			t = value;
 			if (value != areaPanel.getAreaTop()) {
 				areaPanel.setAreaTop(value);
 			}
@@ -270,6 +276,7 @@ class MapAreaSetter
 	private void areaWidthSpinnerChanged() {
 		try {
 			int value = areaWidthSpinner.getIntValue();
+			w = value;
 			if (value != areaPanel.getAreaWidth()) {
 				areaPanel.setAreaWidth(value);
 			}
@@ -281,6 +288,7 @@ class MapAreaSetter
 	private void areaHeightSpinnerChanged() {
 		try {
 			int value = areaHeightSpinner.getIntValue();
+			h = value;
 			if (value != areaPanel.getAreaHeight()) {
 				areaPanel.setAreaHeight(value);
 			}
@@ -290,21 +298,21 @@ class MapAreaSetter
 	}
 
 	private void selfAreaChanged() {
-		int left = areaPanel.getAreaLeft();
-		int top = areaPanel.getAreaTop();
-		int width = areaPanel.getAreaWidth();
-		int height = areaPanel.getAreaHeight();
-		if (left != areaLeftSpinner.getIntValue()) {
-			areaLeftSpinner.setIntValue(left);
+		w = areaPanel.getAreaWidth();
+		h = areaPanel.getAreaHeight();
+		l = info.changeToMobileX(areaPanel.getAreaLeft());
+		t = info.changeToMobileY(areaPanel.getAreaTop(), h);
+		if (l != areaLeftSpinner.getIntValue()) {
+			areaLeftSpinner.setIntValue(l);
 		}
-		if (top != areaTopSpinner.getIntValue()) {
-			areaTopSpinner.setIntValue(top);
+		if (t != areaTopSpinner.getIntValue()) {
+			areaTopSpinner.setIntValue(t);
 		}
-		if (width != areaWidthSpinner.getIntValue()) {
-			areaWidthSpinner.setIntValue(width);
+		if (w != areaWidthSpinner.getIntValue()) {
+			areaWidthSpinner.setIntValue(w);
 		}
-		if (height != areaHeightSpinner.getIntValue()) {
-			areaHeightSpinner.setIntValue(height);
+		if (h != areaHeightSpinner.getIntValue()) {
+			areaHeightSpinner.setIntValue(h);
 		}
 	}
 
@@ -327,7 +335,8 @@ class MapAreaSetPanel
 	private NumberSpinner areaWidthSpinner;
 	private NumberSpinner areaHeightSpinner;
 	private JButton setButton;
-
+	private int l, t, w, h;
+	MapInfo info;
 	public MapAreaSetPanel(JDialog owner, MainFrame mainFrame,
 						   int areaLeft, int areaTop, int areaWidth, int areaHeight) {
 		super();
@@ -339,16 +348,22 @@ class MapAreaSetPanel
 					  int areaLeft, int areaTop, int areaWidth, int areaHeight) {
 
 		this.mainFrame = mainFrame;
+		info = mainFrame.getMapInfo();
+		l = areaLeft;
+		t = areaTop;
+		w = areaWidth;
+		h = areaHeight;
+		
 		TitledBorder border = BorderFactory.createTitledBorder(
 			BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 			"设置地图范围");
 		setBorder(border);
-
+		
 		areaLeftSpinner = new NumberSpinner();
-		areaLeftSpinner.setIntValue(areaLeft);
+		areaLeftSpinner.setIntValue(info.changeToMobileX(areaLeft));
 
 		areaTopSpinner = new NumberSpinner();
-		areaTopSpinner.setIntValue(areaTop);
+		areaTopSpinner.setIntValue(info.changeToMobileY(areaTop, h));
 
 		areaWidthSpinner = new NumberSpinner();
 		areaWidthSpinner.setIntValue(areaWidth);
@@ -404,34 +419,42 @@ class MapAreaSetPanel
 	}
 
 	private void setMapArea() {
+		w = areaWidthSpinner.getIntValue();
+		h = areaHeightSpinner.getIntValue();
+		l = info.changeToMapEditorX(areaLeftSpinner.getIntValue());
+		t = info.changeToMapEditorY(areaTopSpinner.getIntValue(), h);
 		MapAreaSetter setter = new MapAreaSetter(owner, mainFrame,
-												 areaLeftSpinner.getIntValue(),
-												 areaTopSpinner.getIntValue(),
-												 areaWidthSpinner.getIntValue(),
-												 areaHeightSpinner.getIntValue());
+												l,
+												 t,
+												 w,
+												 h);
 		setter.show();
 		if (setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
-			areaLeftSpinner.setIntValue(setter.getAreaLeft());
-			areaTopSpinner.setIntValue(setter.getAreaTop());
-			areaWidthSpinner.setIntValue(setter.getAreaWidth());
-			areaHeightSpinner.setIntValue(setter.getAreaHeight());
+			w = setter.getAreaWidth();
+			h = setter.getAreaHeight();
+			l = setter.getAreaLeft();
+			t = setter.getAreaTop();
+			areaLeftSpinner.setIntValue(info.changeToMobileX(l));
+			areaTopSpinner.setIntValue(info.changeToMobileY(t, h));
+			areaWidthSpinner.setIntValue(w);
+			areaHeightSpinner.setIntValue(h);
 		}
 	}
 
 	public int getAreaLeft() {
-		return areaLeftSpinner.getIntValue();
+		return l;
 	}
 
 	public int getAreaTop() {
-		return areaTopSpinner.getIntValue();
+		return t;
 	}
 
 	public int getAreaWidth() {
-		return areaWidthSpinner.getIntValue();
+		return w;
 	}
 
 	public int getAreaHeight() {
-		return areaHeightSpinner.getIntValue();
+		return h;
 	}
 }
 

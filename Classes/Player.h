@@ -34,7 +34,7 @@
 #include "base/CCEventListenerController.h"
 #include "base/CCController.h"
 #endif
-#include "IState.h"
+#include "MotionImpl.h"
 
 USING_NS_CC;
 
@@ -81,7 +81,7 @@ protected:
     Vec2 targetPos;
     Vec2 _trailOffset;
 	ActionInterval* action1;
-	IState* _curState;
+	MotionImpl* _curState;
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     float keyX;
     float keyY;
@@ -91,7 +91,7 @@ protected:
     
 };
 
-class  PlayerIdleState : public IState
+class  PlayerIdleState : public MotionImpl
 {
 public:
 	PlayerIdleState(Player* p);

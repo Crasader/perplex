@@ -33,6 +33,7 @@ public:
 	bool createFloor();
 	Node* getFloor() { return _floor; }
 	void createUnits();
+	void createBuilding();
 	int getXMapW();
 	int getXMapH();
 	Size getMapSize(){ return Size(getXMapW(), getXMapH()); }

@@ -88,9 +88,9 @@ void Building::processTool()
 		//int max;
 		//int prob;//掉落对应道具的可能性，如果type == 3那么就是任意道具，采用百分比概率
 		auto prob = rand() % 100;
-		if ((tool->prob + prob) >= 100)
+		if ((tool.prob + prob) >= 100)
 		{
-			switch (tool->type)
+			switch (tool.type)
 			{
 			case 0:
 				_gameScene->getSpriteManager()->createTool(55, 50, 55, getPositionX(), getPositionY() + 8, 0);
@@ -162,15 +162,15 @@ void Building::processUnitFactory()
 		return;
 	}
 	_unitFactoryTick++;
-	if (_unitFactoryTick <= _unitFactoryDatas[_unitFactoryIndex]->interval)
+	if (_unitFactoryTick <= _unitFactoryDatas[_unitFactoryIndex].interval)
 	{
 		return;
 	}
-	for (auto i = 0; i < _unitFactoryDatas[_unitFactoryIndex]->unitCount; i++)
+	for (auto i = 0; i < _unitFactoryDatas[_unitFactoryIndex].unitCount; i++)
 	{
-		auto type = _unitFactoryDatas[_unitFactoryIndex]->unitType;
-		auto x = _unitFactoryDatas[_unitFactoryIndex]->left + rand() / _unitFactoryDatas[_unitFactoryIndex]->width;
-		auto y = _unitFactoryDatas[_unitFactoryIndex]->top + rand() / _unitFactoryDatas[_unitFactoryIndex]->height;
+		auto type = _unitFactoryDatas[_unitFactoryIndex].unitType;
+		auto x = _unitFactoryDatas[_unitFactoryIndex].left + rand() / _unitFactoryDatas[_unitFactoryIndex].width;
+		auto y = _unitFactoryDatas[_unitFactoryIndex].top + rand() / _unitFactoryDatas[_unitFactoryIndex].height;
 		_gameScene->getSpriteManager()->createDefaultUnit(type, x, y);
 		_gameScene->addLevelEnemy(1);
 	}
@@ -245,4 +245,14 @@ bool Building::init(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingR
 int Building::getBuildingID()
 {
 	return _buildingID;
+}
+
+void Building::setUnitFactory(VUF uf)
+{
+	_unitFactoryDatas = uf;
+}
+
+void Building::setDropTool(VDT dt)
+{
+	_dropToolDatas = dt;
 }

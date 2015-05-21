@@ -10,6 +10,7 @@ import javax.swing.event.*;
 import sun.net.www.content.audio.x_aiff;
 
 import com.sun.javafx.geom.Vec2d;
+import com.sun.org.apache.bcel.internal.generic.IREM;
 
 public class MapInfo {
 	private int width;
@@ -105,23 +106,27 @@ public class MapInfo {
 	
 	int changeToMobileX(int x)
 	{
+		if(x==0) return x;
 		x -= realLeft;
 		return x;
 	}
 	
 	int changeToMobileY(int y, int height)
 	{
+		if(y == 0) return 0;
 		y = realHeight - (y - realTop + height);
 		return y;
 	}
 	
 	int changeToMapEditorX(int x)
 	{
+		if(x == 0) return 0;
 		return (x+realLeft);
 	}
 	
 	int changeToMapEditorY(int y, int height)
 	{
+		if(y == 0) return 0;
 		return (realHeight - y + realTop - height);
 	}
 	

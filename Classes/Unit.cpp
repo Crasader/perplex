@@ -32,6 +32,7 @@
 #include "shotlogic.h"
 #include "shotlogicmanager.h"
 #include "Player.h"
+#include "UnitResManager.h"
 
 bool Unit::hurt(float damage)
 {
@@ -78,29 +79,139 @@ bool Unit::alive()
     return _alive;
 }
 
-Unit::Unit() 
+Unit::Unit()
 :GameEntity()
-,_alive(0)
-, _HP(0)
+,_alive(true)
+, _castoff(false)
+, _active(false)
+, _eventUnit(false)
+, _unitFireRequire(false)
+, _die(false)
+, _endableMove(true)
+, _power(0)
 , _score(0)
+, _iDieExplodCount(0)
+, _startExplodeTick(0)
+, _campType(0)
+, _unitID(-1)
+, _moveType(0)
+, _maxHP(0)
+, _BodyLevel(0)
+, _orderType(0)
+, _currentOrderIndex(0)
+, _orderDelay(0)
+, _orderCount(0)
+, _moveX(0)
+, _moveY(0)
+, _motion(0)
+, _beAttackTick(0)
+, _diaphaneity(0)
+, _dieTick(0)
+, _walkDir(0)
+, _AIType(0)
+, _shotPosIndex(0)
+, _shotLogicType(0)
+, _weaponResID(0)
+, _fireTick(0)
+, _castoffStage(0)
+, _walkRect()
+, _moveRect()
+, _gameScene(nullptr)
+, _player(nullptr)
+, _unitRes(nullptr)
+, _shotLogicManager(new ShotLogicManager())
+, _curMotion(nullptr)
 {
-
+	_dieExplode =vector<bool>();
+	_unitOrder = vector<XUnitOrder>();
+	_moveProb = vector<int>();
+	_moveItemData = vector<Vec2>();
+	_pointItemData = vector<Vec2>();
+	_fireItemData = vector<Vec2>();
+	_distItemData = vector<Vec2>();
+	_dropToolData = vector<XDropTool>();
+	_unitRecycleOrder = vector<XUnitOrder>();
+	_weapons = vector<shared_ptr<Weapon>>();
 }
 
 Unit::Unit(bool alive, float hp, int score)
-:GameEntity()
-
+:Unit()
 {
 
 }
 
 Unit::Unit(int type, int shadowType, int radius, bool alive, float hp, int score)
-:GameEntity(type, shadowType, score)
-, _alive(alive)
-, _HP(hp)
-, _score(score)
+: Unit()
 {
 
+}
+
+
+Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
+	:GameEntity()
+	, _alive(true)
+	, _castoff(false)
+	, _active(false)
+	, _eventUnit(false)
+	, _unitFireRequire(false)
+	, _die(false)
+	, _endableMove(true)
+	, _power(0)
+	, _score(0)
+	, _iDieExplodCount(0)
+	, _startExplodeTick(0)
+	, _campType(walkdir)
+	, _unitID(unitID)
+	, _moveType(0)
+	, _maxHP(0)
+	, _BodyLevel(0)
+	, _orderType(0)
+	, _currentOrderIndex(0)
+	, _orderDelay(0)
+	, _orderCount(0)
+	, _moveX(0)
+	, _moveY(0)
+	, _motion(0)
+	, _beAttackTick(0)
+	, _diaphaneity(0)
+	, _dieTick(0)
+	, _walkDir(walkdir)
+	, _AIType(0)
+	, _shotPosIndex(0)
+	, _shotLogicType(0)
+	, _weaponResID(0)
+	, _fireTick(0)
+	, _castoffStage(0)
+	, _walkRect()
+	, _moveRect()
+	, _gameScene(gameScene)
+	, _player(nullptr)
+	, _unitRes(nullptr)
+	, _shotLogicManager(new ShotLogicManager())
+	, _curMotion(nullptr)
+{
+	_dieExplode = vector<bool>();
+	_unitOrder = vector<XUnitOrder>();
+	_moveProb = vector<int>();
+	_moveItemData = vector<Vec2>();
+	_pointItemData = vector<Vec2>();
+	_fireItemData = vector<Vec2>();
+	_distItemData = vector<Vec2>();
+	_dropToolData = vector<XDropTool>();
+	_unitRecycleOrder = vector<XUnitOrder>();
+	_weapons = vector<shared_ptr<Weapon>>();
+}
+
+bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
+{
+	if (!GameEntity::init())
+	{
+		return false;
+	}
+	_type = type;
+	auto unitRes = _gameScene->getUnitResManager().getUnitResFromID(type);
+	setUnitRes(unitRes);
+	return true;
 }
 
 vector<int> Unit::getMoveProb() const
@@ -111,7 +222,6 @@ vector<int> Unit::getMoveProb() const
 void Unit::setMoveProb(std::vector<int> aMoveProb)
 {
 
-	_moveProb.clear();
 	_moveProb = aMoveProb;
 }
 
@@ -122,42 +232,42 @@ vector<Vec2> Unit::getMoveItemData() const
 
 void Unit::setMoveItemData(vector<Vec2> aMoveItemData)
 {
-	_moveItemData.clear();
 	_moveItemData = aMoveItemData;
 }
 
 void Unit::setPointItemData(vector<Vec2> aPointItemData)
 {
-	_pointItemData.clear();
 	_pointItemData = aPointItemData;
 }
 
 void Unit::setFireItemData(vector<Vec2> aFireItemData)
 {
 
-	_fireItemData.clear();
 	_fireItemData = aFireItemData;
 }
 
 void Unit::setDistItemData(vector<Vec2> aDistItemData)
 {
-	_distItemData.clear();
 	_distItemData = aDistItemData;
 }
 
 void Unit::setDropToolData(vector<XDropTool> aDropToolData)
 {
-	_dropToolData.clear();
 	_dropToolData = aDropToolData;
 }
 
 void Unit::setUnitRecycleOrder(vector<XUnitOrder> aUnitRecycleOrder)
 {
 
-	_unitRecycleOrder.clear();
 	_unitRecycleOrder = aUnitRecycleOrder;
 }
 
+
+void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
+{
+	_unitRes = aUnitRes;
+	setMotionAndDIR(0, _walkDir);
+}
 
 void Unit::perfrom()
 {

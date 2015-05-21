@@ -11,6 +11,10 @@ class XDropTool;
 class Building : public GameEntity
 {
 public:
+	using VUF = std::vector<XUnitFactory> ;
+	using VDT = std::vector<XDropTool> ;
+	using VEP = std::vector < bool > ;
+public:
 	Building(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph);
 	static Building* create(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph);
 	bool  init(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph);
@@ -22,6 +26,8 @@ public:
 	int beAttack(const cocos2d::Rect &rect, int hp);
 	int getBuildingHP() { return _HP; }
 	int getBuildingID();
+	void setUnitFactory(VUF uf);
+	void setDropTool(VDT dt);
 private:
 	//出兵
 	bool _factory;
@@ -38,9 +44,9 @@ private:
 	int _state;//建筑的状态 0 --- 完好 1 --- 半毁坏
 	std::shared_ptr<BuildingRes> _buildingRes;
 	GameScene* _gameScene;
-	std::vector<std::shared_ptr<XUnitFactory>> _unitFactoryDatas;
-	std::vector<std::shared_ptr<XDropTool>> _dropToolDatas;
-	std::vector<bool> _dieExplode;
+	VUF _unitFactoryDatas;
+	VDT _dropToolDatas;
+	VEP _dieExplode;
 	cocos2d::Rect _walkRect;
 	cocos2d::Node _model;
 };
