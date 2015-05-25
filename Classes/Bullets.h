@@ -47,16 +47,20 @@ public:
 	bool getDrawFlip() const { return _drawFlip; }
 	void setDrawFlip(bool aDrawFlip) { _drawFlip = aDrawFlip; }
 	bool getBump() const { return _bump; }
-	void setBump(bool aBump) { _bump = aBump; }
+	void setBump() { _bump = true; }
 	bool isCastoff();
 	bool isBump();
+	Rect getHitRect() { return _hitRect; }
+	int getPower();
 protected:
 	bool _drawFlip;
 	bool _bump;
+	bool _castoff;
+	int _power;
 	std::shared_ptr<WeaponRes> _weaponRes;
 	GameScene* _gameScene;
     Vec2 _vector;
-	bool _castoff;
+	Rect _hitRect;
 };
 
 class PlayerBullet : public Bullet

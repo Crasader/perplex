@@ -106,6 +106,7 @@ public:
 	};
 
 	Tank();
+	Tank(GameScene* gameScene, int unitID, int type, int dir, int campType);
 	virtual ~Tank();
 
 	bool init() override;
@@ -117,6 +118,7 @@ public:
 	void update(float dt) override;
 	void setTarget(Unit* aTarget);
 	CREATE_FUNC(Tank);
+	static Tank* create(GameScene* gameScene, int unitID, int type, int dir, int campType);
 	void setRoute(float dt);
 	Vec2 getDistance(const Vec2& from, float distance, float direction);
 	void linerRoute(Point from, Point to, float direction, float dt);

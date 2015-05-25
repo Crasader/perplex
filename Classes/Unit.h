@@ -62,6 +62,7 @@ public:
 	Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
 	Unit(bool alive, float hp, int score);
 	Unit(int type, int shadowType, int radius, bool alive, float hp, int score);
+	~Unit();
 	bool init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
 	virtual bool hurt(float damage);
     virtual void die();
@@ -129,6 +130,21 @@ public:
 	void setNewRoad(std::vector<cocos2d::Vec2> _roads);
 	int beAttack(const cocos2d::Rect rect, int power);
 	int getShotDir();
+	std::vector<std::shared_ptr<MotionImpl>> getMotions() const { return _motions; }
+	void setMotions(std::vector<std::shared_ptr<MotionImpl>> aMotions) { _motions = aMotions; }
+	int calDirction(float angle);
+	float calculeAngle();
+	bool isActive(){ return _active; }
+	bool isCastoff() { return _castoff; }
+	void setUnitOrder(vector<XUnitOrder> aOrder);
+private:
+	bool isSceneTop();
+	bool isSceneButton();
+	bool isSceneCenter();
+	bool isSceneUnder();
+	bool isSceneAbove();
+	bool isSceneTopAbove();
+	void activateUnit();
 protected:
     bool		_alive;
 	bool		_castoff;
@@ -190,12 +206,12 @@ protected:
 	vector<Vec2>	_distItemData;
 	//掉落道具
 	vector<XDropTool> _dropToolData;
-	std::vector<std::shared_ptr<Weapon>> _weapons;//此Unit的武器表Weapon
+	Vector<Weapon*> _weapons;//此Unit的武器表Weapon
 	//循环指令
 	vector<XUnitOrder>	_unitRecycleOrder;
 	std::shared_ptr<UnitRes>		 _unitRes;
 	std::shared_ptr<ShotLogicManager> _shotLogicManager;
-	MotionImpl* _curMotion;
+	std::vector<std::shared_ptr<MotionImpl>> _motions;
+	std::shared_ptr<MotionImpl> _curMotion;
 };
-
 #endif /* defined(__Moon3d__AirCraft__) */

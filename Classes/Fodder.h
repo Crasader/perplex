@@ -14,8 +14,10 @@ class FodderIdle;
 class Fodder : public Unit
 {
 public:
+	Fodder(GameScene* gameScene, int unitID, int type, int dir, int campType);
     CREATE_FUNC(Fodder);
-    bool init();
+	static Fodder* create(GameScene* gameScene, int unitID, int type, int dir, int campType);
+	bool init();
     virtual void reset();
     virtual void move(float y, float dt);
     CC_SYNTHESIZE(int, _moveMode, MoveMode);

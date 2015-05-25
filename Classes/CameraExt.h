@@ -39,7 +39,7 @@ enum CameraMovingType
 
 enum CameraOrder
 {
-	ECAMERAORDER_NULL = 0,
+	ECAMERAORDER_DEFAUL = 0,
 	ECAMERAORDER_MOVE = 1,
 	ECAMERAORDER_FOLLOW = 2,
 	ECAMERAORDER_LOCK = 3,
@@ -53,10 +53,10 @@ enum CameraOrder
 static const int KCameraAnchorSpeedX = 20;
 static const int KCameraAnchorSpeedY = 20;
 static const int MAX_OPERATION_COUNT = 8;
-static const float FOLLOW_TYPE_X[] = { -120, -120 };
-static const float FOLLOW_TYPE_Y[] = { 88, 88 };
-static const float CAMERA_OFFSETX = 120;
-static const float CAMERA_OFFSETY = 180;
+static const float FOLLOW_TYPE_X[] = { -120.0f, -120.0f };
+static const float FOLLOW_TYPE_Y[] = { 88.0f, 88.0f };
+static const float CAMERA_OFFSETX = 120.0f;
+static const float CAMERA_OFFSETY = 180.0f;
 static const int SHAKEX[] = { -2, 0, 2, 0, -3, 0, 4, 0, -4, 0, 4, 0, -4, 0, 4, 0 };
 static const int SHAKEY[] = { 2, 0, -2, 0, 3, 0, -4, 0, -4, 0, 4, 0, -4, 0, 4, 0 };
 
@@ -67,9 +67,7 @@ class CameraExt
 {
 public:
 	CameraExt(GameScene* gameScene, std::shared_ptr<MapManager> mapManager);
-
-	CameraExt();
-	~CameraExt();
+	Rect getCameraVisibleSize();
 	void setLockUnit(bool lock);
 	bool isClose();;
 	bool isOperationOk();
@@ -89,10 +87,8 @@ public:
 	void setMoveY(float aMoveY);
 	int getType() const;
 	void setType(int aType);
-	void close();
-	void open();
 	int getOrderCount();
-	void doPeriodicTask();
+	void doPeriodicTask(float dt);
 	void startMoveToPoint(int type, int x, int y, int speed);
 	void startShake(int shakeTick);
 	void startFollowUnit(bool center);
@@ -106,90 +102,30 @@ public:
 	void setSpeedX(float aSpeedX);
 	Node* getTarget() const;
 	void setTarget(Node* aTarget);
-	void setCameraPostion(float x, float y);
-	void moveCameraCenter();
-	bool init();
-	static CameraExt* getInstance();
-	void destroy();
-	void update(float dt);
 	Size getMapSize() const;
 	void setMapSize(Size aMapSize);
 	void revise(float &x, float &y);
-	Point SetCameraPos(float left, float top);
-	Point MoveCamera(float left, float top, float speedX, float speedY);
-	void LockCameraH(float left, float right);
-	void LockCameraV(float top, float bottom);
-	void LockCurrentCamera();
-	void UnlockCameraWhenDead(Node* e);
-	void LockCurrentCameraH();
-	void LockCurrentCameraV();
-	void UnlockCamera();
-	void UnlockCameraH();
-	void UnlockCameraV();
-	void SetCameraReady();
-	void ResetCameraAnchor();
-	void StartCmdCamera(float left, float top, float speedX, float speedY);
-	void StartCmdCamera(float speedX = 0, float speedY = 20);
-	void CameraReturnPlayer(float speedx, float speedy);
-	Point CameraAnchorPlayer(float speedx, float speedy);
-	Rect getCameraVisibleSize();
-	float getCameraLeft() const;
-	void setCameraLeft(float aCameraLeft);
-	float getCameraTop() const;
-	void setCameraTop(float aCameraTop);
-	float getCameraRight() const;
-	void setCameraRight(float aCameraRight);
-	float getCameraBottom() const;
-	void setCameraBottom(float aCameraBottom);
 	Size getCameraSize() const;
 	void setCameraSize(Size aCameraSize);
-	void stopCamera();
-	void startCamera();
 	void setPlayer(Node* player);
 	Rect GetMapVisibleBound();
-	void ResetCamera();
 	Vec2 GetCameraCenter();
 	Vec2 GetCameraOriginToGL();
-	void setRecycle(bool recycle) { _recycle = recycle; }
 	void initCamera();
+	void close();
+	void open();
 protected:
 	float _speedX;
 	float _speedY;
-
-	float _cameraLeft;
-	float _cameraTop;
-	float _cameraRight;
-	float _cameraBottom;
-	float _cameraLockL;
-	float _cameraLockT;
-	float _cameraLockR;
-	float _cameraLockB;
-
-	float _KCameraAnchorX;
-	float _KCameraAnchorY;
-
-	bool _cameraHLocked;
-	bool _cameraVLocked;
-
-	float _cameraCmdLeft;
-	float _cameraCmdTop;
-	float _cameraCmdSpeedX;
-	float _cameraCmdSpeedY;
-
-	int _cameraState;
-	bool _cameraUsed;
-	bool _recycle;
-
 	Size _mapSize;
 	Size _cameraSize;
 	Node* _target;
 	Node* _Player;
-	Scheduler* _schedulerHandler;
 	
 
 	//////////////////////////////////////////////////////////////////////////
 	int _type; //运动类型
-	//0 --- 按键直接控制摄像机
+	//0 --- 向上运动
 	//1 --- 追踪Unit
 	//2 --- 锁定Unit
 	float _x;
@@ -204,6 +140,7 @@ protected:
 	int _shakeTick;
 	int _fadeTick;
 	int _followType; //跟踪Unit的方式  0:局中  1:自由
+	int _recycle;
 
 	bool _lockUnit;
 	bool _close;

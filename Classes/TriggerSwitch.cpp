@@ -3,11 +3,8 @@
 
 bool TriggerSwitch::perform()
 {
-	if (_eventManager->getSwitch(_switchID) == _set)
-	{
-		return true;
-	}
-	return false;
+	_eventManager->setSwitch(_switchID, _set);
+	return true;
 }
 
 TriggerSwitch::TriggerSwitch(EventManager* eventManager, GameScene* gameLayer, int switchID, bool set) 

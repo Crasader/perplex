@@ -53,8 +53,8 @@ public:
 	const Rect getMoveRect();
 	int getShadowType() const { return _shadowType; }
 	void setShadowType(int aShadowType) { _shadowType = aShadowType; }
-	bool getCastoff() const { return _castoff; }
-	void setCastoff(bool aCastoff) { _castoff = aCastoff; }
+	bool isCastoff() const { return _castoff; }
+	void setCastoff() { _castoff = true; }
 	int getCastoffStage() const { return _castoffStage; }
 	void setCastoffStage(int aCastoffStage) { _castoffStage = aCastoffStage; }
 public:

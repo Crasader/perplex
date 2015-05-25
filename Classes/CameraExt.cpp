@@ -1,14 +1,9 @@
 #include "CameraExt.h"
 
-static CameraExt* g_camera = nullptr;
-
-CameraExt::CameraExt()
-{
-
-}
-
 CameraExt::CameraExt(GameScene* gameScene, std::shared_ptr<MapManager> mapManager)
-:_gameScene(gameScene)
+:_speedX(0)
+, _speedY(10)
+,_gameScene(gameScene)
 , _mapManager(mapManager)
 , _x(0)
 , _y(0)
@@ -22,7 +17,7 @@ CameraExt::CameraExt(GameScene* gameScene, std::shared_ptr<MapManager> mapManage
 , _followType(0)
 , _lockUnit(false)
 , _close(false)
-, _operationOk(false)
+, _operationOk(true)
 , _moveRect(Rect::ZERO)
 , _operationCount(0)
 {
@@ -36,353 +31,15 @@ CameraExt::CameraExt(GameScene* gameScene, std::shared_ptr<MapManager> mapManage
 	}
 }
 
-CameraExt::~CameraExt()
-{
-	
-}
-
-void CameraExt::setLockUnit(bool lock)
-{
-	_lockUnit = lock;
-}
-
-bool CameraExt::init()
-{
-	_speedX = 0;
-	_speedY = 5;
-	_target = nullptr;
-
-
-	auto _visiableSize = Director::getInstance()->getVisibleSize();
-	auto origin = Director::getInstance()->getVisibleOrigin();
-	_cameraLeft = origin.x;
-	_cameraTop = origin.y;
-	_cameraRight = _cameraLeft + _visiableSize.width;
-	_cameraBottom = _cameraTop + _visiableSize.height;
-
-	_cameraSize = _visiableSize;
-	setCameraPostion((_mapSize.width - _cameraSize.width) / 2, 0);
-	SetCameraReady();
-	_schedulerHandler = Director::getInstance()->getScheduler();
-	_schedulerHandler->retain();
-	startCamera();
-	return true;
-}
-
-void CameraExt::SetCameraReady()
-{
-	ResetCameraAnchor();
-	_cameraState = ECameraNormal;
-	_cameraHLocked = false;
-	_cameraVLocked = false;
-	_cameraUsed = false;
-	/*CameraAnchorPlayer(10000, 10000);*/
-	//StartCmdCamera(_mapSize.width, _mapSize.height, KCameraAnchorSpeedX, KCameraAnchorSpeedY);
-}
-
-void CameraExt::ResetCameraAnchor()
-{
-	_KCameraAnchorX = _cameraSize.width / 2;
-	_KCameraAnchorY = _cameraSize.height / 2;
-}
-
-void CameraExt::CameraReturnPlayer(float speedx, float speedy)
-{
-	_speedX = speedx;
-	_speedY = speedy;
-	_cameraState = ECameraReturnPlayer;
-}
-
-Point CameraExt::CameraAnchorPlayer(float speedx, float speedy)
-{
-	return MoveCamera(_mapSize.width, _mapSize.height, speedx, speedy);
-}
 
 Rect CameraExt::getCameraVisibleSize()
 {
-	return Rect(_cameraLeft, _cameraTop, _cameraSize.width, _cameraSize.height);
-}
-
-Point CameraExt::SetCameraPos(float left, float top)
-{
-	auto l = 0;
-	auto r = _mapSize.width;
-	auto t = 0;
-	auto b = _mapSize.height;
-
-	if (_cameraHLocked)
-	{
-		l = _cameraLockL;
-		r = _cameraLockR;
-	}
-
-	if (_cameraVLocked)
-	{
-		t = _cameraLockT;
-		b = _cameraLockB;
-	}
-
-	_cameraLeft = left;
-	_cameraTop = top;
-
-	auto rx = ECameraMoveEndX;
-	auto ry = ECameraMoveEndY;
-
-	if (_cameraLeft < l)
-	{
-		_cameraLeft = l;
-		rx = ECameraMoveFailX;
-	}
-
-	if (_cameraLeft + _cameraSize.width > r)
-	{
-		_cameraLeft = r - _cameraSize.width;
-		rx = ECameraMoveFailX;
-	}
-
-	if (_cameraTop < t)
-	{
-		_cameraTop = t;
-		ry = ECameraMoveFailY;
-	}
-
-	if (_cameraTop + _cameraSize.height > b)
-	{
-		_cameraTop = b - _cameraSize.height;
-		ry = ECameraMoveFailY;
-	}
-
-	_cameraRight = _cameraLeft + _cameraSize.width;
-	_cameraBottom = _cameraTop + _cameraSize.height;
-	return Point(rx, ry);
-}
-
-Point CameraExt::MoveCamera(float left, float top, float speedX, float speedY)
-{
-	auto cl = _cameraLeft;
-	auto ct = _cameraTop;
-
-	if (cl < left)
-	{
-		cl = cl + speedX;
-		if (cl > left)
-		{
-			cl = left;
-		}
-	}
-	else if (cl > left)
-	{
-		cl = cl - speedX;
-		if (cl < left)
-		{
-			cl = left;
-		}
-	}
-
-	if (ct < top)
-	{
-		ct += speedY;
-		if (ct > top)
-		{
-			ct = top;
-		}
-	}
-	else if (ct > top)
-	{
-		ct -= speedY;
-		if (ct > top)
-		{
-			ct = top;
-		}
-	}
-
-	auto r = SetCameraPos(cl, ct);
-
-	if (_cameraLeft == left)
-	{
-		r.x = ECameraMoveEndX;
-	}
-	else if (r.x == ECameraMoveEndX)
-	{
-		r.x = ECameraMovingX;
-	}
-
-	if (_cameraTop == top)
-	{
-		r.y = ECameraMoveEndY;
-	}
-	else if (r.y == ECameraMoveEndY)
-	{
-		r.y = ECameraMovingY;
-	}
-	return r;
-}
-
-void CameraExt::LockCameraH(float left, float right)
-{
-	_cameraHLocked = true;
-	_cameraLockL = MAX(0, left);
-	_cameraLockR = MAX(_mapSize.width, right);
-
-	if (_cameraLeft < _cameraLockL)
-	{
-		_cameraLeft = _cameraLockL;
-	}
-
-	if (_cameraLeft + _cameraSize.width > _cameraLockR)
-	{
-		_cameraLeft = _cameraLockR - _cameraSize.width;
-	}
-
-	_cameraRight = _cameraLeft + _cameraSize.width;
-}
-
-void CameraExt::LockCameraV(float top, float bottom)
-{
-	_cameraVLocked = true;
-	_cameraLockT = MAX(0, top);
-	_cameraLockB = MIN(_mapSize.height, bottom);
-
-	if (_cameraTop < _cameraLockT)
-	{
-		_cameraTop = _cameraLockT;
-	}
-
-	if (_cameraTop + _cameraSize.height > _cameraLockB)
-	{
-		_cameraTop = _cameraLockB - _cameraSize.height;
-	}
-
-	_cameraBottom = _cameraTop + _cameraRight;
-}
-
-void CameraExt::LockCurrentCamera()
-{
-	LockCurrentCameraH();
-	LockCurrentCameraV();
-}
-
-void CameraExt::LockCurrentCameraH()
-{
-	LockCameraH(_cameraLeft, _cameraLeft + _cameraSize.width);
-}
-
-void CameraExt::LockCurrentCameraV()
-{
-	LockCameraV(_cameraTop, _cameraTop + _cameraSize.height);
-}
-
-void CameraExt::UnlockCameraWhenDead(Node* e)
-{
-	_target = e;
-}
-
-void CameraExt::UnlockCamera()
-{
-	UnlockCameraH();
-	UnlockCameraV();
-}
-
-void CameraExt::UnlockCameraH()
-{
-	_cameraHLocked = false;
-}
-
-void CameraExt::UnlockCameraV()
-{
-	_cameraVLocked = false;
-}
-
-void CameraExt::StartCmdCamera(float left, float top, float speedX, float speedY)
-{
-	_cameraCmdLeft = left;
-	_cameraCmdTop = top;
-	_speedX = speedX;
-	_speedY = speedY;
-	_cameraState = ECameraCmdMoving;
-	startCamera();
-}
-
-void CameraExt::StartCmdCamera(float speedX, float speedY)
-{
-	auto l = (_mapSize.width - _cameraSize.width) / 2;
-	auto t = _mapSize.height;
-
-	StartCmdCamera(l, t, speedX, speedY);
-}
-
-void CameraExt::update(float dt)
-{
-	/*if (_target)
-	{
-	if (cameraHLocked)
-	{
-	UnlockCamera();
-	_target = nullptr;
-	}
-	}*/
-
-	/*	if (cameraState == ECameraNormal)
-		{
-		CameraAnchorPlayer(KCameraAnchorSpeedX*dt, KCameraAnchorSpeedY*dt);
-		}
-		else if (cameraState = ECameraReturnPlayer)
-		{
-		auto r = CameraAnchorPlayer(_speedX*dt, _speedY*dt);
-		if (r.x != ECameraMovingX && r.y != ECameraMovingY)
-		{
-		cameraState = ECameraNormal;
-		}
-		}
-		else*/ if (_cameraState == ECameraCmdMoving)
-	{
-		auto r = MoveCamera(_cameraCmdLeft, _cameraCmdTop, _speedX*dt, _speedY*dt);
-		if (_target)
-		{
-			CC_ASSERT(_target != nullptr);
-			CC_ASSERT(_Player);
-			_target->setPosition(-_cameraLeft, -_cameraTop);
-			_Player->setPositionY(_Player->getPositionY() + _speedY*dt);
-		}
-		if (r.x != ECameraMovingX && r.y != ECameraMovingY)
-		{
-			_cameraState = ECameraCmdMoveEnd;
-		}
-	}
-	else if (_cameraState == ECameraCmdMoveEnd)
-	{
-	}
-	else if (_cameraState == ECameraMovecenter)
-	{
-		moveCameraCenter();
-		_cameraState = ECameraNormal;
-		stopCamera();
-	}
-
-	/*setCameraPostion(_cameraLeft, _cameraTop);
-	_cameraLeft += _speedX * dt;
-	_cameraTop += _speedY  * dt;
-	setCameraPostion(_cameraLeft, _cameraTop);*/
+	return Rect();
 }
 
 Size CameraExt::getMapSize() const
 {
-	return _mapSize;
-}
-
-void CameraExt::setCameraPostion(float x, float y)
-{
-	revise(x, y);
-	_cameraLeft = x;
-	_cameraTop = y;
-
-	_cameraRight = _cameraLeft + _cameraSize.width;
-	_cameraBottom = _cameraTop + _cameraSize.height;
-
-	if (_target)
-	{
-		_target->setPosition(-_cameraLeft, -_cameraTop);
-	}
+	return _moveRect.size;
 }
 
 void CameraExt::setMapSize(Size aMapSize)
@@ -390,114 +47,14 @@ void CameraExt::setMapSize(Size aMapSize)
 	_mapSize = aMapSize;
 }
 
-void CameraExt::revise(float &x, float &y)
-{
-	if (x <= 0)
-	{
-		x = 0;
-	}
-	else if (x + _cameraSize.width >= _mapSize.width)
-	{
-		x = _mapSize.width - _cameraSize.width;
-	}
-
-	if (y <= 0)
-	{
-		y = 0;
-	}
-	else if (y + _cameraSize.height >= _mapSize.height)
-	{
-		y = _mapSize.height - _cameraSize.height;
-	}
-}
-
-void CameraExt::moveCameraCenter()
-{
-	setCameraPostion((_mapSize.width - _cameraSize.width) / 2, 0);
-}
-
-CameraExt* CameraExt::getInstance()
-{
-	if (g_camera == nullptr)
-	{
-		g_camera = new CameraExt();
-		g_camera->init();
-	}
-	return g_camera;
-}
-
-void CameraExt::destroy()
-{
-	/*stopCamera();
-	CC_SAFE_RELEASE(_schedulerHandler);*/
-}
-
-float CameraExt::getCameraLeft() const
-{
-	return _cameraLeft;
-}
-
-void CameraExt::setCameraLeft(float aCameraLeft)
-{
-	_cameraLeft = aCameraLeft;
-}
-
-float CameraExt::getCameraTop() const
-{
-	return _cameraTop;
-}
-
-void CameraExt::setCameraTop(float aCameraTop)
-{
-	_cameraTop = aCameraTop;
-}
-
-float CameraExt::getCameraRight() const
-{
-	return _cameraRight;
-}
-
-void CameraExt::setCameraRight(float aCameraRight)
-{
-	_cameraRight = aCameraRight;
-}
-
-float CameraExt::getCameraBottom() const
-{
-	return _cameraBottom;
-}
-
-void CameraExt::setCameraBottom(float aCameraBottom)
-{
-	_cameraBottom = aCameraBottom;
-}
-
 Size CameraExt::getCameraSize() const
 {
-	return _cameraSize;
+	return _moveRect.size;
 }
 
 void CameraExt::setCameraSize(Size aCameraSize)
 {
 	_cameraSize = aCameraSize;
-}
-
-void CameraExt::stopCamera()
-{
-// 	if (_cameraUsed)
-// 	{
-// 		_cameraUsed = false;
-// 		_schedulerHandler->unschedule(schedule_selector(CameraExt::update), g_camera);
-// 	}
-}
-
-void CameraExt::startCamera()
-{
-	/*if (!_cameraUsed)
-	{
-		_cameraUsed = true;
-		_schedulerHandler->schedule(schedule_selector(CameraExt::update), g_camera, 0, false);
-	}*/
 }
 
 void CameraExt::setPlayer(Node* player)
@@ -507,29 +64,24 @@ void CameraExt::setPlayer(Node* player)
 
 Rect CameraExt::GetMapVisibleBound()
 {
-	return Rect(_cameraLeft, _cameraBottom - _cameraSize.height, _cameraSize.width, _cameraSize.height);
-}
-
-void CameraExt::ResetCamera()
-{
-	init();
+	return Rect(0, 0 - _cameraSize.height, _cameraSize.width, _cameraSize.height);
 }
 
 Vec2 CameraExt::GetCameraCenter()
 {
-	return Vec2(_cameraSize / 2) + Vec2(GetMapVisibleBound().origin);
+	return Vec2(_moveRect.size / 2) + Vec2(GetMapVisibleBound().origin);
 }
 
 Vec2 CameraExt::GetCameraOriginToGL()
 {
-	return Vec2(_cameraLeft, _cameraBottom - _cameraSize.height);
+	return _moveRect.origin;
 }
 
 void CameraExt::initCamera()
 {
 	switch (_operations[0]._type)
 	{
-	case ECAMERAORDER_NULL:
+	case ECAMERAORDER_DEFAUL:
 		_operationOk = true;
 		break;
 	case ECAMERAORDER_MOVE:
@@ -544,15 +96,15 @@ void CameraExt::initCamera()
 		startLockNPC();
 		break;
 	case ECAMERAORDER_MOVETOPOINT:
-		startMoveToPoint(5, _operations[0]._x, _operations[0]._y, _operations[0]._type);
+		startMoveToPoint(5, _operations[0]._x, _operations[0]._y, _operations[0]._other);
 		break;
 	case ECAMERAORDER_JUMPTOPOINT://切换到某点
-		startMoveToPoint(6, _operations[0]._x, _operations[0]._y, _operations[0]._type);
+		startMoveToPoint(6, _operations[0]._x, _operations[0]._y, _operations[0]._other);
 		break;
 
 	case ECAMERAORDER_OPEN:     //打开摄像机
 		_close = false;
-		startMoveToPoint(6, _operations[0]._x, _operations[0]._y, _operations[0]._type);
+		startMoveToPoint(0, (_gameScene->getSceneWidth() - _gameScene->getMapWidth()) / 2, _gameScene->getMapHeight(), _operations[0]._other);
 		break;
 	default:
 		break;
@@ -664,17 +216,18 @@ int CameraExt::getOrderCount()
 	return _operationCount;
 }
 
-void CameraExt::doPeriodicTask()
+void CameraExt::doPeriodicTask( float dt )
 {
 	auto tempX = _x;
 	auto tempY = _y;
 	auto xOk = false;
 	auto yOk = false;
+	_type = 0;
 	switch (_type)
 	{
 	case 0:
-		_x += _moveX;
-		_y += _moveY;
+		_x += _speedX * dt;
+		_y += _speedY * dt;
 		break;
 	case 1:
 		if (_x <= _desX + FOLLOW_TYPE_X[_followType] &&
@@ -846,6 +399,7 @@ void CameraExt::doPeriodicTask()
 
 void CameraExt::startMoveToPoint(int type, int x, int y, int speed)
 {
+	_speedX = _speedY = speed;
 	_type = type;
 	_desX = x - _gameScene->getSceneWidth() / 2;
 	_desY = y - _gameScene->getSceneHeight() / 2;
@@ -921,9 +475,9 @@ void CameraExt::setMoveRect()
 		_moveRect.size.height >= _gameScene->getSceneHeight())
 	{
 		_x = (_moveRect.getMinX() + _moveRect.getMaxX() - _gameScene->getSceneWidth()) / 2;
-		if (_x <= 0)
+		if (_x <= 0.0f)
 		{
-			_x = 0;
+			_x = 0.0f;
 		}
 		else if (_x >= _gameScene->getMapWidth() - _gameScene->getSceneWidth())
 		{
@@ -950,9 +504,9 @@ void CameraExt::setMoveRect()
 		{
 			_x = _gameScene->getMapWidth() - _gameScene->getSceneWidth();
 		}
-		if (_y < 0)
+		if (_y < 0.0f)
 		{
-			_y = 0;
+			_y = 0.0f;
 		}
 		else if (_y > _gameScene->getMapHeight() - _gameScene->getSceneHeight())
 		{
@@ -965,17 +519,17 @@ void CameraExt::setMoveRect()
 	{
 		_x = (_moveRect.getMinX() + _moveRect.getMaxX() - _gameScene->getSceneWidth()) / 2;
 		_y = (_moveRect.getMinY() + _moveRect.getMaxY() - _gameScene->getSceneHeight()) / 2;
-		if (_x <= 0)
+		if (_x <= 0.0f)
 		{
-			_x = 0;
+			_x = 0.0f;
 		}
 		else if (_x >= _gameScene->getMapWidth() - _gameScene->getSceneWidth())
 		{
 			_x = _gameScene->getMapWidth() - _gameScene->getSceneWidth();
 		}
-		if (_y < 0)
+		if (_y < 0.0f)
 		{
-			_y = 0;
+			_y = 0.0f;
 		}
 		else if (_y >= _gameScene->getSceneHeight() - _gameScene->getSceneWidth())
 		{
@@ -1027,12 +581,3 @@ Node* CameraExt::getTarget() const
 {
 	return _target;
 }
-
-void CameraExt::setTarget(Node* aTarget)
-{
-	_target = aTarget;
-	_cameraState = ECameraMovecenter;
-	moveCameraCenter();
-	startCamera();
-}
-

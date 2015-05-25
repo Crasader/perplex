@@ -21,6 +21,8 @@
 #include "consts.h"
 #include "MyTime.h"
 #include "Player.h"
+#include "building.h"
+#include "Bullets.h"
 
 USING_NS_CC;
 
@@ -79,6 +81,7 @@ GameScene::GameScene()
 	, _unitManager(nullptr)
 	, _eventManager(nullptr)
 	, _activeMap(nullptr)
+	, _mapManager(nullptr)
 {
 
 }
@@ -100,6 +103,7 @@ Scene* GameScene::createScene()
 	warningLayer->setOpacity(0);
 	warningLayer->setTag(LAYER_TAG_WARNING);
 	scene->addChild(warningLayer, 7);
+
     // return the scene
     return scene;
 }
@@ -120,7 +124,11 @@ bool GameScene::init()
 	sb->setTag(LAYER_TAG_GAME);
 	sb->setPosition(origin);
 	addChild(sb);*/
-	
+	_text = Label::create();
+	_text->setTextColor(Color4B::RED);
+	_text->setString("level:");
+	_text->setPosition(100, 100);
+	addChild(_text);
 #ifdef COCOS2D_DEBUG
 	auto d = DrawNode::create();
 	d->drawRect(Vec2(0, 0), Vec2(visibleSize.width, visibleSize.height), Color4F::RED);
@@ -193,12 +201,12 @@ cocos2d::Size GameScene::getSceneSize()
 	return Director::getInstance()->getVisibleSize();
 }
 
-int GameScene::getSceneHeight()
+float GameScene::getSceneHeight()
 {
 	return Director::getInstance()->getVisibleSize().height;
 }
 
-int GameScene::getSceneWidth()
+float GameScene::getSceneWidth()
 {
 	return Director::getInstance()->getVisibleSize().width;
 }
@@ -241,14 +249,37 @@ void GameScene::spriteCollision()
 		_collisionTick++;
 	}
 	//#删除废弃的子弹
-	
+	for (auto iter = UnitManager::_allyBullets.begin(); iter != UnitManager::_allyBullets.end();)
+	{
+		auto b = *iter;
+		if (b->getCastoffStage() >= 1)
+		{
+			iter = UnitManager::_allyBullets.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+	for (auto iter = UnitManager::_enemyBullets.begin(); iter != UnitManager::_enemyBullets.end();)
+	{
+		auto b = *iter;
+		if (b->getCastoffStage() >= 1)
+		{
+			iter = UnitManager::_enemyBullets.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
 	//处理player与道具碰撞处理
 	if (_collisionTick == 0)
 	{
 		for (auto a : UnitManager::_tools)
 		{
 			
-			dynamic_cast<Tool*>(a)->beTouch(_player);
+			a->beTouch(_player);
 		}
 	}
 	////爆炸碰撞处理
@@ -259,12 +290,96 @@ void GameScene::spriteCollision()
 
 void GameScene::explodeCollision()
 {
-	throw std::exception("The method or operation is not implemented.");
+	
 }
 
 void GameScene::bulletCollision()
 {
-	throw std::exception("The method or operation is not implemented.");
+	//处理盟军子弹
+	for (auto b : UnitManager::_allyBullets)
+	{
+		if (b->isBump())
+		{
+			continue;
+		}
+		auto hitRect = b->getHitRect();
+		auto power = b->getPower();
+		//盟军子弹于敌人碰撞
+		for (auto e : UnitManager::_enemies)
+		{
+			auto unit = dynamic_cast<Unit*>(e);
+			if (unit && (unit->isActive() || unit->isCastoff()))
+			{
+				continue;
+			}
+			//收到攻击，且子弹类型
+			if (unit->beAttack(hitRect, power) != 0)
+			{
+				b->setBump();
+				b->setCastoff();
+			}
+		}
+		//盟军子弹与建筑碰撞
+		if (b->isBump())
+		{
+			continue;
+		}
+		for (auto building : UnitManager::_buildings)
+		{
+			if (building->isActive())
+			{
+				if (building->beAttack(hitRect, power) != 0)
+				{
+					b->setBump();
+					b->setCastoff();
+					break;
+				}
+			}
+		}
+	}
+	//处理敌人子弹
+	for (auto eb : UnitManager::_enemyBullets)
+	{
+		if (eb->isBump())
+		{
+			continue;
+		}
+		auto hitRect = eb->getHitRect();
+		auto power = eb->getPower();
+		//敌人子弹与盟军相碰
+		for (auto a : UnitManager::_allys)
+		{
+			if (a->isCastoff())
+			{
+				continue;
+			}
+			if (a->beAttack(hitRect, power) != 0)
+			{
+				eb->setBump();
+				eb->setCastoff();
+				break;
+			}
+		}
+		//敌人子弹与建筑碰撞
+		if (eb->isBump())
+		{
+			continue;
+		}
+		if (_collisionTick == 1)
+		{
+			continue;
+		}
+		for (auto building : UnitManager::_buildings)
+		{
+			if (building->isActive() && 
+				building->beAttack(hitRect, power) != 0)
+			{
+				eb->setBump();
+				eb->setCastoff();
+				break;
+			}
+		}
+	}
 }
 
 void GameScene::gameInitPerform()
@@ -371,6 +486,7 @@ void GameScene::gameInitPerform()
 	default:
 		break;
 	}
+	log("%s,%d,%d", __FUNCTION__, _state, _stateStep);
 	_stateStep++;
 }
 
@@ -405,10 +521,60 @@ bool GameScene::changeMap(int mapID)
 	}
 	return changeOk;
 }
-
+//删除废弃的指针
 void GameScene::deleteCastoffPoint()
 {
+	for (auto iter = UnitManager::_buildings.begin();  iter != UnitManager::_buildings.end();)
+	{
+		auto building = *iter;
+		if (building->isCastoff())
+		{
+			iter = UnitManager::_buildings.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
 
+	for (auto iter = UnitManager::_enemies.begin(); iter != UnitManager::_enemies.end();)
+	{
+		auto e = *iter;
+		if (e->isCastoff())
+		{
+			iter = UnitManager::_enemies.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
+	for (auto iter = UnitManager::_allys.begin(); iter != UnitManager::_allys.end();)
+	{
+		auto e = *iter;
+		if (e->isCastoff())
+		{
+			iter = UnitManager::_allys.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
+	for (auto iter = UnitManager::_tools.begin(); iter != UnitManager::_tools.end();)
+	{
+		auto e = *iter;
+		if (e->isCastoff())
+		{
+			iter = UnitManager::_tools.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
 }
 
 void GameScene::gamePlayingPerform(float dt)
@@ -420,7 +586,10 @@ void GameScene::gamePlayingPerform(float dt)
 		return;
 	}
 	//如果摄像机没有打开，则退出
-
+// 	if (_camera->isClose())
+// 	{
+// 		return;
+// 	}
 	//地图可走范围处理
 	MapWalkRectActive();
 	for (auto iter = UnitManager::_sprites.begin(); iter != UnitManager::_sprites.end();)
@@ -441,9 +610,16 @@ void GameScene::gamePlayingPerform(float dt)
 	//删除索引表的废弃索引值
 	deleteCastoffPoint();
 	//将Sprite排序
-	sortSprites();
+	//sortSprites();
 	//摄像机
-	//MoveCamera();
+	moveCamera(dt);
+	if (_player != nullptr && _player->getPower() <= 0)
+	{
+		if (_life <= 0)
+		{
+			//#todo gameover
+		}
+	}
 }
 
 void GameScene::changeMapByEvent(int stage, int mapFileID)
@@ -549,6 +725,7 @@ int GameScene::getMapHeight()
 
 void GameScene::doPeroidicTick(float dt)
 {
+	_text->setString("level:" + _state);
 	switch (_state)
 	{
 	case EGS_GamePlaying:
@@ -644,6 +821,110 @@ void GameScene::setPlayer(Player* unit)
 UnitResManager& GameScene::getUnitResManager() const
 {
 	return *_unitResManager;
+}
+
+int GameScene::getDefficulty()
+{
+	return _difficulty;
+}
+
+bool GameScene::getUnitCollisionToMap(cocos2d::Rect tempRect)
+{
+	for (auto i = 0; i < (int)_activeMap->getWalkRect().size(); i++)
+	{
+		if (!_activeMap->isWalkRectActive(i))
+		{
+			continue;
+		}
+		if (_activeMap->getWalkRect()[i].intersectsRect(tempRect))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+//unit身体碰撞处理
+bool GameScene::getUnitCollision(cocos2d::Rect tempRect)
+{
+	for (auto iter = UnitManager::_buildings.begin(); iter != UnitManager::_buildings.end(); ++iter)
+	{
+		auto building = *iter;
+		if (building->isActive())
+		{
+			continue;
+		}
+		if (building->getWalkRect().size.width > 0 && tempRect.intersectsRect(building->getWalkRect()))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void GameScene::moveCamera( float dt )
+{
+	if (_cameraUnit != nullptr && _camera->getType() >= 1 && _camera->getType() <= 2)
+	{
+		if (_cameraUnit->getPower() <= 0)
+		{
+			_cameraUnit = nullptr;
+			_cameraBeforeType = _camera->getType();
+			_camera->setType(0);
+		}
+		else
+		{
+			_camera->setDesX(_cameraUnit->getPositionX());
+			_camera->setDesY(_cameraUnit->getPositionY());
+		}
+	}
+	_camera->doPeriodicTask(dt);
+
+	if (_cameraUnit && _cameraUnit->getType() == 2)//跟踪player
+	{
+		auto tempX = _cameraUnit->getPositionX();
+		auto tempY = _cameraUnit->getPositionY();
+		if (tempX < _camera->getX() + 8)
+		{
+			tempX = _camera->getX() + 8;
+		}
+		else if (tempX > _camera->getX() + getSceneHeight() - 8)
+		{
+			tempX = _camera->getX() + getSceneHeight() - 8;
+		}
+		if (tempY < _camera->getY() + 16)
+		{
+			tempY = _camera->getY() + 16;
+		}
+		else if (tempY > _camera->getY() + getSceneHeight() - 20)
+		{
+			tempY = _camera->getY() + getSceneHeight() - 20;
+		}
+		/*_camera->SetCameraPos(tempX, tempY);*/
+	}
+	_mapManager->performMap();
+}
+
+cocos2d::Size GameScene::getMapSize()
+{
+	_mapManager->getActiveMap();
+	return Size::ZERO;
+}
+
+GameScene* GameScene::create()
+{
+	auto ret = new GameScene();
+	if (ret && ret->init())
+	{
+		ret->autorelease();
+		return ret;
+	}
+	CC_SAFE_DELETE(ret);
+	return ret;
+}
+
+void GameScene::addUnit(Node* node)
+{
+	if (_mapManager->getFloor()) _mapManager->getFloor()->addChild(node);
 }
 
 

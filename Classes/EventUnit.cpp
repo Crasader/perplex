@@ -24,6 +24,7 @@
 #include "gameeffectstate.h"
 #include "effectcalculagraph.h"
 #include "GameScene.h"
+#include "TriggerRandom.h"
 
 
 
@@ -95,7 +96,8 @@ void EventUnit::createTriggerCounter(int counterID, int operate, int count)
 
 void EventUnit::createTriggerRandom(int min, int max, int para)
 {
-	
+	auto trigger = std::shared_ptr<TriggerRandom>(new TriggerRandom(_eventManager, _gamelayer, min, max, para));
+	_triggers.push_back(trigger);
 }
 
 void EventUnit::createTriggerUnitToRect(int unitID, cocos2d::Rect rect)
@@ -145,7 +147,7 @@ void EventUnit::createEffectDialog(int faceID, int position, int sentenceID)
 
 void EventUnit::createEffectUnitAppear(int UnitID, int x, int y, bool show)
 {
-	auto effect = std::shared_ptr<EffectUnitAppear>(new EffectUnitAppear(_eventManager, _gamelayer, UnitID, x, y, false));
+	auto effect = std::shared_ptr<EffectUnitAppear>(new EffectUnitAppear(_eventManager, _gamelayer, UnitID, x, y, show));
 	_effects.push_back(effect);
 }
 

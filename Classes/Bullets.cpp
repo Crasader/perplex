@@ -133,6 +133,12 @@ bool Bullet::isBump()
 	return _bump;
 }
 
+
+int Bullet::getPower()
+{
+	return _power;
+}
+
 bool Missile::init()
 {
     //_Model = EffectSprite3D::createFromObjFileAndTexture("daodanv001.c3b", "daodan_32.png");

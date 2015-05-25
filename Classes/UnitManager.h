@@ -29,16 +29,16 @@ public:
 	Unit* createDefaultUnit(int type, int x, int y);
 	Unit* spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* spawnEnemy(int type);
-	Unit* getOrCreate(int type);
+	Unit* getOrCreate(GameScene* gameScene, int unitID, int type, int dir, int campType);
 public:
-	static cocos2d::Vector<GameEntity*> _tools;
-	static cocos2d::Vector<GameEntity*> _buildings;
+	static cocos2d::Vector<Tool*> _tools;
+	static cocos2d::Vector<Building*> _buildings;
 	static cocos2d::Vector<GameEntity*> _sprites;
 	static cocos2d::Vector<GameEntity*> _sortSprites;
-	static cocos2d::Vector<GameEntity*> _allys;
-	static cocos2d::Vector<GameEntity*> _enemies;
-	static cocos2d::Vector<GameEntity*> _enemyBullets;
-	static cocos2d::Vector<GameEntity*> _allyBullets;
+	static cocos2d::Vector<Unit*> _allys;
+	static cocos2d::Vector<Unit*> _enemies;
+	static cocos2d::Vector<Bullet*> _enemyBullets;
+	static cocos2d::Vector<Bullet*> _allyBullets;
 	//static cocos2d::Vector<Explosion*> _explodes;
 	static cocos2d::Vector<GameEntity*> _explodeReals;
 private:

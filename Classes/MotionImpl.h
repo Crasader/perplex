@@ -11,14 +11,20 @@ public:
 #endif // __IState_h__
 
 
-class IdleState : public MotionImpl
+class Idle : public MotionImpl
 {
 public:
+	virtual void execute(){};
+};
 
+class Walk : public MotionImpl
+{
+public:
+	virtual void execute() {};
+};
 
-	virtual void execute()
-	{
-		
-	}
-
+class Die : public MotionImpl
+{
+public:
+	virtual void execute() {};
 };

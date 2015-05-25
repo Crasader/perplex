@@ -54,7 +54,7 @@ bool GameLayer::init()
 
 	ShadowController::init(this);
 
-    _player = Player::create();
+    _player = Player::create(nullptr, 0, 0, 0, 0);
 
 
     addChild(_player, kZOrderSky);
@@ -70,10 +70,6 @@ bool GameLayer::init()
 	}
 	addChild(mapmanager->getFloor());
 
-	_camera = CameraExt::getInstance();
-	_camera->setMapSize(mapmanager->getMapSize());
-	_camera->setTarget(this);
-	_camera->setPlayer(_player);
     //EffectManager::setLayer(this);
 
     this->schedule(schedule_selector(GameLayer::gameMaster) , 1.5f, -1, 2.0f);
@@ -81,16 +77,16 @@ bool GameLayer::init()
     //BulletController::init(this);
 
     scheduleUpdate();
-    
-    _player->setPosition(Vec2(_camera->GetCameraCenter().x,-1000));
-    _player->runAction(Sequence::create(
-                                        DelayTime::create(0.75f),
-					   EaseBackOut::create(MoveTo::create(1.7f, Vec2(_camera->GetCameraCenter().x, 100))),
-					   Spawn::create(CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer, this)),
-					   CallFunc::create([this](){
-		_camera->StartCmdCamera(0, speed);
-	}))
-                      ,nullptr));
+//     
+//     _player->setPosition(Vec2(_camera->GetCameraCenter().x,-1000));
+//     _player->runAction(Sequence::create(
+//                                         DelayTime::create(0.75f),
+// 					   EaseBackOut::create(MoveTo::create(1.7f, Vec2(_camera->GetCameraCenter().x, 100))),
+// 					   Spawn::create(CallFunc::create(CC_CALLBACK_0(GameLayer::schedulePlayer, this)),
+// 					   CallFunc::create([this](){
+// 		_camera->StartCmdCamera(0, speed);
+// 	}))
+//                       ,nullptr));
 
 	auto keyListener = EventListenerKeyboard::create();
 	keyListener->onKeyPressed = CC_CALLBACK_2(GameLayer::onKeyPressed, this);
@@ -242,8 +238,6 @@ void GameLayer::update(float dt)
     }
     else
     {
-		_camera->stopCamera();
-		_camera->ResetCamera();
         if (_player) {
 			ShadowController::erase(_player);
             _player->stop();
@@ -290,18 +284,6 @@ void GameLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 			Director::getInstance()->resume();
 
 		}
-		break;
-	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		_camera->SetCameraPos(_camera->getCameraLeft() - 2, _camera->getCameraRight());
-		break;
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		_camera->SetCameraPos(_camera->getCameraLeft() + 2, _camera->getCameraRight());
-		break;
-	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		_camera->SetCameraPos(_camera->getCameraLeft(), _camera->getCameraRight() + 2);
-		break;
-	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		_camera->SetCameraPos(_camera->getCameraLeft(), _camera->getCameraRight() - 2);
 		break;
 	case EventKeyboard::KeyCode::KEY_A:
 		addEnemy(0);

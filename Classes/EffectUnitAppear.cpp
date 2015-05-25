@@ -13,10 +13,11 @@ bool EffectUnitAppear::perform()
 	if (_show)
 	{
 		_unit->setPosition(_x, _y);
+		_unit->setVisible(_show);
 	}
 	else
 	{
-		_unit->setVisible(false);
+		_unit->setVisible(_show);
 	}
 	return true;
 }

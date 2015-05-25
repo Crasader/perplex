@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "UnitManager.h"
 #include "building.h"
+#include "CameraExt.h"
 
 void MapManager::analyzeMap()
 {
@@ -132,10 +133,11 @@ MapManager::~MapManager()
 	}
 	CC_SAFE_DELETE_ARRAY(iMapImgs);
 	CC_SAFE_RELEASE(_floor);
+	log("%s.....", __FUNCTION__);
 }
 
 MapManager::MapManager(GameScene* scene)
-:iGameScene(nullptr)
+:_gameScene(nullptr)
 ,iLoadingMap(0)    //是否正在载入地图
 ,iLocalMap(0)
 ,iGetMap(0)
@@ -150,7 +152,8 @@ MapManager::MapManager(GameScene* scene)
 ,iFileName("")    //地图包名
 , _floor(nullptr)
 {
-	iGameScene = scene;
+	_gameScene = scene;
+	log("%s....", __FUNCTION__);
 }
 
 bool MapManager::createFloor()
@@ -180,12 +183,47 @@ bool MapManager::createFloor()
 		_floor->addChild(sprite);
 		_floor->retain();
 	}
-	iGameScene->addChild(_floor);
+	_gameScene->addChild(_floor);
 	return true;
 }
 
 int MapManager::getXMapW() { return iActiveMap->getWidth(); }
 int MapManager::getXMapH() { return iActiveMap->getHeight(); }
+
+
+bool isEqualF(float iLastCameraY, float offsetY)
+{
+	return fabs(iLastCameraY - offsetY) <= 0.000001f;
+}
+
+std::shared_ptr<XMap> MapManager::getActiveMap()
+{
+	return iActiveMap;
+}
+
+void MapManager::performMap()
+{
+	auto offsetY = _gameScene->getCamera()->getY();
+	auto offsetX = _gameScene->getCamera()->getX();
+	if (_floor)
+	{
+		_floor->setPosition(offsetX, -offsetY);
+	}
+
+}
+
+bool MapManager::isEqualF(float a, float b)
+{
+	return (fabs(a - b) <= 0.0000001f);
+}
+
+void MapManager::moveMap(float offsetY, float moveUp)
+{
+	if (_floor)
+	{
+		_floor->setPositionY(_floor->getPositionY() - offsetY);
+	}
+}
 
 void MapManager::createUnits()
 {
@@ -199,7 +237,7 @@ void MapManager::createUnits()
 		unitWDir = (iMapUnit[n].dir >> 1);
 		campType = iMapUnit[n].CampType;
 		//TODO
-		auto pUnit = iGameScene->getUnitManager().createUnit(
+		auto pUnit = _gameScene->getUnitManager().createUnit(
 			iMapUnit[n].id,
 			iMapUnit[n].urID,
 			iMapUnit[n].x,
@@ -223,6 +261,7 @@ void MapManager::createUnits()
 		pUnit->setDistItemData(iMapUnit[n].iDistItemData);
 		pUnit->setDropToolData(iMapUnit[n].iDropToolData);
 		pUnit->setUnitRecycleOrder(iMapUnit[n].iRecycleOrderData);
+		pUnit->setUnitOrder(iMapUnit[n].iOrderData);
 		pUnit->setAIType(iMapUnit[n].AIType);
 	}
 	iUnitCount = 0;
@@ -236,7 +275,7 @@ void MapManager::createBuilding()
 	auto mapBuilding = iPrepareLoadMap->getMapBuilding();
 	for (auto n = 0; n < count; n++)
 	{
-		pBuilding = iGameScene->getUnitManager().createBuilding(
+		pBuilding = _gameScene->getUnitManager().createBuilding(
 			mapBuilding[n].brID,
 			mapBuilding[n].id,
 			mapBuilding[n].x,

@@ -17,14 +17,14 @@
 #include "Fodder.h"
 #include "Enemies.h"
 
-cocos2d::Vector<GameEntity*> UnitManager::_tools;
-cocos2d::Vector<GameEntity*> UnitManager::_buildings;
+cocos2d::Vector<Tool*> UnitManager::_tools;
+cocos2d::Vector<Building*> UnitManager::_buildings;
 cocos2d::Vector<GameEntity*> UnitManager::_sprites;
 cocos2d::Vector<GameEntity*> UnitManager::_sortSprites;
-cocos2d::Vector<GameEntity*> UnitManager::_allys;
-cocos2d::Vector<GameEntity*> UnitManager::_enemies;
-cocos2d::Vector<GameEntity*> UnitManager::_enemyBullets;
-cocos2d::Vector<GameEntity*> UnitManager::_allyBullets;
+cocos2d::Vector<Unit*> UnitManager::_allys;
+cocos2d::Vector<Unit*> UnitManager::_enemies;
+cocos2d::Vector<Bullet*> UnitManager::_enemyBullets;
+cocos2d::Vector<Bullet*> UnitManager::_allyBullets;
 //cocos2d::Vector<Explosion*> UnitManager::_explodes;
 cocos2d::Vector<GameEntity*> UnitManager::_explodeReals;
 
@@ -55,16 +55,12 @@ Unit* UnitManager::createUnit(int unitID, int type, int x, int y, int moveType, 
 
 Unit* UnitManager::createRedHeader(int unitID, int type, int x, int y, int moveType, int dir, int campType)
 {
-	auto unit = Player::create();
+	auto unit = Player::create(_gameScene, unitID, type, dir, campType);
 	assert(unit != nullptr);
 	if (unit != nullptr)
 	{
-		unit->setUnitID(unitID);
-		unit->setType(type);
-		unit->setWalkDir(dir);
 		unit->setPosition(Vec2(x, y));
 		unit->setMoveType(moveType);
-		unit->setCampType(campType);
 		unit->setCampType(Ally);
 
 		_gameScene->setPlayer(unit);
@@ -85,6 +81,13 @@ Unit* UnitManager::findUnitFromID(int unitID)
 		return _gameScene->getPlayer();
 	}
 	for (auto a : _allys)
+	{
+		if (((Unit*)a)->getUnitID() == unitID)
+		{
+			return ((Unit*)a);
+		}
+	}
+	for (auto a : _enemies)
 	{
 		if (((Unit*)a)->getUnitID() == unitID)
 		{
@@ -187,14 +190,11 @@ Unit* UnitManager::createDefaultUnit(int type, int x, int y)
 
 Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType)
 {
-	Unit* pUnit = getOrCreate(type);
+	Unit* pUnit = getOrCreate(_gameScene, unitID, type, dir, campType);
 	if (pUnit)
 	{
 		pUnit->setPosition(Vec2(x, y));
 		pUnit->setMoveType(moveType);
-		pUnit->setType(type);
-		pUnit->setWalkDir(dir);
-		pUnit->setCampType(campType);
 		_sprites.pushBack(pUnit);
 		_sortSprites.pushBack(pUnit);
 		if (campType == Ally)
@@ -205,18 +205,18 @@ Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, 
 		{
 			_enemies.pushBack(pUnit);
 		}
-		_gameScene->addChild(pUnit);
+		_gameScene->addUnit(pUnit);
 	}
 	return pUnit;
 }
 
-Unit* UnitManager::getOrCreate(int type)
+Unit* UnitManager::getOrCreate(GameScene* gameScene, int unitID, int type, int dir, int campType)
 {
 	Unit *enemy = nullptr;
 	switch (type)
 	{
 	case kEnemyFodder:
-		enemy = Fodder::create();
+		enemy = Fodder::create(gameScene, unitID, type, dir, campType);
 		enemy->retain();
 	case kEnemyFodderL:
 		
@@ -228,7 +228,7 @@ Unit* UnitManager::getOrCreate(int type)
 		
 		break;
 	case kEnemyTank:
-		enemy = Tank::create();
+		enemy = Tank::create(gameScene, unitID, type, dir, campType);
 		enemy->retain();
 		break;
 	case kEnemyTurret:

@@ -525,6 +525,13 @@ Tank::Tank()
 
 }
 
+
+Tank::Tank(GameScene* gameScene, int unitID, int type, int dir, int campType)
+:Unit(gameScene, unitID, type, dir, campType)
+{
+
+}
+
 Tank::~Tank()
 {
 
@@ -604,6 +611,19 @@ void Tank::update(float dt)
 	default:
 		break;
 	}
+}
+
+
+Tank* Tank::create(GameScene* gameScene, int unitID, int type, int dir, int campType)
+{
+	auto tank = new Tank(gameScene, unitID, type, dir, campType);
+	if (tank && tank->init())
+	{
+		tank->autorelease();
+		return tank;
+	}
+	CC_SAFE_DELETE(tank);
+	return nullptr;
 }
 
 void Tank::setRoute(float dt)

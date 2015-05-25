@@ -29,6 +29,7 @@ public:
 	GameScene* getGameScene();
 	std::shared_ptr<EventUnit> getEventUnitFromID(int id);
 	void doPeriodicTask();
+	void addCount(int counterID) { _counters[counterID] += 1; }
 private:
 	bool _camerBusy;
 	bool _playerReceiveky;

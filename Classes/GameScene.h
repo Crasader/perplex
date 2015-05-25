@@ -28,12 +28,12 @@ public:
     virtual bool init();
 
     // implement the "static create()" method manually
-    CREATE_FUNC(GameScene);
+	static GameScene* create();
 
 	void update(float delta) override;
 
-	int getSceneWidth();
-	int getSceneHeight();
+	float getSceneWidth();
+	float getSceneHeight();
 	cocos2d::Size getSceneSize();
 	std::shared_ptr<MapManager> getMapManager();
 	std::shared_ptr<UnitManager> getSpriteManager() { return _unitManager; }
@@ -79,6 +79,12 @@ public:
 	UnitManager& getUnitManager() const;
 	void setPlayer(Player* unit);
 	UnitResManager& getUnitResManager() const;
+	int getDefficulty();
+	bool getUnitCollisionToMap(cocos2d::Rect tempRect);
+	bool getUnitCollision(cocos2d::Rect tempRect);
+	void moveCamera(float dt);
+	cocos2d::Size getMapSize();
+	void addUnit(Node* node);
 private:
 	bool _game1stStart;
 	bool _victory;
@@ -151,7 +157,9 @@ private:
 	std::shared_ptr<XMap> _activeMap;
 	std::shared_ptr<MapManager> _mapManager;
 	std::shared_ptr<CameraExt> _camera;
+	int _cameraBeforeType;
 	//Victory* _victory;
+	cocos2d::Label *_text;
 };
 
 #endif // __GAME_SCENE_H__

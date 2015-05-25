@@ -249,7 +249,7 @@ void Player::onTouchMoved(Touch *touch, Event *event)
     
     Vec2 shiftPosition = delta+prev;
 	
-	auto camera = CameraExt::getInstance();
+	auto camera = _gameScene->getCamera();
 	setPosition(shiftPosition.getClampPoint(camera->GetCameraOriginToGL(), Vec2(camera->GetCameraOriginToGL().x + camera->getCameraSize().width, camera->getMapSize().height)));
 }
 
@@ -333,9 +333,29 @@ void Player::die()
     NotificationCenter::getInstance()->postNotification("ShowGameOver",NULL);
 }
 
+
+Player::Player(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
+:Unit(gameScene,unitID,type,walkdir,camptype)
+{
+
+}
+
 Player::~Player()
 {
 	CC_SAFE_DELETE(_curState);
+}
+
+
+Player* Player::create(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
+{
+	auto player = new Player(gameScene, unitID, type, walkdir, camptype);
+	if (player && player->init())
+	{
+		player->autorelease();
+		return player;
+	}
+	CC_SAFE_DELETE(player);
+	return nullptr;
 }
 
 void PlayerIdleState::execute()

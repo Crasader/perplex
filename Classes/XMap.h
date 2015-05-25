@@ -99,6 +99,7 @@ public:
 	}
 	void setWalkRectActive(int index, bool active) { ibWalkRectActive[index] = active; }
 	bool isWalkRectActive(int index) { return ibWalkRectActive[index]; }
+	
 	int getBuildingCount() const { return iMapBuilding.size(); }
 	std::vector<SMapBuilding> getMapBuilding() { return iMapBuilding; }
 private:

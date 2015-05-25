@@ -19,9 +19,29 @@ Fodder::Fodder()
 
 }
 
+
+Fodder::Fodder(GameScene* gameScene, int unitID, int type, int dir, int campType)
+:Unit(gameScene, unitID, type, dir, campType)
+{
+
+}
+
 Fodder::~Fodder()
 {
 	CC_SAFE_RELEASE(action1);
+}
+
+
+Fodder* Fodder::create(GameScene* gameScene, int unitID, int type, int dir, int campType)
+{
+	auto foder = new Fodder(gameScene, unitID, type, dir, campType);
+	if (foder && foder->init())
+	{
+		foder->autorelease();
+		return foder;
+	}
+	CC_SAFE_DELETE(foder);
+	return nullptr;
 }
 
 bool Fodder::init()

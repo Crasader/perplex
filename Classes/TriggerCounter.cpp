@@ -40,6 +40,7 @@ bool TriggerCounter::perform()
 	default:
 		break;
 	}
+	_eventManager->addCount(_counterID);
 	return false;
 }
 

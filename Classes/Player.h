@@ -41,8 +41,9 @@ USING_NS_CC;
 class Player : public Unit
 {
 public:
+	Player(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
 	~Player();
-    CREATE_FUNC(Player);
+	static Player* create(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
     bool init();
     virtual bool onTouchBegan(Touch *touch, Event *event);
     virtual void onTouchMoved(Touch *touch, Event *event);

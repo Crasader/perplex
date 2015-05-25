@@ -9,6 +9,7 @@ bool TriggerUnitToRect::perform()
 	{
 		return false;
 	}
+	auto p = _unit->getPosition();
 	if (_rect.containsPoint(_unit->getPosition()))
 	{
 		return true;

@@ -19,10 +19,5 @@ bool TestScene::init()
 		return false;
 	}
 
-	auto loader = AnimationLoader::getInstance();
-	auto s = loader.createAnimation("tank");
-	s->getAnimation()->play("idle");
-	s->setPosition(Vec2(100, 100));
-	addChild(s);
 	return true;
 }

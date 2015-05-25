@@ -313,7 +313,7 @@ void GameController::update(float dt, Player* player)
     {
 		b = list.at(i);
         temp =b->getPosition();
-        if(CameraExt::getInstance()->GetMapVisibleBound().containsPoint(temp))
+        if(true)
         {
             if(b->getOwner() == kPlayer)
             {
@@ -394,7 +394,7 @@ void GameController::update(float dt, Player* player)
                 break;
         }
 		auto enemyMoveRect = enemy->getMoveRect();
-		if (!CameraExt::getInstance()->GetMapVisibleBound().containsPoint(Point(enemy->getPositionX() + (enemy->getPositionX() >= 0 ? enemyMoveRect.getMinX() : enemyMoveRect.getMaxX()), enemy->getPositionY() + enemyMoveRect.getMaxY())) && enemy->getType() != kEnemyBoss)
+		if (enemy->getType() != kEnemyBoss)
         {
             //enemy went out side, kill it
             //EnemyController::erase(k);

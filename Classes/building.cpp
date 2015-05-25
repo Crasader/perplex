@@ -256,3 +256,8 @@ void Building::setDropTool(VDT dt)
 {
 	_dropToolDatas = dt;
 }
+
+bool Building::isCastoff()
+{
+	return _castoff;
+}

@@ -28,6 +28,9 @@ public:
 	int getBuildingID();
 	void setUnitFactory(VUF uf);
 	void setDropTool(VDT dt);
+	bool isActive(){ return _active; }
+	cocos2d::Rect getWalkRect() const { return _walkRect; }
+	bool isCastoff();
 private:
 	//³ö±ø
 	bool _factory;

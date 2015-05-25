@@ -49,7 +49,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("anim");
 
      // create a scene. it's an autorelease object
-     auto scene = TestScene::createScene();
+     auto scene = MainMenuScene::createScene();
  
      // run
      director->runWithScene(scene);

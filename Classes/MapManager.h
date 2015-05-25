@@ -39,22 +39,24 @@ public:
 	Size getMapSize(){ return Size(getXMapW(), getXMapH()); }
 	bool isLoadingMap() { return iLoadingMap; }
 	int getActiveMapID() { return iActiveMapID; }
-	std::shared_ptr<XMap> getActiveMap() { return iActiveMap; }
+	std::shared_ptr<XMap> getActiveMap();
+	void performMap();
+	bool isEqualF(float a, float b);
+	void moveMap(float offsetY, float moveUp);
 private:
-	 GameScene*           iGameScene;
+	 GameScene*           _gameScene;
 	 bool                 iLoadingMap;    //是否正在载入地图
 	 bool                 iLocalMap;
 	 bool                 iGetMap;
 	 int                  iRequestMapID;
 	 int                  iActiveMapID;   //当前活跃的地图ID
-	 int 				  iLastCameraY;	//上次摄像机的Y坐标
 	 int				  iImgCounts;
 	 int				  iLoadState;     //载入进度
+	 float 				  iLastCameraY;	//上次摄像机的Y坐标
 	 std::shared_ptr<XMap>               iPrepareLoadMap;//准备载入的地图大
 	 std::shared_ptr<XMap>                iActiveMap;     //当前活跃的地图
 	 Texture2D** 		  iMapImgs;		//地图图像
 	 std::string          iFileName;      //地图包名
 	 Node*				 _floor;//地板
 };
-
 #endif // __MapManager_h__

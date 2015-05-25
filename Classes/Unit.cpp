@@ -33,6 +33,9 @@
 #include "shotlogicmanager.h"
 #include "Player.h"
 #include "UnitResManager.h"
+#include "CameraExt.h"
+#include "MapManager.h"
+#include "XMap.h"
 
 bool Unit::hurt(float damage)
 {
@@ -131,7 +134,7 @@ Unit::Unit()
 	_distItemData = vector<Vec2>();
 	_dropToolData = vector<XDropTool>();
 	_unitRecycleOrder = vector<XUnitOrder>();
-	_weapons = vector<shared_ptr<Weapon>>();
+	_weapons = Vector<Weapon*>();
 }
 
 Unit::Unit(bool alive, float hp, int score)
@@ -199,7 +202,12 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	_distItemData = vector<Vec2>();
 	_dropToolData = vector<XDropTool>();
 	_unitRecycleOrder = vector<XUnitOrder>();
-	_weapons = vector<shared_ptr<Weapon>>();
+	_weapons = Vector<Weapon*>();
+}
+
+Unit::~Unit()
+{
+	_weapons.clear();
 }
 
 bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
@@ -211,6 +219,7 @@ bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int cam
 	_type = type;
 	auto unitRes = _gameScene->getUnitResManager().getUnitResFromID(type);
 	setUnitRes(unitRes);
+	_shotLogicManager = std::shared_ptr<ShotLogicManager>(new ShotLogicManager());
 	return true;
 }
 
@@ -267,33 +276,29 @@ void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
 {
 	_unitRes = aUnitRes;
 	setMotionAndDIR(0, _walkDir);
+	_maxHP = _power = _unitRes->_HP;
+	//主角
+	if (_unitRes->_ID == 0)
+	{
+		return;
+	}
+	//敌人
+	if (_gameScene->getDefficulty() >= 2)
+	{
+		_power += (_maxHP >> 1);
+	}
+	else if (_gameScene->getDefficulty() < 1)
+	{
+		_power = (_maxHP >> 1);
+	}
 }
 
 void Unit::perfrom()
 {
 	if (!_active)
 	{
-		switch (_AIType)
-		{
-		case 0://屏幕顶线
-			//#如果超出
-			_active = true;
-			break;
-		case 1://上方线
-			_active = true;
-			break;
-		case 2://中线
-			_active = true;
-			break;
-		case 3://下方线
-			_active = true;
-			break;
-		case 4://底下线
-			_active = true;
-			break;
-		default://屏幕外线（上方)
-			break;
-		}
+		activateUnit();
+		return;
 	}
 	else if (isNeedDelete())
 	{
@@ -306,6 +311,7 @@ void Unit::perfrom()
 		if ((*it)->getCastoffStage())
 		{
 			it = _weapons.erase(it);
+			CC_SAFE_RELEASE(*it);
 		}
 		else
 		{
@@ -340,7 +346,6 @@ void Unit::perfrom()
 	AI();
 	//死亡处理
 	processDie();
-
 	//移动
 	unitMove();
 }
@@ -349,11 +354,15 @@ bool Unit::isNeedDelete()
 {
 	if (_active)
 	{
-		if (getPositionX() <= -32)
+		if (getPositionX() <= -32 || getPositionX() >= _gameScene->getMapManager()->getActiveMap()->getWidth() + 32)
 		{
 			return true;
 		}
-		return true;
+		if (getPositionY() <= (_gameScene->getCamera()->getY() - _gameScene->getSceneHeight()) ||
+			getPositionY() >= (_gameScene->getCamera()->getY() + _gameScene->getSceneHeight() + 70))
+		{
+			return true;
+		}
 	}
 	return false;
 }
@@ -381,7 +390,7 @@ void Unit::analyzeOrder()
 		_orderDelay--;
 		return;
 	}
-	if (_currentOrderIndex >= _orderCount)
+	if (_currentOrderIndex >= (int)_unitOrder.size())
 	{
 		_orderType = 1;
 		_currentOrderIndex = 0;
@@ -399,9 +408,12 @@ void Unit::analyzeOrder()
 	//#对准Player
 	if (IntWDir == WALK_DIR_COUNT)
 	{
-		if (_player != nullptr)//面向player
+		if (_gameScene->getPlayer() != nullptr)//面向player
 		{
-
+			//find angle difference
+			auto angleDeg = calculeAngle();
+			setRotation(angleDeg + getRotation());
+			IntWDir = calDirction(angleDeg);
 		}
 		else
 		{
@@ -484,14 +496,16 @@ void Unit::analyzeRecycleOrder()
 		motion = 1;
 	}
 	_shotPosIndex = 0;
-	auto wdir = 0;
+	auto wdir = D_S_DOWN;
 	auto IntWDir = _unitOrder[_currentOrderIndex].Direct;
 	//#对准Player
 	if (IntWDir == WALK_DIR_COUNT)
 	{
-		if (nullptr != nullptr)//面向player
+		if (_gameScene->getPlayer() != nullptr)//面向player
 		{
-
+			auto angleDeg = calculeAngle();
+			setRotation(angleDeg + getRotation());
+			IntWDir = calDirction(angleDeg);
 		}
 		else
 		{
@@ -506,41 +520,41 @@ void Unit::analyzeRecycleOrder()
 		IntWDir = 0;
 	}
 
-	wdir = IntWDir;
+	wdir = (UnitSDIR)IntWDir;
 	setMotionAndDIR(motion, wdir);
 	switch (IntWDir)
 	{
 	case D_S_DOWN:
 		_moveX = 0;
-		_moveY = -_unitOrder[_currentOrderIndex].Speed;
+		_moveY = -_unitRecycleOrder[_currentOrderIndex].Speed;
 		break;
 	case D_S_LEFT_DOWN:
-		_moveX = -_unitOrder[_currentOrderIndex].Speed;
-		_moveY = -_unitOrder[_currentOrderIndex].Speed;
+		_moveX = -_unitRecycleOrder[_currentOrderIndex].Speed;
+		_moveY = -_unitRecycleOrder[_currentOrderIndex].Speed;
 		break;
 	case D_S_LEFT:
-		_moveX = -_unitOrder[_currentOrderIndex].Speed;
+		_moveX = -_unitRecycleOrder[_currentOrderIndex].Speed;
 		_moveY = 0;
 		break;
 	case D_S_LEFT_UP:
-		_moveX = -_unitOrder[_currentOrderIndex].Speed;
-		_moveY = _unitOrder[_currentOrderIndex].Speed;
+		_moveX = -_unitRecycleOrder[_currentOrderIndex].Speed;
+		_moveY = _unitRecycleOrder[_currentOrderIndex].Speed;
 		break;
 	case D_S_UP:
 		_moveX = 0;
-		_moveY = _unitOrder[_currentOrderIndex].Speed;
+		_moveY = _unitRecycleOrder[_currentOrderIndex].Speed;
 		break;
 	case D_S_RIGHT_UP:
-		_moveX = _unitOrder[_currentOrderIndex].Speed;
-		_moveY = _unitOrder[_currentOrderIndex].Speed;
+		_moveX = _unitRecycleOrder[_currentOrderIndex].Speed;
+		_moveY = _unitRecycleOrder[_currentOrderIndex].Speed;
 		break;
 	case D_S_RIGHT:
-		_moveX = _unitOrder[_currentOrderIndex].Speed;
+		_moveX = _unitRecycleOrder[_currentOrderIndex].Speed;
 		_moveY = 0;
 		break;
 	case D_S_RIGHT_DOWN:
-		_moveX = _unitOrder[_currentOrderIndex].Speed;
-		_moveY = -_unitOrder[_currentOrderIndex].Speed;
+		_moveX = _unitRecycleOrder[_currentOrderIndex].Speed;
+		_moveY = -_unitRecycleOrder[_currentOrderIndex].Speed;
 		break;
 	}
 	//射击
@@ -561,15 +575,19 @@ void Unit::setMotionAndDIR(int motion, int wdir)
 		_walkDir = wdir;
 		if (_motion == 1)//走路
 		{
-			
+			/*_curMotion = _motions[0];*/
 		}
 		else if (_motion == 0)
 		{
-
+			/*_curMotion = _motions[0];*/
+			_moveY = 0;
+			_moveX = 0;;
 		}
 		else
 		{
-
+			_curMotion = _motions[0];
+			_moveY = 0;
+			_moveX = 0;
 		}
 	}
 }
@@ -675,10 +693,10 @@ bool Unit::enableMove(int newX, int newY)
 	auto t = tempRect.getMinY();
 	auto r = tempRect.getMaxX();
 	auto b = tempRect.getMaxY();
-	//#
+	enable = _gameScene->getUnitCollisionToMap(tempRect);
 	if (enable)
 	{
-
+		enable = _gameScene->getUnitCollision(tempRect);
 	}
 	return enable;
 }
@@ -738,5 +756,103 @@ int Unit::beAttack(const cocos2d::Rect rect, int power)
 int Unit::getShotDir()
 {
 	return _walkDir;
+}
+
+int Unit::calDirction(float angle)
+{
+	angle += 23;
+	if (angle < 0)
+	{
+		angle += 360;
+	}
+
+	return angle / 45;
+}
+
+float Unit::calculeAngle()
+{
+	auto angleRad = (getPosition() - _gameScene->getPlayer()->getPosition()).getAngle();
+	auto angleDeg = CC_RADIANS_TO_DEGREES(-1 * angleRad);
+	return angleDeg;
+}
+
+void Unit::setUnitOrder(vector<XUnitOrder> aOrder)
+{
+	_unitOrder = aOrder;
+}
+
+bool Unit::isSceneTop()
+{
+	return (getPositionY() <= _gameScene->getCamera()->getY() + _gameScene->getSceneHeight() + 24);
+}
+
+bool Unit::isSceneButton()
+{
+	return (getPositionY() <= _gameScene->getCamera()->getY() - 12);
+}
+
+bool Unit::isSceneCenter()
+{
+	return (getPositionY() <= _gameScene->getCamera()->getY() + _gameScene->getSceneHeight() / 2);
+}
+
+bool Unit::isSceneUnder()
+{
+	return (getPositionY() <= _gameScene->getCamera()->getY() + _gameScene->getSceneHeight() / 4);
+}
+
+bool Unit::isSceneAbove()
+{
+	return ((getPositionY() <= _gameScene->getCamera()->getY() + 3 * _gameScene->getSceneHeight() / 4));
+}
+
+bool Unit::isSceneTopAbove()
+{
+	return (getPositionY() <= _gameScene->getCamera()->getY() +  3 * _gameScene->getSceneHeight() / 2);
+}
+
+void Unit::activateUnit()
+{
+	switch (_AIType)
+	{
+	case 0://屏幕顶线
+		//#如果超出
+		if (isSceneTop())
+		{
+			_active = true;
+		}
+		break;
+	case 1://上方线
+		if (isSceneAbove())
+		{
+			_active = true;
+		}
+		break;
+	case 2://中线
+		if (isSceneCenter())
+		{
+			_active = true;
+		}
+		break;
+	case 3://下方线
+		if (isSceneUnder())
+		{
+			_active = true;
+		}
+		break;
+	case 4://底下线
+		if (isSceneButton())
+		{
+			_active = true;
+		}
+		break;
+	default://屏幕外线（上方)
+		if (isSceneTopAbove())
+		{
+			_active = true;
+		}
+		break;
+	}
+	return;
 }
 

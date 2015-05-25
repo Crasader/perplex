@@ -282,8 +282,8 @@ void XMap::AnalyzeUnitDataL()
 						dis >> tempx;
 						dis >> tempy;
 					
-						iMapUnit[i].iDistItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
-						iMapUnit[i].iDistItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
+						iMapUnit[i].iDistItemData[k].x = tempx;
+						iMapUnit[i].iDistItemData[k].y = tempy;
 					}
 				}
 				//移动时间概率
@@ -298,8 +298,8 @@ void XMap::AnalyzeUnitDataL()
 						dis >> tempx;
 						dis >> tempy;
 					
-						iMapUnit[i].iMoveItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
-						iMapUnit[i].iMoveItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
+						iMapUnit[i].iMoveItemData[k].x = tempx;
+						iMapUnit[i].iMoveItemData[k].y = tempy;
 					}
 				}
 			}
@@ -316,8 +316,8 @@ void XMap::AnalyzeUnitDataL()
 						int tempx, tempy;
 						dis >> tempx >> tempy;
 						
-						iMapUnit[i].iMoveItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
-						iMapUnit[i].iMoveItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
+						iMapUnit[i].iMoveItemData[k].x = tempx;
+						iMapUnit[i].iMoveItemData[k].y = tempy;
 					}
 				}
 			}
@@ -336,8 +336,8 @@ void XMap::AnalyzeUnitDataL()
 					dis >> tempx;
 					dis >> tempy;
 					
-					iMapUnit[i].iFireItemData[k].x = tempx * CC_CONTENT_SCALE_FACTOR();
-					iMapUnit[i].iFireItemData[k].y = tempy * CC_CONTENT_SCALE_FACTOR();
+					iMapUnit[i].iFireItemData[k].x = tempx;
+					iMapUnit[i].iFireItemData[k].y = tempy;
 				}
 			}
 			//掉落道具
@@ -432,6 +432,7 @@ void XMap::init(int aID)
 XMap::~XMap()
 {
 	Release();
+	log("%s", __FUNCTION__);
 }
 
 XMap::XMap(int aID)
@@ -447,7 +448,7 @@ XMap::XMap(int aID)
 , iMapUnit()
 , iMapTop()
 {
-
+	log("%s", __FUNCTION__);
 }
 
 XMap::XMap()
