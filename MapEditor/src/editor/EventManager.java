@@ -120,7 +120,8 @@ public class EventManager {
 
 	public void saveMobileData(String name) throws Exception {
 		try {
-			File f = new File(XUtil.getDefPropStr("EventFilePath") + "\\" + name + "_event_mobile.dat");
+			String n = name.toLowerCase();
+			File f = new File(XUtil.getDefPropStr("MobilePath") + "\\" + n + "_event_mobile.dat");
 			DataOutputStream out =
 				new DataOutputStream(
 				new BufferedOutputStream(

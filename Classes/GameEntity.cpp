@@ -84,7 +84,7 @@ void GameEntity::UseOutlineEffect(Sprite3D* sprite, float width, Color3B color)
 }
 
 
-void GameEntity::perfrom()
+void GameEntity::perfrom( float dt )
 {
 }
 

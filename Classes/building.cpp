@@ -48,10 +48,10 @@ int Building::beAttack(const cocos2d::Rect &rect, int hp)
 				{
 					_dieExplode.resize(_buildingRes->_exploreCount);
 				}
-				for (auto &a : _dieExplode)
-				{
-					a = false;
-				}
+// 				for (auto &a : _dieExplode)
+// 				{
+// 					a = false;
+// 				}
 				if (_flipH)
 				{
 
@@ -121,20 +121,20 @@ void Building::processDie()
 		return;
 	}
 	auto explodeOK = true;
-	for (auto &a : _dieExplode)
-	{
-		_dieTick++;
-		if (!a)
-		{
-			a = true;
-		}
-
-		//#创建爆炸
-		if (!a)
-		{
-			explodeOK = false;
-		}
-	}
+// 	for (auto &a : _dieExplode)
+// 	{
+// 		_dieTick++;
+// 		if (!a)
+// 		{
+// 			a = true;
+// 		}
+// 
+// 		//#创建爆炸
+// 		if (!a)
+// 		{
+// 			explodeOK = false;
+// 		}
+// 	}
 	//爆炸完成
 	if (explodeOK)
 	{

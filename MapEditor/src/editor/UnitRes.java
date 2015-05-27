@@ -827,7 +827,7 @@ class URManager {
 	}
 
 	public void saveMobileData(String name) throws Exception {
-		File f = new File(XUtil.getDefPropStr("URFilePath") + "\\UnitRes_Mobile.dat");
+		File f = new File(XUtil.getDefPropStr("MobilePath") + "\\unitres_mobile.dat");
 		DataOutputStream out =
 			new DataOutputStream(
 			new BufferedOutputStream(

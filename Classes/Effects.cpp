@@ -27,8 +27,8 @@
 Node* EffectManager::_effectLayer = nullptr;
 Vector<SmallExplosion*> EffectManager::_smallExplPool;
 Vector<BigExplosion*> EffectManager::_bigExplPool;
-Vector<BulletExplosionTwo*> EffectManager::_BulletTwoExplPool;
-Vector<TestExplosion*> EffectManager::_testExpPool;
+// Vector<BulletExplosionTwo*> EffectManager::_BulletTwoExplPool;
+// Vector<TestExplosion*> EffectManager::_testExpPool;
 
 void EffectManager::createExplosion(Vec2 pos)
 {
@@ -85,25 +85,25 @@ void EffectManager::setLayer(Node *layer)
 
 void EffectManager::createBulletTwoExplosion(Vec2 pos)
 {
-	if (!_effectLayer)
-	{
-		return;
-	}
+// 	if (!_effectLayer)
+// 	{
+// 		return;
+// 	}
 
-	BulletExplosionTwo* explosion = nullptr;
-
-	if (!_BulletTwoExplPool.empty())
-	{
-		explosion = _BulletTwoExplPool.back();
-		_BulletTwoExplPool.popBack();
-	}
-	else
-	{
-		explosion = BulletExplosionTwo::create();
-		explosion->retain();
-	}
-
-	explosion->createExplosion(_effectLayer, pos);
+// 	BulletExplosionTwo* explosion = nullptr;
+// 
+// 	if (!_BulletTwoExplPool.empty())
+// 	{
+// 		explosion = _BulletTwoExplPool.back();
+// 		_BulletTwoExplPool.popBack();
+// 	}
+// 	else
+// 	{
+// 		explosion = BulletExplosionTwo::create();
+// 		explosion->retain();
+// 	}
+// 
+// 	explosion->createExplosion(_effectLayer, pos);
 }
 
 void EffectManager::createTestExplosion(Vec2 pos)
@@ -112,19 +112,19 @@ void EffectManager::createTestExplosion(Vec2 pos)
 	{
 		return;
 	}
-
-	TestExplosion* explosion = nullptr;
-
-	if (!_testExpPool.empty())
-	{
-		explosion = _testExpPool.back();
-		_testExpPool.popBack();
-	}
-	else
-	{
-		explosion = TestExplosion::create();
-		explosion->retain();
-	}
-
-	explosion->createExplosion(_effectLayer, pos);
+// 
+// 	TestExplosion* explosion = nullptr;
+// 
+// 	if (!_testExpPool.empty())
+// 	{
+// 		explosion = _testExpPool.back();
+// 		_testExpPool.popBack();
+// 	}
+// 	else
+// 	{
+// 		explosion = TestExplosion::create();
+// 		explosion->retain();
+// 	}
+// 
+// 	explosion->createExplosion(_effectLayer, pos);
 }

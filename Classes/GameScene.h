@@ -95,14 +95,14 @@ private:
 	bool _playerReckey;
 	bool _playerInCamara;
 	bool _playerDie;
-	byte _pauseTick;
-	byte _gameEndTick;//通关延迟
-	byte _gameOverPerfomTick;
-	byte _gameOverStepTick;
-	byte _gameOverColorDeep;
-	byte _startTime;
-	byte _psTime;
-	byte _totalTime;
+	short _pauseTick;
+	short _gameEndTick;//通关延迟
+	short _gameOverPerfomTick;
+	short _gameOverStepTick;
+	short _gameOverColorDeep;
+	short _startTime;
+	short _psTime;
+	short _totalTime;
 
 	int _state;
 	int _nextState;

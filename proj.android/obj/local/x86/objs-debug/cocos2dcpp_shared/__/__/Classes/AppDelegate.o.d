@@ -355,10 +355,10 @@ obj/local/x86/objs-debug/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/SimpleAudioEngine.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/Export.h \
- jni/../../Classes/HelloWorldScene.h jni/../../Classes/LoadingScene.h \
  jni/../../Classes/MainMenuScene.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCEventListenerController.h \
- D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h \
+ jni/../../Classes/TestScene.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -1072,12 +1072,10 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../..
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/Export.h:
 
-jni/../../Classes/HelloWorldScene.h:
-
-jni/../../Classes/LoadingScene.h:
-
 jni/../../Classes/MainMenuScene.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCEventListenerController.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h:
+
+jni/../../Classes/TestScene.h:

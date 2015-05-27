@@ -27,7 +27,7 @@ public:
 	int getPower() { return _power; }
 	int getBulletLogicType() { return _bulletLogicType; }
 	int getFireDelay() { return _fireDelay; }
-	byte getSmokeDelay() { return _smokeDelay; }
+	short getSmokeDelay() { return _smokeDelay; }
 	int getSpeed() { return _speed; }
 	Rect getWeaponHitRect() { return _weaponHitRect; }
 	Vec2 getFlameAnimRange(int direction) { return _flameAnimRange[direction]; }
@@ -50,7 +50,7 @@ private:
 	int		_power;//子弹威力
 	int		_bulletLogicType;//子弹的逻辑类型
 	int		_fireDelay;//发射的延迟
-	byte	_smokeDelay;//产生烟雾延迟
+	short	_smokeDelay;//产生烟雾延迟
 	Rect	_weaponHitRect;//子弹攻击矩形
 	int		_speed;//子弹速度
 

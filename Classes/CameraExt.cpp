@@ -2,7 +2,7 @@
 
 CameraExt::CameraExt(GameScene* gameScene, std::shared_ptr<MapManager> mapManager)
 :_speedX(0)
-, _speedY(10)
+, _speedY(100)
 ,_gameScene(gameScene)
 , _mapManager(mapManager)
 , _x(0)

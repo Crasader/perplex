@@ -59,7 +59,7 @@ public:
 	void setCastoffStage(int aCastoffStage) { _castoffStage = aCastoffStage; }
 public:
     static void UseOutlineEffect(Sprite3D* sprite, float width, Color3B color);
-	virtual void perfrom();
+	virtual void perfrom(float dt);
 protected:
 	bool _castoff;
 	int _castoffStage;

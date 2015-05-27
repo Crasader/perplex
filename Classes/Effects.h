@@ -40,8 +40,8 @@ public:
     static void setLayer(Node* layer);
     static Vector<SmallExplosion*> _smallExplPool;
 	static Vector<BigExplosion*> _bigExplPool;
-	static Vector<BulletExplosionTwo*> _BulletTwoExplPool;
-	static Vector<TestExplosion*> _testExpPool;
+// 	static Vector<BulletExplosionTwo*> _BulletTwoExplPool;
+// 	static Vector<TestExplosion*> _testExpPool;
 protected:
     static Node* _effectLayer;
 

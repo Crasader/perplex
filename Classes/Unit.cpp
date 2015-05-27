@@ -293,8 +293,9 @@ void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
 	}
 }
 
-void Unit::perfrom()
+void Unit::perfrom( float dt )
 {
+	log("enter unit::perform...%d", _unitID);
 	if (!_active)
 	{
 		activateUnit();
@@ -345,9 +346,10 @@ void Unit::perfrom()
 	//人工智能
 	AI();
 	//死亡处理
-	processDie();
+/*	processDie();*/
 	//移动
-	unitMove();
+	unitMove(dt);
+	log("exit unit::perfrom...%d",_unitID);
 }
 
 bool Unit::isNeedDelete()
@@ -497,7 +499,11 @@ void Unit::analyzeRecycleOrder()
 	}
 	_shotPosIndex = 0;
 	auto wdir = D_S_DOWN;
-	auto IntWDir = _unitOrder[_currentOrderIndex].Direct;
+	auto IntWDir = _unitRecycleOrder[_currentOrderIndex].Direct;
+	if (IntWDir < 0)
+	{
+		IntWDir = 0;
+	}
 	//#对准Player
 	if (IntWDir == WALK_DIR_COUNT)
 	{
@@ -589,6 +595,7 @@ void Unit::setMotionAndDIR(int motion, int wdir)
 			_moveY = 0;
 			_moveX = 0;
 		}
+		this->setRotation(wdir * 45);
 	}
 }
 
@@ -672,10 +679,11 @@ void Unit::processTool()
 	}
 }
 
-void Unit::unitMove()
+void Unit::unitMove( float dt )
 {
-	auto newX = getPositionX() + _moveX;
-	auto newY = getPositionY() + _moveY;
+	auto newX = getPositionX() + _moveX * dt;
+	auto newY = getPositionY() + _moveY * dt;
+	log("Unit::unitMove x,y:%f,%f", newX, newY);
 
 	_endableMove = enableMove(newX, newY);
 	if (_endableMove)

@@ -1934,8 +1934,13 @@ abstract class SpriteManagerPanel
 	}
 
 	public void saveMobileData(String name, Object[] resManagers) throws Exception {
-		
-		File f = new File(getFilePath() + "\\" + name + "_" + getClassName() + "_Mobile.dat");
+		String n = name.toLowerCase();
+		String cn = getClassName().toLowerCase();
+		String fp = XUtil.getDefPropStr("MobilePath");
+		if (cn.equals("tree") || cn.equals("wa")) {
+			fp = getFilePath();
+		}
+		File f = new File(fp  + "\\" + n + "_" + cn + "_mobile.dat");
 		DataOutputStream out =
 			new DataOutputStream(
 			new BufferedOutputStream(

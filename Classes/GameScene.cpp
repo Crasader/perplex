@@ -136,6 +136,19 @@ bool GameScene::init()
 	addChild(d);
 #endif // 
 
+	auto keyListner = EventListenerKeyboard::create();
+	keyListner->onKeyReleased = [](EventKeyboard::KeyCode keyCode, Event* event){
+		log("keyListner...%d", keyCode);
+		switch (keyCode)
+		{
+		case EventKeyboard::KeyCode::KEY_ESCAPE:
+			Director::getInstance()->end();
+			break;
+		default:
+			break;
+		}
+	};
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListner, this);
 	//
 	NotificationCenter::getInstance()->destroyInstance();
 	NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(GameScene::ShowGameOver), "ShowGameOver", nullptr);
@@ -529,6 +542,7 @@ void GameScene::deleteCastoffPoint()
 		auto building = *iter;
 		if (building->isCastoff())
 		{
+			(*iter)->removeFromParent();
 			iter = UnitManager::_buildings.erase(iter);
 		}
 		else
@@ -542,6 +556,8 @@ void GameScene::deleteCastoffPoint()
 		auto e = *iter;
 		if (e->isCastoff())
 		{
+			log("delete %d", e->getUnitID());
+			(*iter)->removeFromParent();
 			iter = UnitManager::_enemies.erase(iter);
 		}
 		else
@@ -555,6 +571,7 @@ void GameScene::deleteCastoffPoint()
 		auto e = *iter;
 		if (e->isCastoff())
 		{
+			(*iter)->removeFromParent();
 			iter = UnitManager::_allys.erase(iter);
 		}
 		else
@@ -568,6 +585,7 @@ void GameScene::deleteCastoffPoint()
 		auto e = *iter;
 		if (e->isCastoff())
 		{
+			(*iter)->removeFromParent();
 			iter = UnitManager::_tools.erase(iter);
 		}
 		else
@@ -579,6 +597,8 @@ void GameScene::deleteCastoffPoint()
 
 void GameScene::gamePlayingPerform(float dt)
 {
+	log("enter GameScene::gamePlayingPerform....");
+
 	//#处理事件
 	_eventManager->doPeriodicTask();
 	if (_eventLock)
@@ -597,16 +617,17 @@ void GameScene::gamePlayingPerform(float dt)
 		if ((*iter)->getCastoffStage() > 1)
 		{
 			(*iter)->removeFromParent();
+			log("delete sprite...");
 			iter = UnitManager::_sprites.erase(iter);
 		}
 		else
 		{
-			(*iter)->perfrom();
+			(*iter)->perfrom(dt);
 			++iter;
 		}
 	}
 	//物体碰撞处理
-	spriteCollision();
+	/*spriteCollision();*/
 	//删除索引表的废弃索引值
 	deleteCastoffPoint();
 	//将Sprite排序
@@ -700,17 +721,14 @@ void GameScene::refreshMap(float offY, bool move)
 
 void GameScene::startGameState()
 {
-	throw std::exception("The method or operation is not implemented.");
 }
 
 void GameScene::startGameEnd()
 {
-	throw std::exception("The method or operation is not implemented.");
 }
 
 void GameScene::startGameOver()
 {
-	throw std::exception("The method or operation is not implemented.");
 }
 
 int GameScene::getMapWidth()

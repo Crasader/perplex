@@ -10,6 +10,8 @@ import javax.swing.event.*;
 import javax.swing.plaf.metal.*;
 import javax.imageio.ImageIO;
 
+import sun.misc.OSEnvironment;
+
 public class MainFrame
 	extends JFrame {
 	public static Font DEF_FONT = new Font("Dialog", Font.PLAIN, 12);

@@ -1,3 +1,5 @@
-E:
-cd E:\source\EarthWarrior3D-master\EarthWarrior3D-master
-cocos run -p android --ap 20
+@echo off
+set TARGET=%~dp0
+%TARGET%\proj.android\build_native.py run
+rem set TARGET=%COCOS_CONSOLE_ROOT%
+rem %TARGET%\cocos.py compile -p android

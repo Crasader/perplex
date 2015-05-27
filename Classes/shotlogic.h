@@ -17,8 +17,8 @@ public:
 	bool isEnd();
 protected:
 	bool _end;
-	byte _firetick;
-	byte _performTick;
+	short _firetick;
+	short _performTick;
 	int _posIndex;
 	int _weaponResID;
 	int _speed;
@@ -37,7 +37,7 @@ public:
 
 	void perform();
 protected:
-	byte _delay;
+	short _delay;
 	int _shotDirection;
 	float _fireAngle; 
 };
@@ -55,7 +55,7 @@ public:
 
 	void perform();
 private:
-	byte _delay;
+	short _delay;
 	int _fireCount;
 	int _shotCount;
 	Unit* _goalUnit;
@@ -87,7 +87,7 @@ public:
 	void perform();
 private:
 	int _fireCount;
-	byte _delay;
+	short _delay;
 };
 
 
@@ -180,7 +180,7 @@ public:
 	~ShotLogicQ();
 	void perform();
 private:
-	byte _delay;
+	short _delay;
 	int _fireCount;
 	int _shotCount;
 	Unit* _goalUnit;

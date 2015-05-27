@@ -111,7 +111,7 @@ public:
 	void setMoveRect(Rect aMoveRect) { _moveRect = aMoveRect; }
 	std::shared_ptr<UnitRes> getUnitRes() const { return _unitRes; }
 	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes);
-	void perfrom();
+	void perfrom(float dt);
 
 	bool isNeedDelete();
 	void AI();
@@ -121,7 +121,7 @@ public:
 	void fireRequire(int logicType, int weaponResID);
 	void processDie();
 	void processTool();
-	void unitMove();
+	void unitMove(float dt);
 	bool enableMove(int newX, int newY);
 	int getCastoffStage() { return _castoffStage; }
 	void setEventUnit(bool eventUnit);

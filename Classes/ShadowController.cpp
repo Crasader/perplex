@@ -19,12 +19,12 @@ void ShadowController::init(Node* layer)
 
 void ShadowController::createShadow(GameEntity* target, Point offset)
 {
-	CC_ASSERT(_shadowLayer);
-	CC_ASSERT(target);
-	auto shadow = ShadowSprite::create(target);
-	shadow->setOffset(offset);
-	_shadows.pushBack(shadow);
-	_shadowLayer->addChild(shadow, shadow->getType());
+// 	CC_ASSERT(_shadowLayer);
+// 	CC_ASSERT(target);
+// 	auto shadow = ShadowSprite::create(target);
+// 	shadow->setOffset(offset);
+// 	_shadows.pushBack(shadow);
+// 	_shadowLayer->addChild(shadow, shadow->getType());
 }
 
 void ShadowController::erase(GameEntity* target)
@@ -71,87 +71,15 @@ void ShadowController::clean()
 	}
 }
 
-
-bool ShadowSprite::initWithTexture(Texture2D *texture, const Rect& rect, bool rotated)
-{
-	CC_ASSERT(_target);
-	if (Sprite::initWithTexture(texture, rect, rotated))
-	{
-		_offset = Point(20, -20);
-		return true;
-	}
-	return false;
-}
-
-ShadowSprite* ShadowSprite::createWithTexture(Texture2D *texture, const Rect& rect, bool rotated /*= false*/)
-{
-	auto ret = new ShadowSprite();
-	if (ret && ret->initWithTexture(texture, rect, rotated))
-	{
-		ret->autorelease();
-		return ret;
-	}
-	else
-	{
-		CC_SAFE_DELETE(ret);
-		return nullptr;
-	}
-}
-
-ShadowSprite* ShadowSprite::create(GameEntity* target)
-{
-	auto ret = new ShadowSprite();
-	if (ret && ret->init(target))
-	{
-		ret->autorelease();
-		return ret;
-	}
-	else
-	{
-		CC_SAFE_DELETE(ret);
-		return nullptr;
-	}
-}
-
 void ShadowSprite::updateShadow(float dt)
 {
+	if (_target == nullptr)
+	{
+		return;
+	}
 	this->setVisible(true);
 	this->setPosition(_target->getPosition() + _offset);
 	this->setRotation(_target->getRotation());
-}
-
-bool ShadowSprite::init(GameEntity* target)
-{
-	CC_ASSERT(target);
-	CC_SAFE_RETAIN(target);
-	_target = target;
-	auto s = dynamic_cast<Sprite*>(_target->getModel());
-	if (initWithTexture(s->getTexture(), s->getTextureRect(), s->isTextureRectRotated()))
-	{
-			this->setColor(Color3B::BLACK);
-			this->setOpacity(160);
-			this->setVisible(false);
-			this->setPosition(target->getPosition() + _offset);
-			if (_target->getShadowType() == kShadowLand)
-			{
-				_type = kZOrderLandShadow;
-			}
-			else if (_target->getShadowType() == kShadowWater)
-			{
-			}
-			else if (_target->getShadowType() == kShadowSky)
-			{
-				_type = kZOrderSkyShadow;
-				this->setScale(0.5f);
-			}
-		return true;
-	}
-	return false;
-}
-
-ShadowSprite::~ShadowSprite()
-{
-	CC_SAFE_RELEASE(_target);
 }
 
 int ShadowSprite::getType()
@@ -159,7 +87,19 @@ int ShadowSprite::getType()
 	return _type;
 }
 
-bool ShadowSprite::equal(const GameEntity* rl)
+bool ShadowSprite::equal(const Node* rl)
 {
 	return _target == rl;
+}
+
+void ShadowSprite::setShadowData(cocostudio::Armature* s, Node* target)
+{
+	CC_ASSERT(s != nullptr && target != nullptr);
+	_model = s;
+	s->setColor(Color3B::BLACK);
+	s->setOpacity(127);
+	s->setScale(0.75);
+	_target = target;
+	addChild(_model);
+	updateShadow(0);
 }

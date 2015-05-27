@@ -131,7 +131,8 @@ public class MapInfo {
 	}
 	
 	public void saveMobileData() throws Exception {
-		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + name + "_mapinfo_mobile.dat");
+		String n = name.toLowerCase();
+		File f = new File(XUtil.getDefPropStr("MobilePath") + "\\" + n + "_mapinfo_mobile.dat");
 		DataOutputStream out = 
 				  new DataOutputStream(
 						new BufferedOutputStream(

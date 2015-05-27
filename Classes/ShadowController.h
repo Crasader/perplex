@@ -3,31 +3,40 @@
 
 #include "cocos2d.h"
 #include <unordered_map>
+#include "cocostudio\CCArmature.h"
 
 USING_NS_CC;
 using namespace std;
 
 class GameEntity;
 
-class ShadowSprite : public Sprite
+class IShadow
 {
 public:
-	virtual ~ShadowSprite();
-	static ShadowSprite* create(GameEntity* target);
-	virtual bool init(GameEntity* target);
-	static ShadowSprite* createWithTexture(Texture2D *texture, const Rect& rect, bool rotated = false);
-	virtual bool initWithTexture(Texture2D *texture, const Rect& rect, bool rotated);
+	virtual ~IShadow(){}
+	virtual void updateShadow(float dt) = 0;
+private:
 
+};
+
+class ShadowSprite : public Node, public IShadow
+{
+public:
+	ShadowSprite() :_offset(50, 50), _type(0), _target(nullptr), _model(nullptr){}
+	CREATE_FUNC(ShadowSprite);
 	void setOffset(Point p) { _offset = p; }
 	Point getOffset() { return _offset; }
 	void updateShadow(float dt);
 	int getType();
-	GameEntity* getTarget() { return _target; }
-	bool equal(const GameEntity* rl);
+	Node* getTarget() { return _target; }
+	bool equal(const Node* rl);
+	void setTarget(Node* t){ _target = t; }
+	void setShadowData(cocostudio::Armature* s, Node* target);
 private:
-	GameEntity* _target;
 	Point _offset;
 	int _type;
+	Node* _target;
+	Node* _model;
 };
 
 class ShadowController

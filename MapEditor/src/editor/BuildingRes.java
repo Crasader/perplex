@@ -551,7 +551,7 @@ class BRManager {
 	}
 
 	public void saveMobileData(String name) throws Exception {
-		File f = new File(XUtil.getDefPropStr("BRFilePath") + "\\BuildingRes_Mobile.dat");
+		File f = new File(XUtil.getDefPropStr("MobilePath") + "\\buildingres_mobile.dat");
 		DataOutputStream out =
 			new DataOutputStream(
 			new BufferedOutputStream(

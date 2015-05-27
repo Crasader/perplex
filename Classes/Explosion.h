@@ -55,41 +55,41 @@ private:
 
 };
 
-class TestExplosion : public cocos2d::Node
-{
-public:
-	CREATE_FUNC(TestExplosion);
-	bool init();
-	void createExplosion(Node* _effectLayer, cocos2d::Vec2 pos);
-private:
-	void recycle(float dt);
-	cocos2d::ParticleSystemQuad* part1;
-};
-
-class BulletExplosion : public cocos2d::Sprite
-{
-public:
-    CREATE_FUNC(BulletExplosion);
-    bool init();
-    virtual void showExplosion(cocos2d::Vec2 point);
-    virtual void explosionFinished(Ref* obj);
-};
-
-class BulletExplosionTwo : public BulletExplosion
-{
-public:
-	BulletExplosionTwo(){};
-	~BulletExplosionTwo(){ CC_SAFE_RELEASE(_action); };
-	virtual void showExplosion(float dt);
-
-	virtual void explosionFinished(Ref* obj);
-
-	virtual bool init(void);
-
-	void createExplosion(Node* _effectLayer, cocos2d::Vec2 pos);
-	CREATE_FUNC(BulletExplosionTwo);
-protected:
-	cocos2d::ActionInterval* _action;
-};
+// class TestExplosion : public cocos2d::Node
+// {
+// public:
+// 	CREATE_FUNC(TestExplosion);
+// 	bool init();
+// 	void createExplosion(Node* _effectLayer, cocos2d::Vec2 pos);
+// private:
+// 	void recycle(float dt);
+// 	cocos2d::ParticleSystemQuad* part1;
+// };
+// 
+// class BulletExplosion : public cocos2d::Sprite
+// {
+// public:
+//     CREATE_FUNC(BulletExplosion);
+//     bool init();
+//     virtual void showExplosion(cocos2d::Vec2 point);
+//     virtual void explosionFinished(Ref* obj);
+// };
+// 
+// class BulletExplosionTwo : public BulletExplosion
+// {
+// public:
+// 	BulletExplosionTwo(){};
+// 	~BulletExplosionTwo(){ CC_SAFE_RELEASE(_action); };
+// 	virtual void showExplosion(float dt);
+// 
+// 	virtual void explosionFinished(Ref* obj);
+// 
+// 	virtual bool init(void);
+// 
+// 	void createExplosion(Node* _effectLayer, cocos2d::Vec2 pos);
+// 	CREATE_FUNC(BulletExplosionTwo);
+// protected:
+// 	cocos2d::ActionInterval* _action;
+// };
 
 #endif /* defined(__Moon3d__Explosion__) */

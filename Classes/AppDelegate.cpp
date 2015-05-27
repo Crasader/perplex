@@ -54,6 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
      // run
      director->runWithScene(scene);
 
+	 log("start AppDelegate....");
     return true;
 }
 

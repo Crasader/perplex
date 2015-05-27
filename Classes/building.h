@@ -37,8 +37,8 @@ private:
 	bool _flipH;
 	bool _enableHarm;// «∑Òƒ‹πª±ª…À∫¶
 	bool _active;
-	byte _unitFactoryTick;
-	byte _dieTick;
+	short _unitFactoryTick;
+	short _dieTick;
 	int _buildingID;
 	int _unitFactoryIndex;
 	int _middleX;

@@ -323,32 +323,32 @@ void Boss::_next()
 
 void Boss::_dash()
 {
-    int neg = (CCRANDOM_0_1()>0.5)? -1: 1;
-    
-    auto array = PointArray::create(6);
-    
-    array->addControlPoint(Vec2(0,0));
-    array->addControlPoint(Vec2(80*neg,-300));
-    array->addControlPoint(Vec2(500*neg,-900));
-    array->addControlPoint(Vec2(700*neg,-600));
-    array->addControlPoint(Vec2(500*neg,400));
-    array->addControlPoint(Vec2(0,0));
-    
-    auto action = CardinalSplineBy::create(5.5, array,0);
-    runAction(Sequence::create(
-                               DelayTime::create(0.5),
-                               EaseSineOut::create(action)
-                               ,nullptr)
-              );
-    runAction(
-              Sequence::create(
-                               EaseSineInOut::create(RotateBy::create(0.5, Vec3(0,30*neg,0))),
-                               RotateBy::create(2.5, Vec3(-30,45*neg,-90*neg)),
-                                RotateBy::create(1, Vec3(0,-35*neg,-200*neg)),
-                               EaseSineInOut::create(RotateBy::create(1.5, Vec3(30,-40*neg,-70*neg))),
-                               CallFunc::create(CC_CALLBACK_0(Boss::_next, this)),
-              nullptr)
-              );
+//     int neg = (CCRANDOM_0_1()>0.5)? -1: 1;
+//     
+//     auto array = PointArray::create(6);
+//     
+//     array->addControlPoint(Vec2(0,0));
+//     array->addControlPoint(Vec2(80*neg,-300));
+//     array->addControlPoint(Vec2(500*neg,-900));
+//     array->addControlPoint(Vec2(700*neg,-600));
+//     array->addControlPoint(Vec2(500*neg,400));
+//     array->addControlPoint(Vec2(0,0));
+//     
+//     auto action = CardinalSplineBy::create(5.5, array,0);
+//     runAction(Sequence::create(
+//                                DelayTime::create(0.5),
+//                                EaseSineOut::create(action)
+//                                ,nullptr)
+//               );
+//     runAction(
+//               Sequence::create(
+//                                EaseSineInOut::create(RotateBy::create(0.5, Vec3(0,30*neg,0))),
+//                                RotateBy::create(2.5, Vec3(-30,45*neg,-90*neg)),
+//                                 RotateBy::create(1, Vec3(0,-35*neg,-200*neg)),
+//                                EaseSineInOut::create(RotateBy::create(1.5, Vec3(30,-40*neg,-70*neg))),
+//                                CallFunc::create(CC_CALLBACK_0(Boss::_next, this)),
+//               nullptr)
+//               );
 }
 
 void Boss::startShooting()

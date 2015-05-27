@@ -118,7 +118,7 @@ void XMap::AnalyzeInfDataL()
 		dis >> iWidth >> iHeight >> iBackColor;
 		iWidth *= CC_CONTENT_SCALE_FACTOR();
 		iHeight *= CC_CONTENT_SCALE_FACTOR();
-		byte r, g, b;
+		unsigned char r, g, b;
 		r = (iBackColor & 0xff0000) >> 16;
 		g = (iBackColor & 0xff00) >> 8;
 		b = (iBackColor & 0xff);

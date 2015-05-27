@@ -10,7 +10,7 @@ myTm MyTime::getTime()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	time(&timep);
 #else
-	struct cc_timeval now;
+	struct timeval now;
 	gettimeofday(&now, nullptr);
 	timep = now.tv_sec;
 #endif

@@ -22,7 +22,7 @@ public:
 	bool init();
 
 protected:
-	byte _rayTick;//…¡À∏º‰∏Ù
+	short _rayTick;//…¡À∏º‰∏Ù
 	int _type;
 	int _state;
 	int _power;

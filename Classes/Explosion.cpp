@@ -119,95 +119,95 @@ void BigExplosion::recycle(float dt){
     EffectManager::_bigExplPool.pushBack(this);
 }
 
-bool BulletExplosion::init(){
-    
-    auto texture = Director::getInstance()->getTextureCache()->addImage("player_bullet_explosion.png");
-    Sprite::initWithTexture(texture);
-    setTextureRect(Rect(0,0,26,17));
-    //this -> setTexture(texture);
-    return true;
-}
-
-void BulletExplosion::showExplosion(Vec2 point){
-    auto animation = AnimationCache::getInstance()->getAnimation("bullet_expl");
-    auto animate = Animate::create(animation);
-    this->runAction(Sequence::create(animate,
-                                     CallFuncN::create(CC_CALLBACK_1(BulletExplosion::explosionFinished,this)),                                  NULL));
-    this->setScale(0.5);
-    this->runAction(ScaleBy::create(0.4f, 2));
-    this->runAction(FadeOut::create(0.4f));
-    this->setPosition(point);
-    this->setRotation3D(Vec3(30,0,0));
-    this->setBlendFunc(BlendFunc::ADDITIVE);
-    Director::getInstance()->getRunningScene()->getChildByTag(100)->getChildByTag(123)->addChild(this,3);
-}
-
-void BulletExplosion::explosionFinished(Ref* obj){
-    auto expl=static_cast<Sprite*>(obj);
-    expl->removeFromParentAndCleanup(false);
-}
-
-
-bool BulletExplosionTwo::init(void)
-{
-	Vector<SpriteFrame*> frames;
-	for (int i = 0; i < 12; i++)
-	{
-		auto pic = String::createWithFormat("explosion_0_%d.png", i);
-		auto frame = SpriteFrame::create(pic->getCString(), Rect(0, 0, 168, 156));
-		frames.pushBack(frame);
-	}
-	auto animation = Animation::createWithSpriteFrames(frames, 0.1f);
-	_action = Animate::create(animation);
-	_action->retain();
-	Sprite::initWithSpriteFrame(frames.at(0));
-	frames.clear();
-	return true;
-}
-
-void BulletExplosionTwo::showExplosion(float dt)
-{
-	this->runAction(Sequence::create(_action, CallFunc::create(CC_CALLBACK_0(BulletExplosionTwo::explosionFinished, this, this)), nullptr));
-}
-
-void BulletExplosionTwo::explosionFinished(Ref* obj)
-{
-	auto expl = static_cast<Sprite*>(obj);
-	expl->removeFromParentAndCleanup(false);
-}
-
-void BulletExplosionTwo::createExplosion(Node* _effectLayer, cocos2d::Vec2 pos)
-{
-	_effectLayer->addChild(this, kZorderExplosion);
-	setPosition(pos);
-	showExplosion(0);
-}
-
-bool TestExplosion::init()
-{
-	/*auto part1_frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("fire.png");*/
-	auto part1_frame = Director::getInstance()->getTextureCache()->addImage("fire.png");
-	ValueMap vm1 = ParticleManager::getInstance()->GetPlistData("test");
-	part1 = ParticleSystemQuad::create(vm1);
-	part1->setTexture(part1_frame);
-	this->addChild(part1);
-	
-	//part1->setTotalParticles(250);
-	//part1->setEmissionRate(83.3333359);
-	return true;
-}
-
-void TestExplosion::createExplosion(Node* _effectLayer, cocos2d::Vec2 pos)
-{
-	part1->setTotalParticles(part1->getTotalParticles());
-	part1->setEmissionRate(part1->getEmissionRate());
-	_effectLayer->addChild(this, kZorderExplosion);
-	this->setPosition(pos);
-	this->scheduleOnce(schedule_selector(TestExplosion::recycle), 1.5f);
-}
-
-void TestExplosion::recycle(float dt)
-{
-	this->removeFromParentAndCleanup(false);
-	EffectManager::_testExpPool.pushBack(this);
-}
+// bool BulletExplosion::init(){
+//     
+// //     auto texture = Director::getInstance()->getTextureCache()->addImage("player_bullet_explosion.png");
+// //     Sprite::initWithTexture(texture);
+// //     setTextureRect(Rect(0,0,26,17));
+//     //this -> setTexture(texture);
+//     return true;
+// }
+// 
+// void BulletExplosion::showExplosion(Vec2 point){
+// //     auto animation = AnimationCache::getInstance()->getAnimation("bullet_expl");
+// //     auto animate = Animate::create(animation);
+// //     this->runAction(Sequence::create(animate,
+// //                                      CallFuncN::create(CC_CALLBACK_1(BulletExplosion::explosionFinished,this)),                                  NULL));
+// //     this->setScale(0.5);
+// //     this->runAction(ScaleBy::create(0.4f, 2));
+// //     this->runAction(FadeOut::create(0.4f));
+// //     this->setPosition(point);
+// //     this->setRotation3D(Vec3(30,0,0));
+// //     this->setBlendFunc(BlendFunc::ADDITIVE);
+// //     Director::getInstance()->getRunningScene()->getChildByTag(100)->getChildByTag(123)->addChild(this,3);
+// }
+// 
+// void BulletExplosion::explosionFinished(Ref* obj){
+// //     auto expl=static_cast<Sprite*>(obj);
+// //     expl->removeFromParentAndCleanup(false);
+// }
+// 
+// 
+// bool BulletExplosionTwo::init(void)
+// {
+// // 	Vector<SpriteFrame*> frames;
+// // 	for (int i = 0; i < 12; i++)
+// // 	{
+// // 		auto pic = String::createWithFormat("explosion_0_%d.png", i);
+// // 		auto frame = SpriteFrame::create(pic->getCString(), Rect(0, 0, 168, 156));
+// // 		frames.pushBack(frame);
+// // 	}
+// // 	auto animation = Animation::createWithSpriteFrames(frames, 0.1f);
+// // 	_action = Animate::create(animation);
+// // 	_action->retain();
+// // 	Sprite::initWithSpriteFrame(frames.at(0));
+// // 	frames.clear();
+// 	return true;
+// }
+// 
+// void BulletExplosionTwo::showExplosion(float dt)
+// {
+// 	//this->runAction(Sequence::create(_action, CallFunc::create(CC_CALLBACK_0(BulletExplosionTwo::explosionFinished, this, this)), nullptr));
+// }
+// 
+// void BulletExplosionTwo::explosionFinished(Ref* obj)
+// {
+// // 	auto expl = static_cast<Sprite*>(obj);
+// // 	expl->removeFromParentAndCleanup(false);
+// }
+// 
+// void BulletExplosionTwo::createExplosion(Node* _effectLayer, cocos2d::Vec2 pos)
+// {
+// // 	_effectLayer->addChild(this, kZorderExplosion);
+// // 	setPosition(pos);
+// // 	showExplosion(0);
+// }
+// 
+// bool TestExplosion::init()
+// {
+// // 	/*auto part1_frame = SpriteFrameCache::getInstance()->getSpriteFrameByName("fire.png");*/
+// // 	auto part1_frame = Director::getInstance()->getTextureCache()->addImage("fire.png");
+// // 	ValueMap vm1 = ParticleManager::getInstance()->GetPlistData("test");
+// // 	part1 = ParticleSystemQuad::create(vm1);
+// // 	part1->setTexture(part1_frame);
+// // 	this->addChild(part1);
+// 	
+// 	//part1->setTotalParticles(250);
+// 	//part1->setEmissionRate(83.3333359);
+// 	return true;
+// }
+// 
+// void TestExplosion::createExplosion(Node* _effectLayer, cocos2d::Vec2 pos)
+// {
+// // 	part1->setTotalParticles(part1->getTotalParticles());
+// // 	part1->setEmissionRate(part1->getEmissionRate());
+// // 	_effectLayer->addChild(this, kZorderExplosion);
+// // 	this->setPosition(pos);
+// // 	this->scheduleOnce(schedule_selector(TestExplosion::recycle), 1.5f);
+// }
+// 
+// void TestExplosion::recycle(float dt)
+// {
+// // 	this->removeFromParentAndCleanup(false);
+// // 	EffectManager::_testExpPool.pushBack(this);
+// }

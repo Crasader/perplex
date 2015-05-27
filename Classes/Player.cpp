@@ -174,7 +174,7 @@ void Player::onKeyRepeat()
     
     Vec2 shiftPosition = delta+prev;
     
-	auto camera = CameraExt::getInstance();
+	auto camera = _gameScene->getCamera();
 	setPosition(shiftPosition.getClampPoint(camera->GetCameraOriginToGL(), camera->GetCameraOriginToGL()+Vec2(camera->getCameraSize().width, camera->getMapSize().height)));
 }
 
@@ -218,7 +218,7 @@ void Player::onAxisRepeat()
     
     Vec2 shiftPosition = delta+prev;
     
-	auto camera = CameraExt::getInstance();
+	auto camera = _gameScene->getCamera();
 	setPosition(shiftPosition.getClampPoint(camera->GetCameraOriginToGL(), camera->GetCameraOriginToGL()+Vec2(camera->getCameraSize().width, camera->getMapSize().height)));
 }
 #endif
