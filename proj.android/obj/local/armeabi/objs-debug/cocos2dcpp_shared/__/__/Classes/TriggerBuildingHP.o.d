@@ -423,7 +423,7 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/TriggerBuildingHP.o
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CCActionTimeline.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CSLoader.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/UnitManager.h
+ jni/../../Classes/basescene.h jni/../../Classes/UnitManager.h
 
 jni/../../Classes/TriggerBuildingHP.h:
 
@@ -1276,5 +1276,7 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebu
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/UnitManager.h:

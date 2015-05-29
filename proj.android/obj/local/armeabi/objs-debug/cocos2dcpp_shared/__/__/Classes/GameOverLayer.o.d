@@ -356,9 +356,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/GameOverLayer.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCEventListenerController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h \
  jni/../../Classes/MainMenuScene.h jni/../../Classes/GameScene.h \
- jni/../../Classes/gamestate.h jni/../../Classes/GameLayer.h \
- jni/../../Classes/GameControllers.h jni/../../Classes/Unit.h \
- jni/../../Classes/GameEntity.h \
+ jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
+ jni/../../Classes/GameLayer.h jni/../../Classes/GameControllers.h \
+ jni/../../Classes/Unit.h jni/../../Classes/GameEntity.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocosStudioExport.h \
@@ -1147,6 +1147,8 @@ jni/../../Classes/MainMenuScene.h:
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/GameLayer.h:
 

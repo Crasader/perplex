@@ -439,7 +439,7 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/EventUnit.o: \
  jni/../../Classes/effectcameraa.h jni/../../Classes/effectchagnemap.h \
  jni/../../Classes/gameeffectstate.h \
  jni/../../Classes/effectcalculagraph.h jni/../../Classes/GameScene.h \
- jni/../../Classes/TriggerRandom.h
+ jni/../../Classes/basescene.h jni/../../Classes/TriggerRandom.h
 
 jni/../../Classes/EventUnit.h:
 
@@ -1344,5 +1344,7 @@ jni/../../Classes/gameeffectstate.h:
 jni/../../Classes/effectcalculagraph.h:
 
 jni/../../Classes/GameScene.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/TriggerRandom.h:

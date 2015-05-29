@@ -929,12 +929,12 @@ public class MainFrame
 		mapInfo.saveMobileData();
 		progress.setValue(55);
 
-		progress.setInfo("保存作战单位资源");
+		progress.setInfo("保存建筑资源");
 		( (BRManager) (resManagers[RES_BR])).save(name);
 		( (BRManager) (resManagers[RES_BR])).saveMobileData(name);
 		progress.setValue(60);
 		
-		progress.setInfo("保存建筑资源");
+		progress.setInfo("保存作战单位资源");
 		( (URManager) (resManagers[RES_UR])).save(name);
 		( (URManager) (resManagers[RES_UR])).saveMobileData(name);
 		progress.setValue(65);

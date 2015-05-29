@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Unit.h"
 #include "UnitManager.h"
+#include "CameraExt.h"
 
 bool TriggerUnitToRect::perform()
 {
@@ -10,7 +11,11 @@ bool TriggerUnitToRect::perform()
 		return false;
 	}
 	auto p = _unit->getPosition();
-	if (_rect.containsPoint(_unit->getPosition()))
+	if (_unit->getType() == 0)
+	{
+		p.y += _gameLayer->getCamera()->getY();
+	}
+	if (_rect.containsPoint(p))
 	{
 		return true;
 	}

@@ -13,6 +13,7 @@ public:
 	int _exploreCount;
 	bool _shake;
 	std::vector<cocos2d::Rect> _buildingRects;
+	int _stateImageID[3];
 };
 
 

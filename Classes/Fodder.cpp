@@ -46,6 +46,10 @@ Fodder* Fodder::create(GameScene* gameScene, int unitID, int type, int dir, int 
 
 bool Fodder::init()
 {
+	if (!Unit::init())
+	{
+		return false;
+	}
 	_score = 10;
 	_alive = true;
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("plane0.png", "plane0.plist", "plane.csb");

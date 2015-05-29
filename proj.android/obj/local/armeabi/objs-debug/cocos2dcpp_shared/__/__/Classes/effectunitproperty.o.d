@@ -353,8 +353,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/effectunitproperty.
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCString.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
- jni/../../Classes/gamestate.h jni/../../Classes/Unit.h \
- jni/../../Classes/GameEntity.h \
+ jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
+ jni/../../Classes/Unit.h jni/../../Classes/GameEntity.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocosStudioExport.h \
@@ -1135,6 +1135,8 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/Unit.h:
 

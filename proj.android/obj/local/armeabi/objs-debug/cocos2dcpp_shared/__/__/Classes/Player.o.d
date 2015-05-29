@@ -427,8 +427,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Player.o: \
  jni/../../Classes/MotionImpl.h jni/../../Classes/Bullets.h \
  jni/../../Classes/GameControllers.h jni/../../Classes/consts.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/PublicApi.h jni/../../Classes/GameLayer.h \
- jni/../../Classes/ParticleManager.h jni/../../Classes/Sprite3DEffect.h \
+ jni/../../Classes/basescene.h jni/../../Classes/PublicApi.h \
+ jni/../../Classes/GameLayer.h jni/../../Classes/ParticleManager.h \
+ jni/../../Classes/Sprite3DEffect.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
  jni/../../Classes/Effects.h jni/../../Classes/Explosion.h \
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
@@ -1298,6 +1299,8 @@ jni/../../Classes/consts.h:
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/PublicApi.h:
 

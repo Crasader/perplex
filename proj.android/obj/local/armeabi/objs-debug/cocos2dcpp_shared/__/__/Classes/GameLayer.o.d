@@ -435,8 +435,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/GameLayer.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/Export.h \
  jni/../../Classes/ParticleManager.h jni/../../Classes/CameraExt.h \
  jni/../../Classes/CAnimationData.h jni/../../Classes/Head.h \
- jni/../../Classes/GameScene.h jni/../../Classes/LoadMap.h \
- jni/../../Classes/Ifstream.h \
+ jni/../../Classes/GameScene.h jni/../../Classes/basescene.h \
+ jni/../../Classes/LoadMap.h jni/../../Classes/Ifstream.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio \
  jni/../../Classes/ShadowController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
@@ -1336,6 +1336,8 @@ jni/../../Classes/CAnimationData.h:
 jni/../../Classes/Head.h:
 
 jni/../../Classes/GameScene.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/LoadMap.h:
 

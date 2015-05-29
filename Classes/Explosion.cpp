@@ -26,8 +26,11 @@
 #include "Effects.h"
 #include "ParticleManager.h"
 #include "consts.h"
+#include "AnimationLoader.h"
+#include "cocostudio/CCArmature.h"
 
 USING_NS_CC;
+using namespace cocostudio;
 
 bool SmallExplosion::init(){
     
@@ -211,3 +214,38 @@ void BigExplosion::recycle(float dt){
 // // 	this->removeFromParentAndCleanup(false);
 // // 	EffectManager::_testExpPool.pushBack(this);
 // }
+
+Explosion* Explosion::create(const Vec2& pos)
+{
+	auto e = new Explosion();
+	if (e && e->init(pos))
+	{
+		e->autorelease();
+		return e;
+	}
+	CC_SAFE_DELETE(e);
+	return nullptr;
+}
+
+bool Explosion::init(const Vec2& pos)
+{
+	auto armture = AnimationLoader::getInstance().createAnimation("smallexplosion");
+	armture->getAnimation()->play("idle");
+	auto onFrameEvent = [&](Bone *bone, const std::string& frameEventName, int originFrameIndex, int currentFrameIndex)
+	{
+		log("event....");
+		if (frameEventName == "end")
+		{
+			recycle(0);
+		}
+	};
+	armture->getAnimation()->setFrameEventCallFunc(onFrameEvent);
+	this->setPosition(pos);
+	addChild(armture);
+	return true;
+}
+
+void Explosion::recycle(float dt)
+{
+	this->removeFromParentAndCleanup(false);
+}

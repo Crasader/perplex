@@ -7,6 +7,7 @@
 #include "UnitManager.h"
 #include "building.h"
 #include "CameraExt.h"
+#include "consts.h"
 
 void MapManager::analyzeMap()
 {
@@ -182,6 +183,7 @@ bool MapManager::createFloor()
 		}
 		_floor->addChild(sprite);
 		_floor->retain();
+		_floor->setLocalZOrder(kZOrderMap);
 	}
 	_gameScene->addChild(_floor);
 	return true;

@@ -15,3 +15,15 @@ void WeaponResManager::loadRes()
 		_weaponResList.push_back(pWeaponRes);
 	}
 }
+
+std::shared_ptr<WeaponRes> WeaponResManager::getWeapResFromID(int id)
+{
+	for (auto r : _weaponResList)
+	{
+		if (r->getID() == id)
+		{
+			return r;
+		}
+	}
+	return nullptr;
+}

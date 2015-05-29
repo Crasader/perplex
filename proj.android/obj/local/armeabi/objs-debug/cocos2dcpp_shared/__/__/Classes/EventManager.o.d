@@ -354,9 +354,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/EventManager.o: \
  jni/../../Classes/Ifstream.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/EventUnit.h jni/../../Classes/MapManager.h \
- jni/../../Classes/Head.h jni/../../Classes/GameGlobe.h \
- jni/../../Classes/mapconst.h
+ jni/../../Classes/basescene.h jni/../../Classes/EventUnit.h \
+ jni/../../Classes/MapManager.h jni/../../Classes/Head.h \
+ jni/../../Classes/GameGlobe.h jni/../../Classes/mapconst.h
 
 jni/../../Classes/EventManager.h:
 
@@ -1069,6 +1069,8 @@ E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/EventUnit.h:
 

@@ -31,10 +31,10 @@ public:
 	//TODO
 	
 	Weapon(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType);
-	virtual ~Weapon(){}
+	virtual ~Weapon();
 	static Weapon* create(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType);
 	bool  init(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType);
-	void perform();
+	void perform(float dt);
 	bool isCastoff() { return _castoff; }
 	void setCastoff() { _castoff = true; }
 	int getCastoffStage() { return _castoffState; }

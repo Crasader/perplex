@@ -354,7 +354,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/LoadingScene.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/SimpleAudioEngine.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/Export.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/Unit.h jni/../../Classes/GameEntity.h \
+ jni/../../Classes/basescene.h jni/../../Classes/Unit.h \
+ jni/../../Classes/GameEntity.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocosStudioExport.h \
@@ -1143,6 +1144,8 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../..
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/Unit.h:
 

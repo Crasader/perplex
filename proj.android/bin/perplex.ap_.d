@@ -7,6 +7,7 @@ D:\projects\perplex\proj.android\bin\res\drawable-hdpi\icon.png \
 D:\projects\perplex\proj.android\bin\res\drawable-ldpi\icon.png \
 D:\projects\perplex\proj.android\bin\res\drawable-mdpi\icon.png \
 D:\projects\perplex\proj.android\assets\anim \
+D:\projects\perplex\proj.android\assets\b.png \
 D:\projects\perplex\proj.android\assets\changjing01-01.jpg \
 D:\projects\perplex\proj.android\assets\lordplane.csb \
 D:\projects\perplex\proj.android\assets\lordplane.ExportJson \
@@ -29,9 +30,13 @@ D:\projects\perplex\proj.android\assets\anim\lordplane0.png \
 D:\projects\perplex\proj.android\assets\anim\plane.csb \
 D:\projects\perplex\proj.android\assets\anim\plane0.plist \
 D:\projects\perplex\proj.android\assets\anim\plane0.png \
+D:\projects\perplex\proj.android\assets\anim\smallexplosion.csb \
+D:\projects\perplex\proj.android\assets\anim\smallexplosion0.plist \
+D:\projects\perplex\proj.android\assets\anim\smallexplosion0.png \
 D:\projects\perplex\proj.android\assets\anim\tank.csb \
 D:\projects\perplex\proj.android\assets\anim\tank0.plist \
 D:\projects\perplex\proj.android\assets\anim\tank0.png \
+D:\projects\perplex\proj.android\assets\map\1.png \
 D:\projects\perplex\proj.android\assets\map\100.jpg \
 D:\projects\perplex\proj.android\assets\map\101.jpg \
 D:\projects\perplex\proj.android\assets\map\102.jpg \
@@ -41,6 +46,7 @@ D:\projects\perplex\proj.android\assets\map\105.jpg \
 D:\projects\perplex\proj.android\assets\map\106.jpg \
 D:\projects\perplex\proj.android\assets\map\107.jpg \
 D:\projects\perplex\proj.android\assets\map\108.jpg \
+D:\projects\perplex\proj.android\assets\map\2.png \
 D:\projects\perplex\proj.android\assets\mapdat\buildingres_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l0_building_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l0_event_mobile.dat \

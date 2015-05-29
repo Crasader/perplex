@@ -353,7 +353,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Trigger.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
  jni/../../Classes/EventManager.h jni/../../Classes/Ifstream.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio \
- jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h
+ jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
+ jni/../../Classes/basescene.h
 
 jni/../../Classes/Trigger.h:
 
@@ -1068,3 +1069,5 @@ E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:

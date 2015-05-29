@@ -2,3 +2,4 @@
 /proj.win32/Release.win32
 
 /proj.win32_bak
+/proj.android/libs/armeabi/*.so

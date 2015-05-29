@@ -1,6 +1,9 @@
 #include "shotlogic.h"
 #include "Unit.h"
-
+#include "GameScene.h"
+#include "Weapon.h"
+#include "WeaponRes.h"
+#include "weaponresmanager.h"
 
 ShotLogic::ShotLogic(Unit* unit, int weaponResID, int posIndex) : _end(false)
 , _firetick(0)
@@ -18,7 +21,7 @@ ShotLogic::~ShotLogic()
 	CC_SAFE_RELEASE(_unit);
 }
 
-void ShotLogic::perform()
+void ShotLogic::perform( float dt )
 {
 
 }
@@ -36,7 +39,7 @@ ShotLogicA::ShotLogicA(Unit* unit, int weaponResID, int posIndex)
 
 }
 
-void ShotLogicA::perform()
+void ShotLogicA::perform( float dt )
 {
 	float moveX = 0.0f;
 	float moveY = 0.0f;
@@ -73,7 +76,7 @@ ShotLogicB::~ShotLogicB()
 	CC_SAFE_RELEASE(_goalUnit);
 }
 
-void ShotLogicB::perform()
+void ShotLogicB::perform( float dt )
 {
 	if (_firetick < _delay)
 	{
@@ -104,16 +107,16 @@ void ShotLogicB::perform()
 ShotLogicD::ShotLogicD(Unit* unit, int weaponResID, int posIndex) 
 :ShotLogic(unit, weaponResID, posIndex)
 , _fireCount(0)
-, _delay(8)
+, _delay(0.1f)
 {
-	_firetick = 8;
+	_firetick = 0;
 }
 
-void ShotLogicD::perform()
+void ShotLogicD::perform( float dt )
 {
 	if (_firetick < _delay)
 	{
-		_firetick++;
+		_firetick += dt;
 		return;
 	}
 	_firetick = 0;
@@ -123,7 +126,16 @@ void ShotLogicD::perform()
 	}
 	else
 	{
-
+		auto weapon = Weapon::create(_unit->getGameScene(),
+			_unit->getGameScene()->getWeaponResManager()->getWeapResFromID(_weaponResID),
+			_unit,
+			0,
+			_speed,
+			0,
+			_posIndex,
+			_unit->getCampType());
+		_unit->getWeaponList().pushBack(weapon);
+		_fireCount++;
 	}
 }
 
@@ -140,7 +152,7 @@ ShotLogicE::~ShotLogicE()
 	CC_SAFE_RELEASE(_goalUnit);
 }
 
-void ShotLogicE::perform()
+void ShotLogicE::perform( float dt )
 {
 	if (_goalUnit == nullptr)
 	{
@@ -178,7 +190,7 @@ ShotLogicF::~ShotLogicF()
 	CC_SAFE_RELEASE(_goalUnit);
 }
 
-void ShotLogicF::perform()
+void ShotLogicF::perform( float dt )
 {
 	if (_goalUnit == nullptr)
 	{
@@ -212,7 +224,7 @@ ShotLogicH::ShotLogicH(Unit* unit, int weaponResID, int posIndex)
 
 }
 
-void ShotLogicH::perform()
+void ShotLogicH::perform( float dt )
 {
 
 	for (int i = 0; i < 8; i++)
@@ -230,7 +242,7 @@ ShotLogicI::ShotLogicI(Unit* unit, int weaponResID, int posIndex)
 
 }
 
-void ShotLogicI::perform()
+void ShotLogicI::perform( float dt )
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -247,7 +259,7 @@ ShotLogicK::ShotLogicK(Unit* unit, int weaponResID, int posIndex)
 
 }
 
-void ShotLogicK::perform()
+void ShotLogicK::perform( float dt )
 {
 	_end = true;
 }
@@ -268,7 +280,7 @@ ShotLogicQ::~ShotLogicQ()
 	CC_SAFE_RELEASE(_goalUnit);
 }
 
-void ShotLogicQ::perform()
+void ShotLogicQ::perform( float dt )
 {
 	_end = true;
 }
@@ -279,7 +291,7 @@ ShotLogicC::ShotLogicC(Unit* unit, int weaponResID, int posIndex)
 
 }
 
-void ShotLogicC::perform()
+void ShotLogicC::perform( float dt )
 {
 	_end = true;
 	auto movex = cos(CC_DEGREES_TO_RADIANS(45 * _unit->getShotDir())) * _speed;

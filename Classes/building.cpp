@@ -143,7 +143,7 @@ void Building::processDie()
 	}
 }
 
-void Building::processUnitFactory()
+void Building::processUnitFactory( float dt )
 {
 	if (_state >= 2 ||
 		_unitFactoryDatas.empty() ||
@@ -151,35 +151,48 @@ void Building::processUnitFactory()
 	{
 		return;
 	}
-	if (!_factory)
+	if (!_factory &&  _gameScene->getPlayer())
 	{
-		cocos2d::Rect lookRect(getPositionX() - 150, getPositionY() - 150, getPositionX() + 150, getPositionY() + 150);
-		if (_gameScene->getPlayer() != nullptr && lookRect.containsPoint(_gameScene->getPlayer()->getPosition()))
+		cocos2d::Rect lookRect(getPositionX() - 150, getPositionY() - 150, 300, 300);
+		auto p = _gameScene->getPlayer()->getPosition();
+		p.y += _gameScene->getCamera()->getY();
+		if (_gameScene->getPlayer() != nullptr && lookRect.containsPoint(p))
 		{
 			_factory = true;
 			_unitFactoryTick = 0;
 		}
 		return;
 	}
-	_unitFactoryTick++;
-	if (_unitFactoryTick <= _unitFactoryDatas[_unitFactoryIndex].interval)
-	{
-		return;
-	}
-	for (auto i = 0; i < _unitFactoryDatas[_unitFactoryIndex].unitCount; i++)
-	{
-		auto type = _unitFactoryDatas[_unitFactoryIndex].unitType;
-		auto x = _unitFactoryDatas[_unitFactoryIndex].left + rand() / _unitFactoryDatas[_unitFactoryIndex].width;
-		auto y = _unitFactoryDatas[_unitFactoryIndex].top + rand() / _unitFactoryDatas[_unitFactoryIndex].height;
-		_gameScene->getSpriteManager()->createDefaultUnit(type, x, y);
-		_gameScene->addLevelEnemy(1);
-	}
+/*	_unitFactoryTick += dt;*/
+// 	if (_unitFactoryTick <= _unitFactoryDatas[_unitFactoryIndex].interval)
+// 	{
+// 		return;
+// 	}
 
-	_unitFactoryTick = 0;
-	_unitFactoryIndex++;
+	if (_unitFactoryTick == 0)
+	{
+		_unitFactoryTick = 1;
+		auto createUnit = [&](){
+			for (auto i = 0; i < _unitFactoryDatas[_unitFactoryIndex].unitCount; i++)
+			{
+				auto type = _unitFactoryDatas[_unitFactoryIndex].unitType;
+				auto x = _unitFactoryDatas[_unitFactoryIndex].left + rand() / _unitFactoryDatas[_unitFactoryIndex].width;
+				auto y = _unitFactoryDatas[_unitFactoryIndex].top + rand() / _unitFactoryDatas[_unitFactoryIndex].height;
+				_gameScene->getSpriteManager()->createDefaultUnit(type, x, y);
+				_gameScene->addLevelEnemy(1);
+			}
+			_unitFactoryTick = 0;
+			_unitFactoryIndex++;
+		};
+		runAction(Sequence::create(DelayTime::create(_unitFactoryDatas[_unitFactoryIndex].interval), CallFunc::create(createUnit), nullptr));
+	}
+// 	
+// 
+// 	_unitFactoryTick = 0;
+// 	_unitFactoryIndex++;
 }
 
-void Building::perform()
+void Building::perform(float dt)
 {
 	if (_castoff)
 	{
@@ -188,7 +201,8 @@ void Building::perform()
 	}
 	if (!_active)
 	{
-		if (getPositionX() >= _gameScene->getCamera()->getY() - 32)
+		log("%f, %f", getPositionY(), _gameScene->getCamera()->getY() + _gameScene->getSceneHeight());
+		if (getPositionY() <= _gameScene->getCamera()->getY() + _gameScene->getSceneHeight())
 		{
 			_active = true;
 		}
@@ -196,18 +210,19 @@ void Building::perform()
 	}
 	else
 	{
-		if (getPositionY() > _gameScene->getCamera()->getY() + _gameScene->getSceneHeight() + 100)
+		if (getPositionY() < _gameScene->getCamera()->getY() - _gameScene->getSceneHeight())
 		{
 			_castoff = true;
 			_active = false;
 		}
 	}
-	processUnitFactory();
+	processUnitFactory(dt);
 	processDie();
 }
 
 Building::Building(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph)
-:_gameScene(gameScene)
+	:GameEntity()
+,_gameScene(gameScene)
 , _buildingRes(buildingRes)
 , _buildingID(buildingID)
 , _factory(false)
@@ -239,7 +254,14 @@ Building* Building::create(GameScene* gameScene, std::shared_ptr<BuildingRes> bu
 
 bool Building::init(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph)
 {
-	return true;
+	auto s = cocos2d::String::createWithFormat("%d.png", _buildingRes->_stateImageID[state]);
+	_Model = Sprite::create(s->getCString());
+	if (_Model)
+	{
+		addChild(_Model);
+		return true;
+	}
+	return false;
 }
 
 int Building::getBuildingID()

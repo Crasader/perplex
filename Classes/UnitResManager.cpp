@@ -5,9 +5,11 @@
 
 UnitResManager::UnitResManager(const std::string& file)
 {
+	log("%s,enty, %s", __FUNCTION__, file.c_str());
 	Ifstream in(file.c_str());
 	if (!in.fail())
 	{
+		log("read....");
 		int urCount;
 		in >> urCount;
 		_unitReses.clear();
@@ -86,8 +88,6 @@ UnitResManager::UnitResManager(const std::string& file)
 			//补充其它方向的数据
 			for (int i = 9; i < 16; i++)
 			{
-				int x, y;
-				in >> x >> y;
 				pUnitRes->_standAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_standAnimRanges[i] = pUnitRes->_standAnimRanges[16 - i];
 			}
@@ -215,17 +215,18 @@ UnitResManager::UnitResManager(const std::string& file)
 			//创建挂接点武器类型列表
 			std::vector<int> weaponTypeList;
 			std::vector<int> weaponEveryTypeCount;
-
+			weaponTypeList.resize(UNIT_MAX_WEAPON_COUNT);
+			weaponEveryTypeCount.resize(UNIT_MAX_WEAPON_COUNT);
 			for (int p = 0; p < UNIT_MAX_WEAPON_COUNT; p++)
 			{
-				weaponTypeList.push_back(-1);
-				weaponEveryTypeCount.push_back(0);
+				weaponTypeList[p] = -1;
+				weaponEveryTypeCount[p] = 0;
 			}
 			bool use = false;
-			pUnitRes->_weaponEveryTypeCount = 0;
+			pUnitRes->_weaponTypeCount = 0;
 			for (int p = 0; p < weaponPosCount; p++)
 			{
-				for (int m = 0; m < pUnitRes->_weaponEveryTypeCount; m++)
+				for (int m = 0; m < pUnitRes->_weaponTypeCount; m++)
 				{
 					if (pUnitRes->_weaponPos[0][p]->type == weaponTypeList[p])
 					{
@@ -243,7 +244,7 @@ UnitResManager::UnitResManager(const std::string& file)
 				pUnitRes->_weaponTypeCount++;
 			}
 			pUnitRes->_weaponTypeList.resize(pUnitRes->_weaponTypeCount);
-			pUnitRes->_weaponEveryTypeCountList.resize(pUnitRes->_weaponEveryTypeCount);
+			pUnitRes->_weaponEveryTypeCountList.resize(pUnitRes->_weaponTypeCount);
 			pUnitRes->_weaponTypeIndexList.resize(pUnitRes->_weaponTypeCount);
 			for (int p = 0; p < pUnitRes->_weaponTypeCount; p++)
 			{
@@ -253,7 +254,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			//每种武器类型的挂接点索引值表
 			for (int p = 0; p < pUnitRes->_weaponTypeCount; p++)
 			{
-				pUnitRes->_weaponTypeIndexList[p].resize(pUnitRes->_weaponEveryTypeCount);
+				pUnitRes->_weaponTypeIndexList[p].resize(pUnitRes->_weaponEveryTypeCountList[p]);
 				for (int j = 0, m = 0; j < weaponPosCount; j++)
 				{
 					if (pUnitRes->_weaponPos[0][j]->type == pUnitRes->_weaponTypeList[p])
@@ -266,6 +267,7 @@ UnitResManager::UnitResManager(const std::string& file)
 		}
 	}
 	in.close();
+	log("%s,exit", __FUNCTION__);
 }
 
 std::shared_ptr<UnitRes> UnitResManager::getUnitResFromID(int ID)
@@ -277,5 +279,5 @@ std::shared_ptr<UnitRes> UnitResManager::getUnitResFromID(int ID)
 			return a;
 		}
 	}
-	return _unitReses[0];
+	return nullptr;
 }

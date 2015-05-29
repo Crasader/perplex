@@ -16,6 +16,7 @@
 #include "Player.h"
 #include "Fodder.h"
 #include "Enemies.h"
+#include "Explosion.h"
 
 cocos2d::Vector<Tool*> UnitManager::_tools;
 cocos2d::Vector<Building*> UnitManager::_buildings;
@@ -25,7 +26,7 @@ cocos2d::Vector<Unit*> UnitManager::_allys;
 cocos2d::Vector<Unit*> UnitManager::_enemies;
 cocos2d::Vector<Bullet*> UnitManager::_enemyBullets;
 cocos2d::Vector<Bullet*> UnitManager::_allyBullets;
-//cocos2d::Vector<Explosion*> UnitManager::_explodes;
+cocos2d::Vector<Explosion*> UnitManager::_explodes;
 cocos2d::Vector<GameEntity*> UnitManager::_explodeReals;
 
 UnitManager::UnitManager(GameScene* gameScene)
@@ -46,6 +47,7 @@ Unit* UnitManager::createUnit(int unitID, int type, int x, int y, int moveType, 
 	case 1:
 	case 5:
 		pUnit = spawnEnemy(unitID, type, x, y, moveType, dir, campType);
+		_gameScene->addLevelEnemy(-1);
 		break;
 	default:
 		break;
@@ -62,7 +64,7 @@ Unit* UnitManager::createRedHeader(int unitID, int type, int x, int y, int moveT
 		unit->setPosition(Vec2(x, y));
 		unit->setMoveType(moveType);
 		unit->setCampType(Ally);
-
+		unit->setLocalZOrder(kZOrderSky);
 		_gameScene->setPlayer(unit);
 		_gameScene->addChild(unit);
 
@@ -112,6 +114,10 @@ Building* UnitManager::findBuildingFromID(int buildingID)
 Tool* UnitManager::createTool(int appearAnimaID, int generalAnimID, int disappearAnimID, int x, int y, int type)
 {
 	auto tool = Tool::create(_gameScene, appearAnimaID, generalAnimID, disappearAnimID, x, y, type);
+	if (tool == nullptr)
+	{
+		return nullptr;
+	}
 	_tools.pushBack(tool);
 	_sprites.pushBack(tool);
 	return tool;
@@ -164,11 +170,15 @@ Unit* UnitManager::createDefaultUnit(int type, int x, int y)
 {
 	//在游戏里产生的Unit是没有事件ID的,所以就设置成-1
 	auto unit = createUnit(-1, type, x, y, 1, D_S_DOWN, Enemy);
+	if (!unit)
+	{
+		return nullptr;
+	}
 	//循环指令
 	std::vector<XUnitOrder> recycleOrderData;
 	XUnitOrder order;
 	order.Direct = 8;
-	order.Speed = 0;
+	order.Speed = 10;
 	order.Time = 10;
 	order.BulletType = 3;
 	order.FireLogic = 2;
@@ -176,7 +186,7 @@ Unit* UnitManager::createDefaultUnit(int type, int x, int y)
 	recycleOrderData.push_back(order);
 
 	order.Direct = 8;
-	order.Speed = 0;
+	order.Speed = 10;
 	order.Time = 20;
 	order.BulletType = 0;
 	order.FireLogic = 0;
@@ -184,7 +194,6 @@ Unit* UnitManager::createDefaultUnit(int type, int x, int y)
 	recycleOrderData.push_back(order);
 
 	unit->setUnitRecycleOrder(recycleOrderData);
-	
 	return unit;
 }
 
@@ -195,6 +204,7 @@ Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, 
 	{
 		pUnit->setPosition(Vec2(x, y));
 		pUnit->setMoveType(moveType);
+		pUnit->setLocalZOrder(kZOrderSky);
 		_sprites.pushBack(pUnit);
 		_sortSprites.pushBack(pUnit);
 		if (campType == Ally)
@@ -217,7 +227,7 @@ Unit* UnitManager::getOrCreate(GameScene* gameScene, int unitID, int type, int d
 	{
 	case kEnemyFodder:
 		enemy = Fodder::create(gameScene, unitID, type, dir, campType);
-		enemy->retain();
+		CC_SAFE_RETAIN(enemy);
 	case kEnemyFodderL:
 		
 		break;
@@ -229,7 +239,7 @@ Unit* UnitManager::getOrCreate(GameScene* gameScene, int unitID, int type, int d
 		break;
 	case kEnemyTank:
 		enemy = Tank::create(gameScene, unitID, type, dir, campType);
-		enemy->retain();
+		CC_SAFE_RETAIN(enemy);
 		break;
 	case kEnemyTurret:
 		
@@ -242,9 +252,14 @@ Building* UnitManager::createBuilding(int buildType, int BuildiID, int x, int y,
 {
 	auto pBuildingRes = _gameScene->getBuildingResManager()->getBuildingResFromID(buildType);
 	auto pBuilding = Building::create(_gameScene, pBuildingRes, BuildiID, state, fliph);
-	pBuilding->setPosition(x, y);
-	_buildings.pushBack(pBuilding);
-	_sprites.pushBack(pBuilding);
+	if (pBuilding)
+	{
+		pBuilding->setPosition(x, y);
+		pBuilding->setLocalZOrder(kZorderBuilding);
+		_buildings.pushBack(pBuilding);
+		_sprites.pushBack(pBuilding);
+		_gameScene->addUnit(pBuilding);
+	}
 	return pBuilding;
 }
 
@@ -267,8 +282,11 @@ Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, i
 		pBullet = Bullet::create(_gameScene, weaponRes, Vec2(x, y), Vec2(moveX, moveY), Vec2::ZERO);
 		break;
 	}
+	if (pBullet == nullptr) return nullptr;
+	pBullet->setLocalZOrder(kZOrderBullet);
+	_gameScene->addUnit(pBullet);
 	_sprites.pushBack(pBullet);
-	if (campType != Enemy)
+	if (campType == Ally)
 	{
 		_allyBullets.pushBack(pBullet);
 	}
@@ -279,3 +297,21 @@ Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, i
 	return pBullet;
 }
 
+Explosion* UnitManager::createExplode(Unit* unit, int type, const cocos2d::Vec2& pos)
+{
+	Explosion* explosion = nullptr;
+	switch (type)
+	{
+	default:
+		explosion = Explosion::create(pos);
+		break;
+	}
+	if (explosion == nullptr)
+	{
+		return nullptr;
+	}
+	explosion->setLocalZOrder(unit->getLocalZOrder());
+	_gameScene->addUnit(explosion);
+	_explodes.pushBack(explosion);
+	return explosion;
+}

@@ -429,7 +429,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Bullets.o: \
  jni/../../Classes/Fodder.h jni/../../Classes/ParticleManager.h \
  jni/../../Classes/Sprite3DEffect.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
- jni/../../Classes/WeaponRes.h jni/../../Classes/Head.h
+ jni/../../Classes/WeaponRes.h jni/../../Classes/Head.h \
+ jni/../../Classes/GameScene.h jni/../../Classes/basescene.h \
+ jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h
 
 jni/../../Classes/Bullets.h:
 
@@ -1306,3 +1308,11 @@ E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostre
 jni/../../Classes/WeaponRes.h:
 
 jni/../../Classes/Head.h:
+
+jni/../../Classes/GameScene.h:
+
+jni/../../Classes/basescene.h:
+
+jni/../../Classes/CameraExt.h:
+
+jni/../../Classes/CAnimationData.h:

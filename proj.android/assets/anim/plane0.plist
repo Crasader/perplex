@@ -4,25 +4,6 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>敌机001/airsrew0_2.png</key>
-			<dict>
-				<key>width</key>
-				<integer>26</integer>
-				<key>height</key>
-				<integer>2</integer>
-				<key>originalWidth</key>
-				<integer>85</integer>
-				<key>originalHeight</key>
-				<integer>67</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>offsetX</key>
-				<real>-0.5</real>
-				<key>offsetY</key>
-				<real>-26.5</real>
-			</dict>
 			<key>敌机001/airsrew0_1.png</key>
 			<dict>
 				<key>width</key>
@@ -34,11 +15,30 @@
 				<key>originalHeight</key>
 				<integer>67</integer>
 				<key>x</key>
-				<integer>28</integer>
+				<integer>0</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
 				<real>0</real>
+				<key>offsetY</key>
+				<real>-26.5</real>
+			</dict>
+			<key>敌机001/airsrew0_2.png</key>
+			<dict>
+				<key>width</key>
+				<integer>26</integer>
+				<key>height</key>
+				<integer>2</integer>
+				<key>originalWidth</key>
+				<integer>85</integer>
+				<key>originalHeight</key>
+				<integer>67</integer>
+				<key>x</key>
+				<integer>31</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>-0.5</real>
 				<key>offsetY</key>
 				<real>-26.5</real>
 			</dict>

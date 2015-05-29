@@ -84,7 +84,7 @@ void GameEntity::UseOutlineEffect(Sprite3D* sprite, float width, Color3B color)
 }
 
 
-void GameEntity::perfrom( float dt )
+void GameEntity::perform( float dt )
 {
 }
 
@@ -101,6 +101,8 @@ GameEntity::GameEntity()
 , _type(0)
 , _shadowType(-1)
 , _curState(nullptr)
+, _castoff(false)
+, _castoffStage(0)
 {
 
 }

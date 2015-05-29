@@ -424,7 +424,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Weapon.o: \
  jni/../../Classes/XDropTool.h jni/../../Classes/WeaponRes.h \
  jni/../../Classes/Head.h jni/../../Classes/Bullets.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/UnitManager.h
+ jni/../../Classes/basescene.h jni/../../Classes/UnitManager.h \
+ jni/../../Classes/consts.h
 
 jni/../../Classes/Weapon.h:
 
@@ -1284,4 +1285,8 @@ jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
 
+jni/../../Classes/basescene.h:
+
 jni/../../Classes/UnitManager.h:
+
+jni/../../Classes/consts.h:

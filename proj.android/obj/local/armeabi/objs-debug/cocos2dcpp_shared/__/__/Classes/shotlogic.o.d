@@ -422,7 +422,10 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/shotlogic.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CCActionTimelineNode.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CCActionTimeline.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CSLoader.h \
- jni/../../Classes/XDropTool.h
+ jni/../../Classes/XDropTool.h jni/../../Classes/GameScene.h \
+ jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
+ jni/../../Classes/Weapon.h jni/../../Classes/WeaponRes.h \
+ jni/../../Classes/Head.h jni/../../Classes/weaponresmanager.h
 
 jni/../../Classes/shotlogic.h:
 
@@ -1273,3 +1276,17 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebu
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CSLoader.h:
 
 jni/../../Classes/XDropTool.h:
+
+jni/../../Classes/GameScene.h:
+
+jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
+
+jni/../../Classes/Weapon.h:
+
+jni/../../Classes/WeaponRes.h:
+
+jni/../../Classes/Head.h:
+
+jni/../../Classes/weaponresmanager.h:

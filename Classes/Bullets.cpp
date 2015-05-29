@@ -31,6 +31,15 @@
 #include "ParticleManager.h"
 #include "Sprite3DEffect.h"
 #include "WeaponRes.h"
+#include "GameScene.h"
+#include "CameraExt.h"
+
+
+Bullet::Bullet()
+	:GameEntity()
+{
+
+}
 
 Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
 {
@@ -47,17 +56,25 @@ Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRe
 
 bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
 {
-	_gameScene = gameScene;
-	_weaponRes = weaponRes;
-	setPosition(pos);
-	_vector = move;
-	_orientation = dir;
-	_radius = 10;
-	_type = kEnemyBullet;
-	_owner = kEnemy;
-	_damage = 0;
-
-	return true;
+	_Model = Sprite::create("b.png");
+	if (_Model && GameEntity::init())
+	{
+		_gameScene = gameScene;
+		_weaponRes = weaponRes;
+		setPosition(pos);
+		_vector = move;
+		_orientation = dir;
+		_radius = 10;
+		_type = kEnemyBullet;
+		_owner = kEnemy;
+		_damage = 0;
+		_liveTick = 4;
+		_castoff = false;
+		_castoffStage = 0;
+		addChild(_Model);
+		return true;
+	}
+	return false;
 }
 
 bool Bullet::init()
@@ -137,6 +154,27 @@ bool Bullet::isBump()
 int Bullet::getPower()
 {
 	return _power;
+}
+
+
+void Bullet::perform(float dt)
+{
+	if (_castoff)
+	{
+		_castoffStage++;
+		return;
+	}
+	setPosition(getPosition() - _vector);
+	cocos2d::Rect camerRect(
+		_gameScene->getCamera()->getX() - 40,
+		_gameScene->getCamera()->getY() - 40,
+		_gameScene->getSceneWidth() + 80,
+		_gameScene->getSceneHeight() + 80);
+	if (_liveTick < 0 && !camerRect.containsPoint(getPosition()))
+	{
+		_castoff = true;
+	}
+	_liveTick -= dt;
 }
 
 bool Missile::init()

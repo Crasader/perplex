@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -76,9 +77,10 @@ class SingleBarrack {
 	}
 	
 	public void saveMobileData(DataOutputStream out) throws Exception {
+		MapInfo info = MainFrame.self.getMapInfo();
 		SL.writeInt(unitType, out);
-		SL.writeInt(left, out);
-		SL.writeInt(top, out);
+		SL.writeInt(info.changeToMobileX(left), out);
+		SL.writeInt(info.changeToMobileY(top, height), out);
 		SL.writeInt(width, out);
 		SL.writeInt(height, out);
 		SL.writeInt(unitCount, out);

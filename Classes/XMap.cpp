@@ -56,8 +56,8 @@ void XMap::AnalyzeBuildingDataL()
 				dis >> brID >> id >> x >> y >> state >> bflip >> factoryCount;
 				iMapBuilding[i].brID = brID;
 				iMapBuilding[i].id = id;
-				iMapBuilding[i].x = x * CC_CONTENT_SCALE_FACTOR();
-				iMapBuilding[i].y = y * CC_CONTENT_SCALE_FACTOR();
+				iMapBuilding[i].x = x;
+				iMapBuilding[i].y = y;
 				iMapBuilding[i].state = state;
 				iMapBuilding[i].bflip = bflip == 0 ? false : true;
 				iMapBuilding[i].bcasern = false;
@@ -74,10 +74,10 @@ void XMap::AnalyzeBuildingDataL()
 						dis >> unitType >> left >> top >> width >> height >> unitCount >> interval;
 					
 						iMapBuilding[i].iUnitFactoryData[k].unitType = unitType;
-						iMapBuilding[i].iUnitFactoryData[k].left = left * CC_CONTENT_SCALE_FACTOR();
-						iMapBuilding[i].iUnitFactoryData[k].top = top * CC_CONTENT_SCALE_FACTOR();
-						iMapBuilding[i].iUnitFactoryData[k].width = width * CC_CONTENT_SCALE_FACTOR();
-						iMapBuilding[i].iUnitFactoryData[k].height = height * CC_CONTENT_SCALE_FACTOR();
+						iMapBuilding[i].iUnitFactoryData[k].left = left ;
+						iMapBuilding[i].iUnitFactoryData[k].top = top ;
+						iMapBuilding[i].iUnitFactoryData[k].width = width;
+						iMapBuilding[i].iUnitFactoryData[k].height = height;
 						iMapBuilding[i].iUnitFactoryData[k].unitCount = unitCount;
 						iMapBuilding[i].iUnitFactoryData[k].interval = interval;
 					}
@@ -116,8 +116,6 @@ void XMap::AnalyzeInfDataL()
 	if (!dis.fail())
 	{
 		dis >> iWidth >> iHeight >> iBackColor;
-		iWidth *= CC_CONTENT_SCALE_FACTOR();
-		iHeight *= CC_CONTENT_SCALE_FACTOR();
 		unsigned char r, g, b;
 		r = (iBackColor & 0xff0000) >> 16;
 		g = (iBackColor & 0xff00) >> 8;

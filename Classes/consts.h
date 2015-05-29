@@ -73,13 +73,15 @@ enum entityTypes
 
 enum zOrder
 {
-	kZOrderMap = 1,
-	kZOrderLandShadow = 20,
-	kZOrderLand = 21,
-	kZOrderSkyShadow = 30,
-	kZOrderSky = 31,
-	kZOrderBullet = 22,
-	kZorderExplosion = 40,
+	kZOrderMap,
+	kZorderBuilding,
+	kZOrderLandShadow,
+	kZOrderLand,
+	kZOrderSkyShadow,
+	kZOrderSky,
+	kZOrderBullet,
+	kZorderExplosion,
+	kZorderUI,
 };
 
 enum shadowType

@@ -351,7 +351,7 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/GameScene.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCString.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
- jni/../../Classes/gamestate.h \
+ jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocosStudioExport.h \
@@ -469,7 +469,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/GameScene.o: \
  jni/../../Classes/weaponresmanager.h jni/../../Classes/UnitManager.h \
  jni/../../Classes/consts.h jni/../../Classes/MyTime.h \
  jni/../../Classes/Player.h jni/../../Classes/MotionImpl.h \
- jni/../../Classes/building.h jni/../../Classes/Bullets.h
+ jni/../../Classes/building.h jni/../../Classes/Bullets.h \
+ jni/../../Classes/common.h
 
 jni/../../Classes/GameScene.h:
 
@@ -1177,6 +1178,8 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated
 
 jni/../../Classes/gamestate.h:
 
+jni/../../Classes/basescene.h:
+
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h:
@@ -1444,3 +1447,5 @@ jni/../../Classes/MotionImpl.h:
 jni/../../Classes/building.h:
 
 jni/../../Classes/Bullets.h:
+
+jni/../../Classes/common.h:

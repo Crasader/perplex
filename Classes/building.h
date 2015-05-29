@@ -19,8 +19,8 @@ public:
 	static Building* create(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph);
 	bool  init(GameScene* gameScene, std::shared_ptr<BuildingRes> buildingRes, int buildingID, int state, bool fliph);
 	
-	void perform();
-	void processUnitFactory();
+	void perform(float dt) override;
+	void processUnitFactory(float dt);
 	void processDie();
 	void processTool();
 	int beAttack(const cocos2d::Rect &rect, int hp);
@@ -51,6 +51,5 @@ private:
 	VDT _dropToolDatas;
 	VEP _dieExplode;
 	cocos2d::Rect _walkRect;
-	cocos2d::Node _model;
 };
 #endif // __building_h__

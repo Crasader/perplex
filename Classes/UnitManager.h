@@ -30,6 +30,7 @@ public:
 	Unit* spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* spawnEnemy(int type);
 	Unit* getOrCreate(GameScene* gameScene, int unitID, int type, int dir, int campType);
+	Explosion* createExplode(Unit* unit, int type, const cocos2d::Vec2& pos);
 public:
 	static cocos2d::Vector<Tool*> _tools;
 	static cocos2d::Vector<Building*> _buildings;
@@ -39,7 +40,7 @@ public:
 	static cocos2d::Vector<Unit*> _enemies;
 	static cocos2d::Vector<Bullet*> _enemyBullets;
 	static cocos2d::Vector<Bullet*> _allyBullets;
-	//static cocos2d::Vector<Explosion*> _explodes;
+	static cocos2d::Vector<Explosion*> _explodes;
 	static cocos2d::Vector<GameEntity*> _explodeReals;
 private:
 	GameScene* _gameScene;

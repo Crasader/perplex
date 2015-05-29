@@ -23,7 +23,7 @@ void ShotLogicManager::createShotLogic(Unit* unit, int type, int bulletID, int p
 	_shotLogics.push_back(shotLogic);
 }
 
-std::vector<std::shared_ptr<ShotLogic>> ShotLogicManager::getShotLogics() const
+std::vector<std::shared_ptr<ShotLogic>>& ShotLogicManager::getShotLogics()
 {
 	return _shotLogics;
 }

@@ -17,16 +17,21 @@ void BuildingResManager::loadRes(const std::string& res)
 		if (count > 0)
 		{
 			_buildingResList.resize(count);
-			for (int n = 0; n = count; n++)
+			for (int n = 0; n < count; n++)
 			{
 				auto pBuildingRes = std::shared_ptr<BuildingRes>(new BuildingRes());
-				int type, ID, shake, x, y, rectCount;
+				int type, ID, x, y, rectCount;
 				int left, top, width, height;
-				int stateImageID, hp, exploreCount;
+				int hp, exploreCount;
 				int animaID, aAdd, ax, ay, start, end, beginIndex;
 				int interval;
-
+				unsigned char shake;
 				fin >> type >> ID >> shake >> x >> y >> rectCount;
+				pBuildingRes->_type = type;
+				pBuildingRes->_id = ID;
+				pBuildingRes->_shake = shake != 0 ? true : false;
+				pBuildingRes->_originX = x;
+				pBuildingRes->_originY = y;
 				pBuildingRes->_rectCount = rectCount;
 				if (rectCount > 0)
 				{
@@ -43,11 +48,12 @@ void BuildingResManager::loadRes(const std::string& res)
 						pBuildingRes->_buildingRects[i] = cocos2d::Rect(left, top, width, height);
 					}
 				}
-				fin >> stateImageID;
-				fin >> stateImageID;
-				fin >> stateImageID;
+				fin >> pBuildingRes->_stateImageID[0];
+				fin >> pBuildingRes->_stateImageID[1];
+				fin >> pBuildingRes->_stateImageID[2];
 				fin >> hp;
 				pBuildingRes->_Hp = hp;
+				_buildingResList[n] = pBuildingRes;
 				fin >> exploreCount;
 				if (exploreCount > 0)
 				{

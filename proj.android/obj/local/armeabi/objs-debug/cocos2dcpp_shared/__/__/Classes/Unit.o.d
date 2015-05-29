@@ -426,17 +426,17 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Unit.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/Export.h \
  jni/../../Classes/Effects.h jni/../../Classes/Explosion.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/consts.h jni/../../Classes/UnitRes.h \
- jni/../../Classes/Head.h jni/../../Classes/GameGlobe.h \
- jni/../../Classes/Weapon.h jni/../../Classes/shotlogic.h \
- jni/../../Classes/mathconst.h jni/../../Classes/shotlogicmanager.h \
- jni/../../Classes/Player.h \
+ jni/../../Classes/basescene.h jni/../../Classes/consts.h \
+ jni/../../Classes/UnitRes.h jni/../../Classes/Head.h \
+ jni/../../Classes/GameGlobe.h jni/../../Classes/Weapon.h \
+ jni/../../Classes/shotlogic.h jni/../../Classes/mathconst.h \
+ jni/../../Classes/shotlogicmanager.h jni/../../Classes/Player.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCEventListenerController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h \
  jni/../../Classes/MotionImpl.h jni/../../Classes/UnitResManager.h \
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
  jni/../../Classes/MapManager.h jni/../../Classes/mapconst.h \
- jni/../../Classes/XMap.h
+ jni/../../Classes/XMap.h jni/../../Classes/UnitManager.h
 
 jni/../../Classes/Unit.h:
 
@@ -1296,6 +1296,8 @@ jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
 
+jni/../../Classes/basescene.h:
+
 jni/../../Classes/consts.h:
 
 jni/../../Classes/UnitRes.h:
@@ -1331,3 +1333,5 @@ jni/../../Classes/MapManager.h:
 jni/../../Classes/mapconst.h:
 
 jni/../../Classes/XMap.h:
+
+jni/../../Classes/UnitManager.h:

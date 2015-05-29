@@ -91,5 +91,14 @@ private:
 // protected:
 // 	cocos2d::ActionInterval* _action;
 // };
+class Explosion : public cocos2d::Node
+{
+public:
+	static Explosion* create(const cocos2d::Vec2& pos);
+	bool init(const cocos2d::Vec2& pos);
+private:
+	void recycle(float dt);
+	cocos2d::Node* _modle;
+};
 
 #endif /* defined(__Moon3d__Explosion__) */

@@ -13,15 +13,15 @@ public:
 public:
 	ShotLogic(Unit* unit, int weaponResID, int posIndex);
 	virtual ~ShotLogic();
-	virtual void perform();;
+	virtual void perform(float dt);;
 	bool isEnd();
 protected:
 	bool _end;
-	short _firetick;
-	short _performTick;
+	float _firetick;
+	float _performTick;
 	int _posIndex;
 	int _weaponResID;
-	int _speed;
+	float _speed;
 	Unit* _unit;
 };
 //////////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ class ShotLogicA : public ShotLogic
 public:
 	ShotLogicA(Unit* unit, int weaponResID, int posIndex);
 
-	void perform();
+	void perform(float dt);
 protected:
 	short _delay;
 	int _shotDirection;
@@ -53,7 +53,7 @@ public:
 
 	~ShotLogicB();
 
-	void perform();
+	void perform(float dt);
 private:
 	short _delay;
 	int _fireCount;
@@ -70,7 +70,7 @@ class ShotLogicC : public ShotLogic
 public:
 	ShotLogicC(Unit* unit, int weaponResID, int posIndex);
 
-	void perform();
+	void perform(float dt);
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -84,10 +84,10 @@ public:
 public:
 	ShotLogicD(Unit* unit, int weaponResID, int posIndex);
 
-	void perform();
+	void perform(float dt);
 private:
 	int _fireCount;
-	short _delay;
+	float _delay;
 };
 
 
@@ -101,7 +101,7 @@ public:
 	ShotLogicE(Unit* unit, int weaponResID, int posIndex, bool dir);
 	~ShotLogicE();
 
-	void perform();
+	void perform(float dt);
 private:
 	bool _dir;
 	Unit* _goalUnit;
@@ -118,7 +118,7 @@ public:
 	ShotLogicF(Unit* unit, int weaponResID, int posIndex, int shotCount, bool dir);
 	~ShotLogicF();
 
-	void perform();
+	void perform(float dt);
 private:
 	bool _dir;
 	int _shotCount;
@@ -145,7 +145,7 @@ class ShotLogicH : public ShotLogic
 public:
 	ShotLogicH(Unit* unit, int weaponResID, int posIndex);
 	
-	void perform();
+	void perform(float dt);
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ class ShotLogicI : public ShotLogic
 public:
 	ShotLogicI(Unit* unit, int weaponResID, int posIndex);
 
-	void perform();
+	void perform(float dt);
 };
 //////////////////////////////////////////////////////////////////////////
 //∫‰ÃÏ≈⁄
@@ -166,7 +166,7 @@ class ShotLogicK : public ShotLogic
 public:
 	ShotLogicK(Unit* unit, int weaponResID, int posIndex);
 
-	void perform();
+	void perform(float dt);
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -178,7 +178,7 @@ public:
 	ShotLogicQ(Unit* unit, int weaponResID, int posIndex, int shotCount);
 
 	~ShotLogicQ();
-	void perform();
+	void perform(float dt);
 private:
 	short _delay;
 	int _fireCount;

@@ -13,7 +13,7 @@ class ShotLogicManager
 public:
 	ShotLogicManager();
 	void createShotLogic(Unit* unit, int type, int bulletID, int posIndex);
-	std::vector<std::shared_ptr<ShotLogic>> getShotLogics() const;
+	std::vector<std::shared_ptr<ShotLogic>>& getShotLogics();
 	void createDefaultLogic(Unit* unit, int weaponRes);
 private:
 	std::vector<std::shared_ptr<ShotLogic>> _shotLogics;

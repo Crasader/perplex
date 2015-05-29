@@ -353,7 +353,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/TriggerUnitToRect.o
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/Unit.h jni/../../Classes/GameEntity.h \
+ jni/../../Classes/basescene.h jni/../../Classes/Unit.h \
+ jni/../../Classes/GameEntity.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocosStudioExport.h \
@@ -423,7 +424,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/TriggerUnitToRect.o
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CCActionTimelineNode.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CCActionTimeline.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CSLoader.h \
- jni/../../Classes/XDropTool.h jni/../../Classes/UnitManager.h
+ jni/../../Classes/XDropTool.h jni/../../Classes/UnitManager.h \
+ jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
+ jni/../../Classes/Head.h
 
 jni/../../Classes/TriggerUnitToRect.h:
 
@@ -1135,6 +1138,8 @@ jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
 
+jni/../../Classes/basescene.h:
+
 jni/../../Classes/Unit.h:
 
 jni/../../Classes/GameEntity.h:
@@ -1280,3 +1285,9 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebu
 jni/../../Classes/XDropTool.h:
 
 jni/../../Classes/UnitManager.h:
+
+jni/../../Classes/CameraExt.h:
+
+jni/../../Classes/CAnimationData.h:
+
+jni/../../Classes/Head.h:

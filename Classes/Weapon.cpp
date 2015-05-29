@@ -4,6 +4,7 @@
 #include "Bullets.h"
 #include "GameScene.h"
 #include "UnitManager.h"
+#include "consts.h"
 
 USING_NS_CC;
 
@@ -24,7 +25,7 @@ Weapon::Weapon(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit*
 
 }
 
-void Weapon::perform()
+void Weapon::perform( float dt )
 {
 	switch (_state)
 	{
@@ -52,9 +53,12 @@ void Weapon::perform()
 
 bool Weapon::init(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType)
 {
+	_x = _unit->getShotX(posIndex);
+	_y = _unit->getShotY(posIndex);
 	_state = W_BULLET;
 	_bullet = _gameLayer->getSpriteManager()->createBullet(weaponRes, _x, _y, _moveX, _moveY, dir, weaponCampType);;
 	_bullet->setType(_weaponRes->getID());
+	CC_SAFE_RETAIN(_bullet);
 	return true;
 }
 
@@ -68,4 +72,9 @@ Weapon* Weapon::create(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRe
 	}
 	CC_SAFE_DELETE(weapon);
 	return nullptr;
+}
+
+Weapon::~Weapon()
+{
+	CC_SAFE_RELEASE(_bullet);
 }

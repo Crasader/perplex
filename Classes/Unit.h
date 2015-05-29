@@ -64,6 +64,7 @@ public:
 	Unit(int type, int shadowType, int radius, bool alive, float hp, int score);
 	~Unit();
 	bool init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
+	bool init();
 	virtual bool hurt(float damage);
     virtual void die();
     void shoot();
@@ -111,15 +112,20 @@ public:
 	void setMoveRect(Rect aMoveRect) { _moveRect = aMoveRect; }
 	std::shared_ptr<UnitRes> getUnitRes() const { return _unitRes; }
 	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes);
-	void perfrom(float dt);
+	void perform(float dt);
+
+	void castoffStage();
+
+	void performWeapon(float dt);
 
 	bool isNeedDelete();
-	void AI();
-	void analyzeOrder();
-	void analyzeRecycleOrder();
+	void AI(float dt);
+	void analyzeOrder(float dt);
+	void analyzeOrder(vector<XUnitOrder>& orders, float dt);
+	void analyzeRecycleOrder(float dt);
 	void setMotionAndDIR(int motion, int wdir);
 	void fireRequire(int logicType, int weaponResID);
-	void processDie();
+	void processDie(float dt);
 	void processTool();
 	void unitMove(float dt);
 	bool enableMove(int newX, int newY);
@@ -127,6 +133,7 @@ public:
 	void setEventUnit(bool eventUnit);
 	int getPower();
 	void setPower(int power) { _power = power; }
+	void setHurt(int power);
 	void setNewRoad(std::vector<cocos2d::Vec2> _roads);
 	int beAttack(const cocos2d::Rect rect, int power);
 	int getShotDir();
@@ -137,6 +144,11 @@ public:
 	bool isActive(){ return _active; }
 	bool isCastoff() { return _castoff; }
 	void setUnitOrder(vector<XUnitOrder> aOrder);
+	GameScene* getGameScene();
+	Vector<Weapon*>& getWeaponList() { return _weapons; }
+	float getShotX(int posIndex);
+	float getShotY(int posIndex);
+	Rect getHitRect() const;
 private:
 	bool isSceneTop();
 	bool isSceneButton();
@@ -145,9 +157,9 @@ private:
 	bool isSceneAbove();
 	bool isSceneTopAbove();
 	void activateUnit();
+	void fire(float dt);
 protected:
     bool		_alive;
-	bool		_castoff;
 	bool		_active;//是否被激活
 	bool		_eventUnit;//是否事件Unit;
 	bool		_unitFireRequire;
@@ -165,7 +177,7 @@ protected:
 	//指令集
 	int			_orderType;//指令类型 0 －－ 初始指令    1 －－ 循环指令
 	int			_currentOrderIndex;
-	int			_orderDelay;
+	float		_orderDelay;
 	int			_orderCount;
 
 	//移动速度
@@ -186,7 +198,6 @@ protected:
 	int			_shotLogicType;
 	int			_weaponResID;
 	int			_fireTick;//轻武器涉及延迟
-	int			_castoffStage;//被处理的状态， 当大于等于1时被删除
 	//判断可行走范围
 	Rect		_walkRect;//行走碰撞判断矩形
 	Rect		_moveRect;//有效行走矩形

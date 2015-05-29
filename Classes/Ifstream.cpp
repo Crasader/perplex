@@ -8,10 +8,6 @@ Ifstream::Ifstream(const char *_Filename)
 {
 	m_fp = nullptr;
 	auto utils = cocos2d::FileUtils::getInstance();
-	/*if (utils->isFileExist(_Filename)) {
-		const std::string path = utils->fullPathForFilename(_Filename);
-		m_fp = fopen(path.c_str(), "rb");
-		}*/
 	m_data = utils->getDataFromFile(string(_Filename));
 }
 

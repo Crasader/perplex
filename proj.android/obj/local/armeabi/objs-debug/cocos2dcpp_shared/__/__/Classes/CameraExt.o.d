@@ -352,7 +352,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/CameraExt.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
  jni/../../Classes/CAnimationData.h jni/../../Classes/Head.h \
- jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h
+ jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
+ jni/../../Classes/basescene.h
 
 jni/../../Classes/CameraExt.h:
 
@@ -1065,3 +1066,5 @@ jni/../../Classes/Head.h:
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:

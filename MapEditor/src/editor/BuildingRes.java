@@ -369,7 +369,13 @@ class ExploreBR extends BuildingRes {
 		else {
 			SL.writeInt(image.getID(), out);
 		}
-		SL.writeInt(images[DEAD].getID(), out);
+		if (images.length >= DEAD) {
+			SL.writeInt(-1, out);
+		}
+		else {
+			
+			SL.writeInt(images[DEAD].getID(), out);
+		}
 		
 		SL.writeInt(hp, out);
 		

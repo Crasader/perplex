@@ -351,8 +351,6 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/TestScene.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCString.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
- jni/../../Classes/AnimationLoader.h \
- jni/../../Classes/AnimationResLoader.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCArmatureDefine.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCBone.h \
@@ -369,7 +367,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/TestScene.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCArmatureAnimation.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCSpriteFrameCacheHelper.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCArmatureDataManager.h \
- jni/../../Classes/ShadowController.h
+ jni/../../Classes/AnimationLoader.h \
+ jni/../../Classes/AnimationResLoader.h \
+ jni/../../Classes/ShadowController.h jni/../../Classes/Explosion.h
 
 jni/../../Classes/TestScene.h:
 
@@ -1075,10 +1075,6 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h:
 
-jni/../../Classes/AnimationLoader.h:
-
-jni/../../Classes/AnimationResLoader.h:
-
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCArmatureDefine.h:
@@ -1111,4 +1107,10 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebu
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCArmatureDataManager.h:
 
+jni/../../Classes/AnimationLoader.h:
+
+jni/../../Classes/AnimationResLoader.h:
+
 jni/../../Classes/ShadowController.h:
+
+jni/../../Classes/Explosion.h:

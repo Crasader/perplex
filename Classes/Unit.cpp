@@ -36,6 +36,8 @@
 #include "CameraExt.h"
 #include "MapManager.h"
 #include "XMap.h"
+#include "UnitManager.h"
+#include "Explosion.h"
 
 bool Unit::hurt(float damage)
 {
@@ -85,7 +87,6 @@ bool Unit::alive()
 Unit::Unit()
 :GameEntity()
 ,_alive(true)
-, _castoff(false)
 , _active(false)
 , _eventUnit(false)
 , _unitFireRequire(false)
@@ -116,7 +117,6 @@ Unit::Unit()
 , _shotLogicType(0)
 , _weaponResID(0)
 , _fireTick(0)
-, _castoffStage(0)
 , _walkRect()
 , _moveRect()
 , _gameScene(nullptr)
@@ -153,20 +153,19 @@ Unit::Unit(int type, int shadowType, int radius, bool alive, float hp, int score
 Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
 	:GameEntity()
 	, _alive(true)
-	, _castoff(false)
 	, _active(false)
 	, _eventUnit(false)
 	, _unitFireRequire(false)
 	, _die(false)
 	, _endableMove(true)
-	, _power(0)
+	, _power(10)
 	, _score(0)
 	, _iDieExplodCount(0)
 	, _startExplodeTick(0)
 	, _campType(walkdir)
 	, _unitID(unitID)
 	, _moveType(0)
-	, _maxHP(0)
+	, _maxHP(1000)
 	, _BodyLevel(0)
 	, _orderType(0)
 	, _currentOrderIndex(0)
@@ -184,7 +183,6 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	, _shotLogicType(0)
 	, _weaponResID(0)
 	, _fireTick(0)
-	, _castoffStage(0)
 	, _walkRect()
 	, _moveRect()
 	, _gameScene(gameScene)
@@ -193,6 +191,7 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	, _shotLogicManager(new ShotLogicManager())
 	, _curMotion(nullptr)
 {
+	_type = type;
 	_dieExplode = vector<bool>();
 	_unitOrder = vector<XUnitOrder>();
 	_moveProb = vector<int>();
@@ -216,11 +215,22 @@ bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int cam
 	{
 		return false;
 	}
+	log("%s", __FUNCTION__);
 	_type = type;
-	auto unitRes = _gameScene->getUnitResManager().getUnitResFromID(type);
+	auto unitRes = _gameScene->getUnitResManager().getUnitResFromID(_type);
+	if (unitRes == nullptr)
+	{
+		return false;
+	}
 	setUnitRes(unitRes);
 	_shotLogicManager = std::shared_ptr<ShotLogicManager>(new ShotLogicManager());
 	return true;
+}
+
+
+bool Unit::init()
+{
+	return init(_gameScene, _unitID, _type, _walkDir, _campType);
 }
 
 vector<int> Unit::getMoveProb() const
@@ -274,11 +284,12 @@ void Unit::setUnitRecycleOrder(vector<XUnitOrder> aUnitRecycleOrder)
 
 void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
 {
+	assert(aUnitRes != nullptr);
 	_unitRes = aUnitRes;
 	setMotionAndDIR(0, _walkDir);
 	_maxHP = _power = _unitRes->_HP;
 	//主角
-	if (_unitRes->_ID == 0)
+	if (_unitRes && _unitRes->_ID == 0)
 	{
 		return;
 	}
@@ -293,45 +304,37 @@ void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
 	}
 }
 
-void Unit::perfrom( float dt )
+void Unit::perform( float dt )
 {
-	log("enter unit::perform...%d", _unitID);
+	log("enter unit::perform...%s,unitid = %d", __FUNCTION__, _unitID);
 	if (!_active)
 	{
 		activateUnit();
+		log("enter unit::perform...%s,unitid = %d, active", __FUNCTION__, _unitID);
 		return;
 	}
 	else if (isNeedDelete())
 	{
+		log("enter unit::perform...%s,unitid = %d, needDelete", __FUNCTION__, _unitID);
+		if (_castoff)
+		{
+			castoffStage();
+			return;
+		}
 		_castoff = true;
 		return;
 	}
 	//处理已发射的武器
-	for (auto it = _weapons.begin(); it != _weapons.end();)
-	{
-		if ((*it)->getCastoffStage())
-		{
-			it = _weapons.erase(it);
-			CC_SAFE_RELEASE(*it);
-		}
-		else
-		{
-			++it;
-			(*it)->perform();
-		}
-	}
-	if (_castoff)
-	{
-		//如果是事件物体，则将一直保留废弃状态，但不会被切底删除
-		if (!_eventUnit)
-		{
-			_castoffStage++;
-		}
-		return;
-	}
+	performWeapon(dt);
+
 	if (_beAttackTick > 0)
 	{
 		_beAttackTick--;
+	}
+	if (_castoff)
+	{
+		castoffStage();
+		return;
 	}
 	if (_die)
 	{
@@ -343,13 +346,41 @@ void Unit::perfrom( float dt )
 		}
 		return;
 	}
-	//人工智能
-	AI();
 	//死亡处理
-/*	processDie();*/
+	processDie(dt);
+	//人工智能
+	AI(dt);
 	//移动
 	unitMove(dt);
+	//处理待发射的武器
+	fire(dt);
 	log("exit unit::perfrom...%d",_unitID);
+}
+
+
+void Unit::castoffStage()
+{
+	//如果是事件物体，则将一直保留废弃状态，但不会被切底删除
+	if (!_eventUnit)
+	{
+		_castoffStage++;
+	}
+}
+
+void Unit::performWeapon(float dt)
+{
+ 	for (auto it = _weapons.begin(); it != _weapons.end();)
+ 	{
+ 		if ((*it)->getCastoffStage())
+ 		{
+ 			it = _weapons.erase(it);
+ 		}
+ 		else
+ 		{
+ 			(*it)->perform(dt);
+ 			++it;
+ 		}
+ 	}
 }
 
 bool Unit::isNeedDelete()
@@ -369,7 +400,7 @@ bool Unit::isNeedDelete()
 	return false;
 }
 
-void Unit::AI()
+void Unit::AI(float dt)
 {
 	if (_HP <= 0)
 	{
@@ -377,36 +408,40 @@ void Unit::AI()
 	}
 	if (_orderType == 0)
 	{
-		analyzeOrder();
+		analyzeOrder(dt);
 	}
 	else
 	{
-		analyzeRecycleOrder();
+		analyzeRecycleOrder(dt);
 	}
 }
-//解析指令
-void Unit::analyzeOrder()
+void Unit::analyzeOrder(vector<XUnitOrder>& orders, float dt)
 {
-	if (_orderDelay > 0)
+	if (orders.empty())
 	{
-		_orderDelay--;
+		_orderType = 1;
 		return;
 	}
-	if (_currentOrderIndex >= (int)_unitOrder.size())
+	if (_orderDelay > 0)
+	{
+		_orderDelay -= dt;
+		return;
+	}
+	if (_currentOrderIndex >= (int)orders.size())
 	{
 		_orderType = 1;
 		_currentOrderIndex = 0;
 		return;
 	}
-	_orderDelay = _unitOrder[_currentOrderIndex].Time;
+	_orderDelay = orders[_currentOrderIndex].Time;
 	int motion = 0;
-	if (_unitOrder[_currentOrderIndex].Speed != 0)
+	if (orders[_currentOrderIndex].Speed != 0)
 	{
 		motion = 1;
 	}
 	_shotPosIndex = 0;
 	auto wdir = 0;
-	auto IntWDir = _unitOrder[_currentOrderIndex].Direct;
+	auto IntWDir = orders[_currentOrderIndex].Direct;
 	//#对准Player
 	if (IntWDir == WALK_DIR_COUNT)
 	{
@@ -436,140 +471,54 @@ void Unit::analyzeOrder()
 	{
 	case D_S_DOWN:
 		_moveX = 0;
-		_moveY = -_unitOrder[_currentOrderIndex].Speed;
+		_moveY = -orders[_currentOrderIndex].Speed;
 		break;
 	case D_S_LEFT_DOWN:
-		_moveX = -_unitOrder[_currentOrderIndex].Speed;
-		_moveY = -_unitOrder[_currentOrderIndex].Speed;
+		_moveX = -orders[_currentOrderIndex].Speed;
+		_moveY = -orders[_currentOrderIndex].Speed;
 		break;
 	case D_S_LEFT:
-		_moveX = -_unitOrder[_currentOrderIndex].Speed;
+		_moveX = -orders[_currentOrderIndex].Speed;
 		_moveY = 0;
 		break;
 	case D_S_LEFT_UP:
-		_moveX = -_unitOrder[_currentOrderIndex].Speed;
-		_moveY = _unitOrder[_currentOrderIndex].Speed;
+		_moveX = -orders[_currentOrderIndex].Speed;
+		_moveY = orders[_currentOrderIndex].Speed;
 		break;
 	case D_S_UP:
 		_moveX = 0;
-		_moveY = _unitOrder[_currentOrderIndex].Speed;
+		_moveY = orders[_currentOrderIndex].Speed;
 		break;
 	case D_S_RIGHT_UP:
-		_moveX = _unitOrder[_currentOrderIndex].Speed;
-		_moveY = _unitOrder[_currentOrderIndex].Speed;
+		_moveX = orders[_currentOrderIndex].Speed;
+		_moveY = orders[_currentOrderIndex].Speed;
 		break;
 	case D_S_RIGHT:
-		_moveX = _unitOrder[_currentOrderIndex].Speed;
+		_moveX = orders[_currentOrderIndex].Speed;
 		_moveY = 0;
 		break;
 	case D_S_RIGHT_DOWN:
-		_moveX = _unitOrder[_currentOrderIndex].Speed;
-		_moveY = -_unitOrder[_currentOrderIndex].Speed;
+		_moveX = orders[_currentOrderIndex].Speed;
+		_moveY = -orders[_currentOrderIndex].Speed;
 		break;
 	}
 	//射击
-	if (_unitOrder[_currentOrderIndex].BulletType != 0
-		&& _unitOrder[_currentOrderIndex].FireLogic != 0)
+	if (orders[_currentOrderIndex].BulletType != 0
+		&& orders[_currentOrderIndex].FireLogic != 0)
 	{
-		fireRequire(_unitOrder[_currentOrderIndex].FireLogic, _unitOrder[_currentOrderIndex].BulletType);
+		fireRequire(orders[_currentOrderIndex].FireLogic, orders[_currentOrderIndex].BulletType);
 	}
 	_currentOrderIndex++;
 }
-
-void Unit::analyzeRecycleOrder()
+//解析指令
+void Unit::analyzeOrder(float dt)
 {
-	if (_unitRecycleOrder.empty())
-	{
-		return;
-	}
-	if (_orderDelay > 0)
-	{
-		_orderDelay--;
-		return;
-	}
-	if (_currentOrderIndex > (int)_unitRecycleOrder.size())
-	{
-		_currentOrderIndex = 0;
-	}
-	_orderDelay = _unitRecycleOrder[_currentOrderIndex].Time;
-	auto motion = 0;
-	if (_unitRecycleOrder[_currentOrderIndex].Speed != 0)
-	{
-		motion = 1;
-	}
-	_shotPosIndex = 0;
-	auto wdir = D_S_DOWN;
-	auto IntWDir = _unitRecycleOrder[_currentOrderIndex].Direct;
-	if (IntWDir < 0)
-	{
-		IntWDir = 0;
-	}
-	//#对准Player
-	if (IntWDir == WALK_DIR_COUNT)
-	{
-		if (_gameScene->getPlayer() != nullptr)//面向player
-		{
-			auto angleDeg = calculeAngle();
-			setRotation(angleDeg + getRotation());
-			IntWDir = calDirction(angleDeg);
-		}
-		else
-		{
-			IntWDir = 0;
-		}
-	}
+	analyzeOrder(_unitOrder, dt);
+}
 
-	//#指定发射口
-	else if (IntWDir > WALK_DIR_COUNT)
-	{
-		_shotPosIndex = IntWDir - WALK_DIR_COUNT + 1;
-		IntWDir = 0;
-	}
-
-	wdir = (UnitSDIR)IntWDir;
-	setMotionAndDIR(motion, wdir);
-	switch (IntWDir)
-	{
-	case D_S_DOWN:
-		_moveX = 0;
-		_moveY = -_unitRecycleOrder[_currentOrderIndex].Speed;
-		break;
-	case D_S_LEFT_DOWN:
-		_moveX = -_unitRecycleOrder[_currentOrderIndex].Speed;
-		_moveY = -_unitRecycleOrder[_currentOrderIndex].Speed;
-		break;
-	case D_S_LEFT:
-		_moveX = -_unitRecycleOrder[_currentOrderIndex].Speed;
-		_moveY = 0;
-		break;
-	case D_S_LEFT_UP:
-		_moveX = -_unitRecycleOrder[_currentOrderIndex].Speed;
-		_moveY = _unitRecycleOrder[_currentOrderIndex].Speed;
-		break;
-	case D_S_UP:
-		_moveX = 0;
-		_moveY = _unitRecycleOrder[_currentOrderIndex].Speed;
-		break;
-	case D_S_RIGHT_UP:
-		_moveX = _unitRecycleOrder[_currentOrderIndex].Speed;
-		_moveY = _unitRecycleOrder[_currentOrderIndex].Speed;
-		break;
-	case D_S_RIGHT:
-		_moveX = _unitRecycleOrder[_currentOrderIndex].Speed;
-		_moveY = 0;
-		break;
-	case D_S_RIGHT_DOWN:
-		_moveX = _unitRecycleOrder[_currentOrderIndex].Speed;
-		_moveY = -_unitRecycleOrder[_currentOrderIndex].Speed;
-		break;
-	}
-	//射击
-	if (_unitRecycleOrder[_currentOrderIndex].BulletType != 0
-		&& _unitRecycleOrder[_currentOrderIndex].FireLogic != 0)
-	{
-		fireRequire(_unitRecycleOrder[_currentOrderIndex].FireLogic, _unitRecycleOrder[_currentOrderIndex].BulletType);
-	}
-	_currentOrderIndex++;
+void Unit::analyzeRecycleOrder(float dt)
+{
+	analyzeOrder(_unitRecycleOrder, dt);
 }
 
 //改变动作
@@ -591,7 +540,7 @@ void Unit::setMotionAndDIR(int motion, int wdir)
 		}
 		else
 		{
-			_curMotion = _motions[0];
+			/*_curMotion = _motions[0];*/
 			_moveY = 0;
 			_moveX = 0;
 		}
@@ -610,25 +559,19 @@ void Unit::fireRequire(int logicType, int weaponResID)
 	}
 }
 
-void Unit::processDie()
+void Unit::processDie( float dt )
 {
 	if (_motion != 2)
 	{
 		return;
 	}
 	auto explodeOK = true;
-	for (auto explode : _dieExplode)
+	if (!_dieExplode[0])
 	{
-		if (!explode)
-		{
-			explode = true;
-			//播放爆炸
-		}
-		if (!explode)
-		{
-			explodeOK = false;
-		}
+		_dieExplode[0] = true;
+		_gameScene->getUnitManager().createExplode(this, 0, this->getPosition());
 	}
+
 	if (explodeOK)
 	{
 		_dieTick++;
@@ -638,16 +581,10 @@ void Unit::processDie()
 		else if (_dieTick == 8)
 		{
 			//处理道具产生
-			processTool();
+			/*processTool();*/
 		}
 	}
-	if (true)//动画播放完
-	{
-		if (_dieTick >= 320)
-		{
-			_die = true;
-		}
-	}
+	_die = true;
 }
 //处理道具产生
 void Unit::processTool()
@@ -719,6 +656,12 @@ int Unit::getPower()
 	return _power;
 }
 
+
+void Unit::setHurt(int power)
+{
+	_power -= power;
+}
+
 void Unit::setNewRoad(std::vector<cocos2d::Vec2> _roads)
 {
 	_pointItemData = _roads;
@@ -732,29 +675,25 @@ int Unit::beAttack(const cocos2d::Rect rect, int power)
 	{
 		return 0;
 	}
-	for (auto a : _unitRes->_bodyRect[0])
+	auto m = dynamic_cast<Armature*>(_Model);
+	if (m)
 	{
-		auto tempRect = cocos2d::Rect(a->origin.x + getPositionX(), a->origin.y + getPositionY(), a->size.width, a->size.height);
+		auto a = m->getBoundingBox();
+		a.origin.x = getPositionX();
+		a.origin.y = getPositionY();
+		auto tempRect = cocos2d::Rect(a.origin.x, a.origin.y, a.size.width, a.size.height);
 		if (tempRect.intersectsRect(rect))
 		{
-			_beAttackTick = 1;
-			_power -= power;
-			if (_type == 0)
-			{
-				_gameScene->setPlayerPower(_power);
+			setMotionAndDIR(2, D_S_DOWN);
+			_dieExplode.clear();
+			_dieExplode.push_back(false);
+			if (_campType == Enemy){
+				//加分
+				_gameScene->addScore(UNIT_DIE_SCORE[_type]);
+				//加杀敌数量
+				_gameScene->addKillEnemy(1);
 			}
-			if (_power <= 0)
-			{
-				_power = 0;
-				setMotionAndDIR(2, D_S_DOWN);
-				_startExplodeTick = 0;
-				//#爆炸效果
-				if (_campType == Enemy)
-				{
-					_gameScene->addScore(UNIT_DIE_SCORE[_type]);
-					_gameScene->addKillEnemy(1);
-				}
-			}
+			setHurt(power);
 			return 1;
 		}
 	}
@@ -862,5 +801,65 @@ void Unit::activateUnit()
 		break;
 	}
 	return;
+}
+
+void Unit::fire( float dt )
+{
+	if (_power <= 0)
+	{
+		return;
+	}
+	if (_unitFireRequire)
+	{
+		_unitFireRequire = false;
+		_shotLogicManager->createShotLogic(this, _shotLogicType, _weaponResID, 0);
+		_shotLogicManager->createShotLogic(this, _shotLogicType, _weaponResID, 1);
+	}
+	auto list = _shotLogicManager->getShotLogics();
+	for (auto i = 0; i < list.size(); i++)
+	{
+		auto s = list[i];
+		if (s == nullptr) continue;
+		if (s->isEnd())
+		{
+			
+		}
+		else
+		{
+			s->perform(dt);
+		}
+	}
+	auto b = remove_if(list.begin(), list.end(), [](shared_ptr<ShotLogic> s){return s == nullptr ? true : s->isEnd(); });
+	for (auto iter = b; b != list.end(); ++iter)
+	{
+		list.erase(b);
+	}
+}
+
+
+float Unit::getShotX(int posIndex)
+{
+	return getPositionX() + _unitRes->_weaponPos[_walkDir << 1][posIndex]->x;
+}
+
+float Unit::getShotY(int posIndex)
+{
+	return getPositionY() + _unitRes->_weaponPos[_walkDir << 1][posIndex]->x;
+}
+
+
+Rect Unit::getHitRect() const
+{
+	auto a = dynamic_cast<Armature*>(_Model);
+	if (a)
+	{
+		return a->getBoundingBox();
+	}
+	return Rect::ZERO;
+}
+
+GameScene* Unit::getGameScene()
+{
+	return _gameScene;
 }
 

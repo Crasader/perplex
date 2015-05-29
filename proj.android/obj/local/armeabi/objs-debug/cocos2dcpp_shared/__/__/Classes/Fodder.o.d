@@ -427,7 +427,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Fodder.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/audio/android/prebuilt-mk/../../include/Export.h \
  jni/../../Classes/Effects.h jni/../../Classes/Explosion.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/GameLayer.h jni/../../Classes/Sprite3DEffect.h \
+ jni/../../Classes/basescene.h jni/../../Classes/GameLayer.h \
+ jni/../../Classes/Sprite3DEffect.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
  jni/../../Classes/Turret.h jni/../../Classes/Rotor.h \
  jni/../../Classes/Launcher.h jni/../../Classes/RotateWithAction.h \
@@ -1299,6 +1300,8 @@ jni/../../Classes/Explosion.h:
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/GameLayer.h:
 

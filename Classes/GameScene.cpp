@@ -23,6 +23,7 @@
 #include "Player.h"
 #include "building.h"
 #include "Bullets.h"
+#include "common.h"
 
 USING_NS_CC;
 
@@ -124,11 +125,14 @@ bool GameScene::init()
 	sb->setTag(LAYER_TAG_GAME);
 	sb->setPosition(origin);
 	addChild(sb);*/
-	_text = Label::create();
-	_text->setTextColor(Color4B::RED);
-	_text->setString("level:");
-	_text->setPosition(100, 100);
-	addChild(_text);
+// 	_text = Label::create();
+// 	_text->setTextColor(Color4B::RED);
+// 	_text->setString("level:");
+// 	TTFConfig ttfConfig;
+// 	_text->setSystemFontSize(80);
+// 	_text->setPosition(100, 100);
+// 	_text->setLocalZOrder(kZorderUI);
+//	addChild(_text);
 #ifdef COCOS2D_DEBUG
 	auto d = DrawNode::create();
 	d->drawRect(Vec2(0, 0), Vec2(visibleSize.width, visibleSize.height), Color4F::RED);
@@ -253,6 +257,15 @@ void GameScene::MapWalkRectActive()
 void GameScene::spriteCollision()
 {
 	//累计计数器，控制部分需要作碰撞处理
+	addCollisionTick();
+	//#删除废弃的子弹
+	deleteCastoffBullet();
+	//处理碰撞
+	performCollision();
+}
+
+void GameScene::addCollisionTick()
+{
 	if (_collisionTick >= 2)
 	{
 		_collisionTick = 0;
@@ -261,19 +274,27 @@ void GameScene::spriteCollision()
 	{
 		_collisionTick++;
 	}
-	//#删除废弃的子弹
-	for (auto iter = UnitManager::_allyBullets.begin(); iter != UnitManager::_allyBullets.end();)
-	{
-		auto b = *iter;
-		if (b->getCastoffStage() >= 1)
-		{
-			iter = UnitManager::_allyBullets.erase(iter);
-		}
-		else
-		{
-			++iter;
-		}
-	}
+}
+
+void GameScene::performCollision()
+{
+	allyToEnemy();
+	//处理player与道具碰撞处理
+	playerCollissionTool();
+	////爆炸碰撞处理
+	explodeCollision();
+	//子弹碰撞处理
+	bulletCollision();
+}
+
+void GameScene::deleteCastoffBullet()
+{
+	deleteCastoffallyBullet();
+	deleteCastoffEnemyBullet();
+}
+
+void GameScene::deleteCastoffEnemyBullet()
+{
 	for (auto iter = UnitManager::_enemyBullets.begin(); iter != UnitManager::_enemyBullets.end();)
 	{
 		auto b = *iter;
@@ -286,24 +307,70 @@ void GameScene::spriteCollision()
 			++iter;
 		}
 	}
-	//处理player与道具碰撞处理
+}
+
+void GameScene::deleteCastoffallyBullet()
+{
+	for (auto iter = UnitManager::_allyBullets.begin(); iter != UnitManager::_allyBullets.end();)
+	{
+		auto b = *iter;
+		if (b->getCastoffStage() >= 1)
+		{
+			iter = UnitManager::_allyBullets.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+}
+
+void GameScene::playerCollissionTool()
+{
 	if (_collisionTick == 0)
 	{
 		for (auto a : UnitManager::_tools)
 		{
-			
+
 			a->beTouch(_player);
 		}
 	}
-	////爆炸碰撞处理
-	explodeCollision();
-	//子弹碰撞处理
-	bulletCollision();
 }
 
 void GameScene::explodeCollision()
 {
 	
+}
+
+void GameScene::allyToEnemy()
+{
+	//处理敌军与盟军相撞
+	for (auto b : UnitManager::_allys)
+	{
+		if (b->isCastoff())
+		{
+			continue;
+		}
+		auto hitRect = b->getHitRect();
+		hitRect.origin.x = getCamera()->getX() + b->getPositionX();
+		hitRect.origin.y = getCamera()->getY() + b->getPositionY();
+		auto power = b->getPower();
+		//盟军子弹于敌人碰撞
+		for (auto e : UnitManager::_enemies)
+		{
+			auto unit = e;
+			if (unit && (!unit->isActive() || unit->isCastoff()))
+			{
+				continue;
+			}
+			//收到攻击，且子弹类型
+			if (unit->beAttack(hitRect, power) != 0)
+			{
+				b->setPower(power);
+				/*unit->setCastoff();*/
+			}
+		}
+	}
 }
 
 void GameScene::bulletCollision()
@@ -320,8 +387,8 @@ void GameScene::bulletCollision()
 		//盟军子弹于敌人碰撞
 		for (auto e : UnitManager::_enemies)
 		{
-			auto unit = dynamic_cast<Unit*>(e);
-			if (unit && (unit->isActive() || unit->isCastoff()))
+			auto unit = e;
+			if (unit && (!unit->isActive() || unit->isCastoff()))
 			{
 				continue;
 			}
@@ -408,11 +475,11 @@ void GameScene::gameInitPerform()
 	case 1:
 		if (_unitResManager == nullptr)
 		{
-			_unitResManager = std::shared_ptr<UnitResManager>(new UnitResManager("/mapdat/unitres_mobile.dat"));
+			_unitResManager = std::shared_ptr<UnitResManager>(new UnitResManager("unitres_mobile.dat"));
 		}
 		if (_buildingResManager == nullptr)
 		{
-			_buildingResManager = std::shared_ptr<BuildingResManager>(new BuildingResManager("mapdat/buidingres_mobile.dat"));
+			_buildingResManager = std::shared_ptr<BuildingResManager>(new BuildingResManager("buildingres_mobile.dat"));
 		}
 
 		break;
@@ -489,7 +556,7 @@ void GameScene::gameInitPerform()
 		_killoddsF = 0;
 		if (_player != nullptr)
 		{
-
+			
 		}
 		//记录开始时间
 		_totalStartSecond = MyTime::getCurrentTime();
@@ -556,7 +623,6 @@ void GameScene::deleteCastoffPoint()
 		auto e = *iter;
 		if (e->isCastoff())
 		{
-			log("delete %d", e->getUnitID());
 			(*iter)->removeFromParent();
 			iter = UnitManager::_enemies.erase(iter);
 		}
@@ -612,22 +678,11 @@ void GameScene::gamePlayingPerform(float dt)
 // 	}
 	//地图可走范围处理
 	MapWalkRectActive();
-	for (auto iter = UnitManager::_sprites.begin(); iter != UnitManager::_sprites.end();)
-	{
-		if ((*iter)->getCastoffStage() > 1)
-		{
-			(*iter)->removeFromParent();
-			log("delete sprite...");
-			iter = UnitManager::_sprites.erase(iter);
-		}
-		else
-		{
-			(*iter)->perfrom(dt);
-			++iter;
-		}
-	}
+	//精灵运动
+	performUnit(dt);
+
 	//物体碰撞处理
-	/*spriteCollision();*/
+	spriteCollision();
 	//删除索引表的废弃索引值
 	deleteCastoffPoint();
 	//将Sprite排序
@@ -643,10 +698,31 @@ void GameScene::gamePlayingPerform(float dt)
 	}
 }
 
+
+void GameScene::performUnit(float dt)
+{
+	for (auto i = 0; i < UnitManager::_sprites.size(); i++)
+	{
+		auto iter = UnitManager::_sprites.at(i);
+		log("Sprite size:%d", UnitManager::_sprites.size());
+		if (iter->getCastoffStage() > 1)
+		{
+			iter->removeFromParent();
+			log("delete sprite...");
+			UnitManager::_sprites.eraseObject(iter);
+			i--;
+		}
+		else
+		{
+			iter->perform(dt);
+		}
+	}
+}
+
 void GameScene::changeMapByEvent(int stage, int mapFileID)
 {
 	_totalScore += _scoreLevel;
-	if (_state != stage)
+	if (_stage != stage)
 	{
 		_stage = stage;
 		_mapSectonID = mapFileID;
@@ -743,7 +819,6 @@ int GameScene::getMapHeight()
 
 void GameScene::doPeroidicTick(float dt)
 {
-	_text->setString("level:" + _state);
 	switch (_state)
 	{
 	case EGS_GamePlaying:

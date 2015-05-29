@@ -433,9 +433,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/GameControllers.o: 
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCEventListenerController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h \
  jni/../../Classes/MotionImpl.h jni/../../Classes/GameScene.h \
- jni/../../Classes/gamestate.h jni/../../Classes/CameraExt.h \
- jni/../../Classes/CAnimationData.h jni/../../Classes/Head.h \
- jni/../../Classes/ShadowController.h \
+ jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
+ jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
+ jni/../../Classes/Head.h jni/../../Classes/ShadowController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
  jni/../../Classes/Turret.h
 
@@ -1320,6 +1320,8 @@ jni/../../Classes/MotionImpl.h:
 jni/../../Classes/GameScene.h:
 
 jni/../../Classes/gamestate.h:
+
+jni/../../Classes/basescene.h:
 
 jni/../../Classes/CameraExt.h:
 

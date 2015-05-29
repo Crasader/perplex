@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "gamestate.h"
+#include "basescene.h"
 
 class Unit;
 class UnitResManager;
@@ -17,7 +18,7 @@ class Victory;
 class CameraExt;
 class Player;
 
-class GameScene : public cocos2d::Layer
+class GameScene : public SceneBase
 {
 public:
 	GameScene();
@@ -54,12 +55,32 @@ public:
 	void loadEvent(int stage, int mapSectonID);
 	void deleteCastoffPoint();
 	void gamePlayingPerform(float dt);
+
+	void performUnit(float dt);
+
 	void MapWalkRectActive();
 	void changeMapByEvent(int stage, int mapFileID);
+
+private:
 	void spriteCollision();
+
+	void addCollisionTick();
+
+	void performCollision();
+
+	void deleteCastoffBullet();
+
+	void deleteCastoffEnemyBullet();
+
+	void deleteCastoffallyBullet();
+
+	void playerCollissionTool();
+
 	void explodeCollision();
+	void allyToEnemy();
 	void bulletCollision();
 	void sortSprites();
+public:
 	Unit* getPlayer();
 	void addLevelEnemy(int count);
 	void addScore(int param1);
@@ -85,6 +106,7 @@ public:
 	void moveCamera(float dt);
 	cocos2d::Size getMapSize();
 	void addUnit(Node* node);
+	std::shared_ptr<WeaponResManager>& getWeaponResManager() { return _weaponResManager; }
 private:
 	bool _game1stStart;
 	bool _victory;
