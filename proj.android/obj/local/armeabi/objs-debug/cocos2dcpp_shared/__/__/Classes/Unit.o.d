@@ -436,7 +436,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Unit.o: \
  jni/../../Classes/MotionImpl.h jni/../../Classes/UnitResManager.h \
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
  jni/../../Classes/MapManager.h jni/../../Classes/mapconst.h \
- jni/../../Classes/XMap.h jni/../../Classes/UnitManager.h
+ jni/../../Classes/XMap.h jni/../../Classes/UnitManager.h \
+ jni/../../Classes/AIBase.h
 
 jni/../../Classes/Unit.h:
 
@@ -1335,3 +1336,5 @@ jni/../../Classes/mapconst.h:
 jni/../../Classes/XMap.h:
 
 jni/../../Classes/UnitManager.h:
+
+jni/../../Classes/AIBase.h:

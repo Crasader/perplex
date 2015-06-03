@@ -111,13 +111,15 @@ Building* UnitManager::findBuildingFromID(int buildingID)
 	return nullptr;
 }
 
-Tool* UnitManager::createTool(int appearAnimaID, int generalAnimID, int disappearAnimID, int x, int y, int type)
+Tool* UnitManager::createTool(const char* name, int x, int y, int type)
 {
-	auto tool = Tool::create(_gameScene, appearAnimaID, generalAnimID, disappearAnimID, x, y, type);
+	auto tool = Tool::create(_gameScene, name, x, y, type);
 	if (tool == nullptr)
 	{
 		return nullptr;
 	}
+	tool->setLocalZOrder(kZorderTool);
+	_gameScene->addUnit(tool);
 	_tools.pushBack(tool);
 	_sprites.pushBack(tool);
 	return tool;
@@ -203,6 +205,7 @@ Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, 
 	if (pUnit)
 	{
 		pUnit->setPosition(Vec2(x, y));
+		pUnit->setPatrol(Vec2(x, y));
 		pUnit->setMoveType(moveType);
 		pUnit->setLocalZOrder(kZOrderSky);
 		_sprites.pushBack(pUnit);
@@ -297,19 +300,20 @@ Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, i
 	return pBullet;
 }
 
-Explosion* UnitManager::createExplode(Unit* unit, int type, const cocos2d::Vec2& pos)
+Explosion* UnitManager::createExplode(Unit* unit, int type, const cocos2d::Vec2& pos, std::function<void()> callback)
 {
 	Explosion* explosion = nullptr;
 	switch (type)
 	{
 	default:
-		explosion = Explosion::create(pos);
+		explosion = Explosion::create(pos, callback);
 		break;
 	}
 	if (explosion == nullptr)
 	{
 		return nullptr;
 	}
+	explosion->setCallBack(callback);
 	explosion->setLocalZOrder(unit->getLocalZOrder());
 	_gameScene->addUnit(explosion);
 	_explodes.pushBack(explosion);

@@ -10,6 +10,7 @@
 #include "Turret.h"
 #include "RotateWithAction.h"
 #include "FodderIdle.h"
+#include "AnimationLoader.h"
 
 
 Fodder::Fodder()
@@ -52,8 +53,7 @@ bool Fodder::init()
 	}
 	_score = 10;
 	_alive = true;
-	ArmatureDataManager::getInstance()->addArmatureFileInfo("plane0.png", "plane0.plist", "plane.csb");
-	_Model = Armature::create("plane");
+	_Model = AnimationLoader::getInstance().createAnimation("plane");
 	if (_Model)
 	{
 		addChild(_Model);
@@ -62,7 +62,7 @@ bool Fodder::init()
 		_radius = 30;
 		_shadowType = kZOrderSky;
 
-		_curState = new FodderIdle(this);
+		_curState = std::shared_ptr<MotionImpl>(new FodderIdle(this));
 		_curState->execute();
 		auto rect = _Model->getBoundingBox();
 		setMoveRect(rect);

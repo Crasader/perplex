@@ -81,6 +81,7 @@ enum zOrder
 	kZOrderSky,
 	kZOrderBullet,
 	kZorderExplosion,
+	kZorderTool,
 	kZorderUI,
 };
 

@@ -51,7 +51,7 @@ public:
 	void setBump() { _bump = true; }
 	bool isCastoff();
 	bool isBump();
-	Rect getHitRect() { return getBoundingBox(); }
+	Rect getHitRect();
 	int getPower();
 	void perform(float dt) override;
 protected:
@@ -59,7 +59,7 @@ protected:
 	bool _bump;
 	bool _castoff;
 	int _power;
-	int _liveTick;
+	float _liveTick;
 	std::shared_ptr<WeaponRes> _weaponRes;
 	GameScene* _gameScene;
     Vec2 _vector;

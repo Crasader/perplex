@@ -1,6 +1,8 @@
 #include "buildingresmanager.h"
+#include "cocos2d.h"
 
 
+USING_NS_CC;
 
 BuildingResManager::BuildingResManager(const std::string& res)
 {
@@ -45,7 +47,7 @@ void BuildingResManager::loadRes(const std::string& res)
 					for (int i = 0; i < rectCount; i++)
 					{
 						fin >> left >> top >> width >> height;
-						pBuildingRes->_buildingRects[i] = cocos2d::Rect(left, top, width, height);
+						pBuildingRes->_buildingRects[i] = cocos2d::Rect(left *  CC_CONTENT_SCALE_FACTOR(), top *  CC_CONTENT_SCALE_FACTOR(), width *  CC_CONTENT_SCALE_FACTOR(), height *  CC_CONTENT_SCALE_FACTOR());
 					}
 				}
 				fin >> pBuildingRes->_stateImageID[0];

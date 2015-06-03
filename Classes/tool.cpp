@@ -1,17 +1,79 @@
 #include "tool.h"
 #include "GameScene.h"
 #include "Unit.h"
+#include "AnimationLoader.h"
 
+#define APPEAR "appear"
+#define GENERAL "genera"
+#define DISAPPEAR "disappear"
 
-bool Tool::init()
+bool Tool::init(GameScene* gamescene, const std::string& anim, int x, int y, int type)
 {
+	_anim = AnimationLoader::getInstance().createAnimation(anim);
+	if (_anim == nullptr)
+	{
+		return false;
+	}
+	_action = _anim->getAnimation();
+	addChild(_anim);
+	appearAnim();
 	return true;
 }
 
-Tool* Tool::create(GameScene* gamescene, int appearAnimID, int generalAnimID, int disappearID, int x, int y, int type)
+void Tool::appearAnim()
 {
-	auto tool = new Tool(gamescene, appearAnimID, generalAnimID, disappearID, x, y, type);
-	if (tool && tool->init())
+	if (_action)
+	{
+		_action->play(APPEAR);
+		setEvent();
+	}
+}
+
+void Tool::activeAnim()
+{
+	if (_action)
+	{
+		_action->play(GENERAL);
+	}
+}
+
+void Tool::disappearAnim()
+{
+	if (_action)
+	{
+		_action->play(DISAPPEAR);
+		setEvent();
+	}
+}
+
+void Tool::setEvent()
+{
+	auto event = [&](Armature *armature, MovementEventType movementType, const std::string& movementID)
+	{
+		if (movementType == MovementEventType::COMPLETE || movementType == MovementEventType::LOOP_COMPLETE)
+		{
+			if (movementID == APPEAR)
+			{
+				_state = 2;
+				activeAnim();
+			}
+			else if (movementID == GENERAL)
+			{
+
+			}
+			else if (movementID == DISAPPEAR)
+			{
+				removeFromParent();
+			}
+		}
+	};
+	_action->setMovementEventCallFunc(event);
+}
+
+Tool* Tool::create(GameScene* gamescene, const std::string& anim, int x, int y, int type)
+{
+	auto tool = new Tool(gamescene, anim, x, y, type);
+	if (tool && tool->init(gamescene, anim, x, y, type))
 	{
 		tool->autorelease();
 		return tool;
@@ -22,36 +84,39 @@ Tool* Tool::create(GameScene* gamescene, int appearAnimID, int generalAnimID, in
 
 void Tool::beTouch(Unit* unit)
 {
-	if (_state != 2)
+	if (_state != 2 || unit == nullptr)
 	{
 		return;
 	}
+
+	auto rectTool = _anim->getBoundingBox();
+	rectTool.origin += getPosition();
+	if (unit->beAttack(rectTool, 0) != 0)
+	{
+		_state = 3;
+		removeFromParent();
+	}
 }
 
-void Tool::perform()
+void Tool::perform( float dt )
 {
 	if (_castoff)
 	{
 		_castoffStage++;
 		return;
 	}
-	if (_state == 0)
+	if (_state == 2)
 	{
-		_state = 1;
-		//
-	}
-	else
-	{
-
+		_existTick++;
+		if (_existTick > TOOL_DELAY_TICK)
+		{
+			_state = 3;
+			disappearAnim();
+		}
 	}
 }
 
-Tool::~Tool()
-{
-
-}
-
-Tool::Tool(GameScene* gamescene, int appearAnimID, int generalAnimID, int disappearID, int x, int y, int type) 
+Tool::Tool(GameScene* gamescene, const std::string& anim, int x, int y, int type)
 : _type(type)
 , _state(0)
 , _power(100)

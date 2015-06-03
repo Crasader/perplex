@@ -66,7 +66,7 @@ public:
     virtual bool hurt(float damage);
     virtual void die();
     void hideWarningLayer(Node* node);
-    
+	Vec2 getPositionInCamera();
 
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     //对游戏手柄的响应
@@ -98,7 +98,7 @@ public:
 	PlayerIdleState(Player* p);
 	virtual void execute();
 private:
-	Armature* _player;
+	cocostudio::Armature* _player;
 };
 
 #endif /* defined(__Moon3d__Player__) */

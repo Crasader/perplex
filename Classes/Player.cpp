@@ -34,6 +34,7 @@
 #include "Effects.h"
 #include "CameraExt.h"
 #include "ShadowController.h"
+#include "cocostudio/CCArmature.h"
 
 #define visible_size_macro Director::getInstance()->getVisibleSize()
 #define origin_point Director::getInstance()->getVisibleOrigin();
@@ -47,7 +48,7 @@ bool Player::init()
 {
     //_Model = EffectSprite3D::createFromObjFileAndTexture("playerv002.c3b", "playerv002_256.png");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("lordplane0.png", "lordplane0.plist", "lordplane.csb");
-	_Model = Armature::create("lordplane");
+	_Model = cocostudio::Armature::create("lordplane");
     if(_Model)
     {
 		targetAngle = 0;
@@ -297,6 +298,12 @@ void Player::hideWarningLayer(Node* node)
 {
     if(node)
         node->setVisible(false);
+}
+
+
+cocos2d::Vec2 Player::getPositionInCamera()
+{
+	return Vec2(getPositionX() + _gameScene->getCamera()->getX(), getPositionY() + _gameScene->getCamera()->getY());
 }
 
 bool Player::hurt(float damage){

@@ -91,7 +91,7 @@ bool TestScene::init()
 	lister->onTouchBegan = [&](Touch* t, Event* e)
 	{
 		auto p = t->getLocation();
-		auto ex = Explosion::create(p);
+		auto ex = Explosion::create(p, nullptr);
 		addChild(ex);
 		return true;
 	};

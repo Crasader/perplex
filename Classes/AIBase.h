@@ -1,7 +1,7 @@
 #ifndef __AIBase_h__
 #define __AIBase_h__
 
-#include "base\ccRandom.h"
+#include "cocos2d.h"
 
 class Unit;
 class GameScene;
@@ -9,54 +9,48 @@ class GameScene;
 class AIBase
 {
 public:
-	AIBase(GameScene* gameScene, Unit* unit)
-		:_attack(false)
-		, _AIFaceDesDir(0)
-		, _patrolX(unit->getPositionX())
-		, _patrolY(unit->getPositionY())
-		, _pointIndex(-1)
-		, _unit(unit)
-		, _goalUnit(unit)
-		, _gameScene(gameScene)
-	{
-		_AItick(rand_0_1() * 32);
-	}
-	virtual ~AIBase(){}
-	virtual void perform();
-	bool faceToEnemy()
-	{
-		auto angle = (_unit->getPosition() - _goalUnit->getPosition()).getAngle();
-		if (_unit->getShotDir() == _AIFaceDesDir)
-		{
-			return true;
-		}
-		//向着目标转动或走动
-		walkToGoal();
-		return false;
-	}
-	void walkToGoal()
-	{
-	
-	}
+	AIBase(GameScene* gameScene, Unit* unit);
+	virtual ~AIBase();
+	virtual void perform(float dt);;
+	bool faceToEnemy(float dt);
+	void walkToGoal(float dt);
+	void followPoint(float dt, bool cycle = false);
+	void moveRandom(float dt);
+	bool findEnemyGoal(cocos2d::Rect& lookRect, float dt);
+	//目标是否有效
+	bool isEnemyGoalValid(cocos2d::Rect looRect);
+	void resetRaod();
+	void setBeAttack();
+	float getMoveTick();
+	void fire();
+	void setPatrolX(float x) { _patrol.x = x; }
+	void setPatrolY(float y) { _patrol.y = y; }
+	cocos2d::Vec2 getPatorl(){ return _patrol; }
+	void moveDown(float dt);
 
-	void followPoint(bool cycle)
-	{
-		if (_unit->getPositionX() < _patrolX - 10)
-		{
+	void move(const  cocos2d::Vec2& normalized, float dt);
 
-		}
-	}
+	void moveDownleft(float dt);
+	void moveleft(float dt);
+	void moveLeftup(float dt);
+	void moveUp(float dt);
+	void moveUpright(float dt);
+	void moveRight(float dt);
+	void moveDownRight(float dt);
 private:
 	bool _attack;//受到攻击
 	int _AIFaceDesDir;//面向的方向
 	int _AItick;//延迟执行的计时器
 	int _pointIndex;//当前跟踪点的索引
-	float _patrolX;//巡逻出发点 X
-	float _patrolY; //巡逻出发点 Y
-
+	cocos2d::Vec2 _patrol;//巡逻出发点
+	bool _moveStart;
+	bool _moveFinish;
+	cocos2d::Vec2 _nomalized;
+	float _time;
 	Unit* _goalUnit;
 	Unit* _unit;
 	GameScene* _gameScene;
+	std::function<void(float)> _moveRandom;
 };
 
 #endif // __AIBase_h__

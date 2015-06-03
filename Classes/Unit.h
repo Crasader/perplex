@@ -42,6 +42,7 @@ class Player;
 class XUnitOrder;
 class GameScene;
 class MotionImpl;
+class AIBase;
 
 enum UnitSDIR
 {
@@ -113,7 +114,7 @@ public:
 	std::shared_ptr<UnitRes> getUnitRes() const { return _unitRes; }
 	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes);
 	void perform(float dt);
-
+	
 	void castoffStage();
 
 	void performWeapon(float dt);
@@ -149,6 +150,11 @@ public:
 	float getShotX(int posIndex);
 	float getShotY(int posIndex);
 	Rect getHitRect() const;
+	virtual Vec2 getPositionInCamera() { return getPosition(); };
+// 	void setPosition(float x, float y) override;
+// 	void setPosition(const Vec2& pos);
+	void setPatrol(const Vec2& pos);
+	float getSpeed();
 private:
 	bool isSceneTop();
 	bool isSceneButton();
@@ -224,5 +230,6 @@ protected:
 	std::shared_ptr<ShotLogicManager> _shotLogicManager;
 	std::vector<std::shared_ptr<MotionImpl>> _motions;
 	std::shared_ptr<MotionImpl> _curMotion;
+	std::shared_ptr<AIBase> _AI;
 };
 #endif /* defined(__Moon3d__AirCraft__) */

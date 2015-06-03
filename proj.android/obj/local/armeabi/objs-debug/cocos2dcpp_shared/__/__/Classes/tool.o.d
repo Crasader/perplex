@@ -423,7 +423,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/tool.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CSLoader.h \
  jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
  jni/../../Classes/basescene.h jni/../../Classes/Unit.h \
- jni/../../Classes/XDropTool.h
+ jni/../../Classes/XDropTool.h jni/../../Classes/AnimationLoader.h \
+ jni/../../Classes/AnimationResLoader.h \
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h
 
 jni/../../Classes/tool.h:
 
@@ -1278,3 +1280,9 @@ jni/../../Classes/basescene.h:
 jni/../../Classes/Unit.h:
 
 jni/../../Classes/XDropTool.h:
+
+jni/../../Classes/AnimationLoader.h:
+
+jni/../../Classes/AnimationResLoader.h:
+
+D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:

@@ -94,11 +94,13 @@ private:
 class Explosion : public cocos2d::Node
 {
 public:
-	static Explosion* create(const cocos2d::Vec2& pos);
-	bool init(const cocos2d::Vec2& pos);
+	static Explosion* create(const cocos2d::Vec2& pos, std::function<void()> callback);
+	bool init(const cocos2d::Vec2& pos, std::function<void()> callback);
+	void setCallBack(std::function<void()> callback);
 private:
 	void recycle(float dt);
 	cocos2d::Node* _modle;
+	std::function<void()> _callback;
 };
 
 #endif /* defined(__Moon3d__Explosion__) */

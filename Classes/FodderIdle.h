@@ -14,8 +14,17 @@ public:
 
 	virtual void execute();
 
-private:
+protected:
 	cocostudio::Armature* _armature;
+};
+
+class FodderRun : public FodderIdle
+{
+public:
+	FodderRun(Fodder* fodder);
+	void execute();
+private:
+
 };
 
 #endif // __FodderIdle_h__

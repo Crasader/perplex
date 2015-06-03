@@ -107,6 +107,10 @@ public:
 	cocos2d::Size getMapSize();
 	void addUnit(Node* node);
 	std::shared_ptr<WeaponResManager>& getWeaponResManager() { return _weaponResManager; }
+	void gameOver();
+	void playerRelife();
+private:
+	const int RELIFE_DEADLINE = 32;
 private:
 	bool _game1stStart;
 	bool _victory;

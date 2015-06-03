@@ -215,10 +215,10 @@ void BigExplosion::recycle(float dt){
 // // 	EffectManager::_testExpPool.pushBack(this);
 // }
 
-Explosion* Explosion::create(const Vec2& pos)
+Explosion* Explosion::create(const Vec2& pos, std::function<void()> callback)
 {
 	auto e = new Explosion();
-	if (e && e->init(pos))
+	if (e && e->init(pos, callback))
 	{
 		e->autorelease();
 		return e;
@@ -227,19 +227,21 @@ Explosion* Explosion::create(const Vec2& pos)
 	return nullptr;
 }
 
-bool Explosion::init(const Vec2& pos)
+bool Explosion::init(const Vec2& pos, std::function<void()> callback)
 {
 	auto armture = AnimationLoader::getInstance().createAnimation("smallexplosion");
 	armture->getAnimation()->play("idle");
-	auto onFrameEvent = [&](Bone *bone, const std::string& frameEventName, int originFrameIndex, int currentFrameIndex)
+	_callback = callback;
+	auto onFrameEvent = [&](Armature *armature, MovementEventType movementType, const std::string& movementID)
 	{
 		log("event....");
-		if (frameEventName == "end")
+		if (movementType == MovementEventType::COMPLETE || MovementEventType::LOOP_COMPLETE)
 		{
+			if(_callback)_callback();
 			recycle(0);
 		}
 	};
-	armture->getAnimation()->setFrameEventCallFunc(onFrameEvent);
+	armture->getAnimation()->setMovementEventCallFunc(onFrameEvent);
 	this->setPosition(pos);
 	addChild(armture);
 	return true;
@@ -248,4 +250,9 @@ bool Explosion::init(const Vec2& pos)
 void Explosion::recycle(float dt)
 {
 	this->removeFromParentAndCleanup(false);
+}
+
+void Explosion::setCallBack(std::function<void()> callback)
+{
+	_callback = callback;
 }

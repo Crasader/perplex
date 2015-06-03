@@ -120,5 +120,4 @@ GameEntity::GameEntity(int type, int shadowType, int radius, const Vec2& orienti
 
 GameEntity::~GameEntity()
 {
-	CC_SAFE_DELETE(_curState);
 }

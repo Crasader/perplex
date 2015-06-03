@@ -148,6 +148,9 @@ bool GameScene::init()
 		case EventKeyboard::KeyCode::KEY_ESCAPE:
 			Director::getInstance()->end();
 			break;
+		case EventKeyboard::KeyCode::KEY_F2:
+			Director::getInstance()->isPaused() ? Director::getInstance()->resume():Director::getInstance()->pause();
+			break;
 		default:
 			break;
 		}
@@ -437,6 +440,7 @@ void GameScene::bulletCollision()
 			{
 				eb->setBump();
 				eb->setCastoff();
+				eb->removeFromParent();
 				break;
 			}
 		}
@@ -680,7 +684,6 @@ void GameScene::gamePlayingPerform(float dt)
 	MapWalkRectActive();
 	//精灵运动
 	performUnit(dt);
-
 	//物体碰撞处理
 	spriteCollision();
 	//删除索引表的废弃索引值
@@ -689,11 +692,26 @@ void GameScene::gamePlayingPerform(float dt)
 	//sortSprites();
 	//摄像机
 	moveCamera(dt);
+	//player复活
+	if (_player != nullptr && _player->getPower() <= 0 && _state == EGS_GamePlaying && _life > 0)
+	{
+		_playerDelay += dt;
+		if (_playerDelay > RELIFE_DEADLINE)
+		{
+			if (_difficulty == 3 && _life > 1)
+			{
+				_life--;
+				playerRelife();
+				return;
+			}
+
+		}
+	}
 	if (_player != nullptr && _player->getPower() <= 0)
 	{
 		if (_life <= 0)
 		{
-			//#todo gameover
+			gameOver();
 		}
 	}
 }
@@ -1018,6 +1036,18 @@ GameScene* GameScene::create()
 void GameScene::addUnit(Node* node)
 {
 	if (_mapManager->getFloor()) _mapManager->getFloor()->addChild(node);
+}
+
+void GameScene::gameOver()
+{
+	CC_SAFE_RELEASE_NULL(_player);
+	_state = EGS_GameOver;
+	_stateStep = 0;
+}
+
+void GameScene::playerRelife()
+{
+	
 }
 
 

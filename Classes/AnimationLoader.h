@@ -11,7 +11,7 @@ class AnimationLoader
 {
 public:
 	static AnimationLoader& AnimationLoader::getInstance();
-	Armature* createAnimation(const std::string& name);
+	cocostudio::Armature* createAnimation(const std::string& name);
 	
 private:
 	void load();

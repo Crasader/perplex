@@ -222,6 +222,7 @@
     <ClCompile Include="..\Classes\TestScene.cpp" />
     <ClCompile Include="..\Classes\TriggerRandom.cpp" />
     <ClCompile Include="..\Classes\common.cpp" />
+    <ClCompile Include="..\Classes\AIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -490,6 +491,9 @@
     <ClInclude Include="..\Classes\TriggerRandom.h" />
     <ClInclude Include="..\Classes\common.h" />
     <ClInclude Include="..\Classes\basescene.h" />
+    <ClInclude Include="..\Classes\AIBase.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

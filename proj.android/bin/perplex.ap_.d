@@ -23,6 +23,9 @@ D:\projects\perplex\proj.android\assets\res \
 D:\projects\perplex\proj.android\assets\tank_body0_0.png \
 D:\projects\perplex\proj.android\assets\tank_turret0_0.png \
 D:\projects\perplex\proj.android\assets\tank_turret0_1.png \
+D:\projects\perplex\proj.android\assets\anim\blood.csb \
+D:\projects\perplex\proj.android\assets\anim\blood0.plist \
+D:\projects\perplex\proj.android\assets\anim\blood0.png \
 D:\projects\perplex\proj.android\assets\anim\confg.csv \
 D:\projects\perplex\proj.android\assets\anim\lordplane.csb \
 D:\projects\perplex\proj.android\assets\anim\lordplane0.plist \

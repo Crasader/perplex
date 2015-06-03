@@ -3,32 +3,38 @@
 
 #include "GameEntity.h"
 
+
 class GameScene;
 class Unit;
 
 class Tool : public GameEntity
 {
 public:
-	static const int TOOL_DELAY_TICK = 150;
-	static const int TOOL_RAY_TICK = 100;
+	static const int TOOL_DELAY_TICK = 60 * 10;
+	static const int TOOL_RAY_TICK = 60 * 1;
 public:
-	Tool(GameScene* gamescene, int appearAnimID, int generalAnimID, int disappearID, int x, int y, int type);
-	virtual ~Tool();
-	void perform();
-
+	Tool(GameScene* gamescene, const std::string& anim, int x, int y, int type);
+	void perform(float dt);
 	void beTouch(Unit* unit);
-	static Tool* create(GameScene* gamescene, int appearAnimID, int generalAnimID, int disappearID, int x, int y, int type);
+	static Tool* create(GameScene* gamescene, const std::string& anim, int x, int y, int type);
+	bool init(GameScene* gamescene, const std::string& anim, int x, int y, int type);
 
-	bool init();
-
+private:
+	void appearAnim();
+	void activeAnim();
+	void disappearAnim();
+	void setEvent();
 protected:
-	short _rayTick;//闪烁间隔
-	int _type;
+	float _rayTick;//闪烁间隔
+	int _type;//0 --- 喷枪  1 --- MG  2 --- 导弹  3 --- 雷  4 --- 血
 	int _state;
 	int _power;
 	int _moveX;
 	int _moveY;
-	int _existTick;//生存时间
+	float _existTick;//生存时间
 	GameScene* _gameScene;
+	cocostudio::Armature* _anim;
+	cocostudio::ArmatureAnimation* _action;
+
 };
 #endif // __tool_h__

@@ -38,20 +38,21 @@
 #include "XMap.h"
 #include "UnitManager.h"
 #include "Explosion.h"
+#include "AIBase.h"
 
 bool Unit::hurt(float damage)
 {
-    _HP -= damage;
-    if(_HP <= 0)
-    {
-        die();
-        return true;
-    }
-    return false;
+	_HP -= damage;
+	if (_HP <= 0)
+	{
+		die();
+		return true;
+	}
+	return false;
 }
 void Unit::die()
 {
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("explodeEffect.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("explodeEffect.mp3");
 	/* auto helloworld = (HelloWorld*)Director::getInstance()->getRunningScene()->getChildByTag(100);
 	 int score = helloworld->getScore();
 	 helloworld->setScore(score+=_score);
@@ -66,66 +67,66 @@ void Unit::die()
 	 auto scaleBack = ScaleTo::create(0.1, 1);
 	 auto label =helloworld->getScoreLabel();
 	 label->runAction(Sequence::create(scale, scaleBack,NULL));*/
-    //removeFromParent();
+	//removeFromParent();
 }
 
 void Unit::move(float y, float dt)
 {
-    //setPosition(getPosition().x+getPosition().y+y);
-    forward(y);
+	//setPosition(getPosition().x+getPosition().y+y);
+	forward(y);
 }
 
 void Unit::reset()
 {
-    _alive = true;
+	_alive = true;
 }
 bool Unit::alive()
 {
-    return _alive;
+	return _alive;
 }
 
 Unit::Unit()
-:GameEntity()
-,_alive(true)
-, _active(false)
-, _eventUnit(false)
-, _unitFireRequire(false)
-, _die(false)
-, _endableMove(true)
-, _power(0)
-, _score(0)
-, _iDieExplodCount(0)
-, _startExplodeTick(0)
-, _campType(0)
-, _unitID(-1)
-, _moveType(0)
-, _maxHP(0)
-, _BodyLevel(0)
-, _orderType(0)
-, _currentOrderIndex(0)
-, _orderDelay(0)
-, _orderCount(0)
-, _moveX(0)
-, _moveY(0)
-, _motion(0)
-, _beAttackTick(0)
-, _diaphaneity(0)
-, _dieTick(0)
-, _walkDir(0)
-, _AIType(0)
-, _shotPosIndex(0)
-, _shotLogicType(0)
-, _weaponResID(0)
-, _fireTick(0)
-, _walkRect()
-, _moveRect()
-, _gameScene(nullptr)
-, _player(nullptr)
-, _unitRes(nullptr)
-, _shotLogicManager(new ShotLogicManager())
-, _curMotion(nullptr)
+	:GameEntity()
+	, _alive(true)
+	, _active(false)
+	, _eventUnit(false)
+	, _unitFireRequire(false)
+	, _die(false)
+	, _endableMove(true)
+	, _power(0)
+	, _score(0)
+	, _iDieExplodCount(0)
+	, _startExplodeTick(0)
+	, _campType(0)
+	, _unitID(-1)
+	, _moveType(0)
+	, _maxHP(0)
+	, _BodyLevel(0)
+	, _orderType(0)
+	, _currentOrderIndex(0)
+	, _orderDelay(0)
+	, _orderCount(0)
+	, _moveX(0)
+	, _moveY(0)
+	, _motion(0)
+	, _beAttackTick(0)
+	, _diaphaneity(0)
+	, _dieTick(0)
+	, _walkDir(0)
+	, _AIType(0)
+	, _shotPosIndex(0)
+	, _shotLogicType(0)
+	, _weaponResID(0)
+	, _fireTick(0)
+	, _walkRect()
+	, _moveRect()
+	, _gameScene(nullptr)
+	, _player(nullptr)
+	, _unitRes(nullptr)
+	, _shotLogicManager(new ShotLogicManager())
+	, _curMotion(nullptr)
 {
-	_dieExplode =vector<bool>();
+	_dieExplode = vector<bool>();
 	_unitOrder = vector<XUnitOrder>();
 	_moveProb = vector<int>();
 	_moveItemData = vector<Vec2>();
@@ -138,13 +139,13 @@ Unit::Unit()
 }
 
 Unit::Unit(bool alive, float hp, int score)
-:Unit()
+	:Unit()
 {
 
 }
 
 Unit::Unit(int type, int shadowType, int radius, bool alive, float hp, int score)
-: Unit()
+	: Unit()
 {
 
 }
@@ -162,7 +163,7 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	, _score(0)
 	, _iDieExplodCount(0)
 	, _startExplodeTick(0)
-	, _campType(walkdir)
+	, _campType(camptype)
 	, _unitID(unitID)
 	, _moveType(0)
 	, _maxHP(1000)
@@ -224,6 +225,7 @@ bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int cam
 	}
 	setUnitRes(unitRes);
 	_shotLogicManager = std::shared_ptr<ShotLogicManager>(new ShotLogicManager());
+	_AI = std::shared_ptr<AIBase>(new AIBase(_gameScene, this));
 	return true;
 }
 
@@ -304,20 +306,20 @@ void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
 	}
 }
 
-void Unit::perform( float dt )
+void Unit::perform(float dt)
 {
 	log("enter unit::perform...%s,unitid = %d", __FUNCTION__, _unitID);
 	if (!_active)
 	{
 		activateUnit();
-		log("enter unit::perform...%s,unitid = %d, active", __FUNCTION__, _unitID);
+		if (_active)log("enter unit::perform...%s,unitid = %d, active", __FUNCTION__, _unitID);
 		return;
 	}
 	else if (isNeedDelete())
 	{
-		log("enter unit::perform...%s,unitid = %d, needDelete", __FUNCTION__, _unitID);
 		if (_castoff)
 		{
+			log("enter unit::perform...%s,unitid = %d, needDelete", __FUNCTION__, _unitID);
 			castoffStage();
 			return;
 		}
@@ -347,14 +349,18 @@ void Unit::perform( float dt )
 		return;
 	}
 	//死亡处理
-	processDie(dt);
-	//人工智能
-	AI(dt);
-	//移动
-	unitMove(dt);
-	//处理待发射的武器
-	fire(dt);
-	log("exit unit::perfrom...%d",_unitID);
+// 	processDie(dt);
+// 	//人工智能
+// 	AI(dt);
+// 	//移动
+// 	unitMove(dt);
+// 	//处理待发射的武器
+// 	fire(dt);
+	log("exit unit::perfrom...%s, %d", __FUNCTION__, _unitID);
+	if (_AI)
+	{
+		_AI->perform(dt);
+	}
 }
 
 
@@ -369,18 +375,18 @@ void Unit::castoffStage()
 
 void Unit::performWeapon(float dt)
 {
- 	for (auto it = _weapons.begin(); it != _weapons.end();)
- 	{
- 		if ((*it)->getCastoffStage())
- 		{
- 			it = _weapons.erase(it);
- 		}
- 		else
- 		{
- 			(*it)->perform(dt);
- 			++it;
- 		}
- 	}
+	for (auto it = _weapons.begin(); it != _weapons.end();)
+	{
+		if ((*it)->getCastoffStage())
+		{
+			it = _weapons.erase(it);
+		}
+		else
+		{
+			(*it)->perform(dt);
+			++it;
+		}
+	}
 }
 
 bool Unit::isNeedDelete()
@@ -559,37 +565,42 @@ void Unit::fireRequire(int logicType, int weaponResID)
 	}
 }
 
-void Unit::processDie( float dt )
+void Unit::processDie(float dt)
 {
 	if (_motion != 2)
 	{
 		return;
 	}
-	auto explodeOK = true;
+	auto explodeOK = false;
 	if (!_dieExplode[0])
 	{
 		_dieExplode[0] = true;
-		_gameScene->getUnitManager().createExplode(this, 0, this->getPosition());
+		auto callback = [&](){
+			explodeOK = true;
+			processTool();
+		};
+		_gameScene->getUnitManager().createExplode(this, 0, this->getPositionInCamera(), callback);
 	}
 
 	if (explodeOK)
 	{
-		_dieTick++;
-		if (_dieTick == 1)//播放音效
-		{
-		}
-		else if (_dieTick == 8)
-		{
-			//处理道具产生
-			/*processTool();*/
-		}
+		// 		_dieTick++;
+		// 		if (_dieTick == 1)//播放音效
+		// 		{
+		// 		}
+		// 		else if (_dieTick == 8)
+		// 		{
+		//处理道具产生
+		/*processTool();*/
+		/*}*/
 	}
 	_die = true;
 }
 //处理道具产生
 void Unit::processTool()
 {
-	if (_player == nullptr)
+	auto player = _gameScene->getPlayer();
+	if (player == nullptr)
 	{
 		return;
 	}
@@ -607,17 +618,22 @@ void Unit::processTool()
 			switch (dropTool.type)
 			{
 			case 0:
-
+				_gameScene->getUnitManager().createTool("blood", getPositionInCamera().x, getPositionInCamera().y, 0);
 				break;
 			default:
+				_gameScene->getUnitManager().createTool("blood", getPositionInCamera().x, getPositionInCamera().y, 0);
 				break;
 			}
 		}
 	}
 }
 
-void Unit::unitMove( float dt )
+void Unit::unitMove(float dt)
 {
+	if (_AI)
+	{
+		_AI->followPoint(dt,true);
+	}
 	auto newX = getPositionX() + _moveX * dt;
 	auto newY = getPositionY() + _moveY * dt;
 	log("Unit::unitMove x,y:%f,%f", newX, newY);
@@ -667,6 +683,10 @@ void Unit::setNewRoad(std::vector<cocos2d::Vec2> _roads)
 	_pointItemData = _roads;
 	_moveType = 2;//设置按照固定路线行走
 	_active = true;
+	if (_AI)
+	{
+		_AI->resetRaod();
+	}
 }
 
 int Unit::beAttack(const cocos2d::Rect rect, int power)
@@ -679,21 +699,34 @@ int Unit::beAttack(const cocos2d::Rect rect, int power)
 	if (m)
 	{
 		auto a = m->getBoundingBox();
-		a.origin.x = getPositionX();
-		a.origin.y = getPositionY();
-		auto tempRect = cocos2d::Rect(a.origin.x, a.origin.y, a.size.width, a.size.height);
+		auto pos = getPosition();
+		if (_campType != Enemy)
+		{
+			pos.y += _gameScene->getCamera()->getY();
+			pos.x += _gameScene->getCamera()->getX();
+		}
+		auto tempRect = cocos2d::Rect(a.origin.x + getPositionX(), a.origin.y + getPositionY(), a.size.width, a.size.height);
 		if (tempRect.intersectsRect(rect))
 		{
-			setMotionAndDIR(2, D_S_DOWN);
-			_dieExplode.clear();
-			_dieExplode.push_back(false);
-			if (_campType == Enemy){
-				//加分
-				_gameScene->addScore(UNIT_DIE_SCORE[_type]);
-				//加杀敌数量
-				_gameScene->addKillEnemy(1);
+			_beAttackTick = 1;
+			_power -= power;
+			if (_type == 0)
+			{
+				_gameScene->setPlayerPower(_power);
 			}
-			setHurt(power);
+			if (_power <= 0)
+			{
+				_power = 0;
+				setMotionAndDIR(2, D_S_DOWN);
+				_dieExplode.clear();
+				_dieExplode.push_back(false);
+				if (_campType == Enemy){
+					//加分
+					_gameScene->addScore(UNIT_DIE_SCORE[_type]);
+					//加杀敌数量
+					_gameScene->addKillEnemy(1);
+				}
+			}
 			return 1;
 		}
 	}
@@ -755,7 +788,7 @@ bool Unit::isSceneAbove()
 
 bool Unit::isSceneTopAbove()
 {
-	return (getPositionY() <= _gameScene->getCamera()->getY() +  3 * _gameScene->getSceneHeight() / 2);
+	return (getPositionY() <= _gameScene->getCamera()->getY() + 3 * _gameScene->getSceneHeight() / 2);
 }
 
 void Unit::activateUnit()
@@ -803,7 +836,7 @@ void Unit::activateUnit()
 	return;
 }
 
-void Unit::fire( float dt )
+void Unit::fire(float dt)
 {
 	if (_power <= 0)
 	{
@@ -816,13 +849,13 @@ void Unit::fire( float dt )
 		_shotLogicManager->createShotLogic(this, _shotLogicType, _weaponResID, 1);
 	}
 	auto list = _shotLogicManager->getShotLogics();
-	for (auto i = 0; i < list.size(); i++)
+	for (size_t i = 0; i < list.size(); i++)
 	{
 		auto s = list[i];
 		if (s == nullptr) continue;
 		if (s->isEnd())
 		{
-			
+
 		}
 		else
 		{
@@ -836,6 +869,11 @@ void Unit::fire( float dt )
 	}
 }
 
+
+float Unit::getSpeed()
+{
+	return 200.0f;
+}
 
 float Unit::getShotX(int posIndex)
 {
@@ -856,6 +894,29 @@ Rect Unit::getHitRect() const
 		return a->getBoundingBox();
 	}
 	return Rect::ZERO;
+}
+
+
+// void Unit::setPosition(float x, float y)
+// {
+// 	setPositionX(x);
+// 	setPositionY(y);
+// 	if (_AI != nullptr)
+// 	{
+// 		_AI->setPatrolX(x);
+// 		_AI->setPatrolY(y);
+// 	}
+// }
+
+// 
+// void Unit::setPosition(const Vec2& pos)
+// {
+// 	setPosition(pos.x, pos.y);
+// }
+
+void Unit::setPatrol(const Vec2& pos)
+{
+	if (_AI != nullptr){ _AI->setPatrolX(pos.x); _AI->setPatrolY(pos.y); }
 }
 
 GameScene* Unit::getGameScene()

@@ -37,6 +37,7 @@
 
 Bullet::Bullet()
 	:GameEntity()
+	, _hitRect(Rect::ZERO)
 {
 
 }
@@ -56,9 +57,11 @@ Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRe
 
 bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
 {
-	_Model = Sprite::create("b.png");
+	auto s = Sprite::create("b.png");
+	_Model = s;
 	if (_Model && GameEntity::init())
 	{
+		_hitRect = s->getBoundingBox();
 		_gameScene = gameScene;
 		_weaponRes = weaponRes;
 		setPosition(pos);
@@ -71,7 +74,14 @@ bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Ve
 		_liveTick = 4;
 		_castoff = false;
 		_castoffStage = 0;
+		_bump = false;
 		addChild(_Model);
+#if COCOS2D_DEBUG
+		auto bound = DrawNode::create();
+		bound->drawRect(_hitRect.origin, Vec2(_hitRect.getMaxX(), _hitRect.getMaxY()), Color4F::RED);
+		addChild(bound);
+#endif
+
 		return true;
 	}
 	return false;
@@ -150,6 +160,11 @@ bool Bullet::isBump()
 	return _bump;
 }
 
+
+Rect Bullet::getHitRect()
+{
+	return Rect(_hitRect.origin.x + getPositionX(), _hitRect.origin.y +getPositionY(), _hitRect.size.width, _hitRect.size.height);
+}
 
 int Bullet::getPower()
 {

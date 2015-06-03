@@ -93,21 +93,18 @@ void Building::processTool()
 			switch (tool.type)
 			{
 			case 0:
-				_gameScene->getSpriteManager()->createTool(55, 50, 55, getPositionX(), getPositionY() + 8, 0);
+				_gameScene->getSpriteManager()->createTool("blood", getPositionX(), getPositionY() + 8, 0);
 				break;
 			case 1:
-				_gameScene->getSpriteManager()->createTool(55, 50, 55, getPositionX(), getPositionY() + 8, 1);
 				break;
 			case 2:
-				_gameScene->getSpriteManager()->createTool(55, 50, 55, getPositionX(), getPositionY() + 8, 2);
 				break;
 			case 3:
-				_gameScene->getSpriteManager()->createTool(55, 50, 55, getPositionX(), getPositionY() + 8, 3);
 				break;
 			case 4:
-				_gameScene->getSpriteManager()->createTool(55, 50, 55, getPositionX(), getPositionY() + 8, 4);
 				break;
 			default:
+				_gameScene->getSpriteManager()->createTool("blood", getPositionX(), getPositionY() + 8, 0);
 				break;
 			}
 		}
@@ -153,11 +150,17 @@ void Building::processUnitFactory( float dt )
 	}
 	if (!_factory &&  _gameScene->getPlayer())
 	{
-		cocos2d::Rect lookRect(getPositionX() - 150, getPositionY() - 150, 300, 300);
-		auto p = _gameScene->getPlayer()->getPosition();
-		p.y += _gameScene->getCamera()->getY();
+		cocos2d::Rect lookRect(getPositionX() - 150 * CC_CONTENT_SCALE_FACTOR(), getPositionY() - 150 * CC_CONTENT_SCALE_FACTOR(), 300 * CC_CONTENT_SCALE_FACTOR(), 300 * CC_CONTENT_SCALE_FACTOR());
+		auto p = _gameScene->getPlayer()->getPositionInCamera();
 		if (_gameScene->getPlayer() != nullptr && lookRect.containsPoint(p))
 		{
+#if COCOS2D_DEBUG
+			auto bound = DrawNode::create();
+			bound->drawRect(lookRect.origin, Vec2(lookRect.getMaxX(), lookRect.getMaxY()), Color4F::RED);
+			addChild(bound);
+#endif
+
+
 			_factory = true;
 			_unitFactoryTick = 0;
 		}

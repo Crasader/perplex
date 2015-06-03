@@ -67,7 +67,7 @@ protected:
 	int _shadowType;
 	float _radius;
     Node *_Model;
-	MotionImpl* _curState;
+	std::shared_ptr<MotionImpl> _curState;
     Vec2 _orientation;
 	Rect _moveRect;
 };

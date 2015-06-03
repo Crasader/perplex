@@ -22,7 +22,7 @@ public:
 	Unit* createRedHeader(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* findUnitFromID(int unitID);
 	Building* findBuildingFromID(int buildingID);
-	Tool* createTool(int appearAnimaID, int generalAnimID, int disappearAnimID, int x, int y, int type);
+	Tool* createTool(const char* name, int x, int y, int type);
 	Building* createBuilding(int buildType, int BuildiID, int x, int y, int state, bool fliph);
 	Bullet* createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, int y, int moveX, int moveY, int dir, int campType);
 	void processDropItem(Unit* unit);
@@ -30,7 +30,7 @@ public:
 	Unit* spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* spawnEnemy(int type);
 	Unit* getOrCreate(GameScene* gameScene, int unitID, int type, int dir, int campType);
-	Explosion* createExplode(Unit* unit, int type, const cocos2d::Vec2& pos);
+	Explosion* createExplode(Unit* unit, int type, const cocos2d::Vec2& pos, std::function<void()> callback);
 public:
 	static cocos2d::Vector<Tool*> _tools;
 	static cocos2d::Vector<Building*> _buildings;
