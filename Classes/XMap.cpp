@@ -318,6 +318,17 @@ void XMap::AnalyzeUnitDataL()
 						iMapUnit[i].iMoveItemData[k].y = tempy;
 					}
 				}
+				int animCount = 0;
+				dis >> animCount;
+				if (animCount > 0)
+				{
+					for (int k = 0; k < animCount; k++)
+					{
+						int id = 0;
+						dis >> id;
+						iMapUnit[i]._moveAnimID.push_back(id);
+					}
+				}
 			}
 
 			//ÎäÆ÷¸ÅÂÊ

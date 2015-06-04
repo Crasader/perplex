@@ -247,7 +247,7 @@ public class UnitRes {
 		this.uf = source.uf.getCopy();
 		
 		this.anim = source.anim;
-
+		um.setAnimaCount(anim != null ? anim.getAnimaCount() : 0);
 		for (int i = 0; i < Dir.LENGTH; ++i) {
 			this.moveAnimRanges[i].x = source.moveAnimRanges[i].x;
 			this.moveAnimRanges[i].y = source.moveAnimRanges[i].y;
@@ -327,7 +327,9 @@ public class UnitRes {
 	}
 	
 	public UnitMoveMode getUM() {
-		return um.getCopy();
+		um.getCopy();
+		um.setAnimaCount(anim != null ? anim.getAnimaCount() : 0);
+		return um;
 	}
 	
 	public void SetUM(UnitMoveMode um) {
@@ -619,7 +621,7 @@ public class UnitRes {
 				p.saveMobileData(out);
 			}
 		}
-
+		SL.writeShort(anim != null ? anim.getAnimaCount() : 1, out);
 	}
 
 	public void save(DataOutputStream out) throws Exception {

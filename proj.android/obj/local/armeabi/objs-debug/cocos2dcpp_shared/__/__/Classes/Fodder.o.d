@@ -433,7 +433,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Fodder.o: \
  jni/../../Classes/Turret.h jni/../../Classes/Rotor.h \
  jni/../../Classes/Launcher.h jni/../../Classes/RotateWithAction.h \
  jni/../../Classes/Head.h jni/../../Classes/FodderIdle.h \
- jni/../../Classes/MotionImpl.h
+ jni/../../Classes/MotionImpl.h jni/../../Classes/AnimationLoader.h \
+ jni/../../Classes/AnimationResLoader.h \
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h
 
 jni/../../Classes/Fodder.h:
 
@@ -1322,3 +1324,9 @@ jni/../../Classes/Head.h:
 jni/../../Classes/FodderIdle.h:
 
 jni/../../Classes/MotionImpl.h:
+
+jni/../../Classes/AnimationLoader.h:
+
+jni/../../Classes/AnimationResLoader.h:
+
+D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:

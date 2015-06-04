@@ -1095,7 +1095,7 @@ public class MainFrame
 		Container cp = tmp.getContentPane();
 		cp.setLayout(new BorderLayout());
 		
-		cp.add(new UnitMoveModePanel(tmp, new UnitMoveMode()));
+		cp.add(new UnitMoveModePanel(tmp, new UnitMoveMode(), 1));
 		tmp.show();
 //		BRExplorePanel p = new BRExplorePanel(tmp, (ARManager)resManagers[RES_AR]);
 //		if(br == null) {

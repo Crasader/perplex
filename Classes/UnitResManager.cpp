@@ -264,6 +264,14 @@ UnitResManager::UnitResManager(const std::string& file)
 					}
 				}
 			}
+			short animCount = 0;
+			in >> animCount;
+			for (int i = 0; i < animCount; i++)
+			{
+				char s[8];
+				std::sprintf(s, i > 9 ? "0%d0" : "00%d", i);
+				pUnitRes->_animIDs.insert(std::pair<int, std::string>(i, s));
+			}
 		}
 	}
 	in.close();

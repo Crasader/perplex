@@ -15,10 +15,6 @@ D:\projects\perplex\proj.android\assets\lordplane0.plist \
 D:\projects\perplex\proj.android\assets\lordplane0.png \
 D:\projects\perplex\proj.android\assets\map \
 D:\projects\perplex\proj.android\assets\mapdat \
-D:\projects\perplex\proj.android\assets\plane.csb \
-D:\projects\perplex\proj.android\assets\plane.ExportJson \
-D:\projects\perplex\proj.android\assets\plane0.plist \
-D:\projects\perplex\proj.android\assets\plane0.png \
 D:\projects\perplex\proj.android\assets\res \
 D:\projects\perplex\proj.android\assets\tank_body0_0.png \
 D:\projects\perplex\proj.android\assets\tank_turret0_0.png \

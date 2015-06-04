@@ -37,7 +37,7 @@ class URBasicPanel
 		idSpinner = new NumberSpinner();
 		nameText = new JTextField();
 		hpSpinner = new NumberSpinner();
-		umPanel = new UnitMoveModePanel(owner, new UnitMoveMode());
+		umPanel = new UnitMoveModePanel(owner, new UnitMoveMode(), 1);
 		ufPanel = new UnitFireModePanel(owner, new UnitFireMode());
 		dimList = new DropItemModeList(owner);
 

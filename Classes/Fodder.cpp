@@ -29,7 +29,7 @@ Fodder::Fodder(GameScene* gameScene, int unitID, int type, int dir, int campType
 
 Fodder::~Fodder()
 {
-	CC_SAFE_RELEASE(action1);
+	
 }
 
 

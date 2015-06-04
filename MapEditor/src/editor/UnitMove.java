@@ -1,11 +1,13 @@
 package editor;
 
 import java.io.*;
-
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
+import com.sun.javafx.scene.layout.region.SliceSequenceConverter;
 
 class UnitPathMove
 	extends Operation {
@@ -13,7 +15,14 @@ class UnitPathMove
 	private int unitID;
 	private IntPair startPoint;
 	private IntPair[] path;
-
+	private int[] animID;
+	private int animCount;
+	
+	public int getAnimCount()
+	{
+		return animCount;
+	}
+	
 	public UnitPathMove(int id) {
 		super(id, UNIT_PATH_MOVE);
 		init();
@@ -28,6 +37,8 @@ class UnitPathMove
 		unitID = -1;
 		this.startPoint = new IntPair();
 		path = null;
+		animID = null;
+		animCount = 1;
 	}
 
 	public int getUnitID() {
@@ -50,6 +61,15 @@ class UnitPathMove
 		return XUtil.copyArray(path);
 	}
 
+	public int[] getAnimaID() {
+		return XUtil.copyArray(animID);
+	}
+	
+	public void setAnimaID(int [] anima)
+	{
+		this.animID = XUtil.copyArray(anima);
+	}
+	
 	public void setPath(IntPair[] path) {
 		this.path = XUtil.copyArray(path);
 	}
@@ -64,6 +84,7 @@ class UnitPathMove
 		super.saveMobileData(out, stringManager);
 		SL.writeInt(unitID, out);
 		SL.writeIntPairArrayMobile(path, out);
+		SL.writeIntArray(animID, out);
 	}
 
 	public void save(DataOutputStream out, StringManager stringManager) throws Exception {
@@ -71,6 +92,7 @@ class UnitPathMove
 		out.writeInt(unitID);
 		SL.writeIntPair(startPoint, out);
 		SL.writeIntPairArray(path, out);
+		SL.writeIntArray(animID, out);
 	}
 
 	protected void load(DataInputStream in, StringManager stringManager) throws Exception {
@@ -78,6 +100,7 @@ class UnitPathMove
 		unitID = in.readInt();
 		startPoint = SL.readIntPair(in);
 		path = SL.readIntPairArray(in);
+		animID = SL.readIntArray(in);
 	}
 
 	public Operation getCopy() {
@@ -95,6 +118,9 @@ class UnitPathMoveSetter
 	private UnitChoosePanel unitChoosePanel;
 	private IntPair startPoint;
 	private IntPair[] path;
+	private int[] animaID;
+	private int animCount;
+	
 	private ButtonText pathText;
 
 	public UnitPathMoveSetter(JDialog owner, MainFrame mainFrame, UnitPathMove um) {
@@ -105,7 +131,7 @@ class UnitPathMoveSetter
 	private void init(UnitPathMove um) {
 		setTitle("Unit按照固定路径移动");
 		this.um = um;
-
+		
 		unitChoosePanel = new UnitChoosePanel(this, mainFrame);
 		unitChoosePanel.setSelectedUnitID(um.getUnitID());
 		unitChoosePanel.getCombo().addItemListener(new ItemListener() {
@@ -116,7 +142,7 @@ class UnitPathMoveSetter
 
 		this.startPoint = um.getStartPoint();
 		this.path = um.getPath();
-		pathText = new ButtonText(new UnitPath(path));
+		pathText = new ButtonText(new UnitPath(path,null));
 		pathText.setBorder(BorderFactory.createTitledBorder(
 			BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 			"设置移动路径"));
@@ -166,19 +192,20 @@ class UnitPathMoveSetter
 	}
 
 	private void selectPath() {
-		UnitPath up = new UnitPath(path);
-		UnitPathSetter setter = new UnitPathSetter(this, mainFrame, startPoint, up);
+		UnitPath up = new UnitPath(path, animaID);
+		UnitPathSetter setter = new UnitPathSetter(this, mainFrame, startPoint, up, um.getAnimCount());
 		setter.show();
 		if (setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
 			this.startPoint = setter.getStartPoint();
-			setPath(setter.getUnitPath().getPath());
+			setPath(setter.getUnitPath().getPath(), setter.getUnitPath().getAnimaID());
 		}
 
 	}
 
-	private void setPath(IntPair[] path) {
+	private void setPath(IntPair[] path, int[] animaID) {
 		this.path = path;
-		pathText.setValue(new UnitPath(path));
+		this.animaID = animaID;
+		pathText.setValue(new UnitPath(path, animaID));
 	}
 
 	public void okPerformed() {

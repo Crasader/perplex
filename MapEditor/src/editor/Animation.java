@@ -2,16 +2,17 @@ package editor;
 
 import java.io.*;
 import java.util.*;
-
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
 class AnimGroup {
 	private int id;
 	private String name;
-
+	private int AnimaCount;
+	private HashMap<String, Integer> animaIDs;
 	public AnimGroup(int id, String name) {
 		this.id = id;
 		this.name = name;
@@ -24,6 +25,7 @@ class AnimGroup {
 	public String getName() {
 		return name;
 	}
+	
 }
 
 public class Animation {
@@ -43,21 +45,32 @@ public class Animation {
 	private int id;
 	private String name;
 	private boolean loaded;
-
+	private int AnimaCount;
+	private HashMap<String, Integer> animaIDs;
+	
 	public Animation(int id, String name) {
-		init( -1, id, name);
+		init( -1, id, name, 0);
 	}
 
-	public Animation(int groupID, int id, String folder) {
-		init(groupID, id, folder);
+	public Animation(int groupID, int id, String folder, int animaCount) {
+		init(groupID, id, folder, animaCount);
 	}
 
-	private void init(int groupID, int id, String folder) {
+	private void init(int groupID, int id, String folder, int animaCount) {
 		this.groupID = groupID;
 		this.id = id;
 		this.animFolder = new File(folder);
 		this.name = animFolder.getName();
 		loaded = false;
+		AnimaCount = animaCount;
+		animaIDs = new HashMap<>();
+		for (int i = 0; i < animaCount; i++) {
+			String key = "00" + i;
+			if (i > 9) {
+				key = "0" + i;
+			}
+			animaIDs.put(key, i);
+		}
 	}
 
 	public int getGroupID() {
@@ -68,6 +81,20 @@ public class Animation {
 		return id;
 	}
 
+	public int getAnimaCount()
+	{
+		return AnimaCount;
+	}
+	
+	public Integer[] getAnimaID()
+	{
+		return (Integer[])animaIDs.values().toArray();
+	}
+	
+	public String[] getAnimaName() {
+		return (String[]) animaIDs.keySet().toArray();
+	}
+	
 	public int getInterval(int frameIndex) {
 		if (frameIndex < 0 || frameIndex >= intervals.length) {
 			return 0;
@@ -605,10 +632,11 @@ class ARManager {
 			if (sLine.startsWith("@") && sLine.endsWith(";") && sLine.length() > 2) { //anim line
 				String infos[] = sLine.substring(1, sLine.length() - 1).split(",", 0);
 				if (infos != null) {
-					if (infos.length >= 2) {
+					if (infos.length >= 3) {
 						int animID = Integer.parseInt(infos[0].trim());
 						String animName = infos[1].trim();
-						tmpAnims.add(new Animation(groupID, animID, animFolder + "\\" + animName));
+						int animCount = Integer.parseInt(infos[2].trim());
+						tmpAnims.add(new Animation(groupID, animID, animFolder + "\\" + animName, animCount));
 					}
 				}
 			}

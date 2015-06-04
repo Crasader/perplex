@@ -155,6 +155,10 @@ public:
 // 	void setPosition(const Vec2& pos);
 	void setPatrol(const Vec2& pos);
 	float getSpeed();
+	void setMotionData(std::vector<int> ids);
+	std::vector<int> getMotionData();
+	void changeMotion(int motion);
+	int getCurrentMotionID() { return _curMotionID; }
 private:
 	bool isSceneTop();
 	bool isSceneButton();
@@ -231,5 +235,7 @@ protected:
 	std::vector<std::shared_ptr<MotionImpl>> _motions;
 	std::shared_ptr<MotionImpl> _curMotion;
 	std::shared_ptr<AIBase> _AI;
+	std::vector<int> _motionIDs;
+	int _curMotionID;
 };
 #endif /* defined(__Moon3d__AirCraft__) */

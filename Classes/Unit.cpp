@@ -125,6 +125,7 @@ Unit::Unit()
 	, _unitRes(nullptr)
 	, _shotLogicManager(new ShotLogicManager())
 	, _curMotion(nullptr)
+	, _curMotionID(0)
 {
 	_dieExplode = vector<bool>();
 	_unitOrder = vector<XUnitOrder>();
@@ -191,6 +192,7 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	, _unitRes(nullptr)
 	, _shotLogicManager(new ShotLogicManager())
 	, _curMotion(nullptr)
+	, _curMotionID(0)
 {
 	_type = type;
 	_dieExplode = vector<bool>();
@@ -219,6 +221,7 @@ bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int cam
 	log("%s", __FUNCTION__);
 	_type = type;
 	auto unitRes = _gameScene->getUnitResManager().getUnitResFromID(_type);
+	assert(unitRes != nullptr);
 	if (unitRes == nullptr)
 	{
 		return false;
@@ -869,6 +872,37 @@ void Unit::fire(float dt)
 	}
 }
 
+
+void Unit::changeMotion(int motion)
+{
+	if (_unitRes)
+	{
+		auto m = _unitRes->_animIDs.at(motion);
+		if (!m.empty())
+		{
+			auto armature = dynamic_cast<Armature*>(_Model);
+			if (armature != nullptr)
+			{
+				auto a = armature->getAnimation();
+				if (a)
+				{
+					a->play(m);
+				}
+				_curMotionID = motion;
+			}
+		}
+	}
+}
+
+void Unit::setMotionData(std::vector<int> ids)
+{
+	_motionIDs = ids;
+}
+
+std::vector<int> Unit::getMotionData()
+{
+	return _motionIDs;
+}
 
 float Unit::getSpeed()
 {

@@ -45,6 +45,7 @@ public:
 	std::vector<std::shared_ptr<Vec2>>		_dieAnimRanges;//16方向死亡的动画range，只有9方向数据，顺序同上
 	std::vector<std::shared_ptr<Vec2>>		_standAnimRanges;//16方向站立的动画range，只有9方向数据，顺序为 D, DDL, DL, DLL, L, LLU, LU, LUU, U
 	std::vector<std::shared_ptr<Vec2>>		_centerPoints;//16方向身体中心点的位置，16方向数据都有，顺序为D, DDL, DL, DLL, L, LLU, LU, LUU, U, UUR, UR, URR, R, RRD, RD, RDD
+	std::map <int, std::string> _animIDs;
 };
 
 #endif // __UnitRes_h__

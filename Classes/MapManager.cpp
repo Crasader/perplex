@@ -254,6 +254,7 @@ void MapManager::createUnits()
 		if (iMapUnit[n].MoveType == PATH_MOVE)
 		{
 			pUnit->setPointItemData(iMapUnit[n].iMoveItemData);
+			pUnit->setMotionData(iMapUnit[n]._moveAnimID);
 		}
 		else
 		{

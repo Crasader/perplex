@@ -8,7 +8,7 @@ using namespace cocostudio;
 
 void FodderIdle::execute()
 {
-	_armature->getAnimation()->play("idle");
+	_armature->getAnimation()->play("001");
 }
 
 FodderIdle::FodderIdle(Fodder* fodder)

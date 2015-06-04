@@ -12,6 +12,7 @@ const float Offset = 100;
 AIBase::AIBase(GameScene* gameScene, Unit* unit) :_attack(false)
 , _AIFaceDesDir(0)
 , _patrol(unit->getPosition())
+, _motion(0)
 , _pointIndex(-1)
 , _unit(unit)
 , _goalUnit(unit)
@@ -23,6 +24,7 @@ AIBase::AIBase(GameScene* gameScene, Unit* unit) :_attack(false)
 , _time(0.0f)
 , _moveRandom(nullptr)
 {
+	_unit->changeMotion(_motion);
 }
 
 AIBase::~AIBase()
@@ -32,24 +34,24 @@ AIBase::~AIBase()
 
 void AIBase::perform( float dt )
 {
-// 	switch (_unit->getMoveType())
-// 	{
-// 	case STAND_MOVE:
-// 
-// 		break;
-// 	case RANDOM_MOVE:
-// 		moveRandom(dt);
-// 		break;
-// 	case PATH_MOVE:
-// 		followPoint(dt, true);
-// 		break;
-// 	case ORDER_MOVE:
-// 
-// 		break;
-// 	default:
-//		break;
-// 	}
-		walkToGoal(dt);
+ 	switch (_unit->getMoveType())
+ 	{
+ 	case STAND_MOVE:
+ 
+ 		break;
+ 	case RANDOM_MOVE:
+ 		moveRandom(dt);
+ 		break;
+ 	case PATH_MOVE:
+ 		followPoint(dt, true);
+ 		break;
+ 	case ORDER_MOVE:
+ 
+ 		break;
+ 	default:
+		break;
+ 	}
+		/*walkToGoal(dt);*/
 }
 
 bool AIBase::faceToEnemy( float dt )
@@ -90,6 +92,7 @@ void AIBase::followPoint(float dt, bool cycle)
 		auto lenght = delt.getLength();
 		_nomalized = delt.getNormalized();
 		auto speed = _unit->getSpeed();
+		if(_unit->getCurrentMotionID() != _motion)_unit->changeMotion(_motion);
 		_time = lenght / speed;
 		
 		auto angle = delt.getAngle();
@@ -126,6 +129,7 @@ void AIBase::followPoint(float dt, bool cycle)
 			}
 		}
 		_patrol = _unit->getPointItemData()[_pointIndex];
+		_motion = _unit->getMotionData()[_pointIndex];
 	}
 }
 

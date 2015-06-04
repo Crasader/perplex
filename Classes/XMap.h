@@ -44,6 +44,7 @@ public:
 	std::vector<XDropTool>      iDropToolData;
 	std::vector<XUnitOrder>    iOrderData;
 	std::vector<XUnitOrder>    iRecycleOrderData;
+	std::vector<int>        _moveAnimID;
 };
 
 class SMapBuilding{
