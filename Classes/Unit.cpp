@@ -39,6 +39,7 @@
 #include "UnitManager.h"
 #include "Explosion.h"
 #include "AIBase.h"
+#include "ShadowController.h"
 
 bool Unit::hurt(float damage)
 {
@@ -126,6 +127,7 @@ Unit::Unit()
 	, _shotLogicManager(new ShotLogicManager())
 	, _curMotion(nullptr)
 	, _curMotionID(0)
+	, _shadowdata(nullptr)
 {
 	_dieExplode = vector<bool>();
 	_unitOrder = vector<XUnitOrder>();
@@ -193,6 +195,7 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	, _shotLogicManager(new ShotLogicManager())
 	, _curMotion(nullptr)
 	, _curMotionID(0)
+	, _shadowdata(nullptr)
 {
 	_type = type;
 	_dieExplode = vector<bool>();
@@ -210,6 +213,11 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 Unit::~Unit()
 {
 	_weapons.clear();
+	if (_shadowdata)
+	{
+		_shadowdata->removeFromParent();
+		CC_SAFE_RELEASE_NULL(_shadowdata);
+	}
 }
 
 bool Unit::init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
@@ -312,6 +320,10 @@ void Unit::setUnitRes(std::shared_ptr<UnitRes> aUnitRes)
 void Unit::perform(float dt)
 {
 	log("enter unit::perform...%s,unitid = %d", __FUNCTION__, _unitID);
+	if (_shadowdata)
+	{
+		_shadowdata->updateShadow(dt);
+	}
 	if (!_active)
 	{
 		activateUnit();
@@ -352,18 +364,18 @@ void Unit::perform(float dt)
 		return;
 	}
 	//死亡处理
-// 	processDie(dt);
-// 	//人工智能
-// 	AI(dt);
-// 	//移动
-// 	unitMove(dt);
-// 	//处理待发射的武器
-// 	fire(dt);
-	log("exit unit::perfrom...%s, %d", __FUNCTION__, _unitID);
+ 	processDie(dt);
+ 	//人工智能
+ 	/*AI(dt);*/
+ 	//移动
+ 	/*unitMove(dt);*/
 	if (_AI)
 	{
 		_AI->perform(dt);
 	}
+ 	//处理待发射的武器
+ 	fire(dt);
+	log("exit unit::perfrom...%s, %d", __FUNCTION__, _unitID);
 }
 
 
@@ -583,6 +595,11 @@ void Unit::processDie(float dt)
 			processTool();
 		};
 		_gameScene->getUnitManager().createExplode(this, 0, this->getPositionInCamera(), callback);
+		if (_shadowdata)
+		{
+			_shadowdata->removeFromParent();
+			CC_SAFE_RELEASE_NULL(_shadowdata);
+		}
 	}
 
 	if (explodeOK)
@@ -873,6 +890,23 @@ void Unit::fire(float dt)
 }
 
 
+void Unit::setMoveSpeed(std::vector<int> speed)
+{
+	_moveSpeed = speed;
+}
+
+
+void Unit::setMoveDir(std::vector<int> dir)
+{
+	_moveDir = dir;
+}
+
+
+void Unit::setMoveDelay(std::vector<int> delay)
+{
+	_moveDelay = delay;
+}
+
 void Unit::changeMotion(int motion)
 {
 	if (_unitRes)
@@ -886,6 +920,7 @@ void Unit::changeMotion(int motion)
 				auto a = armature->getAnimation();
 				if (a)
 				{
+					a->stop();
 					a->play(m);
 				}
 				_curMotionID = motion;

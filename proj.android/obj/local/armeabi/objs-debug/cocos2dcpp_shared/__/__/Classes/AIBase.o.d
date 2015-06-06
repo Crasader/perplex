@@ -425,7 +425,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/AIBase.o: \
  jni/../../Classes/UnitRes.h jni/../../Classes/Head.h \
  jni/../../Classes/GameGlobe.h jni/../../Classes/GameScene.h \
  jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
- jni/../../Classes/consts.h
+ jni/../../Classes/consts.h jni/../../Classes/CameraExt.h \
+ jni/../../Classes/CAnimationData.h
 
 jni/../../Classes/AIBase.h:
 
@@ -1290,3 +1291,7 @@ jni/../../Classes/gamestate.h:
 jni/../../Classes/basescene.h:
 
 jni/../../Classes/consts.h:
+
+jni/../../Classes/CameraExt.h:
+
+jni/../../Classes/CAnimationData.h:

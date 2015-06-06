@@ -72,6 +72,7 @@ D:\projects\perplex\proj.android\assets\mapdat\newmap_mapinfo_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\newmap_rect_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\newmap_unit_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\unitres_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\version_mobile.dat \
 D:\projects\perplex\proj.android\assets\res\Default \
 D:\projects\perplex\proj.android\assets\res\HelloWorld.png \
 D:\projects\perplex\proj.android\assets\res\MainScene.csb \

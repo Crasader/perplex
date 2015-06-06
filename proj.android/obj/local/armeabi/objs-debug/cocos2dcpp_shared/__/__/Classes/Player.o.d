@@ -434,7 +434,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Player.o: \
  jni/../../Classes/Effects.h jni/../../Classes/Explosion.h \
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
  jni/../../Classes/Head.h jni/../../Classes/ShadowController.h \
- D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
+ jni/../../Classes/AnimationLoader.h \
+ jni/../../Classes/AnimationResLoader.h
 
 jni/../../Classes/Player.h:
 
@@ -1325,3 +1327,7 @@ jni/../../Classes/Head.h:
 jni/../../Classes/ShadowController.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:
+
+jni/../../Classes/AnimationLoader.h:
+
+jni/../../Classes/AnimationResLoader.h:

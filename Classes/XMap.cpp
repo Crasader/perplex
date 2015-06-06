@@ -107,6 +107,17 @@ void XMap::AnalyzeBuildingDataL()
 	//生成建筑物
 	
 }
+void XMap::AnalyzeVersionDataL()
+{
+	char f[256];
+	sprintf(f, "version_mobile.dat");
+	Ifstream dis(f);
+	if (!dis.fail())
+	{
+		dis >> _version;
+	}
+	dis.close();
+}
 
 void XMap::AnalyzeInfDataL()
 {
@@ -329,6 +340,37 @@ void XMap::AnalyzeUnitDataL()
 						iMapUnit[i]._moveAnimID.push_back(id);
 					}
 				}
+				int count = 0;
+				dis >> count;
+				if (count > 0)
+				{
+					for (int k = 0; k < count; k++)
+					{
+						int id = 0;
+						dis >> id;
+						iMapUnit[i]._moveSpeed.push_back(id);
+					}
+				}
+				dis >> count;
+				if (count > 0)
+				{
+					for (int k = 0; k < count; k++)
+					{
+						int id = 0;
+						dis >> id;
+						iMapUnit[i]._movedir.push_back(id);
+					}
+				}
+				dis >> count;
+				if (count > 0)
+				{
+					for (int k = 0; k < count; k++)
+					{
+						int id = 0;
+						dis >> id;
+						iMapUnit[i]._movedelay.push_back(id);
+					}
+				}
 			}
 
 			//武器概率
@@ -456,6 +498,7 @@ XMap::XMap(int aID)
 , iMapFloor()
 , iMapUnit()
 , iMapTop()
+, _version(100)
 {
 	log("%s", __FUNCTION__);
 }

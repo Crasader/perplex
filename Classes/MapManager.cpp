@@ -67,6 +67,7 @@ bool MapManager::analyzeDataL()
 	case MapManager::MapLayer::EIdle:
 		break;
 	case MapManager::MapLayer::ELoadMapInf:
+		iPrepareLoadMap->AnalyzeVersionDataL();
 		iPrepareLoadMap->AnalyzeInfDataL();
 		break;
 	case MapManager::MapLayer::ELoadMapFloor:
@@ -147,6 +148,7 @@ MapManager::MapManager(GameScene* scene)
 ,iLastCameraY(-1000)	//上次摄像机的Y坐标
 ,iImgCounts(0)
 ,iLoadState(0)     //载入进度
+, _version(100)
 ,iPrepareLoadMap(nullptr)//准备载入的地图大
 ,iActiveMap(nullptr)     //当前活跃的地图
 ,iMapImgs(nullptr)		//地图图像
@@ -227,6 +229,15 @@ void MapManager::moveMap(float offsetY, float moveUp)
 	}
 }
 
+int MapManager::getVersion()
+{
+	if (iActiveMap)
+	{ 
+		return iActiveMap->getVersion(); 
+	}
+	return 100;
+}
+
 void MapManager::createUnits()
 {
 	auto iUnitCount = iPrepareLoadMap->getUnitCount();
@@ -249,12 +260,15 @@ void MapManager::createUnits()
 			campType);
 		if (pUnit == nullptr) continue;
 		pUnit->setMoveProb(iMapUnit[n].iMoveProb);
-		pUnit->setAnchorPoint(Vec2(0.5f, 0.5f));
+	/*	pUnit->setAnchorPoint(Vec2(0.5f, 0.5f));*/
 
 		if (iMapUnit[n].MoveType == PATH_MOVE)
 		{
 			pUnit->setPointItemData(iMapUnit[n].iMoveItemData);
 			pUnit->setMotionData(iMapUnit[n]._moveAnimID);
+			pUnit->setMoveSpeed(iMapUnit[n]._moveSpeed);
+			pUnit->setMoveDir(iMapUnit[n]._movedir);
+			pUnit->setMoveDelay(iMapUnit[n]._movedelay);
 		}
 		else
 		{

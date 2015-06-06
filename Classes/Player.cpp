@@ -35,6 +35,7 @@
 #include "CameraExt.h"
 #include "ShadowController.h"
 #include "cocostudio/CCArmature.h"
+#include "AnimationLoader.h"
 
 #define visible_size_macro Director::getInstance()->getVisibleSize()
 #define origin_point Director::getInstance()->getVisibleOrigin();
@@ -46,9 +47,7 @@ const float Player::rollReturnThreshold = 1.02f;
 
 bool Player::init()
 {
-    //_Model = EffectSprite3D::createFromObjFileAndTexture("playerv002.c3b", "playerv002_256.png");
-	ArmatureDataManager::getInstance()->addArmatureFileInfo("lordplane0.png", "lordplane0.plist", "lordplane.csb");
-	_Model = cocostudio::Armature::create("lordplane");
+	_Model = AnimationLoader::getInstance().createAnimation("lordplane");
     if(_Model)
     {
 		targetAngle = 0;
@@ -63,12 +62,13 @@ bool Player::init()
         _alive = true;
 		_shadowType = kShadowSky;
 
-		_curState = new PlayerIdleState(this);
-		_curState->execute();
-
 		auto rect = _Model->getBoundingBox();
 		setMoveRect(rect);
 
+		_shadowdata = ShadowSprite::create();
+		_shadowdata->setShadowData(AnimationLoader::getInstance().createAnimation("lordplane"), this);
+		_gameScene->addUnit(_shadowdata);
+		CC_SAFE_RETAIN(_shadowdata);
 #if COCOS2D_DEBUG
 		auto bound = DrawNode::create();
 		bound->drawRect(rect.origin, Vec2(rect.getMaxX(), rect.getMaxY()), Color4F::RED);
@@ -349,7 +349,6 @@ Player::Player(GameScene* gameScene, int unitID, int type, int walkdir, int camp
 
 Player::~Player()
 {
-	CC_SAFE_DELETE(_curState);
 }
 
 

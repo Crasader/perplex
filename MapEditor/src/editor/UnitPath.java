@@ -45,7 +45,7 @@ public class UnitPath {
 	public final static String getPathDescription(UnitPath up) {
 		IntPair[] path = null;
 		if(up != null) {
-			path = up.getPath();
+			path = up.getData().getPath();
 		}
 		return getPathDescription(path);
 	}
@@ -108,69 +108,34 @@ public class UnitPath {
 		return new IntPair(offsetX, offsetY);
 	}
 
-	private IntPair[] path;
-	private int[] animaID;
+	UnitPathData data;
 	
 	public UnitPath() {
-		init(null, null);
+		init(null);
 	}
 
-	public UnitPath(IntPair[] path, int[] animaID) {
-		init(path, animaID);
+	public UnitPath(UnitPathData data) {
+		init(data);
 	}
 
-	public UnitPath(UnitPath unitPath) {
-		if (unitPath != null) {
-			init(unitPath.path, unitPath.animaID);
-		}
-		else {
-			init(null, null);
-			
-		}
+	private void init(UnitPathData data) {
+		if(data == null) return;
+		this.data = new UnitPathData(data);
 	}
 
-	private void init(IntPair[] path, int[] animaID) {
-		if (path != null) {
-			this.path = new IntPair[path.length];
-			for (int i = 0; i < path.length; ++i) {
-				this.path[i] = path[i].getCopy();
-			}
-		}
-		if (animaID != null) {
-			this.animaID = new int[animaID.length];
-			for (int i = 0; i < animaID.length; ++i) {
-				this.animaID[i] = animaID[i];
-			}
-		}
-	}
-
-	public IntPair[] getPath() {
-		IntPair[] result = null;
-		if (path != null) {
-			result = new IntPair[path.length];
-			for (int i = 0; i < path.length; ++i) {
-				result[i] = path[i].getCopy();
-			}
-		}
-		return result;
-	}
-
-	public int[] getAnimaID() {
-		int[] result = null;
-		if (animaID != null) {
-			result = new int[animaID.length];
-			for (int i = 0; i < path.length; ++i) {
-				result[i] = animaID[i];
-			}
+	public UnitPathData getData() {
+		UnitPathData result = null;
+		if (data != null) {
+			result = new UnitPathData(data);
 		}
 		return result;
 	}
 	
 	public IntPair getEndPoint(IntPair startPoint) {
 		IntPair result = startPoint.getCopy();
-		if (path != null) {
-			if(path.length > 0) {
-				result = path[path.length - 1].getCopy();
+		if (data.path != null) {
+			if(data.path.length > 0) {
+				result = data.path[data.path.length - 1].getCopy();
 			}
 //			for (int i = 0; i < path.length; ++i) {
 //				result = UnitPath.getEndPoint(result, path[i].x, path[i].y);
@@ -180,7 +145,7 @@ public class UnitPath {
 	}
 
 	public String toString() {
-		return getPathDescription(path);
+		return getPathDescription(data.path);
 	}
 }
 
@@ -206,10 +171,10 @@ class UnitPathPanel
 	{
 		
 		selectIndex = index;
-		if (unitPath.getPath() != null)
+		if (unitPath.getData().getPath() != null)
 		{
-			if(selectIndex < unitPath.getPath().length && selectIndex >= 0) {
-				selectPoint = unitPath.getPath()[selectIndex].getCopy();
+			if(selectIndex < unitPath.getData().getPath().length && selectIndex >= 0) {
+				selectPoint = unitPath.getData().getPath()[selectIndex].getCopy();
 			}
 		}
 		else {
@@ -242,7 +207,7 @@ class UnitPathPanel
 	}
 
 	public void setUnitPath(UnitPath unitPath, int selectRow) {
-		this.unitPath = new UnitPath(unitPath);
+		this.unitPath = new UnitPath(unitPath.data);
 		setSelectIndex(selectRow);
 		repaint();
 	}
@@ -340,7 +305,7 @@ class UnitPathPanel
 //		manager.paintSprites(g);
 //		IntPair p = startPoint.getCopy();
 
-		IntPair[] path = unitPath.getPath();
+		IntPair[] path = unitPath.getData().getPath();
 		if (path != null && path.length > 0) {
 			IntPair p = path[0].getCopy();;
 			if (path.length == 1) {
@@ -426,6 +391,10 @@ class UnitPathSetter
 		tableModel.addColumn("X");
 		tableModel.addColumn("Y");
 		tableModel.addColumn("动画id");
+		tableModel.addColumn("speed");
+		tableModel.addColumn("改变方向");
+		tableModel.addColumn("延迟");
+		
 		pathTable = new JTable(tableModel);
 		pathTable.setRowSelectionAllowed(false);
 		pathTable.setRowHeight(XUtil.getDefPropInt("UPTableRowHeight"));
@@ -454,32 +423,6 @@ class UnitPathSetter
 			}
 		});
 		
-		pathTable.getColumnModel().addColumnModelListener(new TableColumnModelListener() {
-			
-			@Override
-			public void columnSelectionChanged(ListSelectionEvent arg0) {
-//				int select = arg0.getFirstIndex();
-//				System.out.println(select+" : " + arg0.getLastIndex());
-//				IntPair pos = pathPanel.setSelectIndex(select);
-//				if(pos != null)selectPoint = new SelectPoint(pos, select);
-			}
-			
-			@Override
-			public void columnRemoved(TableColumnModelEvent arg0) {
-			}
-			
-			@Override
-			public void columnMoved(TableColumnModelEvent arg0) {
-			}
-			
-			@Override
-			public void columnMarginChanged(ChangeEvent arg0) {
-			}
-			
-			@Override
-			public void columnAdded(TableColumnModelEvent arg0) {
-			}
-		});
 		//dir column
 		TableColumn dirColumn = columnModel.getColumn(0);
 		dirColumn.setCellRenderer(new SpinnerTableCellRenderer());
@@ -493,6 +436,18 @@ class UnitPathSetter
 		TableColumn column = columnModel.getColumn(2);
 		column.setCellRenderer(new ComboTableCellRenderer(value, name));
 		column.setCellEditor(new ComboTableCellEditor(value, name));
+		
+		TableColumn speedColumn = columnModel.getColumn(3);
+		speedColumn.setCellRenderer(new SpinnerTableCellRenderer());
+		speedColumn.setCellEditor(new SpinnerTableCellEditor());
+
+		TableColumn orientation = columnModel.getColumn(4);
+		orientation.setCellRenderer(new ComboTableCellRenderer(new int[]{0,1}, new String[] {"否","是"}));
+		orientation.setCellEditor(new ComboTableCellEditor(new int[]{0,1}, new String[] {"否","是"}));
+		
+		TableColumn delay = columnModel.getColumn(5);
+		delay.setCellRenderer(new SpinnerTableCellRenderer());
+		delay.setCellEditor(new SpinnerTableCellEditor());
 		
 		JScrollPane tableScroll = new JScrollPane(pathTable);
 		SwingUtil.setDefScrollIncrement(tableScroll);
@@ -631,11 +586,11 @@ class UnitPathSetter
 	 * @param unitPath
 	 */
 	private void reflesh(UnitPath unitPath) {
-		if(unitPath != null)
+		if(unitPath != null && unitPath.getData().getPath() != null)
 		{
 			sps.clear();
-			for (int i = 0; i < unitPath.getPath().length; i++) {
-				sps.add(new SelectPoint(unitPath.getPath()[i], i));
+			for (int i = 0; i < unitPath.getData().getPath().length; i++) {
+				sps.add(new SelectPoint(unitPath.getData().getPath()[i], i));
 			}
 		}
 	}
@@ -671,6 +626,9 @@ class UnitPathSetter
 		tableModel.addRow(new Object[] {
 				info.changeToMobileX(new Integer(0)),
 				info.changeToMobileY(new Integer(0),0),
+				new Integer(0),
+				new Integer(100),
+				new Integer(1),
 				new Integer(0)
 		});
 	}
@@ -680,6 +638,9 @@ class UnitPathSetter
 		tableModel.addRow(new Object[] {
 				info.changeToMobileX(new Integer(row.x)),
 				info.changeToMobileY(new Integer(row.y),0),
+				new Integer(0),
+				new Integer(100),
+				new Integer(1),
 				new Integer(0)
 		});
 	}
@@ -763,7 +724,7 @@ class UnitPathSetter
 		int bottom = top;
 		IntPair p = startPoint.getCopy();
 
-		IntPair[] path = unitPath.getPath();
+		IntPair[] path = unitPath.getData().getPath();
 
 		if (path != null) {
 			for (int i = 0; i < path.length; ++i) {
@@ -797,15 +758,22 @@ class UnitPathSetter
 			tableModel.removeRow(0);
 		}
 		MapInfo info = MainFrame.self.getMapInfo();
-		IntPair[] path = unitPath.getPath();
-		int[] id = unitPath.getAnimaID();
+		IntPair[] path = unitPath.getData().getPath();
+		int[] id = unitPath.getData().getAnimaID();
+		int[] s = unitPath.getData().getSpeed();
+		int[] o = unitPath.getData().getOrientation();
+		int[] d = unitPath.getData().getDelay();
+		
 		if (path != null) {
 			for (int i = 0; i < path.length; ++i) {
 				if (path[i] != null) {
 					tableModel.addRow(new Object[] {
 									  info.changeToMobileX(new Integer(path[i].x)),
 									  info.changeToMobileY(new Integer(path[i].y), 0),
-									  new Integer(id == null || id[i] >= count ? 0 : id[i])});
+									  new Integer(id == null || id[i] >= count ? 0 : id[i]),
+									  new Integer(s == null ? 100 : s[i]),
+									  new Integer(o == null ? 0 : o[i]),
+									  new Integer(d == null ? 0 : d[i])});
 				}
 			}
 		}
@@ -818,10 +786,17 @@ class UnitPathSetter
 		MapInfo info = MainFrame.self.getMapInfo();
 		ArrayList tmp = new ArrayList();
 		ArrayList tmp1 = new ArrayList();
+		ArrayList tmp2 = new ArrayList();
+		ArrayList tmp3 = new ArrayList();
+		ArrayList tmp4 = new ArrayList();
+	
 		for (int i = 0; i < tableModel.getRowCount(); ++i) {
 			int x = 0; //((Integer)(tableModel.getValueAt(i, 0))).intValue();
 			int y = 0; //((Integer)(tableModel.getValueAt(i, 1))).intValue();
 			int z = 0;
+			int s = 0;
+			int o = 0;
+			int d = 0;
 			
 			//read x
 			Object xObj = tableModel.getValueAt(i, 0);
@@ -853,21 +828,60 @@ class UnitPathSetter
 			}
 			z = ( (Integer) zObj).intValue();
 			
+			Object zObj1 = tableModel.getValueAt(i, 3);
+			if (zObj1 == null) {
+				continue;
+			}
+			if (! (zObj1 instanceof Integer)) {
+				continue;
+			}
+			s = ( (Integer) zObj1).intValue();
+			
+			Object zObj2 = tableModel.getValueAt(i, 4);
+			if (zObj2 == null) {
+				continue;
+			}
+			if (! (zObj2 instanceof Integer)) {
+				continue;
+			}
+			o = ( (Integer) zObj2).intValue();
+			
+			Object zObj3 = tableModel.getValueAt(i, 5);
+			if (zObj3 == null) {
+				continue;
+			}
+			if (! (zObj3 instanceof Integer)) {
+				continue;
+			}
+			d = ( (Integer) zObj3).intValue();
+			
 			tmp.add(new IntPair(info.changeToMapEditorX(x), info.changeToMapEditorY(y, 0)));
 			tmp1.add(new Integer(z));
+			tmp2.add(new Integer(s));
+			tmp3.add(new Integer(o));
+			tmp4.add(new Integer(d));
 		}
 
 		IntPair[] path = null;
 		int[] id = null;
+		int[] s = null;
+		int[] o = null;
+		int[] d = null;
 		if (tmp != null) {
 			path = new IntPair[tmp.size()];
 			id = new int[tmp1.size()];
+			s = new int[tmp2.size()];
+			o = new int[tmp3.size()];
+			d = new int[tmp4.size()];
 			for (int i = 0; i < tmp.size(); ++i) {
 				path[i] = (IntPair) (tmp.get(i));
 				id[i] = (Integer)(tmp1.get(i));
+				s[i] = (Integer)(tmp2.get(i));
+				o[i] = (Integer)(tmp3.get(i));
+				d[i] = (Integer)(tmp4.get(i));
 			}
 		}
-		unitPath = new UnitPath(path, id);
+		unitPath = new UnitPath(new UnitPathData(path, id, s, o, d));
 	}
 
 	public void setStartPoint(IntPair startPoint) {
@@ -881,7 +895,7 @@ class UnitPathSetter
 	}
 
 	public void setUnitPath(UnitPath unitPath) {
-		this.unitPath = new UnitPath(unitPath);
+		this.unitPath = new UnitPath(unitPath.data);
 		updatePathTable();
 	}
 

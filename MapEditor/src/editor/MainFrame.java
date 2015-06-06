@@ -48,6 +48,10 @@ public class MainFrame
 
 	public static MainFrame self;
 	
+	public static int version = 0;
+	
+	public static int currentVersion = 0;
+	
 	private ProgressDialog progress;
 	
 	private Object[] resManagers;
@@ -110,8 +114,10 @@ public class MainFrame
 	private MenuActionListener menuActionListener;
 	
 	public MainFrame() {
+		currentVersion = XUtil.getDefPropInt("Version");
+		String vString = XUtil.getDefPropStr("Version");
 		self = this;
-		setTitle("MB3Editor");
+		setTitle("Editor " + vString);
 		try {
 			setIconImage(XImage.readPNG(new File(".\\icon.png")));
 		}
@@ -925,6 +931,10 @@ public class MainFrame
 
 	private void saveMap(String name) throws Exception {		
 		progress.setInfo("保存基本信息");
+		
+		saveVersion(name);
+		saveMobileVersion(name);
+		
 		mapInfo.save();
 		mapInfo.saveMobileData();
 		progress.setValue(55);
@@ -954,6 +964,32 @@ public class MainFrame
 		progress.setValue(100);
 	}
 	
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	private void saveVersion(String name) throws Exception {
+		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + "version.dat");
+		DataOutputStream out = 
+				  new DataOutputStream(
+						new BufferedOutputStream(
+							  new FileOutputStream(f)));
+		
+		out.writeInt(currentVersion);
+		out.flush();
+		out.close();
+	}
+
+	private void saveMobileVersion(String name) throws Exception {
+		File f = new File(XUtil.getDefPropStr("MobilePath") + "\\" + "version_mobile.dat");
+		DataOutputStream out = 
+				  new DataOutputStream(
+						new BufferedOutputStream(
+							  new FileOutputStream(f)));
+		out.writeInt(currentVersion);
+		out.flush();
+		out.close();
+	}
 	private void savePNG(String name) throws Exception {
 		progress.setInfo("创建空图");
 		BufferedImage img = new BufferedImage(mapInfo.getWidth(),
@@ -987,6 +1023,7 @@ public class MainFrame
 //		refreshUR();
 		
 		progress.setInfo("加载基本信息");
+		loadVersion(name);
 		mapInfo.load(name);
 		for(int i = 0; i < panels.length; ++i) {
 			panels[i].reset(mapInfo.getWidth(), mapInfo.getHeight());
@@ -1006,6 +1043,21 @@ public class MainFrame
 		eventManager.load(name);
 		progress.setValue(100);
 		setTitle("MB3Editor：" + name);
+	}
+
+	/**
+	 * @param name
+	 * @throws Exception 
+	 */
+	private void loadVersion(String name) throws Exception  {
+		File f = new File(XUtil.getDefPropStr("MapInfoFilePath") + "\\" + "version.dat");
+		if(!f.exists()) return;
+		DataInputStream in = 
+				  new DataInputStream(
+						new BufferedInputStream(
+							  new FileInputStream(f)));
+		version = in.readInt();
+		in.close();
 	}
 
 	private final static String[][] SAVE_FILES = {

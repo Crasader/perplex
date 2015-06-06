@@ -2,6 +2,8 @@
 #include "GameEntity.h"
 #include "GameLayer.h"
 #include "consts.h"
+#include "Unit.h"
+#include "GameScene.h"
 
 Vector<ShadowSprite*> ShadowController::_shadows;
 bool  ShadowController::_init = false;
@@ -77,8 +79,9 @@ void ShadowSprite::updateShadow(float dt)
 	{
 		return;
 	}
+	changeMotion();
 	this->setVisible(true);
-	this->setPosition(_target->getPosition() + _offset);
+	this->setPosition(_target->getPositionInCamera() + _offset);
 	this->setRotation(_target->getRotation());
 }
 
@@ -92,14 +95,32 @@ bool ShadowSprite::equal(const Node* rl)
 	return _target == rl;
 }
 
-void ShadowSprite::setShadowData(cocostudio::Armature* s, Node* target)
+void ShadowSprite::setShadowData(cocostudio::Armature* s, Unit* target)
 {
 	CC_ASSERT(s != nullptr && target != nullptr);
 	_model = s;
-	s->setColor(Color3B::BLACK);
-	s->setOpacity(127);
-	s->setScale(0.75);
-	_target = target;
-	addChild(_model);
-	updateShadow(0);
+	auto temp = target;
+	if (temp)
+	{
+		_tArmature = dynamic_cast<Armature*>(temp->getModel());
+		s->setColor(Color3B::BLACK);
+		s->setOpacity(80);
+		s->setScale(0.75);
+		_target = target;
+		addChild(_model);
+		changeMotion();
+		setLocalZOrder(kZOrderLandShadow);
+	}
+}
+
+void ShadowSprite::changeMotion()
+{
+	if (_model && _tArmature)
+	{
+		auto id = _tArmature->getAnimation()->getCurrentMovementID();
+		if (_model->getAnimation()->getCurrentMovementID() != id)
+		{
+			_model->getAnimation()->play(id);
+		}
+	}
 }

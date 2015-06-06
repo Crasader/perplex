@@ -9,6 +9,7 @@ USING_NS_CC;
 using namespace std;
 
 class GameEntity;
+class Unit;
 
 class IShadow
 {
@@ -22,21 +23,21 @@ private:
 class ShadowSprite : public Node, public IShadow
 {
 public:
-	ShadowSprite() :_offset(50, 50), _type(0), _target(nullptr), _model(nullptr){}
+	ShadowSprite() :_offset(50, -50), _type(0), _target(nullptr), _model(nullptr){}
 	CREATE_FUNC(ShadowSprite);
 	void setOffset(Point p) { _offset = p; }
 	Point getOffset() { return _offset; }
 	void updateShadow(float dt);
 	int getType();
-	Node* getTarget() { return _target; }
 	bool equal(const Node* rl);
-	void setTarget(Node* t){ _target = t; }
-	void setShadowData(cocostudio::Armature* s, Node* target);
+	void setShadowData(cocostudio::Armature* s, Unit* target);
+	void changeMotion();
 private:
 	Point _offset;
 	int _type;
-	Node* _target;
-	Node* _model;
+	Unit* _target;
+	cocostudio::Armature* _tArmature;
+	cocostudio::Armature* _model;
 };
 
 class ShadowController

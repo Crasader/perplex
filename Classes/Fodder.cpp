@@ -11,6 +11,7 @@
 #include "RotateWithAction.h"
 #include "FodderIdle.h"
 #include "AnimationLoader.h"
+#include "ShadowController.h"
 
 
 Fodder::Fodder()
@@ -67,6 +68,10 @@ bool Fodder::init()
 		auto rect = _Model->getBoundingBox();
 		setMoveRect(rect);
 
+		_shadowdata = ShadowSprite::create();
+		_shadowdata->setShadowData(AnimationLoader::getInstance().createAnimation("plane"), this);
+		_gameScene->addUnit(_shadowdata);
+		CC_SAFE_RETAIN(_shadowdata);
 #if COCOS2D_DEBUG
 		auto bound = DrawNode::create();
 		bound->drawRect(rect.origin, Vec2(rect.getMaxX(), rect.getMaxY()), Color4F::RED);

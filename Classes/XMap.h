@@ -45,6 +45,9 @@ public:
 	std::vector<XUnitOrder>    iOrderData;
 	std::vector<XUnitOrder>    iRecycleOrderData;
 	std::vector<int>        _moveAnimID;
+	std::vector<int>        _moveSpeed;
+	std::vector<int>        _movedir;
+	std::vector<int>        _movedelay;
 };
 
 class SMapBuilding{
@@ -80,6 +83,7 @@ public:
 	void AnalyzeFloorDataL();
 	void AnalyzeUnitDataL();
 	void AnalyzeBuildingDataL();
+	void AnalyzeVersionDataL();
 	void AnalyzeRectDataL();
 	void Release();
 	bool LoadMapImg();
@@ -103,6 +107,8 @@ public:
 	
 	int getBuildingCount() const { return iMapBuilding.size(); }
 	std::vector<SMapBuilding> getMapBuilding() { return iMapBuilding; }
+
+	int getVersion(){ return _version; }
 private:
 	int             	iID;                    // 地图ID，全球唯一v
 	int					iActivist;
@@ -112,6 +118,8 @@ private:
 	//地图摄像机
 	int					iCameraX;				//摄像机X坐标
 	int 				iCameraY;				//摄像机Y坐标
+
+	int					_version;
 
 	std::vector<SMapFloor>    	iMapTop;                //顶层地板数据
 	std::vector<SMapFloor>    	iMapFloor;				//地板数据

@@ -43,6 +43,7 @@ class XUnitOrder;
 class GameScene;
 class MotionImpl;
 class AIBase;
+class ShadowSprite;
 
 enum UnitSDIR
 {
@@ -159,6 +160,12 @@ public:
 	std::vector<int> getMotionData();
 	void changeMotion(int motion);
 	int getCurrentMotionID() { return _curMotionID; }
+	std::vector<int> getMoveSpeed() const { return _moveSpeed; }
+	std::vector<int> getMoveDir() const { return _moveDir; }
+	std::vector<int> getMoveDelay() const { return _moveDelay; }
+	void setMoveSpeed(std::vector<int> speed);
+	void setMoveDir(std::vector<int> dir);
+	void setMoveDelay(std::vector<int> delay);
 private:
 	bool isSceneTop();
 	bool isSceneButton();
@@ -237,5 +244,9 @@ protected:
 	std::shared_ptr<AIBase> _AI;
 	std::vector<int> _motionIDs;
 	int _curMotionID;
+	std::vector<int> _moveSpeed;
+	std::vector<int> _moveDir;
+	std::vector<int> _moveDelay;
+	ShadowSprite* _shadowdata;
 };
 #endif /* defined(__Moon3d__AirCraft__) */

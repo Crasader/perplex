@@ -5,17 +5,24 @@
 #include "GameScene.h"
 #include "consts.h"
 #include "GameGlobe.h"
+#include "CameraExt.h"
+
 USING_NS_CC;
 
 const float Offset = 100;
 
-AIBase::AIBase(GameScene* gameScene, Unit* unit) :_attack(false)
+AIBase::AIBase(GameScene* gameScene, Unit* unit)
+:_attack(false)
+, _lock(false)
 , _AIFaceDesDir(0)
 , _patrol(unit->getPosition())
 , _motion(0)
+, _speed(_unit->getSpeed())
+, _dir(0)
+, _delay(0)
 , _pointIndex(-1)
 , _unit(unit)
-, _goalUnit(unit)
+, _goalUnit(nullptr)
 , _gameScene(gameScene)
 , _AItick(rand_0_1() * 32)
 , _moveStart(false)
@@ -34,46 +41,61 @@ AIBase::~AIBase()
 
 void AIBase::perform( float dt )
 {
- 	switch (_unit->getMoveType())
- 	{
- 	case STAND_MOVE:
- 
- 		break;
- 	case RANDOM_MOVE:
- 		moveRandom(dt);
- 		break;
- 	case PATH_MOVE:
- 		followPoint(dt, true);
- 		break;
- 	case ORDER_MOVE:
- 
- 		break;
- 	default:
+  	/*switch (_unit->getMoveType())
+  	{
+  	case STAND_MOVE:
+  
+  		break;
+  	case RANDOM_MOVE:
+  		moveRandom(dt);
+  		break;
+  	case PATH_MOVE:
+  		followPoint(dt, true);
+  		break;
+  	case ORDER_MOVE:
+  
+  		break;
+  	default:
 		break;
- 	}
+  	}*/
 		/*walkToGoal(dt);*/
+		findEnemyGoal(Rect(_gameScene->getCamera()->getX(), _gameScene->getCamera()->getY(), _gameScene->getSceneWidth(), _gameScene->getSceneHeight()), dt);
 }
 
 bool AIBase::faceToEnemy( float dt )
 {
-	auto angle = (_unit->getPosition() - _goalUnit->getPosition()).getAngle();
-	_goalUnit->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);
+	auto angle = (_goalUnit->getPosition() - _unit->getPosition()).getAngle();
+	_unit->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);
 // 	if (_unit->getShotDir() == _AIFaceDesDir)
 // 	{
 // 		return true;
 // 	}
-	//向着目标转动或走动
-	walkToGoal(dt);
 	return false;
 }
 
 void AIBase::walkToGoal( float dt )
 {
-	auto delta = _unit->getPosition() - _goalUnit->getPosition();
+	auto delta = _patrol - _unit->getPosition();
 	auto normalized = delta.getNormalized();
-	auto speed = _goalUnit->getSpeed();
-	auto newPos = _goalUnit->getPosition() + normalized * speed * dt;
-	_goalUnit->setPosition(newPos);
+	auto speed = _unit->getSpeed();
+	if (!_lock)
+	{
+		_lock = true;
+		_time = delta.getLength() / speed;
+	}
+	auto newPos = _unit->getPosition() + normalized * speed * dt;
+	if (_time > 0)
+	{
+		_time -= dt;
+	}
+	else
+	{
+		_time = 0.0f;
+		newPos = _patrol;
+		_lock = false;
+	}
+
+	_unit->setPosition(newPos);
 }
 
 void AIBase::followPoint(float dt, bool cycle)
@@ -83,22 +105,30 @@ void AIBase::followPoint(float dt, bool cycle)
 		return;
 	}
 
+	if (_delay > 0)
+	{
+		_delay -= dt;
+		return;
+	}
+	else
+	{
+		_delay = 0.0f;
+	}
 	auto movefinish = false;
-	auto oldPos = _unit->getPosition();
+	auto oldPos = _unit->getPositionInCamera();
 	if (!_moveStart)
 	{
 		_moveStart = true;
 		auto delt = _patrol - oldPos;
 		auto lenght = delt.getLength();
 		_nomalized = delt.getNormalized();
-		auto speed = _unit->getSpeed();
-		if(_unit->getCurrentMotionID() != _motion)_unit->changeMotion(_motion);
-		_time = lenght / speed;
+		/*if(_unit->getCurrentMotionID() != _motion)*/_unit->changeMotion(_motion);
+		_time = lenght / _speed;
 		
 		auto angle = delt.getAngle();
-		_unit->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);
+		if(_dir != 0)_unit->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);
 	}
-	auto movepos = _unit->getPosition() + _nomalized * _unit->getSpeed() * dt;
+	auto movepos = _unit->getPositionInCamera() + _nomalized * _speed * dt;
 	
 	if (_time > 0)
 	{
@@ -130,6 +160,9 @@ void AIBase::followPoint(float dt, bool cycle)
 		}
 		_patrol = _unit->getPointItemData()[_pointIndex];
 		_motion = _unit->getMotionData()[_pointIndex];
+		_speed = _unit->getMoveSpeed()[_pointIndex];
+		_dir = _unit->getMoveDir()[_pointIndex];
+		_delay = _unit->getMoveDelay()[_pointIndex];
 	}
 }
 
@@ -214,23 +247,25 @@ void AIBase::moveRandom( float dt )
 
 bool AIBase::findEnemyGoal(cocos2d::Rect& lookRect, float dt)
 {
-	cocos2d::Vector<Unit*> enemys;
-	enemys = UnitManager::_enemies;
 	//如果被攻击，可是范围扩大
 	if (_attack)
 	{
 		_attack = false;
 	}
 	//查找视线内的敌人
-	for (auto enemy : enemys)
+	for (auto a : UnitManager::_allys)
 	{
-		if (enemy->getPower() > 0 && lookRect.containsPoint(enemy->getPosition()))
+		_goalUnit = a;
+		if (_unit != _goalUnit && _unit->getPower() > 0 && lookRect.containsPoint(_unit->getPositionInCamera()))
 		{
-			_goalUnit = enemy;
-			CC_SAFE_RETAIN(_goalUnit);
 			//追踪目标的方向
-			faceToEnemy(dt);
-			_patrol = _unit->getPosition();
+			if (!_lock)
+			{
+				faceToEnemy(dt);
+				_patrol = _goalUnit->getPositionInCamera();
+			}
+			//向着目标转动或走动
+			walkToGoal(dt);
 			return true;
 		}
 	}

@@ -12,6 +12,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import sun.swing.UIAction;
+
+import com.sun.java_cup.internal.runtime.virtual_parse_stack;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
 
@@ -45,37 +48,37 @@ public class UnitMoveMode {
 		return result;
 	}
 	
-	public final static UnitPath getPath(IntPair[] data, int[] animaID) {
-		UnitPath result = null;
-		if(data != null) {
-			if(data.length >= 2) {
-				IntPair[] path = new IntPair[data.length - 1];
-				for(int i = 1; i < data.length; ++i) {
-					path[i - 1] = data[i].getCopy();
-				}
-				int[] id = null;
-				if (animaID != null) {
-					if (animaID.length >= 2) {
-						id = new int[animaID.length - 1];
-						for (int i = 1; i < animaID.length; ++i) {
-							id[i - 1] = animaID[i];
-						}
-					}
-				}
-				result = new UnitPath(path, id);
-			}
-		}
-		return result;
-	}
-	
-	public final static int[] combine(int a, UnitPath up)
-	{
-		int[] id = null;
-		if (up != null) {
-			id = up.getAnimaID();
-		}
-		return combine(a, id);
-	}
+//	public final static UnitPath getPath(IntPair[] data, int[] animaID) {
+//		UnitPath result = null;
+//		if(data != null) {
+//			if(data.length >= 2) {
+//				IntPair[] path = new IntPair[data.length - 1];
+//				for(int i = 1; i < data.length; ++i) {
+//					path[i - 1] = data[i].getCopy();
+//				}
+//				int[] id = null;
+//				if (animaID != null) {
+//					if (animaID.length >= 2) {
+//						id = new int[animaID.length - 1];
+//						for (int i = 1; i < animaID.length; ++i) {
+//							id[i - 1] = animaID[i];
+//						}
+//					}
+//				}
+//				result = new UnitPath(path, id);
+//			}
+//		}
+//		return result;
+//	}
+//	
+//	public final static int[] combine(int a, UnitPath up)
+//	{
+//		int[] id = null;
+//		if (up != null) {
+//			id = up.getAnimaID();
+//		}
+//		return combine(a, id);
+//	}
 	
 	public final static int[] combine(int a, int[] id) {
 		int[] result = null;
@@ -96,7 +99,7 @@ public class UnitMoveMode {
 	public final static IntPair[] combine(IntPair point, UnitPath up) {
 		IntPair[] path = null;
 		if(up != null) {
-			path = up.getPath();
+			path = up.getData().getPath();
 		}
 		return combine(point, path);
 	}
@@ -200,7 +203,7 @@ public class UnitMoveMode {
 	public final static String getDescription(UnitMoveMode um) {
 		String result = "";
 		if(um != null) {
-			result = getDescription(um.getMode(), um.getData());
+			result = getDescription(um.getMode(), um.data.getPath());
 		}
 		return result;
 	}
@@ -214,21 +217,26 @@ public class UnitMoveMode {
 		}
 		
 		if(mode == PATH) {
-			return UnitPath.getPathDescription(getPath(data, null));
+			return UnitPath.getPathDescription(data);
 		}
-		
-		UnitPath up = getPath(data, null);
-		
 		
 		return "";
 	}
 	
 	private int mode;
-	private IntPair[] data;
-	private int[] animaID;
+	private UnitPathData data;
 	private int animaCount;
 	
+	public UnitPathData getData()
+	{
+		return data;
+	}
+	
+	public void setData(UnitPathData data) {
+		this.data = data;
+	}
     public UnitMoveMode() {
+    	data = new UnitPathData();
 		init();
     }
 	
@@ -245,8 +253,7 @@ public class UnitMoveMode {
 	private void copyFrom(UnitMoveMode dest) {
 		this.mode = dest.mode;
 		this.animaCount = dest.animaCount;
-		this.data = XUtil.copyArray(dest.data);
-		this.animaID = XUtil.copyArray(dest.animaID);
+		this.data = dest.data.getCopy();
 	}
 	
 	public int getMode() {
@@ -255,22 +262,6 @@ public class UnitMoveMode {
 	
 	public void setMode(int mode) {
 		this.mode = mode;
-	}
-	
-	public IntPair[] getData() {
-		return XUtil.copyArray(data);
-	}
-	
-	public void setData(IntPair[] data) {
-		this.data = XUtil.copyArray(data);
-	}
-	
-	public int[] getAnimaID() {
-		return XUtil.copyArray(animaID);
-	}
-	
-	public void setAnimaID(int[] data) {
-		this.animaID = XUtil.copyArray(data);
 	}
 	
 	public void setAnimaCount(int animaCount)
@@ -288,26 +279,32 @@ public class UnitMoveMode {
 		if (mode == PATH) {
 			IntPair[] temp = null;
 			if (data != null) {
-				temp = new IntPair[ data.length];
+				temp = new IntPair[ data.path.length];
 				MapInfo info = MainFrame.self.getMapInfo();
-				for (int i = 0; i < data.length; i++) {
+				for (int i = 0; i < data.path.length; i++) {
 					temp[i] = new IntPair();
-					temp[i].x = info.changeToMobileX(data[i].x);
-					temp[i].y = info.changeToMobileY(data[i].y,0);
+					temp[i].x = info.changeToMobileX(data.path[i].x);
+					temp[i].y = info.changeToMobileY(data.path[i].y,0);
 				}
 			}
 			SL.writeIntPairArrayMobile(temp, out);
-			SL.writeIntArrayMobile(animaID, out);
+			SL.writeIntArrayMobile(data.animaID, out);
+			SL.writeIntArrayMobile(data.speed, out);
+			SL.writeIntArrayMobile(data.orientation, out);
+			SL.writeIntArrayMobile(data.delay, out);
 		}
 		else {
-			SL.writeIntPairArrayMobile(data, out);
+			SL.writeIntPairArrayMobile(data.path, out);
 		}
 	}
 
 	public void save(DataOutputStream out) throws Exception {
 		out.writeInt(mode);
-		SL.writeIntPairArray(data, out);
-		SL.writeIntArray(animaID, out);
+		SL.writeIntPairArray(data.path, out);
+		SL.writeIntArray(data.animaID, out);
+		SL.writeIntArray(data.speed, out);
+		SL.writeIntArray(data.orientation, out);
+		SL.writeIntArray(data.delay, out);
 	}
 
 	public final static UnitMoveMode createViaFile(DataInputStream in) throws Exception {
@@ -318,8 +315,11 @@ public class UnitMoveMode {
 	
 	private void load(DataInputStream in) throws Exception {
 		mode = in.readInt();
-		data = SL.readIntPairArray(in);
-		animaID = SL.readIntArray(in);
+		data.path = SL.readIntPairArray(in);
+		data.animaID = SL.readIntArray(in);
+		data.speed = SL.readIntArray(in);
+		data.orientation = SL.readIntArray(in);
+		data.delay = SL.readIntArray(in);
 	}
 }
 
@@ -328,8 +328,7 @@ class UnitMoveModePanel extends JPanel {
 	private UnitMoveMode um;
 	private ValueChooser modeChooser;
 	private ButtonText dataText;
-	private IntPair[] data;
-	private int[] animaID;
+	private UnitPathData data;
 	private int animaCount;
 	public UnitMoveModePanel(JDialog owner, UnitMoveMode um, int animaCount) {
 		super();
@@ -353,7 +352,6 @@ class UnitMoveModePanel extends JPanel {
 			}
 		});
 		this.data = um.getData();
-		this.animaID = um.getAnimaID();
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
@@ -383,7 +381,6 @@ class UnitMoveModePanel extends JPanel {
 		modeChooser.setValue(um.getMode());
 		dataText.setValue(UnitMoveMode.getDescription(um));
 		this.data = um.getData();
-		this.animaID = um.getAnimaID();
 		this.animaCount = um.getAnimaCount();
 	}
 	
@@ -391,7 +388,6 @@ class UnitMoveModePanel extends JPanel {
 		if(um != null) {
 			um.setMode(modeChooser.getValue());
 			um.setData(data);
-			um.setAnimaID(animaID);
 			um.setAnimaCount(animaCount);
 		}
 	}
@@ -404,35 +400,34 @@ class UnitMoveModePanel extends JPanel {
 		
 		int mode = modeChooser.getValue();
 		if(mode == UnitMoveMode.RANDOM || mode == UnitMoveMode.AUTO) {
-			RandomMove rm = UnitMoveMode.getRandomMove(data);
-			data = UnitMoveMode.combine(rm);
+			RandomMove rm = UnitMoveMode.getRandomMove(data.path);
+			data.path = UnitMoveMode.combine(rm);
 		}
 		else {
-			data = null;
+			data.path = null;
 		}
-		dataText.setValue(UnitMoveMode.getDescription(modeChooser.getValue(), data));
+		dataText.setValue(UnitMoveMode.getDescription(modeChooser.getValue(), data.path));
 	}
 	
 	private void setData() {
 		int mode = modeChooser.getValue();
 		if(mode == UnitMoveMode.RANDOM || mode == UnitMoveMode.AUTO) {
-			RandomMove rm = UnitMoveMode.getRandomMove(data);
+			RandomMove rm = UnitMoveMode.getRandomMove(data.path);
 			RandomMoveSetter setter = new RandomMoveSetter(owner, rm);
 			setter.show();
 			if(setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
-				data = UnitMoveMode.combine(rm);
+				data.path = UnitMoveMode.combine(rm);
 			}
 		}
 		else if(mode == UnitMoveMode.PATH) {
 			UnitPathSetter setter = new UnitPathSetter(owner, MainFrame.self, 
-				UnitMoveMode.getPoint(data), new UnitPath(data, animaID), animaCount);
+				UnitMoveMode.getPoint(data.path), new UnitPath(data), animaCount);
 			setter.show();
 			if(setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
-				data = setter.getUnitPath().getPath();
-				animaID = setter.getUnitPath().getAnimaID();
+				data = setter.getUnitPath().getData();
 			}
 		}
-		dataText.setValue(UnitMoveMode.getDescription(mode, data));
+		dataText.setValue(UnitMoveMode.getDescription(mode, data.path));
 	}
 }
 

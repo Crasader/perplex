@@ -39,10 +39,14 @@ public:
 	void moveDownRight(float dt);
 private:
 	bool _attack;//受到攻击
+	bool _lock;
 	int _AIFaceDesDir;//面向的方向
 	int _AItick;//延迟执行的计时器
 	int _pointIndex;//当前跟踪点的索引
 	int _motion;
+	int _speed;
+	int _dir;
+	float _delay;
 	cocos2d::Vec2 _patrol;//巡逻出发点
 	bool _moveStart;
 	bool _moveFinish;

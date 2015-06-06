@@ -43,6 +43,7 @@ public:
 	void performMap();
 	bool isEqualF(float a, float b);
 	void moveMap(float offsetY, float moveUp);
+	int getVersion();
 private:
 	 GameScene*           _gameScene;
 	 bool                 iLoadingMap;    //是否正在载入地图
@@ -52,6 +53,7 @@ private:
 	 int                  iActiveMapID;   //当前活跃的地图ID
 	 int				  iImgCounts;
 	 int				  iLoadState;     //载入进度
+	 int				  _version;
 	 float 				  iLastCameraY;	//上次摄像机的Y坐标
 	 std::shared_ptr<XMap>               iPrepareLoadMap;//准备载入的地图大
 	 std::shared_ptr<XMap>                iActiveMap;     //当前活跃的地图

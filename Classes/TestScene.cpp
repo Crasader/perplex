@@ -24,7 +24,7 @@ bool TestScene::init()
 	{
 		return false;
 	}
-	auto colorLayer = LayerColor::create(Color4B::BLUE);
+	/*auto colorLayer = LayerColor::create(Color4B::BLUE);
 	addChild(colorLayer);
 	auto s = AnimationLoader::getInstance().createAnimation("plane");
 	s->setColor(Color3B::BLACK);
@@ -95,6 +95,6 @@ bool TestScene::init()
 		addChild(ex);
 		return true;
 	};
-	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(lister, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(lister, this);*/
 	return true;
 }
