@@ -32,45 +32,33 @@ USING_NS_CC;
 
 using namespace cocostudio;
 
-class MotionImpl;
-
 class GameEntity : public Node
 {
 public:
 	GameEntity();
-	GameEntity(int type, int shadowType, int radius, const Vec2& oriention = Vec2::ZERO, const Rect& moveRect = Rect::ZERO);
+	GameEntity(int id, int type, const Rect& moveRect = Rect::ZERO);
 	virtual ~GameEntity();;
     CREATE_FUNC(GameEntity);
     Node *getModel();
-    void remove();
-    Vec2 getOrientation();
-    void setType(int type){_type = type;};
-    int getType(){return _type;};
-    float getRadius(){return _radius;};
-    void forward(float dist);
-    void forward(float dist, float angle);
-	void setMoveSize(const Size& size) { _moveRect.size = size; }
+    void setID(int id){_id = id;};
+    int getID(){return _id;};
+    void forward(const cocos2d::Vec2& dist, float angle);
+	void setMoveSize(cocos2d::Rect rect) { _hitRect = rect; }
 	const Rect getMoveRect();
-	int getShadowType() const { return _shadowType; }
-	void setShadowType(int aShadowType) { _shadowType = aShadowType; }
 	bool isCastoff() const { return _castoff; }
 	void setCastoff() { _castoff = true; }
 	int getCastoffStage() const { return _castoffStage; }
+	int getType() const { return _type; }
+	void setType(int val) { _type = val; }
 	void setCastoffStage(int aCastoffStage) { _castoffStage = aCastoffStage; }
 public:
-    static void UseOutlineEffect(Sprite3D* sprite, float width, Color3B color);
 	virtual void perform(float dt);
 protected:
 	bool _castoff;
 	int _castoffStage;
+	int _id;
 	int _type;
-	int _shadowType;
-	float _radius;
-    Node *_Model;
-	std::shared_ptr<MotionImpl> _curState;
-    Vec2 _orientation;
-	Rect _moveRect;
+	Node *_Model;
+	Rect _hitRect;
 };
-
-
 #endif /* defined(__Moon3d__GameEntity__) */

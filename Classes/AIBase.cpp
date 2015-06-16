@@ -30,6 +30,7 @@ AIBase::AIBase(GameScene* gameScene, Unit* unit)
 , _nomalized(Vec2::ZERO)
 , _time(0.0f)
 , _moveRandom(nullptr)
+, _complete(nullptr)
 {
 	_unit->changeMotion(_motion);
 }
@@ -41,7 +42,7 @@ AIBase::~AIBase()
 
 void AIBase::perform( float dt )
 {
-  	/*switch (_unit->getMoveType())
+  	switch (_unit->getMoveType())
   	{
   	case STAND_MOVE:
   
@@ -53,13 +54,14 @@ void AIBase::perform( float dt )
   		followPoint(dt, true);
   		break;
   	case ORDER_MOVE:
-  
+		_unit->AI(dt);
+		_unit->unitMove(dt);
   		break;
   	default:
 		break;
-  	}*/
+  	}
 		/*walkToGoal(dt);*/
-		findEnemyGoal(Rect(_gameScene->getCamera()->getX(), _gameScene->getCamera()->getY(), _gameScene->getSceneWidth(), _gameScene->getSceneHeight()), dt);
+		//findEnemyGoal(Rect(_gameScene->getCamera()->getX(), _gameScene->getCamera()->getY(), _gameScene->getSceneWidth(), _gameScene->getSceneHeight()), dt);
 }
 
 bool AIBase::faceToEnemy( float dt )
@@ -122,11 +124,14 @@ void AIBase::followPoint(float dt, bool cycle)
 		auto delt = _patrol - oldPos;
 		auto lenght = delt.getLength();
 		_nomalized = delt.getNormalized();
-		/*if(_unit->getCurrentMotionID() != _motion)*/_unit->changeMotion(_motion);
 		_time = lenght / _speed;
 		
 		auto angle = delt.getAngle();
-		if(_dir != 0)_unit->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);
+		auto rotateTime = 0.16f * abs(angle);
+		/*_unit->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);*/
+		log("angle: %f, time %f", angle, rotateTime);
+		if (_dir == 1)_unit->runAction(RotateTo::create(rotateTime, -CC_RADIANS_TO_DEGREES(angle) - 90));
+		_unit->changeMotion(_motion);
 	}
 	auto movepos = _unit->getPositionInCamera() + _nomalized * _speed * dt;
 	
@@ -175,42 +180,42 @@ void AIBase::moveRandom( float dt )
 		if (prob < _unit->getMoveProb()[0])
 		{
 			_unit->setRotation(0 * 45);
-			_moveRandom = [&](float dt){this->moveDown(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveDown, this);
 		}
 		else if (prob < _unit->getMoveProb()[1])
 		{
 			_unit->setRotation(1 * 45);
-			_moveRandom = [&](float dt){this->moveDownleft(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveDownleft, this);
 		}
 		else if (prob < _unit->getMoveProb()[2])
 		{
 			_unit->setRotation(2 * 45);
-			_moveRandom = [&](float dt){this->moveleft(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveleft, this);
 		}
 		else if (prob < _unit->getMoveProb()[3])
 		{
 			_unit->setRotation(3 * 45);
-			_moveRandom = [&](float dt){this->moveLeftup(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveLeftup, this);
 		}
 		else if (prob < _unit->getMoveProb()[4])
 		{
 			_unit->setRotation(4 * 45);
-			_moveRandom = [&](float dt){this->moveUp(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveUp, this);
 		}
 		else if (prob < _unit->getMoveProb()[5])
 		{
 			_unit->setRotation(5 * 45);
-			_moveRandom = [&](float dt){this->moveUpright(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveUpright, this);
 		}
 		else if (prob < _unit->getMoveProb()[6])
 		{
 			_unit->setRotation(6 * 45);
-			_moveRandom = [&](float dt){this->moveRight(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveRight, this);
 		}
 		else if (prob < _unit->getMoveProb()[7])
 		{
 			_unit->setRotation(7 * 45);
-			_moveRandom = [&](float dt){this->moveDownRight(dt); };
+			_moveRandom = CC_CALLBACK_1(AIBase::moveDownRight, this);
 		}
 	}
 	
@@ -220,22 +225,22 @@ void AIBase::moveRandom( float dt )
 // 		if (_unit->getPositionX() > _patrol.x + Offset)
 // 		{
 // 			_unit->setRotation(2 * 45);
-// 			_moveRandom = [&](float dt){this->moveleft(dt); };
+// 			_moveRandom = [&](float dt){this->moveleft, this);
 // 		}
 // 		else if (_unit->getPositionX() < _patrol.x - Offset)
 // 		{
 // 			_unit->setRotation(6 * 45);
-// 			_moveRandom = [&](float dt){this->moveRight(dt); };
+// 			_moveRandom = [&](float dt){this->moveRight, this);
 // 		}
 // 		if (_unit->getPositionY() > _patrol.y + Offset)
 // 		{
 // 			_unit->setRotation(0 * 45);
-// 			_moveRandom = [&](float dt){this->moveDown(dt); };
+// 			_moveRandom = [&](float dt){this->moveDown, this);
 // 		}
 // 		else if (_unit->getPositionY() < _patrol.y - Offset)
 // 		{
 // 			_unit->setRotation(4 * 45);
-// 			_moveRandom = [&](float dt){this->moveUp(dt); };
+// 			_moveRandom = [&](float dt){this->moveUp, this);
 // 		}
 // 	}
 

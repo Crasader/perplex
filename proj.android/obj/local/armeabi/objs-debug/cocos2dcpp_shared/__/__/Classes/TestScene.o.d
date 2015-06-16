@@ -369,7 +369,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/TestScene.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCArmatureDataManager.h \
  jni/../../Classes/AnimationLoader.h \
  jni/../../Classes/AnimationResLoader.h \
- jni/../../Classes/ShadowController.h jni/../../Classes/Explosion.h
+ jni/../../Classes/ShadowController.h jni/../../Classes/Explosion.h \
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCSkin.h \
+ E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream
 
 jni/../../Classes/TestScene.h:
 
@@ -1114,3 +1116,7 @@ jni/../../Classes/AnimationResLoader.h:
 jni/../../Classes/ShadowController.h:
 
 jni/../../Classes/Explosion.h:
+
+D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCSkin.h:
+
+E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream:

@@ -424,7 +424,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/ShadowController.o:
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CCActionTimeline.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/ActionTimeline/CSLoader.h \
  jni/../../Classes/GameLayer.h jni/../../Classes/gamestate.h \
- jni/../../Classes/consts.h
+ jni/../../Classes/consts.h jni/../../Classes/Unit.h \
+ jni/../../Classes/XDropTool.h jni/../../Classes/GameScene.h \
+ jni/../../Classes/basescene.h
 
 jni/../../Classes/ShadowController.h:
 
@@ -1277,3 +1279,11 @@ jni/../../Classes/GameLayer.h:
 jni/../../Classes/gamestate.h:
 
 jni/../../Classes/consts.h:
+
+jni/../../Classes/Unit.h:
+
+jni/../../Classes/XDropTool.h:
+
+jni/../../Classes/GameScene.h:
+
+jni/../../Classes/basescene.h:

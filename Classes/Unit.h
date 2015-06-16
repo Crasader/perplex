@@ -62,20 +62,9 @@ class Unit : public GameEntity
 public:
 	Unit();
 	Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
-	Unit(bool alive, float hp, int score);
-	Unit(int type, int shadowType, int radius, bool alive, float hp, int score);
 	~Unit();
 	bool init(GameScene* gameScene, int unitID, int type, int walkdir, int camptype);
-	bool init();
-	virtual bool hurt(float damage);
-    virtual void die();
-    void shoot();
-    CC_SYNTHESIZE(float, _HP, HP);
     bool alive();
-    virtual void move(float y, float dt);
-    virtual void reset();
-	int getUnitID() const { return _unitID; }
-	void setUnitID(int aUnitID) { _unitID = aUnitID; }
 	int getMoveType() const { return _moveType; }
 	void setMoveType(int aMoveType) { _moveType = aMoveType; }
 	int getMaxHP() const { return _maxHP; }
@@ -110,16 +99,13 @@ public:
 	void setUnitRecycleOrder(vector<XUnitOrder> aUnitRecycleOrder);
 	Rect getWalkRect() const { return _walkRect; }
 	void setWalkRect(Rect aWalkRect) { _walkRect = aWalkRect; }
-	Rect getMoveRect() const { return _moveRect; }
-	void setMoveRect(Rect aMoveRect) { _moveRect = aMoveRect; }
+	Rect getMoveRect() const { return _hitRect; }
+	void setMoveRect(Rect aMoveRect);
 	std::shared_ptr<UnitRes> getUnitRes() const { return _unitRes; }
 	void setUnitRes(std::shared_ptr<UnitRes> aUnitRes);
 	void perform(float dt);
-	
 	void castoffStage();
-
 	void performWeapon(float dt);
-
 	bool isNeedDelete();
 	void AI(float dt);
 	void analyzeOrder(float dt);
@@ -148,8 +134,7 @@ public:
 	void setUnitOrder(vector<XUnitOrder> aOrder);
 	GameScene* getGameScene();
 	Vector<Weapon*>& getWeaponList() { return _weapons; }
-	float getShotX(int posIndex);
-	float getShotY(int posIndex);
+	cocos2d::Vec2 getShotPos(int posIndex);
 	Rect getHitRect() const;
 	virtual Vec2 getPositionInCamera() { return getPosition(); };
 // 	void setPosition(float x, float y) override;
@@ -166,6 +151,7 @@ public:
 	void setMoveSpeed(std::vector<int> speed);
 	void setMoveDir(std::vector<int> dir);
 	void setMoveDelay(std::vector<int> delay);
+	Vec2 getShotPositionInWorld(int index, float angle, const cocos2d::Vec2& pos = Vec2::ZERO);
 private:
 	bool isSceneTop();
 	bool isSceneButton();
@@ -175,6 +161,8 @@ private:
 	bool isSceneTopAbove();
 	void activateUnit();
 	void fire(float dt);
+protected:
+	void drawDebug(const cocos2d::Rect& rect);
 protected:
     bool		_alive;
 	bool		_active;//是否被激活
@@ -217,7 +205,7 @@ protected:
 	int			_fireTick;//轻武器涉及延迟
 	//判断可行走范围
 	Rect		_walkRect;//行走碰撞判断矩形
-	Rect		_moveRect;//有效行走矩形
+	Rect		_hitRect;//有效行走矩形
 	GameScene* _gameScene;
 	Player* _player;
 	vector<bool>	 _dieExplode;//记录是否爆炸

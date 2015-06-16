@@ -17,6 +17,7 @@
 #include "Fodder.h"
 #include "Enemies.h"
 #include "Explosion.h"
+#include "tank.h"
 
 cocos2d::Vector<Tool*> UnitManager::_tools;
 cocos2d::Vector<Building*> UnitManager::_buildings;
@@ -44,8 +45,8 @@ Unit* UnitManager::createUnit(int unitID, int type, int x, int y, int moveType, 
 		pUnit = createRedHeader(unitID, type, x, y, moveType, dir, campType);
 		_gameScene->addLevelEnemy(-1);
 		break;
-	case 1:
-	case 5:
+	case kEnemyFodder:
+	case kEnemyTank:
 		pUnit = spawnEnemy(unitID, type, x, y, moveType, dir, campType);
 		_gameScene->addLevelEnemy(-1);
 		break;
@@ -84,14 +85,14 @@ Unit* UnitManager::findUnitFromID(int unitID)
 	}
 	for (auto a : _allys)
 	{
-		if (((Unit*)a)->getUnitID() == unitID)
+		if (((Unit*)a)->getID() == unitID)
 		{
 			return ((Unit*)a);
 		}
 	}
 	for (auto a : _enemies)
 	{
-		if (((Unit*)a)->getUnitID() == unitID)
+		if (((Unit*)a)->getID() == unitID)
 		{
 			return ((Unit*)a);
 		}
@@ -207,7 +208,6 @@ Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, 
 		pUnit->setPosition(Vec2(x, y));
 		pUnit->setPatrol(Vec2(x, y));
 		pUnit->setMoveType(moveType);
-		pUnit->setLocalZOrder(kZOrderSky);
 		_sprites.pushBack(pUnit);
 		_sortSprites.pushBack(pUnit);
 		if (campType == Ally)
@@ -266,23 +266,23 @@ Building* UnitManager::createBuilding(int buildType, int BuildiID, int x, int y,
 	return pBuilding;
 }
 
-Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, int y, int moveX, int moveY, int dir, int campType)
+Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, const cocos2d::Vec2& pos, const cocos2d::Vec2& move, int dir, int campType)
 {
 	assert(weaponRes!= nullptr);
 	Bullet* pBullet = nullptr;
 	switch (weaponRes->getBulletLogicType())
 	{
 	case 1:
-		pBullet = Bullet::create(_gameScene, weaponRes, Vec2(x, y), Vec2(moveX, moveY), Vec2::ZERO);
+		pBullet = Bullet::create(_gameScene, weaponRes, pos, move, dir);
 		break;
 	case 2:
-		pBullet = Bullet::create(_gameScene, weaponRes, Vec2(x, y), Vec2(moveX, moveY), Vec2::ZERO);
+		pBullet = Bullet::create(_gameScene, weaponRes, pos, move, dir);
 		break;
 	case 5:
-		pBullet = Bullet::create(_gameScene, weaponRes, Vec2(x, y), Vec2(moveX, moveY), Vec2::ZERO);
+		pBullet = Bullet::create(_gameScene, weaponRes, pos, move, dir);
 		break;
 	default:
-		pBullet = Bullet::create(_gameScene, weaponRes, Vec2(x, y), Vec2(moveX, moveY), Vec2::ZERO);
+		pBullet = Bullet::create(_gameScene, weaponRes, pos, move, dir);
 		break;
 	}
 	if (pBullet == nullptr) return nullptr;
@@ -305,6 +305,9 @@ Explosion* UnitManager::createExplode(Unit* unit, int type, const cocos2d::Vec2&
 	Explosion* explosion = nullptr;
 	switch (type)
 	{
+	case 0:
+
+		break;
 	default:
 		explosion = Explosion::create(pos, callback);
 		break;

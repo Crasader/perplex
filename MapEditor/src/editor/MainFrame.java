@@ -870,6 +870,7 @@ public class MainFrame
 				saveMap(mapName);
 			}
 			catch (Exception e) {
+				e.printStackTrace();
 				restoreSaveFiles(mapName);
 				JOptionPane.showMessageDialog(progress, "保存当前地图出错" + "\n" + e,
 											  "保存出错", JOptionPane.ERROR_MESSAGE);

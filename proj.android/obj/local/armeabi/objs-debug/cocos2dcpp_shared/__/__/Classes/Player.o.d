@@ -425,12 +425,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Player.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCEventListenerController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h \
  jni/../../Classes/MotionImpl.h jni/../../Classes/Bullets.h \
- jni/../../Classes/GameControllers.h jni/../../Classes/consts.h \
- jni/../../Classes/GameScene.h jni/../../Classes/gamestate.h \
- jni/../../Classes/basescene.h jni/../../Classes/PublicApi.h \
- jni/../../Classes/GameLayer.h jni/../../Classes/ParticleManager.h \
- jni/../../Classes/Sprite3DEffect.h \
- E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
+ jni/../../Classes/consts.h jni/../../Classes/GameScene.h \
+ jni/../../Classes/gamestate.h jni/../../Classes/basescene.h \
+ jni/../../Classes/PublicApi.h jni/../../Classes/GameLayer.h \
  jni/../../Classes/Effects.h jni/../../Classes/Explosion.h \
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
  jni/../../Classes/Head.h jni/../../Classes/ShadowController.h \
@@ -1294,8 +1291,6 @@ jni/../../Classes/MotionImpl.h:
 
 jni/../../Classes/Bullets.h:
 
-jni/../../Classes/GameControllers.h:
-
 jni/../../Classes/consts.h:
 
 jni/../../Classes/GameScene.h:
@@ -1307,12 +1302,6 @@ jni/../../Classes/basescene.h:
 jni/../../Classes/PublicApi.h:
 
 jni/../../Classes/GameLayer.h:
-
-jni/../../Classes/ParticleManager.h:
-
-jni/../../Classes/Sprite3DEffect.h:
-
-E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream:
 
 jni/../../Classes/Effects.h:
 

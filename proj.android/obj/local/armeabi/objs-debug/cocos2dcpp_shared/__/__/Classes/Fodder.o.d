@@ -435,7 +435,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Fodder.o: \
  jni/../../Classes/Head.h jni/../../Classes/FodderIdle.h \
  jni/../../Classes/MotionImpl.h jni/../../Classes/AnimationLoader.h \
  jni/../../Classes/AnimationResLoader.h \
- D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
+ jni/../../Classes/ShadowController.h
 
 jni/../../Classes/Fodder.h:
 
@@ -1330,3 +1331,5 @@ jni/../../Classes/AnimationLoader.h:
 jni/../../Classes/AnimationResLoader.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:
+
+jni/../../Classes/ShadowController.h:

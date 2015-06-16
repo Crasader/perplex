@@ -42,10 +42,10 @@ Bullet::Bullet()
 
 }
 
-Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
+Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, int speed)
 {
 	auto bullet = new Bullet();
-	if (bullet && bullet->init(gameScene, weaponRes, pos, move, dir))
+	if (bullet && bullet->init(gameScene, weaponRes, pos, move, speed))
 	{
 		bullet->autorelease();
 		return bullet;
@@ -55,7 +55,7 @@ Bullet* Bullet::create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRe
 }
 
 
-bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir)
+bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, int speed)
 {
 	auto s = Sprite::create("b.png");
 	_Model = s;
@@ -66,15 +66,14 @@ bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Ve
 		_weaponRes = weaponRes;
 		setPosition(pos);
 		_vector = move;
-		_orientation = dir;
-		_radius = 10;
-		_type = kEnemyBullet;
+		_id = kEnemyBullet;
 		_owner = kEnemy;
 		_damage = 0;
 		_liveTick = 4;
 		_castoff = false;
 		_castoffStage = 0;
 		_bump = false;
+		_speed = speed;
 		addChild(_Model);
 #if COCOS2D_DEBUG
 		auto bound = DrawNode::create();
@@ -94,8 +93,7 @@ bool Bullet::init()
     if(_Model)
     {
         addChild(_Model);
-        _radius=10;
-        _type = kEnemyBullet;
+        _id = kEnemyBullet;
         _owner = kEnemy;
         _damage = 0;
         
@@ -125,8 +123,7 @@ bool PlayerBullet::init()
     {
 		//_Model->setScale(0.5);
         addChild(_Model);
-        _radius=12;
-        _type = kPlayerBullet;
+        _id = kPlayerBullet;
         _owner = kPlayer;
         _damage = 2;
         return true;
@@ -179,7 +176,7 @@ void Bullet::perform(float dt)
 		_castoffStage++;
 		return;
 	}
-	setPosition(getPosition() - _vector);
+	setPosition(getPosition() + _vector * _speed * dt);
 	cocos2d::Rect camerRect(
 		_gameScene->getCamera()->getX() - 40,
 		_gameScene->getCamera()->getY() - 40,
@@ -206,8 +203,7 @@ bool Missile::init()
 		_velocity = 0;
 
         addChild(_Model);
-        _radius=10;
-        _type = kPlayerMissiles;
+        _id = kPlayerMissiles;
         _owner = kPlayer;
 		_Model->setRotation(180);
         _Model->setScale(0.3f);

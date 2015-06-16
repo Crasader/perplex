@@ -30,10 +30,10 @@ public:
 	//weapon sound
 	//TODO
 	
-	Weapon(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType);
+	Weapon(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, const cocos2d::Vec2& pos, const cocos2d::Vec2& vec, int dir, int posIndex, int weaponCampType);
 	virtual ~Weapon();
-	static Weapon* create(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType);
-	bool  init(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType);
+	static Weapon* create(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, const cocos2d::Vec2& pos, const cocos2d::Vec2& vec, int dir, int posIndex, int weaponCampType);
+	bool  init(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, const cocos2d::Vec2& pos, const cocos2d::Vec2& vec, int dir, int posIndex, int weaponCampType);
 	void perform(float dt);
 	bool isCastoff() { return _castoff; }
 	void setCastoff() { _castoff = true; }
@@ -48,8 +48,6 @@ private:
 	float		_x;//发射点坐标
 	float		_y;
 	
-	float		_moveX;
-	float		_moveY;
 	int			_dir;//方向
 	int			_state;//
 	bool		_bump;

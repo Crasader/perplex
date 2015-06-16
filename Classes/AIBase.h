@@ -56,6 +56,7 @@ private:
 	Unit* _unit;
 	GameScene* _gameScene;
 	std::function<void(float)> _moveRandom;
+	std::function<void()> _complete;
 };
 
 #endif // __AIBase_h__

@@ -8,13 +8,11 @@
 
 USING_NS_CC;
 
-Weapon::Weapon(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType) :_castoff(false)
+Weapon::Weapon(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, const cocos2d::Vec2& pos, const cocos2d::Vec2& vec, int dir, int posIndex, int weaponCampType) :_castoff(false)
 , _castoffState(0)
 , _beCover(false)
 , _posIndex(posIndex)
 , _unit(unit)
-, _moveX(moveX)
-, _moveY(moveY)
 , _dir(dir)
 , _state(W_FLAME)
 , _bullet(nullptr)
@@ -51,21 +49,19 @@ void Weapon::perform( float dt )
 	}
 }
 
-bool Weapon::init(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType)
+bool Weapon::init(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, const cocos2d::Vec2& pos, const cocos2d::Vec2& vec, int dir, int posIndex, int weaponCampType)
 {
-	_x = _unit->getShotX(posIndex);
-	_y = _unit->getShotY(posIndex);
 	_state = W_BULLET;
-	_bullet = _gameLayer->getSpriteManager()->createBullet(weaponRes, _x, _y, _moveX, _moveY, dir, weaponCampType);;
+	_bullet = _gameLayer->getSpriteManager()->createBullet(weaponRes, pos, vec, dir, weaponCampType);;
 	_bullet->setType(_weaponRes->getID());
 	CC_SAFE_RETAIN(_bullet);
 	return true;
 }
 
-Weapon* Weapon::create(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, float moveX, float moveY, int dir, int posIndex, int weaponCampType)
+Weapon* Weapon::create(GameScene* gameLayer, std::shared_ptr<WeaponRes> weaponRes, Unit* unit, const cocos2d::Vec2& pos, const cocos2d::Vec2& vec, int dir, int posIndex, int weaponCampType)
 {
-	auto weapon = new Weapon(gameLayer, weaponRes, unit, moveX, moveY, dir, posIndex, weaponCampType);
-	if (weapon && weapon->init(gameLayer, weaponRes, unit, moveX, moveY, dir, posIndex, weaponCampType))
+	auto weapon = new Weapon(gameLayer, weaponRes, unit, pos, vec, dir, posIndex, weaponCampType);
+	if (weapon && weapon->init(gameLayer, weaponRes, unit, pos, vec, dir, posIndex, weaponCampType))
 	{
 		weapon->autorelease();
 		return weapon;

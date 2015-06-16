@@ -22,6 +22,7 @@ public:
 	static const int STAND_DIR_COUNT = 16;
 public:
 	UnitRes();
+	~UnitRes();
 public:
 	int			_ID; //每一种Unit对应一个UnitRes, iID是UnitRes的唯一标识
 	int			_HP;

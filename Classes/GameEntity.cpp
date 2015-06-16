@@ -26,94 +26,32 @@
 #include "Sprite3DEffect.h"
 #include "MotionImpl.h"
 
-USING_NS_CC_MATH;
-
 Node *GameEntity::getModel(){
     return _Model;
 }
 
-Vec2 GameEntity::getOrientation(){
-    return _orientation;
-}
-
-void GameEntity::forward(float dist){
-    float f = getRotation();
-    setPosition(getPosition()
-                +Vec2(
-                       sinf(CC_DEGREES_TO_RADIANS(f))*dist,
-                       cosf(CC_DEGREES_TO_RADIANS(f))*dist)
-                );
-}
-void GameEntity::forward(float dist, float angle)
-{
-    setRotation(getRotation()-angle);
-    forward(dist);
-}
-
-void GameEntity::UseOutlineEffect(Sprite3D* sprite, float width, Color3B color)
-{
-    if(nullptr == sprite)
-        CCLOGERROR("Can not apply outline effect to a null Sprite3D");
-    EffectSprite3D* _effectSprite3D = dynamic_cast<EffectSprite3D*>(sprite);
-    if(_effectSprite3D)
-    {
-        Effect3DOutline* effect(nullptr);
-        for (ssize_t index = 0; index < _effectSprite3D->getEffectCount(); ++index)
-        {
-            effect = dynamic_cast<Effect3DOutline*>(_effectSprite3D->getEffect(index));
-            if(nullptr != effect) break;
-        }
-        if(effect)
-        {
-            effect->setOutlineColor(Vec3(color.r/255.0f, color.g/255.0f, color.b/255.0f));
-            effect->setOutlineWidth(width);
-        }
-        else
-        {
-            effect = Effect3DOutline::create();
-            effect->setOutlineColor(Vec3(color.r/255.0f, color.g/255.0f, color.b/255.0f));
-            effect->setOutlineWidth(width);
-            _effectSprite3D->addEffect(effect, 1);
-        }
-        
-    }
-//    Sprite3DOutlineEffect* effect = Sprite3DOutlineEffect::create();
-//    sprite->setEffect(effect);
-//    effect->setOutlineColor(Vec3(color.r/255.0f, color.g/255.0f, color.b/255.0f));
-//    effect->setOutlineWidth(width);
-}
-
-
-void GameEntity::perform( float dt )
+void GameEntity::perform(float dt )
 {
 }
 
 const Rect GameEntity::getMoveRect()
 {
-	_moveRect.origin = Point(getPositionX() - _moveRect.size.width / 2, this->getPositionY() - _moveRect.size.height / 2);
-	return _moveRect;
+	return _hitRect;
 }
 
 GameEntity::GameEntity()
-:_Model(nullptr)
-, _radius(0)
-, _orientation(0, 0)
-, _type(0)
-, _shadowType(-1)
-, _curState(nullptr)
-, _castoff(false)
-, _castoffStage(0)
+:GameEntity(-1, 0)
 {
 
 }
 
-GameEntity::GameEntity(int type, int shadowType, int radius, const Vec2& oriention /*= Vec3::ZERO*/, const Rect& moveRect /*= Rect::ZERO*/)
-:_type(type)
-, _shadowType(shadowType)
-, _radius(radius)
-, _orientation(oriention)
-, _moveRect(moveRect)
-,_curState(nullptr)
+GameEntity::GameEntity(int id, int type, const Rect& moveRect /*= Rect::ZERO*/)
+:_id(id)
+, _type(type)
+, _Model(nullptr)
+, _castoff(false)
+, _hitRect(moveRect)
+, _castoffStage(0)
 {
 
 }

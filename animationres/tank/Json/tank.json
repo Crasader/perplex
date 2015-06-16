@@ -7,11 +7,11 @@
       "name": "tank",
       "bone_data": [
         {
-          "name": "Layer7",
+          "name": "b",
           "parent": "",
           "dI": 0,
-          "x": 0.0,
-          "y": 0.0,
+          "x": -3.0,
+          "y": 6.67333984375,
           "z": 1,
           "cX": 1.0,
           "cY": 1.0,
@@ -27,8 +27,8 @@
               "displayType": 0,
               "skin_data": [
                 {
-                  "x": 0.0,
-                  "y": -7.67334,
+                  "x": 1.0,
+                  "y": -8.0,
                   "cX": 1.0,
                   "cY": 1.0,
                   "kX": 0.0,
@@ -39,32 +39,32 @@
           ]
         },
         {
-          "name": "Layer8",
-          "parent": "Layer7",
-          "dI": 0,
-          "x": 0.0,
-          "y": 0.0,
+          "name": "t",
+          "parent": "b",
+          "dI": 1,
+          "x": 1.1818233728408814,
+          "y": 1.2115049362182617,
           "z": 2,
           "cX": 1.0,
           "cY": 1.0,
-          "kX": 1.55413115,
-          "kY": -1.55413115,
-          "arrow_x": 60.008346557617188,
-          "arrow_y": 3.2022246159613132E-05,
+          "kX": 1.53243279,
+          "kY": -1.53243279,
+          "arrow_x": 50.982078552246094,
+          "arrow_y": 1.8325683413422666E-05,
           "effectbyskeleton": true,
-          "bl": 60,
+          "bl": 50,
           "display_data": [
             {
               "name": "坦克001/tank_turret0_0.png",
               "displayType": 0,
               "skin_data": [
                 {
-                  "x": 6.672415,
-                  "y": -0.111195564,
+                  "x": 10.9421053,
+                  "y": 0.324211121,
                   "cX": 1.00000012,
                   "cY": 1.00000012,
-                  "kX": -1.55413115,
-                  "kY": 1.554131
+                  "kX": -1.51727593,
+                  "kY": 1.51727629
                 }
               ]
             },
@@ -73,16 +73,48 @@
               "displayType": 0,
               "skin_data": [
                 {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0
+                  "x": 10.9421053,
+                  "y": 0.324211121,
+                  "cX": 1.00000012,
+                  "cY": 1.00000012,
+                  "kX": -1.51727593,
+                  "kY": 1.51727593
                 }
               ]
             }
           ]
+        },
+        {
+          "name": "r",
+          "parent": "t",
+          "dI": -1,
+          "x": 36.6370849609375,
+          "y": 5.7385129928588867,
+          "z": 4,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.52876949,
+          "kY": 1.52876949,
+          "arrow_x": -3.4570693969726562E-05,
+          "arrow_y": -1.2473843526095152E-05,
+          "effectbyskeleton": true,
+          "bl": 0
+        },
+        {
+          "name": "l",
+          "parent": "t",
+          "dI": -1,
+          "x": 35.0794792175293,
+          "y": -9.6641921997070312,
+          "z": 3,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.52876949,
+          "kY": 1.52876949,
+          "arrow_x": -2.0146369934082031E-05,
+          "arrow_y": 5.5267591960728168E-06,
+          "effectbyskeleton": true,
+          "bl": 0
         }
       ]
     }
@@ -92,7 +124,7 @@
       "name": "tank",
       "mov_data": [
         {
-          "name": "walk",
+          "name": "000",
           "dr": 1,
           "lp": true,
           "to": 0,
@@ -101,7 +133,49 @@
           "sc": 1.0,
           "mov_bone_data": [
             {
-              "name": "Layer8",
+              "name": "r",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": -1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "l",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": -1,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.0431857258,
+                  "kY": 0.0431857258,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -122,7 +196,7 @@
               ]
             },
             {
-              "name": "Layer7",
+              "name": "t",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -145,8 +219,8 @@
           ]
         },
         {
-          "name": "idle",
-          "dr": 16,
+          "name": "001",
+          "dr": 1,
           "lp": true,
           "to": 0,
           "drTW": 0,
@@ -154,7 +228,7 @@
           "sc": 1.0,
           "mov_bone_data": [
             {
-              "name": "Layer8",
+              "name": "t",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -175,7 +249,7 @@
               ]
             },
             {
-              "name": "Layer7",
+              "name": "b",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -192,17 +266,320 @@
                   "tweenFrame": true,
                   "bd_src": 1,
                   "bd_dst": 771
-                },
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "002",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "t",
+              "dl": 0.0,
+              "frame_data": [
                 {
                   "dI": 0,
                   "x": 0.0,
-                  "y": -1.0,
+                  "y": 0.0,
                   "z": 0,
                   "cX": 1.0,
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 15,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "003",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "t",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "004",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "t",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "005",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "t",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "006",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "t",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "007",
+          "dr": 1,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "t",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "b",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -222,32 +599,10 @@
       "height": 86.0,
       "pX": 0.5,
       "pY": 0.5,
-      "plistFile": "",
-      "contour_data": [
-        {
-          "vertex": [
-            {
-              "x": 37.0,
-              "y": 47.0
-            },
-            {
-              "x": 37.0,
-              "y": -38.0
-            },
-            {
-              "x": -36.0,
-              "y": -38.0
-            },
-            {
-              "x": -36.0,
-              "y": 47.0
-            }
-          ]
-        }
-      ]
+      "plistFile": ""
     },
     {
-      "name": "坦克001/tank_turret0_1",
+      "name": "坦克001/tank_turret0_0",
       "width": 74.0,
       "height": 86.0,
       "pX": 0.5,
@@ -255,7 +610,7 @@
       "plistFile": ""
     },
     {
-      "name": "坦克001/tank_turret0_0",
+      "name": "坦克001/tank_turret0_1",
       "width": 74.0,
       "height": 86.0,
       "pX": 0.5,

@@ -667,6 +667,17 @@ public class XUtil {
 		return result;
 	}
 
+	public static int[] copyArray(Integer[] data) {
+		int[] result = null;
+		if (data != null) {
+			result = new int[data.length];
+			for (int i = 0; i < data.length; ++i) {
+				result[i] = data[i];
+			}
+		}
+		return result;
+	}
+	
 	public static IntPair[] copyArray(IntPair[] data) {
 		IntPair[] result = null;
 		if (data != null) {
@@ -758,6 +769,16 @@ public class XUtil {
 		return value + "";
 	}
 
+
+	public static int[] IntegerToint(Integer[] data)
+	{
+		int[] result = new int[data.length];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = data[i].intValue();
+		}
+		return result;
+	}
+	
 }
 
 class SL {
@@ -853,6 +874,18 @@ class SL {
 		}
 	}
 
+	public static void writeIntArray(Integer[] data, DataOutputStream out) throws Exception {
+		if (data == null) {
+			out.writeInt(0);
+		}
+		else {
+			out.writeInt(data.length);
+			for (int i = 0; i < data.length; ++i) {
+				out.writeInt(data[i]);
+			}
+		}
+	}
+	
 	public static int[] readIntArray(DataInputStream in) throws Exception {
 		int[] result = null;
 		int length = in.readInt();

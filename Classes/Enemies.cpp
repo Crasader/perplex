@@ -47,19 +47,11 @@ bool FodderLeader::init()
         addChild(_Model);
         //_Model->setRotation3D(Vec3(90,0,0));
         //GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02, Color3B(255,0,0));
-        _type = kEnemyFodderL;
-        _HP = 20;
-        _radius = 35;
+        _id = kEnemyFodderL;
         return true;
     }
     return false;
 }
-void FodderLeader::reset()
-{
-    Unit::reset();
-    _HP = 25;
-}
-
 
 bool BigDude::init()
 {
@@ -73,22 +65,11 @@ bool BigDude::init()
         addChild(_Model);
         //_Model->setRotation3D(Vec3(90,0,0));
         //static_cast<Sprite3D*>(_Model)->setOutline(0.2, Color3B::BLACK);
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02f, Color3B::BLACK);
-        _type = kEnemyBigDude;
-        _HP = 30;
-        _radius = 40;
-        
+        _id = kEnemyBigDude;
         
         return true;
     }
     return false;
-}
-
-void BigDude::reset()
-{
-    Unit::reset();
-    _HP = 30;
-    //_targetPos = nullptr;
 }
 
 void BigDude::showFinished()
@@ -96,32 +77,32 @@ void BigDude::showFinished()
     //remove from show Vector, add to the enemy Vector
     EnemyController::enemies.pushBack(this);
     EnemyController::showCaseEnemies.eraseObject(this);
-    schedule(schedule_selector(BigDude::shoot),CCRANDOM_0_1()*2+1, 90, 0);
+  /*  schedule(schedule_selector(BigDude::shoot),CCRANDOM_0_1()*2+1, 90, 0);*/
 }
-void BigDude::shoot(float dt)
-{
-    if(GameLayer::isDie)
-    {
-        unschedule(schedule_selector(BigDude::shoot));
-        return;
-    }
-    //Point bulletVec = Vec2(getRotation())
-    
-    Vec2 offset1 = getPosition();
-    Vec2 offset2 = offset1;
-    float angle = CC_DEGREES_TO_RADIANS(-getRotation()+90);
-    float offsetRad = CC_DEGREES_TO_RADIANS(45);
-    offset1.x += cosf(angle+offsetRad)*-50;
-    offset1.y += sinf(angle+offsetRad)*-50;
-    offset2.x += cosf(angle-offsetRad)*-50;
-    offset2.y += sinf(angle-offsetRad)*-50;
-    //this->showMuzzle();
-    auto bullet =BulletController::spawnBullet(kEnemyBullet, offset1, Vec2(cosf(angle)*-500, sinf(angle)*-500));
-    bullet->setRotation(-CC_RADIANS_TO_DEGREES(angle)-90);
-    bullet =BulletController::spawnBullet(kEnemyBullet, offset2, Vec2(cosf(angle)*-500, sinf(angle)*-500));
-    bullet->setRotation(-CC_RADIANS_TO_DEGREES(angle)-90);
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom.mp3");
-}
+//void BigDude::shoot(float dt)
+//{
+//    if(GameLayer::isDie)
+//    {
+//       /* unschedule(schedule_selector(BigDude::shoot));*/
+//        return;
+//    }
+//    //Point bulletVec = Vec2(getRotation())
+//    
+//    Vec2 offset1 = getPosition();
+//    Vec2 offset2 = offset1;
+//    float angle = CC_DEGREES_TO_RADIANS(-getRotation()+90);
+//    float offsetRad = CC_DEGREES_TO_RADIANS(45);
+//    offset1.x += cosf(angle+offsetRad)*-50;
+//    offset1.y += sinf(angle+offsetRad)*-50;
+//    offset2.x += cosf(angle-offsetRad)*-50;
+//    offset2.y += sinf(angle-offsetRad)*-50;
+//    //this->showMuzzle();
+//    auto bullet =BulletController::spawnBullet(kEnemyBullet, offset1, Vec2(cosf(angle)*-500, sinf(angle)*-500));
+//    bullet->setRotation(-CC_RADIANS_TO_DEGREES(angle)-90);
+//    bullet =BulletController::spawnBullet(kEnemyBullet, offset2, Vec2(cosf(angle)*-500, sinf(angle)*-500));
+//    bullet->setRotation(-CC_RADIANS_TO_DEGREES(angle)-90);
+//        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom.mp3");
+//}
 
 void BigDude::update(float dt, Node* player)
 {
@@ -166,33 +147,33 @@ void BigDude::dismissMuzzle(float dt)
     muzzle2->removeFromParent();
 }
 
-void BigDude::die()
-{
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom2.mp3");
-    this->_alive = false;
-    EnemyController::enemies.eraseObject(this);
-    EnemyController::showCaseEnemies.pushBack(this);
-    EffectManager::createExplosion(getPosition());
-    Vec2 nowPoint = this->getPosition();
-    log("now X: %f Y:%f \n",nowPoint.x,nowPoint.y);
-    Vec2 targetPos = Vec2(nowPoint.x,nowPoint.y-200);
-    log("now X: %f Y:%f \n",targetPos.x,targetPos.y);
-	unscheduleAllCallbacks();
-    this->runAction(
-                     Sequence::create(
-                                      Spawn::create(
-                                                    EaseSineOut::create(MoveTo::create(2, targetPos)),
-                                                    EaseSineOut::create(ScaleTo::create(2,0.3f)),//TODO: replace with move 3d when possible
-                                                    //EaseBackOut::create(RotateBy::create(2,Vec3(CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle()),CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle())+45,-CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle())+90))),
-                                                    RotateBy::create(2, Vec3(360+CCRANDOM_0_1()*600, 360+CCRANDOM_0_1()*600, 360+CCRANDOM_0_1()*600)),
-                                                    nullptr
-                                                    ),
-                                      CallFunc::create(CC_CALLBACK_0(BigDude::fall, this)),
-                                      nullptr
-                                      ));
-
-
-}
+//void BigDude::die()
+//{
+//    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom2.mp3");
+//    this->_alive = false;
+//    EnemyController::enemies.eraseObject(this);
+//    EnemyController::showCaseEnemies.pushBack(this);
+//    EffectManager::createExplosion(getPosition());
+//    Vec2 nowPoint = this->getPosition();
+//    log("now X: %f Y:%f \n",nowPoint.x,nowPoint.y);
+//    Vec2 targetPos = Vec2(nowPoint.x,nowPoint.y-200);
+//    log("now X: %f Y:%f \n",targetPos.x,targetPos.y);
+//	unscheduleAllCallbacks();
+//    this->runAction(
+//                     Sequence::create(
+//                                      Spawn::create(
+//                                                    EaseSineOut::create(MoveTo::create(2, targetPos)),
+//                                                    EaseSineOut::create(ScaleTo::create(2,0.3f)),//TODO: replace with move 3d when possible
+//                                                    //EaseBackOut::create(RotateBy::create(2,Vec3(CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle()),CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle())+45,-CC_RADIANS_TO_DEGREES((nowPoint-targetPos).getAngle())+90))),
+//                                                    RotateBy::create(2, Vec3(360+CCRANDOM_0_1()*600, 360+CCRANDOM_0_1()*600, 360+CCRANDOM_0_1()*600)),
+//                                                    nullptr
+//                                                    ),
+//                                      CallFunc::create(CC_CALLBACK_0(BigDude::fall, this)),
+//                                      nullptr
+//                                      ));
+//
+//
+//}
 
 void BigDude::fall()
 {
@@ -215,7 +196,6 @@ void BigDude::fall()
     this->removeFromParentAndCleanup(false);
     EnemyController::_bigDudePool.pushBack(this);
     EnemyController::showCaseEnemies.eraseObject(this);
-    reset();
 }
 
 bool Boss::init()
@@ -226,36 +206,30 @@ bool Boss::init()
     //auto cannon2 = Sprite3D::create("bossCannon.obj", "boos.png");
     if(_Model)
     {
-        _Model->setScale(28);
-        addChild(_Model);
-       // _Model->setRotation3D(Vec3(90,0,0));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02f, Color3B::BLACK);
-        _type = kEnemyBoss;
-        _HP = 5000;
-        _radius = 150;
-        auto cannon1 = EffectSprite3D::createFromObjFileAndTexture("bossCannon.c3b", "boss.png");
-        _Cannon1 = Node::create();
-        addChild(_Cannon1);
-        _Cannon1->addChild(cannon1);
-        cannon1->setScale(28);
-        //cannon1->setRotation3D(Vec3(90,0,0));
-        _Cannon1->setPosition3D(Vec3(40,-100, 10));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(cannon1), 0.02f, Color3B(0,0,0));
-        auto cannon2 = EffectSprite3D::createFromObjFileAndTexture("bossCannon.c3b", "boss.png");
-        _Cannon2 = Node::create();
-        addChild(_Cannon2);
-        _Cannon2->addChild(cannon2);
-        cannon2->setScale(28);
-        //cannon2->setRotation3D(Vec3(90,0,0));
-        _Cannon2->setPosition3D(Vec3(-40,-100, 10));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(cannon2), 0.02f, Color3B(0,0,0));
-        //addChild(_Cannon2);
-        //_Cannon2->setPosition(-20,-200);
-        
-        _Cannon1->setRotation(-45);
-        _Cannon2->setRotation(45);
-        
-                enterTheBattle();
+       // _Model->setScale(28);
+       // addChild(_Model);
+       //// _Model->setRotation3D(Vec3(90,0,0));
+       // _id = kEnemyBoss;
+       // auto cannon1 = EffectSprite3D::createFromObjFileAndTexture("bossCannon.c3b", "boss.png");
+       // _Cannon1 = Node::create();
+       // addChild(_Cannon1);
+       // _Cannon1->addChild(cannon1);
+       // cannon1->setScale(28);
+       // //cannon1->setRotation3D(Vec3(90,0,0));
+       // _Cannon1->setPosition3D(Vec3(40,-100, 10));
+       // _Cannon2 = Node::create();
+       // addChild(_Cannon2);
+       // _Cannon2->addChild(cannon2);
+       // cannon2->setScale(28);
+       // //cannon2->setRotation3D(Vec3(90,0,0));
+       // _Cannon2->setPosition3D(Vec3(-40,-100, 10));
+       // //addChild(_Cannon2);
+       // //_Cannon2->setPosition(-20,-200);
+       // 
+       // _Cannon1->setRotation(-45);
+       // _Cannon2->setRotation(45);
+       // 
+       //         enterTheBattle();
         return true;
     }
     return false;
@@ -354,7 +328,7 @@ void Boss::_dash()
 void Boss::startShooting()
 {
     log("startShooting");
-     schedule(schedule_selector(Boss::shoot),0.15f, 6, 0);
+    /* schedule(schedule_selector(Boss::shoot),0.15f, 6, 0);*/
 
 }
 
@@ -410,32 +384,32 @@ void Boss::_endGame(float dt)
     NotificationCenter::getInstance()->postNotification("ShowGameOver",NULL);
 }
 
-void Boss::die()
-{
-    //sequence to 10 random explosion
-    stopAllActions();
-    Vector<FiniteTimeAction*> explosions;
-    for(int i = 0; i < 22; i++)
-    {
-        auto expl = CallFunc::create(CC_CALLBACK_0(Boss::createRandomExplosion,this));
-        auto delay = DelayTime::create(i*0.15);
-        auto seq = Sequence::create(delay, expl, nullptr);
-        explosions.pushBack(seq);
-    }
-    auto giantExpl = Spawn::create(explosions);
-    Vector<FiniteTimeAction*> explosions2;
-    for(int i = 0; i < 15; i++)
-    {
-        auto expl = CallFunc::create(CC_CALLBACK_0(Boss::createRandomExplosion,this));
-        explosions2.pushBack(expl);
-    }
-    auto giantExpl2 = Spawn::create(explosions2);
-    auto callDead = CallFunc::create(CC_CALLBACK_0(Boss::dead,this));
-    auto final = Sequence::create(giantExpl, giantExpl2, callDead,nullptr);
-    runAction(final);
-    dying();
-    
-}
+//void Boss::die()
+//{
+//    //sequence to 10 random explosion
+//    stopAllActions();
+//    Vector<FiniteTimeAction*> explosions;
+//    for(int i = 0; i < 22; i++)
+//    {
+//        auto expl = CallFunc::create(CC_CALLBACK_0(Boss::createRandomExplosion,this));
+//        auto delay = DelayTime::create(i*0.15);
+//        auto seq = Sequence::create(delay, expl, nullptr);
+//        explosions.pushBack(seq);
+//    }
+//    auto giantExpl = Spawn::create(explosions);
+//    Vector<FiniteTimeAction*> explosions2;
+//    for(int i = 0; i < 15; i++)
+//    {
+//        auto expl = CallFunc::create(CC_CALLBACK_0(Boss::createRandomExplosion,this));
+//        explosions2.pushBack(expl);
+//    }
+//    auto giantExpl2 = Spawn::create(explosions2);
+//    auto callDead = CallFunc::create(CC_CALLBACK_0(Boss::dead,this));
+//    auto final = Sequence::create(giantExpl, giantExpl2, callDead,nullptr);
+//    runAction(final);
+//    dying();
+//    
+//}
 
 Vec2 Boss::_getCannon1Position()
 {
@@ -488,22 +462,22 @@ void Boss::dismissMuzzle(float dt){
     muzzle1->removeFromParent();
     muzzle2->removeFromParent();
 }
-
-void Boss::shoot(float dt)
-{
-    if (GameLayer::isDie) {
-        return;
-    }
-    auto bullet =BulletController::spawnBullet(kEnemyBullet, _getCannon1Position(), _getCannon1Vector());
-    
-    showMuzzle();
-    
-    bullet->setRotation(_Cannon1->getRotation()+180);
-    bullet =BulletController::spawnBullet(kEnemyBullet, _getCannon2Position(), _getCannon2Vector());
-    bullet->setRotation(_Cannon2->getRotation()+180);
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom.mp3");
-    schedule(schedule_selector(Boss::startShooting),1, 0, 3);
-}
+//
+//void Boss::shoot(float dt)
+//{
+//    if (GameLayer::isDie) {
+//        return;
+//    }
+//    auto bullet =BulletController::spawnBullet(kEnemyBullet, _getCannon1Position(), _getCannon1Vector());
+//    
+//    showMuzzle();
+//    
+//    bullet->setRotation(_Cannon1->getRotation()+180);
+//    bullet =BulletController::spawnBullet(kEnemyBullet, _getCannon2Position(), _getCannon2Vector());
+//    bullet->setRotation(_Cannon2->getRotation()+180);
+//    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom.mp3");
+//    schedule(schedule_selector(Boss::startShooting),1, 0, 3);
+//}
 void Boss::update(float dt, Node* player)
 {
     float angleRad = (_getCannon1Position()-player->getPosition()).getAngle();
@@ -517,238 +491,4 @@ void Boss::update(float dt, Node* player)
 
 }
 
-Tank::Tank()
-:Unit()
-, _turret(nullptr)
-, _state(TankAction::kIdle)
-{
 
-}
-
-
-Tank::Tank(GameScene* gameScene, int unitID, int type, int dir, int campType)
-:Unit(gameScene, unitID, type, dir, campType)
-{
-
-}
-
-Tank::~Tank()
-{
-
-}
-
-bool Tank::init()
-{
-	auto temp = Sprite::create("tank_body0_0.png");
-	if (temp)
-	{
-		_Model = temp;
-		_alive = true;
-		_HP = 10;
-		_score = 10;
-		_type = kEnemyTank;
-		_shadowType = kShadowLand;
-		_radius = 10;
-		setTurnRate(45);
-		this->setMoveSize(temp->getTextureRect().size);
-		_turret = TurretTwo::create();
-		addChild(_Model);
-		addChild(_turret);
-		//this->scheduleUpdate();
-		return true;
-	}
-	
-	return false;
-}
-
-void Tank::move(float y, float dt)
-{
-	/*forward(y, getTurnRate() * dt);*/
-}
-
-void Tank::reset()
-{
-	Unit::reset();
-	_HP = 10;
-}
-
-void Tank::setTurnRate(float aTurn)
-{
-	setMoveMode(moveMode::kTurn);
-	setRotation(fabsf(aTurn)*0.15f);
-	_turn = aTurn;
-}
-
-float Tank::getTurnRate()
-{
-	return _turn;
-}
-
-void Tank::setTarget(Unit* aTarget)
-{
-	_turret->setTarget(aTarget);
-}
-
-Unit* Tank::getTarget() const
-{
-	return _turret->getTarget();
-}
-
-void Tank::update(float dt)
-{
-	switch (_state)
-	{
-	case Tank::TankAction::kIdle:
-		setRoute(10.f);
-		_state = TankAction::kMove;
-		break;
-	case Tank::TankAction::kMove:
-		break;
-	case Tank::TankAction::kAim:
-		break;
-	case Tank::TankAction::kShoot:
-		break;
-	default:
-		break;
-	}
-}
-
-
-Tank* Tank::create(GameScene* gameScene, int unitID, int type, int dir, int campType)
-{
-	auto tank = new Tank(gameScene, unitID, type, dir, campType);
-	if (tank && tank->init())
-	{
-		tank->autorelease();
-		return tank;
-	}
-	CC_SAFE_DELETE(tank);
-	return nullptr;
-}
-
-void Tank::setRoute(float dt)
-{
-	auto direction = abs(rand() % 2), route = 1/*abs(rand() % 2)*/;
-	auto size = Director::getInstance()->getVisibleSize();
-
-	if (route == 0)
-	{
-		/*linerRoute(Point(-10, rand() % (int)size.height),
-			Point(size.width + 10, rand() % (int)size.height),
-			dt, direction);*/
-		linerRoute(Point(rand() % (int)size.width, 100),
-			100, (rand()%360),
-			dt);
-	}
-	else
-	{
-		/*bezierRoute(Point(-10, rand() % (int)size.height),
-			Point(size.width + 10, rand() % (int)size.height),
-			dt, direction);*/
-		bezierRoute(Point(299, 10),
-			300, 90,
-			dt);
-	}
-}
-
-void Tank::linerRoute(Point from, Point to, float direction, float dt)
-{
-	this->setPosition(from);
-	auto delta = to - from;
-	dt = delta.getLength() / 10.0f;
-	this->setRotation(-direction - 90.0f);
-	auto move = MoveTo::create(dt, to);
-	auto rotate = CallFunc::create(CC_CALLBACK_0(Tank::startRotate, this, dt));
-	auto end = CallFunc::create(CC_CALLBACK_0(Tank::moveActionEnd, this, this));
-	auto action = Sequence::create(rotate, move, end, nullptr);
-	this->runAction(action);
-}
-
-void Tank::linerRoute(Point from, float distance, float direction, float dt)
-{
-	auto to = getDistance(from, distance, direction);
-	linerRoute(from, to, direction, dt);
-}
-
-void Tank::bezierRoute(Point from, Point to, float direction, float dt)
-{
-	auto p1 = Point::ZERO;
-	auto p2 = Point::ZERO;
-	bezierRoute(from, to, p1, p2, direction, dt);
-}
-
-void Tank::bezierRoute(Point from, float distance, float direction, float dt)
-{
-	auto to = getDistance(from, distance, direction);
-	bezierRoute(from, to, direction, dt);
-}
-
-void Tank::bezierRoute(Point from, Point to, Point p1, Point p2, float direction, float dt)
-{
-	ccBezierConfig b1, b2;
-
-	b1.controlPoint_1 = p1;
-	b1.controlPoint_2 = p2;
-	b1.endPosition = to;
-	dt = to.getDistance(from) / 20.0f;
-
-	auto draw = DrawNode::create();
-	draw->drawCubicBezier(from, b1.controlPoint_1, b1.controlPoint_2, to, 2, Color4F::RED);
-
-	draw->setTag(1000);
-	this->getParent()->addChild(draw, kZOrderMap);
-	this->setRotation(direction);
-	auto rotate = CallFunc::create(CC_CALLBACK_0(Tank::startRotate, this, dt));
-	auto end = CallFunc::create(CC_CALLBACK_0(Tank::moveActionEnd, this, this));
-	auto move = Sequence::create(
-		rotate,
-		Place::create(from),
-		BezierTo::create(dt / 2, b1),
-		DelayTime::create(3),
-		end,
-		nullptr);
-
-	auto rotateAction = RotateWithAction::create(move, 0.2f);
-	auto action = Sequence::create(rotateAction, end, nullptr);
-
-	this->runAction(rotateAction);
-}
-
-void Tank::moveActionEnd(Node* sender)
-{
-	this->getParent()->removeChildByTag(1000);
-	this->setRoute(updateInterval);
-}
-
-void Tank::startRotate(float dt)
-{
-	_turret->startAction();
-}
-
-void Tank::rotating(float dt)
-{
-}
-
-void Tank::rotated()
-{
-}
-
-void Tank::startShoot(float dt)
-{
-}
-
-void Tank::shooting()
-{
-}
-
-void Tank::shot()
-{
-}
-
-cocos2d::Vec2 Tank::getDistance(const Vec2& from, float distance, float direction)
-{
-	auto radian = CC_DEGREES_TO_RADIANS(direction);
-	auto x = distance * cosf(radian);
-	auto y = distance * sinf(radian);
-	return (Vec2(x, y) + from);
-}

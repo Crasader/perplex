@@ -118,7 +118,7 @@ void ShadowSprite::changeMotion()
 	if (_model && _tArmature)
 	{
 		auto id = _tArmature->getAnimation()->getCurrentMovementID();
-		if (_model->getAnimation()->getCurrentMovementID() != id)
+		if (_model->getAnimation()->getCurrentMovementID() != id && !id.empty())
 		{
 			_model->getAnimation()->play(id);
 		}

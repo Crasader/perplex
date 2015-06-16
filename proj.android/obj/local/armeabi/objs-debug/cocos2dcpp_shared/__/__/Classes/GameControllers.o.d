@@ -437,7 +437,7 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/GameControllers.o: 
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
  jni/../../Classes/Head.h jni/../../Classes/ShadowController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
- jni/../../Classes/Turret.h
+ jni/../../Classes/Turret.h jni/../../Classes/tank.h
 
 jni/../../Classes/GameControllers.h:
 
@@ -1334,3 +1334,5 @@ jni/../../Classes/ShadowController.h:
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:
 
 jni/../../Classes/Turret.h:
+
+jni/../../Classes/tank.h:

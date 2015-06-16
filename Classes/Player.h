@@ -50,21 +50,6 @@ public:
     virtual void onTouchEnded(Touch *touch, Event *event);
     void update(float dt);
     
-    static const float rollSpeed;// recommended 1.5
-    static const float returnSpeed;// recommended 4
-    static const float maxRoll;
-    static const float rollReturnThreshold;
-    void setTargetAngle(float angle){targetAngle = angle;};
-    void setTargetPos(Vec2 target){targetPos = target;};
-    
-    void shoot(float dt);
-    void shootMissile(float dt);
-    void stop();
-    CC_SYNTHESIZE(MotionStreak*, _streak, Trail);
-    CC_SYNTHESIZE(ParticleSystemQuad*, _emissionPart, EmissionPart);
-    void setPosition(Vec2 pos);
-    virtual bool hurt(float damage);
-    virtual void die();
     void hideWarningLayer(Node* node);
 	Vec2 getPositionInCamera();
 
@@ -78,11 +63,6 @@ public:
 #endif
     
 protected:
-    float targetAngle;
-    Vec2 targetPos;
-    Vec2 _trailOffset;
-	ActionInterval* action1;
-	MotionImpl* _curState;
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     float keyX;
     float keyY;
@@ -90,15 +70,6 @@ protected:
     float axisY;
 #endif
     
-};
-
-class  PlayerIdleState : public MotionImpl
-{
-public:
-	PlayerIdleState(Player* p);
-	virtual void execute();
-private:
-	cocostudio::Armature* _player;
 };
 
 #endif /* defined(__Moon3d__Player__) */

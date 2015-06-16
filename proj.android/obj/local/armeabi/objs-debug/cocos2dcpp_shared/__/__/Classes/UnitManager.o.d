@@ -437,7 +437,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/UnitManager.o: \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/CCController.h \
  jni/../../Classes/MotionImpl.h jni/../../Classes/Fodder.h \
  jni/../../Classes/Enemies.h jni/../../Classes/Rotor.h \
- jni/../../Classes/Launcher.h jni/../../Classes/MoveMode.h
+ jni/../../Classes/Launcher.h jni/../../Classes/MoveMode.h \
+ jni/../../Classes/tank.h
 
 jni/../../Classes/UnitManager.h:
 
@@ -1340,3 +1341,5 @@ jni/../../Classes/Rotor.h:
 jni/../../Classes/Launcher.h:
 
 jni/../../Classes/MoveMode.h:
+
+jni/../../Classes/tank.h:

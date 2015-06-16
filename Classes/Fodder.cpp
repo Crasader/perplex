@@ -15,8 +15,6 @@
 
 
 Fodder::Fodder()
-:action1(nullptr)
-, isRoll(false)
 {
 
 }
@@ -37,7 +35,7 @@ Fodder::~Fodder()
 Fodder* Fodder::create(GameScene* gameScene, int unitID, int type, int dir, int campType)
 {
 	auto foder = new Fodder(gameScene, unitID, type, dir, campType);
-	if (foder && foder->init())
+	if (foder && foder->init(gameScene, unitID, type, dir, campType))
 	{
 		foder->autorelease();
 		return foder;
@@ -46,9 +44,9 @@ Fodder* Fodder::create(GameScene* gameScene, int unitID, int type, int dir, int 
 	return nullptr;
 }
 
-bool Fodder::init()
+bool Fodder::init(GameScene* gameScene, int unitID, int type, int dir, int campType)
 {
-	if (!Unit::init())
+	if (!Unit::init(gameScene, unitID, type, dir, campType))
 	{
 		return false;
 	}
@@ -58,82 +56,16 @@ bool Fodder::init()
 	if (_Model)
 	{
 		addChild(_Model);
-		_type = kEnemyFodder;
-		_HP = 10;
-		_radius = 30;
-		_shadowType = kZOrderSky;
-
-		_curState = std::shared_ptr<MotionImpl>(new FodderIdle(this));
-		_curState->execute();
+		_id = kEnemyFodder;
 		auto rect = _Model->getBoundingBox();
 		setMoveRect(rect);
-
+		setLocalZOrder(kZOrderSky);
 		_shadowdata = ShadowSprite::create();
 		_shadowdata->setShadowData(AnimationLoader::getInstance().createAnimation("plane"), this);
 		_gameScene->addUnit(_shadowdata);
 		CC_SAFE_RETAIN(_shadowdata);
-#if COCOS2D_DEBUG
-		auto bound = DrawNode::create();
-		bound->drawRect(rect.origin, Vec2(rect.getMaxX(), rect.getMaxY()), Color4F::RED);
-		addChild(bound);
-#endif
+		drawDebug(rect);
 		return true;
 	}
 	return false;
 }
-void Fodder::reset()
-{
-	Unit::reset();
-	_target = nullptr;
-	_HP = 10;
-}
-void Fodder::setTurnRate(float turn)
-{
-	setMoveMode(moveMode::kTrunAndRoll);
-	//setRotation3D(Vec3(fabsf(turn)*0.15, turn, 0));
-	setRotation(fabsf(turn)*0.15);
-	_turn = turn;
-}
-float Fodder::getTurnRate()
-{
-	return _turn;
-}
-void Fodder::move(float y, float dt)
-{
-	switch (_moveMode)
-	{
-	case moveMode::kTurn:
-		forward(y, getTurnRate()*dt);
-		break;
-	case kTrunAndRoll:
-		forward(y, getTurnRate()*dt);
-		if (!isRoll) {
-			isRoll = true;
-			if (action1){
-				_Model->runAction(action1);
-			}
-		}
-		break;
-	default:
-		//setPosition(getPosition()+pos);
-		forward(y);
-
-	}
-
-}
-void Fodder::shoot(float dt)
-{
-	if (!GameLayer::isDie && _target->alive())
-	{
-		//get angle to player;
-		float angle = (getPosition() - _target->getPosition()).getAngle();
-		auto bullet = BulletController::spawnBullet(kEnemyBullet, getPosition(), Vec2(cosf(angle)*-500, sinf(angle)*-500));
-		//auto bullet =BulletController::spawnBullet(kEnemyBullet, getPosition(), Vec2(0,-500));
-		bullet->setRotation(-CC_RADIANS_TO_DEGREES(angle) - 90);
-		//log("aaaaaaa");
-	}
-	else{
-		//log("player is dead,hahahaha");
-	}
-}
-

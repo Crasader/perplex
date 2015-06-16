@@ -191,6 +191,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\shotlogic.cpp" />
     <ClCompile Include="..\Classes\shotlogicmanager.cpp" />
     <ClCompile Include="..\Classes\Sprite3DEffect.cpp" />
+    <ClCompile Include="..\Classes\tank.cpp" />
     <ClCompile Include="..\Classes\TestScene.cpp" />
     <ClCompile Include="..\Classes\tool.cpp" />
     <ClCompile Include="..\Classes\Trigger.cpp" />
@@ -286,6 +287,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\shotlogic.h" />
     <ClInclude Include="..\Classes\shotlogicmanager.h" />
     <ClInclude Include="..\Classes\Sprite3DEffect.h" />
+    <ClInclude Include="..\Classes\tank.h" />
     <ClInclude Include="..\Classes\TestScene.h" />
     <ClInclude Include="..\Classes\tool.h" />
     <ClInclude Include="..\Classes\Trigger.h" />

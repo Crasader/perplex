@@ -1,0 +1,1765 @@
+﻿'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\perplex.exe'. Symbols loaded.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntdll.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\KernelBase.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\opengl32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\advapi32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sechost.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\rpcrt4.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sspicli.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cryptbase.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\gdi32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\user32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\lpk.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\usp10.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\glu32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ddraw.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dciman32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\setupapi.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cfgmgr32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\oleaut32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ole32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\devobj.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dwmapi.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\glew32.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp120.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcr120.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libcocos2d_2013.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\sqlite3.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcr100.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libcurl.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ws2_32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\nsi.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\Wldap32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libeay32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\winsxs\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4940_none_50916076bcb9a742\msvcr90.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\ssleay32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\zlib1.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcr110.dll'. Symbols loaded.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\websockets.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libmpg123.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libvorbisfile.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libogg.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\libvorbis.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'D:\projects\perplex\proj.win32\Debug.win32\OpenAL32.dll'. Module was built without symbols.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shell32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shlwapi.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmm.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\imm32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msctf.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\uxtheme.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\nvoglv32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\version.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wintrust.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\crypt32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msasn1.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntmarta.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\powrprof.dll'. Cannot find or open the PDB file.
+The thread 0xefc has exited with code 0 (0x0).
+'perplex.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\powrprof.dll'
+The thread 0xaf4 has exited with code 0 (0x0).
+The thread 0xbec has exited with code 0 (0x0).
+The thread 0x1658 has exited with code 0 (0x0).
+'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ole32.dll'. Cannot find or open the PDB file.
+'perplex.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ole32.dll'
+Ready for GLSL
+Ready for OpenGL 2.0
+start AppDelegate....
+GameScene::gameInitPerform,10,0
+UnitResManager::UnitResManager,enty, unitres_mobile.dat
+read....
+UnitResManager::UnitResManager,exit
+GameScene::gameInitPerform,10,1
+GameScene::gameInitPerform,10,2
+GameScene::gameInitPerform,10,3
+MapManager::MapManager....
+GameScene::gameInitPerform,10,4
+XMap::XMap
+GameScene::gameInitPerform,10,5
+GameScene::gameInitPerform,10,6
+GameScene::gameInitPerform,10,7
+Unit::init
+GameScene::gameInitPerform,10,8
+GameScene::gameInitPerform,10,9
+GameScene::gameInitPerform,10,10
+GameScene::gameInitPerform,10,11
+GameScene::gameInitPerform,10,12
+GameScene::gameInitPerform,10,13
+GameScene::gameInitPerform,10,14
+GameScene::gameInitPerform,10,15
+GameScene::gameInitPerform,10,16
+GameScene::gameInitPerform,10,17
+GameScene::gameInitPerform,0,0
+enter GameScene::gamePlayingPerform....
+Sprite size:2
+enter unit::perform...Unit::perform,unitid = 1
+enter unit::perform...Unit::perform,unitid = 1, active
+Sprite size:2
+enter unit::perform...Unit::perform,unitid = 5
+enter unit::perform...Unit::perform,unitid = 5, active
+enter GameScene::gamePlayingPerform....
+Sprite size:2
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,532.000000
+perform ShotLogicF::perform, 282
+perform ShotLogicF::perform, 282
+exit unit::perfrom...Unit::perform, 1
+Sprite size:12
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+enter GameScene::gamePlayingPerform....
+Sprite size:12
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,532.000000
+exit unit::perfrom...Unit::perform, 1
+Sprite size:12
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+Sprite size:12
+enter GameScene::gamePlayingPerform....
+Sprite size:12
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,530.023193
+perform ShotLogicF::perform, 282
+perform ShotLogicF::perform, 282
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,528.036316
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,527.192810
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,525.025085
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,523.859558
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,521.686340
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,520.519653
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,519.435364
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,517.708679
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,516.136475
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,514.436462
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,512.837280
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,511.137268
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,509.436768
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,507.835876
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,506.136963
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,504.434357
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,502.832062
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,501.136749
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,499.433746
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,497.836548
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,496.136353
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,494.435059
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,492.233673
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,489.057587
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,487.575684
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,486.135895
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,484.434692
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,482.835205
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,481.135712
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,479.435516
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,477.835327
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,476.135315
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,474.434723
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,472.835327
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,471.135620
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,469.434235
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,467.835327
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,466.135132
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,464.433838
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,462.835144
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,461.134735
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,459.434845
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,457.834656
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,456.134369
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,454.502167
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,452.834473
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,451.134674
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,449.432678
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,447.825989
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,446.134277
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,444.433990
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,442.833801
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,441.133789
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,439.500702
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,437.829895
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,436.132904
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+enter GameScene::gamePlayingPerform....
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,434.433105
+exit unit::perfrom...Unit::perform, 1
+Sprite size:22
+enter unit::perform...Unit::perform,unitid = 5
+exit unit::perfrom...Unit::perform, 5
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+Sprite size:22
+keyListner...48

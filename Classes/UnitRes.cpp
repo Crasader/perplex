@@ -11,3 +11,7 @@ UnitRes::UnitRes()
 {
 
 }
+
+UnitRes::~UnitRes()
+{
+}

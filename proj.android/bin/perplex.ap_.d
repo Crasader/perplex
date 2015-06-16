@@ -16,9 +16,6 @@ D:\projects\perplex\proj.android\assets\lordplane0.png \
 D:\projects\perplex\proj.android\assets\map \
 D:\projects\perplex\proj.android\assets\mapdat \
 D:\projects\perplex\proj.android\assets\res \
-D:\projects\perplex\proj.android\assets\tank_body0_0.png \
-D:\projects\perplex\proj.android\assets\tank_turret0_0.png \
-D:\projects\perplex\proj.android\assets\tank_turret0_1.png \
 D:\projects\perplex\proj.android\assets\anim\blood.csb \
 D:\projects\perplex\proj.android\assets\anim\blood0.plist \
 D:\projects\perplex\proj.android\assets\anim\blood0.png \
@@ -47,6 +44,12 @@ D:\projects\perplex\proj.android\assets\map\107.jpg \
 D:\projects\perplex\proj.android\assets\map\108.jpg \
 D:\projects\perplex\proj.android\assets\map\2.png \
 D:\projects\perplex\proj.android\assets\mapdat\buildingres_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\l00_building_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\l00_event_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\l00_floor_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\l00_mapinfo_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\l00_rect_mobile.dat \
+D:\projects\perplex\proj.android\assets\mapdat\l00_unit_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l0_building_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l0_event_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l0_floor_mobile.dat \

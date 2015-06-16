@@ -58,10 +58,10 @@ enum entityTypes
     kPlayer,
 
     kEnemyFodder,
+	kEnemyTank,
     kEnemyFodderL,
     kEnemyBigDude,
     kEnemyBoss,
-	kEnemyTank,
 	kEnemyTurret,
 
     kPlayerBullet,

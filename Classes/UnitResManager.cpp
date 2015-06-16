@@ -22,16 +22,24 @@ UnitResManager::UnitResManager(const std::string& file)
 			pUnitRes->_HP = hp;
 			pUnitRes->_animID = animID;
 			_unitReses.push_back(pUnitRes);
-		
+			short animCount = 0;
+			in >> animCount;
+			for (int i = 0; i < animCount; i++)
+			{
+				char s[8];
+				std::sprintf(s, i > 9 ? "0%d0" : "00%d", i);
+				pUnitRes->_animIDs.insert(std::pair<int, std::string>(i, s));
+			}
 			pUnitRes->_moveAnimRanges.resize(WALK_DIR_COUNT);
 			//0 ~ 5://8方向移动的动画range，只有5方向数据，顺序为 D, DL, L, UL, U
 			//TInt start;//每个方向的起始帧
 			//TInt end;//每个方向的结束帧
 			for (int i = 0; i < 5; i++)
 			{
-				pUnitRes->_moveAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				int x, y;
 				in >> x >> y;
+
+				pUnitRes->_moveAnimRanges[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_moveAnimRanges[i]->x = x;
 				pUnitRes->_moveAnimRanges[i]->y = y;
 			}
@@ -97,9 +105,9 @@ UnitResManager::UnitResManager(const std::string& file)
 			pUnitRes->_centerPoints.resize(STAND_DIR_COUNT);
 			for (int i = 0; i < 16; i++)
 			{
-				pUnitRes->_centerPoints[i] = std::shared_ptr<Vec2>(new Vec2());
 				int x, y;
 				in >> x >> y;
+				pUnitRes->_centerPoints[i] = std::shared_ptr<Vec2>(new Vec2());
 				pUnitRes->_centerPoints[i]->x = x;
 				pUnitRes->_centerPoints[i]->y = y;
 			}
@@ -145,7 +153,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			}
 			//补充其它方向的动画
 			for (int i = 9; i < 16; i++) {
-				pUnitRes->_dieAnimRanges[i] = pUnitRes->_dieAnimRanges[16 - 8];
+				pUnitRes->_dieAnimRanges[i] = pUnitRes->_dieAnimRanges[16 - i];
 			}
 
 			//////////////////////////////////////////////////////////////////////////
@@ -169,9 +177,9 @@ UnitResManager::UnitResManager(const std::string& file)
 				//  for 0 ~ exploreCount://每个死亡爆炸的数据
 				for (int j = 0; j < exploreCount; j++)
 				{
-					pUnitRes->_explode[i][j] = std::shared_ptr<Explode>(new Explode());
 					int animID, add, x, y, start, end, beginIndex;
 					in >> animID >> add >> x >> y >> start >> end >> beginIndex;
+					pUnitRes->_explode[i][j] = std::shared_ptr<Explode>(new Explode());
 					pUnitRes->_explode[i][j]->iAnimID = animID;
 					pUnitRes->_explode[i][j]->iAdd = add;
 					pUnitRes->_explode[i][j]->iX = x;
@@ -196,12 +204,13 @@ UnitResManager::UnitResManager(const std::string& file)
 				int id, weaponType, cover, x, y;
 				for (int j = 0; j < weaponPosCount; j++)
 				{
-					in >> id >> weaponType >> cover >> x >> y;
+					in >> id >> weaponType;
 					//              int x;//该挂接点在该方向上的位置相对作战单位基准点的偏移
 					//              int y;
 					//for 0 ~ 7://该挂接点在8方向上的具体位置，8方向数据都有，顺序同上
 					for (int i = 0; i < 16; i++)
 					{
+						in >> cover >> x >> y;
 						pUnitRes->_weaponPos[i][j] = std::shared_ptr<WeaponPos>(new WeaponPos());
 						pUnitRes->_weaponPos[i][j]->id = id;
 						pUnitRes->_weaponPos[i][j]->type = weaponType;
@@ -212,7 +221,7 @@ UnitResManager::UnitResManager(const std::string& file)
 				
 				}
 			}
-			//创建挂接点武器类型列表
+			////创建挂接点武器类型列表
 			std::vector<int> weaponTypeList;
 			std::vector<int> weaponEveryTypeCount;
 			weaponTypeList.resize(UNIT_MAX_WEAPON_COUNT);
@@ -228,7 +237,7 @@ UnitResManager::UnitResManager(const std::string& file)
 			{
 				for (int m = 0; m < pUnitRes->_weaponTypeCount; m++)
 				{
-					if (pUnitRes->_weaponPos[0][p]->type == weaponTypeList[p])
+					if (pUnitRes->_weaponPos[0][p]->type == weaponTypeList[m])
 					{
 						weaponEveryTypeCount[m]++;
 						use = true;
@@ -263,14 +272,6 @@ UnitResManager::UnitResManager(const std::string& file)
 						m++;
 					}
 				}
-			}
-			short animCount = 0;
-			in >> animCount;
-			for (int i = 0; i < animCount; i++)
-			{
-				char s[8];
-				std::sprintf(s, i > 9 ? "0%d0" : "00%d", i);
-				pUnitRes->_animIDs.insert(std::pair<int, std::string>(i, s));
 			}
 		}
 	}

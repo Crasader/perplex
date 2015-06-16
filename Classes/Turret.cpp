@@ -5,7 +5,7 @@
 #include "Bullets.h"
 
 TurretOne::TurretOne()
-:Unit(kEnemyTurret, kShadowLand, 10, true, 10, 20)
+:Unit(nullptr, 0, 0, 0, 0)
 , _aiming(false)
 , _speed(80.0f)
 , _oldAngle(0.0f)
@@ -28,8 +28,6 @@ bool TurretOne::init()
 	if (temp)
 	{
 		_Model = temp;
-
-		setMoveSize(temp->getTextureRect().size);
 		addChild(_Model);
 		return true;
 	}
@@ -57,8 +55,6 @@ bool TurretOne::init(const char* filename)
 	if (temp)
 	{
 		_Model = temp;
-
-		setMoveSize(temp->getTextureRect().size);
 		addChild(_Model);
 		/*this->scheduleUpdate();*/
 		return true;

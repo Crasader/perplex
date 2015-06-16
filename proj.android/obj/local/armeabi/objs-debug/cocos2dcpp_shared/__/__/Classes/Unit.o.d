@@ -437,7 +437,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Unit.o: \
  jni/../../Classes/CameraExt.h jni/../../Classes/CAnimationData.h \
  jni/../../Classes/MapManager.h jni/../../Classes/mapconst.h \
  jni/../../Classes/XMap.h jni/../../Classes/UnitManager.h \
- jni/../../Classes/AIBase.h
+ jni/../../Classes/AIBase.h jni/../../Classes/ShadowController.h \
+ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h
 
 jni/../../Classes/Unit.h:
 
@@ -1338,3 +1339,7 @@ jni/../../Classes/XMap.h:
 jni/../../Classes/UnitManager.h:
 
 jni/../../Classes/AIBase.h:
+
+jni/../../Classes/ShadowController.h:
+
+D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h:

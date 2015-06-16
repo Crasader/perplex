@@ -11,7 +11,7 @@ class ShotLogic
 public:
 	
 public:
-	ShotLogic(Unit* unit, int weaponResID, int posIndex);
+	ShotLogic(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 	virtual ~ShotLogic();
 	virtual void perform(float dt);;
 	bool isEnd();
@@ -23,6 +23,7 @@ protected:
 	int _weaponResID;
 	float _speed;
 	Unit* _unit;
+	cocos2d::Node* _shot;
 };
 //////////////////////////////////////////////////////////////////////////
 //Ô²»¡ÐÎ
@@ -33,11 +34,11 @@ static const float LOGICASPEED = 3.0f;
 class ShotLogicA : public ShotLogic
 {
 public:
-	ShotLogicA(Unit* unit, int weaponResID, int posIndex);
+	ShotLogicA(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 
 	void perform(float dt);
 protected:
-	short _delay;
+	float _delay;
 	int _shotDirection;
 	float _fireAngle; 
 };
@@ -49,7 +50,7 @@ protected:
 class ShotLogicB : public ShotLogic
 {
 public:
-	ShotLogicB(Unit* unit, int weaponResID, int posIndex, int shotCount);
+	ShotLogicB(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex, int shotCount);
 
 	~ShotLogicB();
 
@@ -68,7 +69,7 @@ private:
 class ShotLogicC : public ShotLogic
 {
 public:
-	ShotLogicC(Unit* unit, int weaponResID, int posIndex);
+	ShotLogicC(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 
 	void perform(float dt);
 };
@@ -82,7 +83,8 @@ class ShotLogicD : public ShotLogic
 public:
 	static const int LOGIC_D_MAXFIRECOUNT = 1;
 public:
-	ShotLogicD(Unit* unit, int weaponResID, int posIndex);
+	
+	ShotLogicD(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 
 	void perform(float dt);
 private:
@@ -98,7 +100,7 @@ private:
 class ShotLogicE : public ShotLogic
 {
 public:
-	ShotLogicE(Unit* unit, int weaponResID, int posIndex, bool dir);
+	ShotLogicE(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex, bool dir);
 	~ShotLogicE();
 
 	void perform(float dt);
@@ -115,7 +117,7 @@ private:
 class ShotLogicF : public ShotLogic
 {
 public:
-	ShotLogicF(Unit* unit, int weaponResID, int posIndex, int shotCount, bool dir);
+	ShotLogicF(Unit* unit, cocos2d::Node* shot, int weaponResID, int posIndex, int shotCount, bool dir);
 	~ShotLogicF();
 
 	void perform(float dt);
@@ -131,10 +133,10 @@ private:
 class ShotLogicG : public ShotLogic
 {
 public:
-	
-
+	ShotLogicG(Unit* unit, cocos2d::Node* shot, int weaponResID, int posIndex);
+	void perform(float dt);
 private:
-
+	int _count;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -143,7 +145,7 @@ private:
 class ShotLogicH : public ShotLogic
 {
 public:
-	ShotLogicH(Unit* unit, int weaponResID, int posIndex);
+	ShotLogicH(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 	
 	void perform(float dt);
 };
@@ -154,7 +156,7 @@ public:
 class ShotLogicI : public ShotLogic
 {
 public:
-	ShotLogicI(Unit* unit, int weaponResID, int posIndex);
+	ShotLogicI(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 
 	void perform(float dt);
 };
@@ -164,7 +166,7 @@ public:
 class ShotLogicK : public ShotLogic
 {
 public:
-	ShotLogicK(Unit* unit, int weaponResID, int posIndex);
+	ShotLogicK(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex);
 
 	void perform(float dt);
 };
@@ -175,7 +177,7 @@ public:
 class ShotLogicQ : public ShotLogic
 {
 public:
-	ShotLogicQ(Unit* unit, int weaponResID, int posIndex, int shotCount);
+	ShotLogicQ(Unit* parent, cocos2d::Node* shot, int weaponResID, int posIndex, int shotCount);
 
 	~ShotLogicQ();
 	void perform(float dt);

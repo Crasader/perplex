@@ -35,7 +35,7 @@ class UnitPathMove
 	private void init() {
 		unitID = -1;
 		this.startPoint = new IntPair();
-		data = null;
+		data = new UnitPathData();
 		animCount = 1;
 	}
 
@@ -70,40 +70,40 @@ class UnitPathMove
 	
 	public String getListItemDescription() {
 		String result = Event.getUnitDescription(unitID) + "按照" +
-						UnitPath.getPathDescription(data.path) + "移动";
+						UnitPath.getPathDescription(data.getPath()) + "移动";
 		return result;
 	}
 
 	public void saveMobileData(DataOutputStream out, StringManager stringManager) throws Exception {
 		super.saveMobileData(out, stringManager);
 		SL.writeInt(unitID, out);
-		SL.writeIntPairArrayMobile(data.path, out);
-		SL.writeIntArray(data.animaID, out);
-		SL.writeIntArray(data.speed, out);
-		SL.writeIntArray(data.orientation, out);
-		SL.writeIntArray(data.delay, out);
+		SL.writeIntPairArrayMobile(data.getPath(), out);
+		SL.writeIntArray(data.getAnimaID(), out);
+		SL.writeIntArray(data.getSpeed(), out);
+		SL.writeIntArray(data.getOrientation(), out);
+		SL.writeIntArray(data.getDelay(), out);
 	}
 
 	public void save(DataOutputStream out, StringManager stringManager) throws Exception {
 		super.save(out, stringManager);
 		out.writeInt(unitID);
 		SL.writeIntPair(startPoint, out);
-		SL.writeIntPairArray(data.path, out);
-		SL.writeIntArray(data.animaID, out);
-		SL.writeIntArray(data.speed, out);
-		SL.writeIntArray(data.orientation, out);
-		SL.writeIntArray(data.delay, out);
+		SL.writeIntPairArray(data.getPath(), out);
+		SL.writeIntArray(data.getAnimaID(), out);
+		SL.writeIntArray(data.getSpeed(), out);
+		SL.writeIntArray(data.getOrientation(), out);
+		SL.writeIntArray(data.getDelay(), out);
 	}
 
 	protected void load(DataInputStream in, StringManager stringManager) throws Exception {
 		super.load(in, stringManager);
 		unitID = in.readInt();
 		startPoint = SL.readIntPair(in);
-		data.path = SL.readIntPairArray(in);
-		data.animaID = SL.readIntArray(in);
-		data.speed = SL.readIntArray(in);
-		data.orientation = SL.readIntArray(in);
-		data.delay = SL.readIntArray(in);
+		data.setPath(SL.readIntPairArray(in));
+		data.setAnimaID(SL.readIntArray(in));
+		data.setSpeed(SL.readIntArray(in));
+		data.setOrientation(SL.readIntArray(in));
+		data.setDelay(SL.readIntArray(in));
 	}
 
 	public Operation getCopy() {
@@ -144,7 +144,7 @@ class UnitPathMoveSetter
 
 		this.startPoint = um.getStartPoint();
 		this.data = um.getData();
-		pathText = new ButtonText(new UnitPath(new UnitPathData(data.path, null, null, null, null)));
+		pathText = new ButtonText(new UnitPath(new UnitPathData(data.getPath(), null, null, null, null)));
 		pathText.setBorder(BorderFactory.createTitledBorder(
 			BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 			"设置移动路径"));
@@ -200,13 +200,14 @@ class UnitPathMoveSetter
 		if (setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
 			this.startPoint = setter.getStartPoint();
 			setPath(setter.getUnitPath().getData().getPath(), setter.getUnitPath().getData().getAnimaID());
+			data.removeOrigin();
 		}
 
 	}
 
 	private void setPath(IntPair[] path, int[] animaID) {
-		data.path = path;
-		data.animaID = animaID;
+		data.setPath(path);
+		data.setAnimaID(animaID);
 		pathText.setValue(new UnitPath(data));
 	}
 
@@ -218,9 +219,10 @@ class UnitPathMoveSetter
 			if (unitID != UnitManager.PLAYER_ID && sprite == null) {
 				throw new Exception("必须选择一个Unit");
 			}
-			if (data.path == null) {
+			if (data.getPath() == null) {
 				throw new Exception("必须设置路径");
 			}
+			data.removeOrigin();
 			um.setUnitID(unitID);
 			um.setStartPoint(startPoint);
 			um.setData(data);

@@ -26,7 +26,7 @@ private:
 	void setEvent();
 protected:
 	float _rayTick;//ÉÁË¸¼ä¸ô
-	int _type;//0 --- ÅçÇ¹  1 --- MG  2 --- µ¼µ¯  3 --- À×  4 --- Ñª
+	int _id;//0 --- ÅçÇ¹  1 --- MG  2 --- µ¼µ¯  3 --- À×  4 --- Ñª
 	int _state;
 	int _power;
 	int _moveX;

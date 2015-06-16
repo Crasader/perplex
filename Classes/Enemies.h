@@ -40,7 +40,6 @@ class FodderLeader : public Fodder
 public:
     CREATE_FUNC(FodderLeader);
     bool init();
-    virtual void reset();
 };
 
 class BigDude : public Unit
@@ -48,13 +47,10 @@ class BigDude : public Unit
 public:
     CREATE_FUNC(BigDude);
     bool init();
-    virtual void reset();
-    virtual void die();
     void update(float dt, Node* player);
     void showFinished();
     void showMuzzle();
     void dismissMuzzle(float dt);
-    virtual void shoot(float dt);
     void fall();
 protected:
     Sprite* muzzle1;
@@ -68,8 +64,6 @@ class Boss : public Fodder
 public:
     CREATE_FUNC(Boss);
     bool init();
-    virtual void die();
-    virtual void shoot(float dt);
     void update(float dt, Node* player);
 protected:
     void createRandomExplosion();
@@ -94,56 +88,6 @@ protected:
     void _next();
 };
 
-class Tank : public Unit, public Rotor, public Launcher
-{
-public:
-	enum class TankAction
-	{
-		kIdle,
-		kMove,
-		kAim,
-		kShoot,
-	};
 
-	Tank();
-	Tank(GameScene* gameScene, int unitID, int type, int dir, int campType);
-	virtual ~Tank();
-
-	bool init() override;
-	virtual void move(float y, float dt);
-	virtual void reset();
-	CC_SYNTHESIZE(int, _moveMode, MoveMode);
-	CC_PROPERTY(float, _turn, TurnRate);
-	Unit* getTarget() const;
-	void update(float dt) override;
-	void setTarget(Unit* aTarget);
-	CREATE_FUNC(Tank);
-	static Tank* create(GameScene* gameScene, int unitID, int type, int dir, int campType);
-	void setRoute(float dt);
-	Vec2 getDistance(const Vec2& from, float distance, float direction);
-	void linerRoute(Point from, Point to, float direction, float dt);
-	void linerRoute(Point from, float distance, float direction, float dt);
-	void bezierRoute(Point from, Point to, float direction, float dt);
-	void bezierRoute(Point from, Point to, Point p1, Point p2, float direction, float dt);
-	void bezierRoute(Point from, float distance, float direction, float dt);
-	void moveActionEnd(Node* sender);
-
-	virtual void startRotate(float dt);
-
-	virtual void rotating(float dt);
-
-	virtual void rotated();
-
-	virtual void startShoot(float dt);
-
-	virtual void shooting();
-
-	virtual void shot();
-
-protected:
-	TurretTwo* _turret;
-	TankAction _state;
-	float updateInterval;
-};
 
 #endif /* defined(__Moon3d__Fodder__) */

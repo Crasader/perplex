@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <memory>
+#include "cocos2d.h"
 
 class ShotLogic;
 class Unit;
@@ -12,7 +13,7 @@ class ShotLogicManager
 {
 public:
 	ShotLogicManager();
-	void createShotLogic(Unit* unit, int type, int bulletID, int posIndex);
+	void createShotLogic(Unit* parent, cocos2d::Node* shot, int type, int bulletID, int posIndex);
 	std::vector<std::shared_ptr<ShotLogic>>& getShotLogics();
 	void createDefaultLogic(Unit* unit, int weaponRes);
 private:

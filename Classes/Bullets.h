@@ -37,8 +37,8 @@ class Bullet : public GameEntity
 public:
 	Bullet();
     CREATE_FUNC(Bullet);
-	static Bullet* create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir);
-	bool init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, Vec2 dir);
+	static Bullet* create(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, int speed);
+	bool init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Vec2 pos, Vec2 move, int speed);
     bool init();
     void setVector(Vec2 vec);
     Vec2 getVector();
@@ -60,6 +60,7 @@ protected:
 	bool _castoff;
 	int _power;
 	float _liveTick;
+	float _speed;
 	std::shared_ptr<WeaponRes> _weaponRes;
 	GameScene* _gameScene;
     Vec2 _vector;

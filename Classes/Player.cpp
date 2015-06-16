@@ -24,43 +24,23 @@
 
 #include "Player.h"
 #include "Bullets.h"
-#include "GameControllers.h"
 #include "consts.h"
 #include "GameScene.h"
 #include "PublicApi.h"
 #include "GameLayer.h"
-#include "ParticleManager.h"
-#include "Sprite3DEffect.h"
 #include "Effects.h"
 #include "CameraExt.h"
 #include "ShadowController.h"
 #include "cocostudio/CCArmature.h"
 #include "AnimationLoader.h"
 
-#define visible_size_macro Director::getInstance()->getVisibleSize()
-#define origin_point Director::getInstance()->getVisibleOrigin();
-
-const float Player::rollSpeed = 1.5f;// recommended 1.5
-const float Player::returnSpeed = 10;// recommended 4
-const float Player::maxRoll = 75;
-const float Player::rollReturnThreshold = 1.02f;
-
 bool Player::init()
 {
 	_Model = AnimationLoader::getInstance().createAnimation("lordplane");
     if(_Model)
     {
-		targetAngle = 0;
-		targetPos = Vec2(0,0);
-		_trailOffset = Vec2(0,-40);
-
-        //_Model->setScale(8);
         addChild(_Model);
-       // _Model->setRotation3D(Vec3(90,0,0));
-        _radius = 40;
-        _HP = 100;
         _alive = true;
-		_shadowType = kShadowSky;
 
 		auto rect = _Model->getBoundingBox();
 		setMoveRect(rect);
@@ -75,8 +55,6 @@ bool Player::init()
 		addChild(bound);
 #endif
 
-		/*ShadowController::createShadow(this);*/
-
         auto listener = EventListenerTouchOneByOne::create();
         listener->setSwallowTouches(true);
         
@@ -85,22 +63,6 @@ bool Player::init()
         listener->onTouchEnded = CC_CALLBACK_2(Player::onTouchEnded, this);
         
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-        //scheduleUpdate();
-        //GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.02, Color3B(0,0,0));
-        
-        schedule(schedule_selector(Player::shootMissile), 1.5f, -1, 0);
-        schedule(schedule_selector(Player::shoot), 0.075f, -1, 0);
-        
-        // engine trail
-		/*    auto part_frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("engine2.jpg");
-			ValueMap vm=ParticleManager::getInstance()->GetPlistData("engine");
-			auto part = ParticleSystemQuad::create(vm);
-			part->setTextureWithRect(part_frame->getTexture(), part_frame->getRect());
-			addChild(part);
-			part->setPosition(0,-30);
-			part->setScale(0.6);*/
-        //part->setRotation(90);
-        
         //controller support ios and android
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         
@@ -171,8 +133,6 @@ void Player::onKeyRepeat()
     Vec2 prev = this->getPosition();
     Vec2 delta =Vec2(15*keyX,15*keyY);
     
-    setTargetAngle(targetAngle+delta.x*rollSpeed*(rollReturnThreshold-fabsf(targetAngle)/maxRoll));
-    
     Vec2 shiftPosition = delta+prev;
     
 	auto camera = _gameScene->getCamera();
@@ -215,8 +175,6 @@ void Player::onAxisRepeat()
     Vec2 prev = this->getPosition();
     Vec2 delta =Vec2(15*axisX,-15*axisY);
     
-    setTargetAngle(targetAngle+delta.x*rollSpeed*(rollReturnThreshold-fabsf(targetAngle)/maxRoll));
-    
     Vec2 shiftPosition = delta+prev;
     
 	auto camera = _gameScene->getCamera();
@@ -226,9 +184,6 @@ void Player::onAxisRepeat()
 
 void Player::update(float dt)
 {
-   /* float smoothedAngle =std::min(std::max(targetAngle*(1-dt*returnSpeed*(rollReturnThreshold-fabsf(targetAngle)/maxRoll)),-maxRoll),maxRoll);
-    setRotation3D(Vec3(fabsf(smoothedAngle)*0.15,smoothedAngle, 0));
-    targetAngle = getRotation3D().y;*/
     
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     this->onAxisRepeat();
@@ -246,8 +201,6 @@ void Player::onTouchMoved(Touch *touch, Event *event)
     Vec2 prev = event->getCurrentTarget()->getPosition();
     Vec2 delta =touch->getDelta();
     
-    setTargetAngle(targetAngle+delta.x*rollSpeed*(rollReturnThreshold-fabsf(targetAngle)/maxRoll));
-    
     Vec2 shiftPosition = delta+prev;
 	
 	auto camera = _gameScene->getCamera();
@@ -258,88 +211,16 @@ void Player::onTouchEnded(Touch *touch, Event *event)
 {
 }
 
-void Player::shoot(float dt)
-{
-	/* BulletController::spawnBullet(kPlayerBullet, getPosition()+Vec2(-20,20), Vec2(-200,1600));
-	 BulletController::spawnBullet(kPlayerBullet, getPosition()+Vec2(20,20), Vec2(200,1600));
-	 BulletController::spawnBullet(kPlayerBullet, getPosition()+Vec2(0,20), Vec2(0,1600));*/
-}
-void Player::setPosition(Vec2 pos)
-{
-    if (_position.equals(pos))
-        return;
-    
-    _position = pos;
-    _transformUpdated = _transformDirty = _inverseDirty = true;
-   /* if(_streak)
-    {
-        _streak->setPosition(pos+_trailOffset);
-    }
-    if(_emissionPart)
-    {
-        _emissionPart->setPosition(pos);
-    }*/
-}
-void Player::shootMissile(float dt)
-{
-	  /*auto left = BulletController::spawnBullet(kPlayerMissiles, getPosition()+Vec2(-50,-20), Vec2(-200,-200));
-	  left->setRotation(-45);
-	  auto right = BulletController::spawnBullet(kPlayerMissiles, getPosition()+Vec2(50,-20), Vec2(200,-200));
-	  right->setRotation(45);*/
-}
-
-void Player::stop()
-{
-    unschedule(schedule_selector(Player::shoot));
-    unschedule(schedule_selector(Player::shootMissile));
-}
-
 void Player::hideWarningLayer(Node* node)
 {
     if(node)
         node->setVisible(false);
 }
 
-
 cocos2d::Vec2 Player::getPositionInCamera()
 {
 	return Vec2(getPositionX() + _gameScene->getCamera()->getX(), getPositionY() + _gameScene->getCamera()->getY());
 }
-
-bool Player::hurt(float damage){
-    float fromHP = _HP;
-    float toHP = _HP-=damage;
-    
-    auto fade = FadeTo::create(0.2f, 40);
-    auto fadeBack = FadeTo::create(0.2f, 0);
-    auto warningLayer = Director::getInstance()->getRunningScene()->getChildByTag(456);
-    warningLayer->setVisible(true);
-    warningLayer->runAction(Sequence::create(fade,fadeBack,
-                                             CallFunc::create(
-                                                              CC_CALLBACK_0(Player::hideWarningLayer, this, warningLayer)
-                                                              ),NULL));
-    
-    auto hpView = ((GameScene*)Director::getInstance()->getRunningScene()->getChildByTag(100))->getHPView();
-    
-    auto to = ProgressFromTo::create(0.5, PublicApi::hp2percent(fromHP), PublicApi::hp2percent(toHP));
-   if(hpView) hpView->runAction(to);
-    
-    if(_HP <= 0  && _alive)
-    {
-        die();
-        return true;
-    }
-
-    return false;
-}
-
-void Player::die()
-{
-    _alive = false;
-    GameLayer::isDie=true;
-    NotificationCenter::getInstance()->postNotification("ShowGameOver",NULL);
-}
-
 
 Player::Player(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
 :Unit(gameScene,unitID,type,walkdir,camptype)
@@ -351,7 +232,6 @@ Player::~Player()
 {
 }
 
-
 Player* Player::create(GameScene* gameScene, int unitID, int type, int walkdir, int camptype)
 {
 	auto player = new Player(gameScene, unitID, type, walkdir, camptype);
@@ -362,18 +242,4 @@ Player* Player::create(GameScene* gameScene, int unitID, int type, int walkdir, 
 	}
 	CC_SAFE_DELETE(player);
 	return nullptr;
-}
-
-void PlayerIdleState::execute()
-{
-	if (_player)
-	{
-		_player->getAnimation()->play("idle");
-	}
-}
-
-PlayerIdleState::PlayerIdleState(Player* p)
-{
-	CCAssert(p != nullptr, "p is null");
-	_player = dynamic_cast<Armature*>(p->getModel());
 }

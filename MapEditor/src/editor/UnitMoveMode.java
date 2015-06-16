@@ -203,7 +203,7 @@ public class UnitMoveMode {
 	public final static String getDescription(UnitMoveMode um) {
 		String result = "";
 		if(um != null) {
-			result = getDescription(um.getMode(), um.data.getPath());
+			result = getDescription(um.getMode(), um.pathData.getPath());
 		}
 		return result;
 	}
@@ -224,19 +224,19 @@ public class UnitMoveMode {
 	}
 	
 	private int mode;
-	private UnitPathData data;
+	private UnitPathData pathData;
 	private int animaCount;
 	
 	public UnitPathData getData()
 	{
-		return data;
+		return pathData;
 	}
 	
 	public void setData(UnitPathData data) {
-		this.data = data;
+		this.pathData = data;
 	}
     public UnitMoveMode() {
-    	data = new UnitPathData();
+    	pathData = new UnitPathData();
 		init();
     }
 	
@@ -253,7 +253,7 @@ public class UnitMoveMode {
 	private void copyFrom(UnitMoveMode dest) {
 		this.mode = dest.mode;
 		this.animaCount = dest.animaCount;
-		this.data = dest.data.getCopy();
+		this.pathData = dest.pathData.getCopy();
 	}
 	
 	public int getMode() {
@@ -278,33 +278,33 @@ public class UnitMoveMode {
 		SL.writeInt(mode, out);
 		if (mode == PATH) {
 			IntPair[] temp = null;
-			if (data != null) {
-				temp = new IntPair[ data.path.length];
+			if (pathData != null && pathData.getPath() != null) {
+				temp = new IntPair[ pathData.getPath().length];
 				MapInfo info = MainFrame.self.getMapInfo();
-				for (int i = 0; i < data.path.length; i++) {
+				for (int i = 0; i < pathData.getPath().length; i++) {
 					temp[i] = new IntPair();
-					temp[i].x = info.changeToMobileX(data.path[i].x);
-					temp[i].y = info.changeToMobileY(data.path[i].y,0);
+					temp[i].x = info.changeToMobileX(pathData.getPath()[i].x);
+					temp[i].y = info.changeToMobileY(pathData.getPath()[i].y,0);
 				}
 			}
 			SL.writeIntPairArrayMobile(temp, out);
-			SL.writeIntArrayMobile(data.animaID, out);
-			SL.writeIntArrayMobile(data.speed, out);
-			SL.writeIntArrayMobile(data.orientation, out);
-			SL.writeIntArrayMobile(data.delay, out);
+			SL.writeIntArrayMobile(pathData.getAnimaID(), out);
+			SL.writeIntArrayMobile(pathData.getSpeed(), out);
+			SL.writeIntArrayMobile(pathData.getOrientation(), out);
+			SL.writeIntArrayMobile(pathData.getDelay(), out);
 		}
 		else {
-			SL.writeIntPairArrayMobile(data.path, out);
+			SL.writeIntPairArrayMobile(pathData.getPath(), out);
 		}
 	}
 
 	public void save(DataOutputStream out) throws Exception {
 		out.writeInt(mode);
-		SL.writeIntPairArray(data.path, out);
-		SL.writeIntArray(data.animaID, out);
-		SL.writeIntArray(data.speed, out);
-		SL.writeIntArray(data.orientation, out);
-		SL.writeIntArray(data.delay, out);
+		SL.writeIntPairArray(pathData.getPath(), out);
+		SL.writeIntArray(pathData.getAnimaID(), out);
+		SL.writeIntArray(pathData.getSpeed(), out);
+		SL.writeIntArray(pathData.getOrientation(), out);
+		SL.writeIntArray(pathData.getDelay(), out);
 	}
 
 	public final static UnitMoveMode createViaFile(DataInputStream in) throws Exception {
@@ -315,11 +315,11 @@ public class UnitMoveMode {
 	
 	private void load(DataInputStream in) throws Exception {
 		mode = in.readInt();
-		data.path = SL.readIntPairArray(in);
-		data.animaID = SL.readIntArray(in);
-		data.speed = SL.readIntArray(in);
-		data.orientation = SL.readIntArray(in);
-		data.delay = SL.readIntArray(in);
+		pathData.setPath(SL.readIntPairArray(in));
+		pathData.setAnimaID(SL.readIntArray(in)); 
+		pathData.setSpeed(SL.readIntArray(in));
+		pathData.setOrientation(SL.readIntArray(in));
+		pathData.setDelay(SL.readIntArray(in));
 	}
 }
 
@@ -330,6 +330,8 @@ class UnitMoveModePanel extends JPanel {
 	private ButtonText dataText;
 	private UnitPathData data;
 	private int animaCount;
+	private IntPair origin;
+	
 	public UnitMoveModePanel(JDialog owner, UnitMoveMode um, int animaCount) {
 		super();
 		this.owner = owner;
@@ -352,6 +354,7 @@ class UnitMoveModePanel extends JPanel {
 			}
 		});
 		this.data = um.getData();
+		origin = data.getOrigin();
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
@@ -397,37 +400,41 @@ class UnitMoveModePanel extends JPanel {
 	}
 	
 	private void modeChanged() {
-		
+		data.clear();
 		int mode = modeChooser.getValue();
 		if(mode == UnitMoveMode.RANDOM || mode == UnitMoveMode.AUTO) {
-			RandomMove rm = UnitMoveMode.getRandomMove(data.path);
-			data.path = UnitMoveMode.combine(rm);
+			RandomMove rm = UnitMoveMode.getRandomMove(data.getPath());
+			data.setPath(UnitMoveMode.combine(rm));
 		}
 		else {
-			data.path = null;
+			
 		}
-		dataText.setValue(UnitMoveMode.getDescription(modeChooser.getValue(), data.path));
+		dataText.setValue(UnitMoveMode.getDescription(modeChooser.getValue(), data.getPath()));
 	}
 	
 	private void setData() {
 		int mode = modeChooser.getValue();
 		if(mode == UnitMoveMode.RANDOM || mode == UnitMoveMode.AUTO) {
-			RandomMove rm = UnitMoveMode.getRandomMove(data.path);
+			RandomMove rm = UnitMoveMode.getRandomMove(data.getPath());
 			RandomMoveSetter setter = new RandomMoveSetter(owner, rm);
 			setter.show();
 			if(setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
-				data.path = UnitMoveMode.combine(rm);
+				data.setPath(UnitMoveMode.combine(rm));
 			}
 		}
 		else if(mode == UnitMoveMode.PATH) {
+			if(data != null) data.addOrigin(origin);
 			UnitPathSetter setter = new UnitPathSetter(owner, MainFrame.self, 
-				UnitMoveMode.getPoint(data.path), new UnitPath(data), animaCount);
+				null, new UnitPath(data), animaCount);
 			setter.show();
 			if(setter.getCloseType() == OKCancelDialog.OK_PERFORMED) {
+				
 				data = setter.getUnitPath().getData();
 			}
+		
+			if(data != null)data.removeOrigin();
 		}
-		dataText.setValue(UnitMoveMode.getDescription(mode, data.path));
+		dataText.setValue(UnitMoveMode.getDescription(mode, data.getPath()));
 	}
 }
 

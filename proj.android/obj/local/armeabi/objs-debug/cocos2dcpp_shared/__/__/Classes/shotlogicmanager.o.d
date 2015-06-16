@@ -3,7 +3,6 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/shotlogicmanager.o:
  jni/../../Classes/shotlogicmanager.h \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/vector \
  E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/memory \
- jni/../../Classes/shotlogic.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../cocos2d.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../base/ccConfig.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../platform/CCPlatformConfig.h \
@@ -319,8 +318,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/shotlogicmanager.o:
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCString.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h \
- jni/../../Classes/mathconst.h jni/../../Classes/Unit.h \
- jni/../../Classes/GameEntity.h \
+ jni/../../Classes/shotlogic.h jni/../../Classes/mathconst.h \
+ jni/../../Classes/Unit.h jni/../../Classes/GameEntity.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocoStudio.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CCActionFrame.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio/CocosStudioExport.h \
@@ -397,8 +396,6 @@ jni/../../Classes/shotlogicmanager.h:
 E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/vector:
 
 E:/androidtool/android-ndk-r10d/sources/cxx-stl/gnu-libstdc++/4.9/include/memory:
-
-jni/../../Classes/shotlogic.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../cocos2d.h:
 
@@ -1029,6 +1026,8 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCNotificationCenter.h:
 
 D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/3d/prebuilt-mk/../../deprecated/CCDeprecated.h:
+
+jni/../../Classes/shotlogic.h:
 
 jni/../../Classes/mathconst.h:
 

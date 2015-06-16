@@ -2,13 +2,20 @@
 #include "AnimationLoader.h"
 #include "ShadowController.h"
 #include "Explosion.h"
+#include <vector>
+#include "cocostudio\CCSkin.h"
+#include <iostream>
+
 
 using namespace cocostudio;
 
 Scene* TestScene::createScene()
 {
-	auto scene = Scene::create();
+	auto scene = Scene::createWithPhysics();
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
 	auto layer = TestScene::create();
+
 	scene->addChild(layer);
 	return scene;
 }
@@ -24,9 +31,9 @@ bool TestScene::init()
 	{
 		return false;
 	}
-	/*auto colorLayer = LayerColor::create(Color4B::BLUE);
+	auto colorLayer = LayerColor::create(Color4B::BLUE);
 	addChild(colorLayer);
-	auto s = AnimationLoader::getInstance().createAnimation("plane");
+	/*	auto s = AnimationLoader::getInstance().createAnimation("plane");
 	s->setColor(Color3B::BLACK);
 	s->setOpacity(127);
 	s->getAnimation()->play("run");
@@ -96,5 +103,76 @@ bool TestScene::init()
 		return true;
 	};
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(lister, this);*/
+	auto size = Director::getInstance()->getVisibleSize();
+	auto oringin = Director::getInstance()->getVisibleOrigin();
+
+	s1 = AnimationLoader::getInstance().createAnimation("tank");
+	s1->getAnimation()->play("000");
+	s1->setPosition(size.width / 2, size.height / 2);
+	s1->getBone("t")->changeDisplayByIndex(1, true);
+	addChild(s1);
+	auto move = MoveBy::create(3, Vec2(100, 100));
+	auto r = RotateTo::create(1, 45);
+
+	/*s1->runAction(RepeatForever::create(Sequence::create(move, move->reverse(), r, r->reverse(), nullptr)));*/
+
+	auto _shot1 = s1->getBone("r");
+	auto skin = cocostudio::Skin::create();
+	_shot1->addDisplay(skin, 0);
+	_shot1->changeDisplayWithIndex(0, true);
+	pos = _shot1->getDisplayRenderNode()->getPosition();
+
+
+	drawnode = Sprite::create("b.png");
+	drawnode->setPosition(pos);
+	addChild(drawnode, 10, 100);
+
+	auto listern = EventListenerTouchOneByOne::create();
+	listern->onTouchBegan = [&](Touch* touch, Event* event)
+	{
+		auto p = touch->getLocation();
+		auto p1 = s1->getPosition();
+		auto angle = (p - p1).getAngle();
+		auto t = s1->getBone("t");
+		s1->setRotation(-CC_RADIANS_TO_DEGREES(angle) - s1->getRotation() - 90);
+		return true;
+	};
+
+	listern->onTouchMoved = [&](Touch* touch, Event* event)
+	{
+		auto p = touch->getLocation();
+		auto p1 = s1->getPosition();
+		auto angle = (p - p1).getAngle();
+		auto t = s1->getBone("t");
+		t->setRotation(-CC_RADIANS_TO_DEGREES(angle) - s1->getRotation() - 90);
+		pos = s1->getBone("r")->getDisplayRenderNode()->convertToWorldSpaceAR(Vec2::ZERO);
+		/*auto p3 = pos.rotateByAngle(Vec2::ZERO, -CC_DEGREES_TO_RADIANS(t->getRotation() + s1->getRotation()));*/
+
+		ve = (p - p1).getNormalized();
+
+		drawnode->setPosition(pos);
+		schedule(schedule_selector(TestScene::shot), 0.1f, CC_REPEAT_FOREVER, 0);
+	};
+	getEventDispatcher()->addEventListenerWithSceneGraphPriority(listern, this);
 	return true;
+}
+
+void TestScene::shot(float dt)
+{
+	drawnode->setPosition(drawnode->getPosition() + ve * 100 *  dt);
+}
+VisibleRect::VisibleRect()
+{
+	auto size = Director::getInstance()->getVisibleSize();
+	auto oringin = Director::getInstance()->getVisibleOrigin();
+	_rect.origin = oringin;
+	_rect.size = size;
+}
+
+void VisibleRect::crazyInit()
+{
+	auto size = Director::getInstance()->getVisibleSize();
+	auto oringin = Director::getInstance()->getVisibleOrigin();
+	_rect.origin = oringin;
+	_rect.size = size;
 }

@@ -240,7 +240,6 @@ void GameLayer::update(float dt)
     {
         if (_player) {
 			ShadowController::erase(_player);
-            _player->stop();
             removeChild(_player);
             _player=NULL;
             removeChild(_streak);
@@ -309,7 +308,7 @@ void GameLayer::addEnemy(int i)
 	auto enemy1 = EnemyController::spawnEnemy(kEnemyTank);
 	enemy1->setPosition(random + Vec2(160, 60)*(i + 1));
 	/*enemy2->schedule(schedule_selector(Tank::shoot), 0, kRepeatForever, 0);*/
-	static_cast<Tank*>(enemy1)->setTarget(_player);
+	/*static_cast<Tank*>(enemy1)->setTarget(_player);*/
 }
 
 MapManager* GameLayer::getManManger()

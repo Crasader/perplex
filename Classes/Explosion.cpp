@@ -235,7 +235,7 @@ bool Explosion::init(const Vec2& pos, std::function<void()> callback)
 	auto onFrameEvent = [&](Armature *armature, MovementEventType movementType, const std::string& movementID)
 	{
 		log("event....");
-		if (movementType == MovementEventType::COMPLETE || MovementEventType::LOOP_COMPLETE)
+		if (movementType == MovementEventType::COMPLETE || movementType == MovementEventType::LOOP_COMPLETE)
 		{
 			if(_callback)_callback();
 			recycle(0);

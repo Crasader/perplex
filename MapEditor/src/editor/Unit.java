@@ -360,7 +360,9 @@ class UnitPropSetter extends OKCancelDialog {
 		alignmentChooser = new ValueChooser(unit.getAlignment(), 
 											Alignment.ALIGNMENTS, 
 											Alignment.DESCRIPTIONS);
-		umPanel = new UnitMoveModePanel(this, unit.getUM(), unit.getAnim().getAnimaCount());
+		UnitMoveMode UM =  unit.getUM();
+		UM.getData().addUnitPos(new IntPair(unit.getX(), unit.getY()));
+		umPanel = new UnitMoveModePanel(this, UM, unit.getAnim().getAnimaCount());
 		ufPanel = new UnitFireModePanel(this, unit.getUF());
 		dimList = new DropItemModeList(this, unit.getDIM());
 		amm = unit.getAMM();

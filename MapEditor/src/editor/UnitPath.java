@@ -133,9 +133,9 @@ public class UnitPath {
 	
 	public IntPair getEndPoint(IntPair startPoint) {
 		IntPair result = startPoint.getCopy();
-		if (data.path != null) {
-			if(data.path.length > 0) {
-				result = data.path[data.path.length - 1].getCopy();
+		if (data.getPath() != null) {
+			if(data.getPath().length > 0) {
+				result = data.getPath()[data.getPath().length - 1].getCopy();
 			}
 //			for (int i = 0; i < path.length; ++i) {
 //				result = UnitPath.getEndPoint(result, path[i].x, path[i].y);
@@ -145,7 +145,7 @@ public class UnitPath {
 	}
 
 	public String toString() {
-		return getPathDescription(data.path);
+		return getPathDescription(data.getPath());
 	}
 }
 

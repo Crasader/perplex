@@ -100,10 +100,10 @@ Scene* GameScene::createScene()
     scene->addChild(layer, 2);
 
 	//add waring layer;
-	auto warningLayer = LayerColor::create(Color4B(255, 0, 0, 60));
-	warningLayer->setOpacity(0);
-	warningLayer->setTag(LAYER_TAG_WARNING);
-	scene->addChild(warningLayer, 7);
+	//auto warningLayer = LayerColor::create(Color4B(255, 0, 0, 60));
+	//warningLayer->setOpacity(0);
+	//warningLayer->setTag(LAYER_TAG_WARNING);
+	//scene->addChild(warningLayer, 7);
 
     // return the scene
     return scene;
@@ -118,27 +118,6 @@ bool GameScene::init()
     {
         return false;
     }
-    //GameScene
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	auto origin = Director::getInstance()->getVisibleOrigin();
-	/*auto sb = GameLayer::create();
-	sb->setTag(LAYER_TAG_GAME);
-	sb->setPosition(origin);
-	addChild(sb);*/
-// 	_text = Label::create();
-// 	_text->setTextColor(Color4B::RED);
-// 	_text->setString("level:");
-// 	TTFConfig ttfConfig;
-// 	_text->setSystemFontSize(80);
-// 	_text->setPosition(100, 100);
-// 	_text->setLocalZOrder(kZorderUI);
-//	addChild(_text);
-#ifdef COCOS2D_DEBUG
-	auto d = DrawNode::create();
-	d->drawRect(Vec2(0, 0), Vec2(visibleSize.width, visibleSize.height), Color4F::RED);
-	d->setPosition(origin);
-	addChild(d);
-#endif // 
 
 	auto keyListner = EventListenerKeyboard::create();
 	keyListner->onKeyReleased = [](EventKeyboard::KeyCode keyCode, Event* event){

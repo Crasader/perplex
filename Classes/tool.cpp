@@ -117,7 +117,7 @@ void Tool::perform( float dt )
 }
 
 Tool::Tool(GameScene* gamescene, const std::string& anim, int x, int y, int type)
-: _type(type)
+: _id(type)
 , _state(0)
 , _power(100)
 , _moveX(0)

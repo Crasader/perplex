@@ -35,6 +35,7 @@
 #include "CameraExt.h"
 #include "ShadowController.h"
 #include "Turret.h"
+#include "tank.h"
 
 Node* BulletController::_bulletLayer = nullptr;
 bool BulletController::_inited = false;
@@ -86,7 +87,6 @@ Bullet* BulletController::spawnBullet(int type, Vec2 pos, Vec2 vec)
             break;
         case kEnemyBullet:
             bullet = Bullet::create();
-            bullet->setType(kEnemyBullet);
             break;
     }
     if(bullet)
@@ -102,34 +102,34 @@ Bullet* BulletController::spawnBullet(int type, Vec2 pos, Vec2 vec)
 }
 void BulletController::erase(Bullet* b)
 {
-    if(b->getType() == kPlayerMissiles)
-    {
-        _missilePool.pushBack(static_cast<Missile*>(b));
-        bullets.eraseObject(b);
-        b->removeFromParentAndCleanup(false);
-        b->reset();
-    }
-    else
-    {
-        b->removeFromParentAndCleanup(true);
-        bullets.eraseObject(b);
-    }
+	/*if(b->getType() == kPlayerMissiles)
+	{
+	_missilePool.pushBack(static_cast<Missile*>(b));
+	bullets.eraseObject(b);
+	b->removeFromParentAndCleanup(false);
+	b->reset();
+	}
+	else
+	{
+	b->removeFromParentAndCleanup(true);
+	bullets.eraseObject(b);
+	}*/
 }
 void BulletController::erase(int i)
 {
-    auto b = bullets.at(i);
-    if(b->getType() == kPlayerMissiles)
-    {
-        _missilePool.pushBack(static_cast<Missile*>(b));
-        bullets.erase(i);
-        b->removeFromParentAndCleanup(false);
-        b->reset();
-    }
-    else
-    {
-        bullets.erase(i);
-        b->removeFromParentAndCleanup(true);
-    }
+	/* auto b = bullets.at(i);
+	 if(b->getType() == kPlayerMissiles)
+	 {
+	 _missilePool.pushBack(static_cast<Missile*>(b));
+	 bullets.erase(i);
+	 b->removeFromParentAndCleanup(false);
+	 b->reset();
+	 }
+	 else
+	 {
+	 bullets.erase(i);
+	 b->removeFromParentAndCleanup(true);
+	 }*/
 }
 
 
@@ -163,82 +163,82 @@ void EnemyController::reset()
 Unit* EnemyController::createOrGet(int type)
 {
     Unit *enemy = nullptr;
-    switch(type)
-    {
-        case kEnemyFodder:
-            if(!_fodderPool.empty())
-            {
-				auto size = _fodderPool.size();
-                enemy = _fodderPool.back();
-                _fodderPool.popBack();
-            }
-            else
-            {
-                enemy = Fodder::create();
-                enemy->retain();
-            }
-            break;
-        case kEnemyFodderL:
-            if(!_fodderLPool.empty())
-            {
-                enemy = _fodderLPool.back();
-                _fodderLPool.popBack();
-            }
-            else
-            {
-                enemy = FodderLeader::create();
-                enemy->retain();
-            }
-            break;
-        case kEnemyBigDude:
-            if(!_bigDudePool.empty())
-            {
-                enemy = _bigDudePool.back();
-                _bigDudePool.popBack();
-            }
-            else
-            {
-                enemy = BigDude::create();
-                enemy->retain();
-            }
-            break;
-		case kEnemyBoss:
-			if (!_bossPool.empty())
-			{
-				enemy = _bossPool.back();
-				_bossPool.popBack();
-			}
-			else
-			{
-				enemy = Boss::create();
-				enemy->retain();
-			}
-			break;
-		case kEnemyTank:
-			if (!_tankPool.empty())
-			{
-				enemy = _tankPool.back();
-				_tankPool.popBack();
-			}
-			else
-			{
-				enemy = Tank::create();
-				enemy->retain();
-			}
-			break;
-		case kEnemyTurret:
-			if (!_turretPool.empty())
-			{
-				enemy = _turretPool.back();
-				_turretPool.popBack();
-			}
-			else
-			{
-				enemy = TurretOne::create();
-				enemy->retain();
-			}
-			break;
-    }
+  //  switch(type)
+  //  {
+  //      case kEnemyFodder:
+  //          if(!_fodderPool.empty())
+  //          {
+		//		auto size = _fodderPool.size();
+  //              enemy = _fodderPool.back();
+  //              _fodderPool.popBack();
+  //          }
+  //          else
+  //          {
+  //              enemy = Fodder::create();
+  //              enemy->retain();
+  //          }
+  //          break;
+  //      case kEnemyFodderL:
+  //          if(!_fodderLPool.empty())
+  //          {
+  //              enemy = _fodderLPool.back();
+  //              _fodderLPool.popBack();
+  //          }
+  //          else
+  //          {
+  //              enemy = FodderLeader::create();
+  //              enemy->retain();
+  //          }
+  //          break;
+  //      case kEnemyBigDude:
+  //          if(!_bigDudePool.empty())
+  //          {
+  //              enemy = _bigDudePool.back();
+  //              _bigDudePool.popBack();
+  //          }
+  //          else
+  //          {
+  //              enemy = BigDude::create();
+  //              enemy->retain();
+  //          }
+  //          break;
+		//case kEnemyBoss:
+		//	if (!_bossPool.empty())
+		//	{
+		//		enemy = _bossPool.back();
+		//		_bossPool.popBack();
+		//	}
+		//	else
+		//	{
+		//		enemy = Boss::create();
+		//		enemy->retain();
+		//	}
+		//	break;
+		//case kEnemyTank:
+		//	/*	if (!_tankPool.empty())
+		//		{
+		//		enemy = _tankPool.back();
+		//		_tankPool.popBack();
+		//		}
+		//		else
+		//		{
+		//		enemy = Tank::create();
+		//		enemy->retain();
+		//		}*/
+		//	break;
+		//case kEnemyTurret:
+		//	if (!_turretPool.empty())
+		//	{
+		//		enemy = _turretPool.back();
+		//		_turretPool.popBack();
+		//	}
+		//	else
+		//	{
+		//		enemy = TurretOne::create();
+		//		enemy->retain();
+		//	}
+		//	break;
+  //  }
     return enemy;
 }
 
@@ -249,7 +249,7 @@ Unit* EnemyController::spawnEnemy(int type)
     if(enemy)
     {
         enemies.pushBack(enemy);
-        _enemyLayer->addChild(enemy, enemy->getShadowType() == kShadowLand? kZOrderLand : kZOrderSky);
+        _enemyLayer->addChild(enemy, kZOrderSky);
 		//ShadowController::createShadow(enemy, Point(10, -10));
         return enemy;
     }
@@ -269,147 +269,144 @@ Unit* EnemyController::showCaseEnemy(int type)
 }
 void EnemyController::erase(int i)
 {
-	if (i >= 0 && i < enemies.size())
-	{
-		auto e = enemies.at(i);
-		int type = e->getType();
-		switch (type)
-		{
-		case kEnemyFodder:
-			_fodderPool.pushBack(static_cast<Fodder*>(e));
-			break;
-		case kEnemyFodderL:
-			_fodderLPool.pushBack(static_cast<FodderLeader*>(e));
-			break;
-		case kEnemyBigDude:
-			_bigDudePool.pushBack(static_cast<BigDude*>(e));
-			break;
-		case kEnemyBoss:
-			_bossPool.pushBack(static_cast<Boss*>(e));
-			break;
-		case kEnemyTank:
-			_tankPool.pushBack(static_cast<Tank*>(e));
-			break;
-		case kEnemyTurret:
-			_turretPool.pushBack(static_cast<TurretOne*>(e));
-			break;
-		}
-		//ShadowController::erase(e);
-		enemies.erase(i);
-		e->removeFromParentAndCleanup(false);
-		e->reset();
-	}
-  
+	//if (i >= 0 && i < enemies.size())
+	//{
+	//	auto e = enemies.at(i);
+	//	int type = e->getType();
+	//	switch (type)
+	//	{
+	//	case kEnemyFodder:
+	//		_fodderPool.pushBack(static_cast<Fodder*>(e));
+	//		break;
+	//	case kEnemyFodderL:
+	//		_fodderLPool.pushBack(static_cast<FodderLeader*>(e));
+	//		break;
+	//	case kEnemyBigDude:
+	//		_bigDudePool.pushBack(static_cast<BigDude*>(e));
+	//		break;
+	//	case kEnemyBoss:
+	//		_bossPool.pushBack(static_cast<Boss*>(e));
+	//		break;
+	//	case kEnemyTank:
+	//		/*_tankPool.pushBack(static_cast<Tank*>(e));*/
+	//		break;
+	//	case kEnemyTurret:
+	//		_turretPool.pushBack(static_cast<TurretOne*>(e));
+	//		break;
+	//	}
+	//	//ShadowController::erase(e);
+	//	enemies.erase(i);
+	//	e->removeFromParentAndCleanup(false);
+	//}
+ // 
 }
 
 
 void GameController::update(float dt, Player* player)
 {
-    Vec2 temp;
-	Bullet* b = nullptr;
-	auto list = BulletController::bullets;
-    float enemyMoveDist =EnemyController::EnemyMoveDist*dt;
-	for (int i = list.size() - 1; i >= 0; i--)
-    {
-		b = list.at(i);
-        temp =b->getPosition();
-        if(true)
-        {
-            if(b->getOwner() == kPlayer)
-            {
-                //********* Enemy Loop **********
-                for(int j = EnemyController::enemies.size()-1; j >= 0; j--)
-                {
-                    auto e = EnemyController::enemies.at(j);
-                    if(b->getPosition().getDistance(e->getPosition()) <(b->getRadius() + e->getRadius()))
-                    {
-                        //collision happened
-                        bool dead =  e->hurt(b->getDamage());
-                        if(!dead)
-                        {
-                            switch(b->getType())
-                            {
-                                case kPlayerMissiles:
-									EffectManager::createExplosion(b->getPosition());
+ //   Vec2 temp;
+	//Bullet* b = nullptr;
+	//auto list = BulletController::bullets;
+ //   float enemyMoveDist =EnemyController::EnemyMoveDist*dt;
+	//for (int i = list.size() - 1; i >= 0; i--)
+ //   {
+	//	b = list.at(i);
+ //       temp =b->getPosition();
+ //       if(true)
+ //       {
+ //           if(b->getOwner() == kPlayer)
+ //           {
+ //               //********* Enemy Loop **********
+ //               for(int j = EnemyController::enemies.size()-1; j >= 0; j--)
+ //               {
+ //                   auto e = EnemyController::enemies.at(j);
+ //                   if(b->getPosition().getDistance(e->getPosition()) <0)
+ //                   {
+ //                       //collision happened
+ //                       bool dead =  0;
+ //                       if(!dead)
+ //                       {
+ //                           switch(b->getType())
+ //                           {
+ //                               case kPlayerMissiles:
+	//								EffectManager::createExplosion(b->getPosition());
 
-                                    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom2.mp3");
-                                    break;
-                                default:
-                                    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("hit.mp3");
-                                    break;
-                            }
-                        }
-                        BulletController::erase(i);
-                    }
-                    
-                }
-                //*********** Enemy Loop ***************
-                if(b->getType() == kPlayerMissiles)
-                {
-                    b->update(dt);
-                }
-                else{
-                    b->setPosition(temp+(b->getVector()*dt));
-                }
-            }
-            // loop all enemy bullets against player
-            else if(b->getPosition().getDistance(player->getPosition()) < b->getRadius()+player->getRadius())
-            {
-                player->hurt(b->getDamage());
-                BulletController::erase(i);
-				EffectManager::createTestExplosion(player->getPosition());
-                break;
-            }
-            else // nothing happens to the bullet, move along..
-            {
-                
-                b->setPosition(temp+(b->getVector()*dt));
-            }
-        }
-        else
-        {
-            BulletController::erase(i);
-        }
-    }
-    // Enemies update
-    for(int k = EnemyController::enemies.size()-1; k>=0; k--)
-    {
-        auto enemy =EnemyController::enemies.at(k);
-        if(!enemy->alive())
-        {
-            EnemyController::erase(k);
-            //enemy->reset();
-            //break;
-        }
-        switch(enemy->getType())
-        {
-            case kEnemyBigDude:
-                static_cast<BigDude*>(enemy)->update(dt, player);
-                break;
-            case kEnemyBoss:
-                static_cast<Boss*>(enemy)->update(dt, player);
-                break;
-            default:
-                //enemy->move(enemyMoveDist, dt);
-                break;
-        }
-		auto enemyMoveRect = enemy->getMoveRect();
-		if (enemy->getType() != kEnemyBoss)
-        {
-            //enemy went out side, kill it
-            //EnemyController::erase(k);
-        }
-        //if colliding with player
-        else if(enemy->getPosition().getDistance(player->getPosition()) <(enemy->getRadius() + player->getRadius()) && enemy->getShadowType() != kShadowLand)
-        {
-            player->hurt(50);
-            enemy->hurt(50);
-			/*if (enemy->getType() != kEnemyBoss && enemy->getType() != kEnemyBigDude)
-			{
-			EnemyController::erase(k);
-			}*/
-        }
-        //TODO: if enemy collide with player
-        //if(enemy->getPosition().getDistance(<#const cocos2d::Point &other#>))
-    }
+ //                                   CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("boom2.mp3");
+ //                                   break;
+ //                               default:
+ //                                   CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("hit.mp3");
+ //                                   break;
+ //                           }
+ //                       }
+ //                       BulletController::erase(i);
+ //                   }
+ //                   
+ //               }
+ //               //*********** Enemy Loop ***************
+ //               if(b->getType() == kPlayerMissiles)
+ //               {
+ //                   b->update(dt);
+ //               }
+ //               else{
+ //                   b->setPosition(temp+(b->getVector()*dt));
+ //               }
+ //           }
+ //           // loop all enemy bullets against player
+ //           else if(b->getPosition().getDistance(player->getPosition()) < 0)
+ //           {
+ //               player->hurt(b->getDamage());
+ //               BulletController::erase(i);
+	//			EffectManager::createTestExplosion(player->getPosition());
+ //               break;
+ //           }
+ //           else // nothing happens to the bullet, move along..
+ //           {
+ //               
+ //               b->setPosition(temp+(b->getVector()*dt));
+ //           }
+ //       }
+ //       else
+ //       {
+ //           BulletController::erase(i);
+ //       }
+ //   }
+ //   // Enemies update
+ //   for(int k = EnemyController::enemies.size()-1; k>=0; k--)
+ //   {
+ //       auto enemy =EnemyController::enemies.at(k);
+ //       if(!enemy->alive())
+ //       {
+ //           EnemyController::erase(k);
+ //           //enemy->reset();
+ //           //break;
+ //       }
+ //       switch(enemy->getType())
+ //       {
+ //           case kEnemyBigDude:
+ //               static_cast<BigDude*>(enemy)->update(dt, player);
+ //               break;
+ //           case kEnemyBoss:
+ //               static_cast<Boss*>(enemy)->update(dt, player);
+ //               break;
+ //           default:
+ //               //enemy->move(enemyMoveDist, dt);
+ //               break;
+ //       }
+	//	auto enemyMoveRect = enemy->getMoveRect();
+	//	if (enemy->getType() != kEnemyBoss)
+ //       {
+ //           //enemy went out side, kill it
+ //           //EnemyController::erase(k);
+ //       }
+ //       //if colliding with player
+ //       else if(enemy->getPosition().getDistance(player->getPosition()) < 0)
+ //       {
+	//		/*if (enemy->getType() != kEnemyBoss && enemy->getType() != kEnemyBigDude)
+	//		{
+	//		EnemyController::erase(k);
+	//		}*/
+ //       }
+ //       //TODO: if enemy collide with player
+ //       //if(enemy->getPosition().getDistance(<#const cocos2d::Point &other#>))
+ //   }
 }

@@ -24,7 +24,7 @@ public:
 	Building* findBuildingFromID(int buildingID);
 	Tool* createTool(const char* name, int x, int y, int type);
 	Building* createBuilding(int buildType, int BuildiID, int x, int y, int state, bool fliph);
-	Bullet* createBullet(std::shared_ptr<WeaponRes> weaponRes, int x, int y, int moveX, int moveY, int dir, int campType);
+	Bullet* createBullet(std::shared_ptr<WeaponRes> weaponRes, const cocos2d::Vec2& pos, const cocos2d::Vec2& move, int dir, int campType);
 	void processDropItem(Unit* unit);
 	Unit* createDefaultUnit(int type, int x, int y);
 	Unit* spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType);

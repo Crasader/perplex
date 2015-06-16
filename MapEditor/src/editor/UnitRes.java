@@ -572,7 +572,8 @@ public class UnitRes {
 		else {
 			SL.writeInt(anim.getID(), out);
 		}
-
+		SL.writeShort(anim != null ? anim.getAnimaCount() : 1, out);
+		
 		for (int i = 0; i < Dir.MOVE_DIRS.length; ++i) {
 			SL.writeIntPairMobile(moveAnimRanges[Dir.MOVE_DIRS[i]], out);
 		}
@@ -621,7 +622,7 @@ public class UnitRes {
 				p.saveMobileData(out);
 			}
 		}
-		SL.writeShort(anim != null ? anim.getAnimaCount() : 1, out);
+		
 	}
 
 	public void save(DataOutputStream out) throws Exception {

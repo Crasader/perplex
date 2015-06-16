@@ -116,7 +116,6 @@ void LoadingScene::InitCoco()
     {
 		coco->setRotation3D(Vec3(90,0,180));
         coco->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2-150));
-        GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(coco), 0.03f, Color3B(0,0,0));
         
         addChild(coco,1);
         coco->runAction(RepeatForever::create(RotateBy::create(0.8f,Vec3(0,360,0))));
@@ -250,45 +249,45 @@ void LoadingScene::update(float dt)
 
 void LoadingScene::LoadingEnemy(int type)
 {
-    switch(type)
-    {
-		case kEnemyFodder:
-		 {
-		 auto enemy_fodder = Fodder::create();
-		 enemy_fodder->retain();
-		 EnemyController::_fodderPool.pushBack(enemy_fodder);
-		 }
-		 break;
-		 /*  case kEnemyFodderL:
-		 {
-		 auto enemy_fodderL= FodderLeader::create();
-		 enemy_fodderL->retain();
-		 EnemyController::_fodderLPool.pushBack(enemy_fodderL);
-		 }
-		 break;
-		 case kEnemyBigDude:
-		 {
-		 auto enmey_bigdude= BigDude::create();
-		 enmey_bigdude->retain();
-		 EnemyController::_bigDudePool.pushBack(enmey_bigdude);
-		 }
-		 case kEnemyBoss:
-		 {
-		 auto enemy_boss =Boss::create();
-		 enemy_boss->retain();
-		 EnemyController::_bossPool.pushBack(enemy_boss);
-		 }
-		 break;*/
-		case kEnemyTank:
-		{
-						   auto enemy_tank = Tank::create();
-						   enemy_tank->retain();
-						   EnemyController::_tankPool.pushBack(enemy_tank);
-		}
-			break;
-        default:
-            break;
-    }
+  //  switch(type)
+  //  {
+		//case kEnemyFodder:
+		// {
+		// auto enemy_fodder = Fodder::create();
+		// enemy_fodder->retain();
+		// EnemyController::_fodderPool.pushBack(enemy_fodder);
+		// }
+		// break;
+		// /*  case kEnemyFodderL:
+		// {
+		// auto enemy_fodderL= FodderLeader::create();
+		// enemy_fodderL->retain();
+		// EnemyController::_fodderLPool.pushBack(enemy_fodderL);
+		// }
+		// break;
+		// case kEnemyBigDude:
+		// {
+		// auto enmey_bigdude= BigDude::create();
+		// enmey_bigdude->retain();
+		// EnemyController::_bigDudePool.pushBack(enmey_bigdude);
+		// }
+		// case kEnemyBoss:
+		// {
+		// auto enemy_boss =Boss::create();
+		// enemy_boss->retain();
+		// EnemyController::_bossPool.pushBack(enemy_boss);
+		// }
+		// break;*/
+		//case kEnemyTank:
+		//{
+		//				/*   auto enemy_tank = Tank::create();
+		//				   enemy_tank->retain();
+		//				   EnemyController::_tankPool.pushBack(enemy_tank);*/
+		//}
+		//	break;
+  //      default:
+  //          break;
+  //  }
 }
 
 void LoadingScene::LoadingBullet(int type)
