@@ -18,6 +18,7 @@ class UnitManager
 {
 public:
 	UnitManager(GameScene* gameScene);
+	~UnitManager();
 	Unit* createUnit(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* createRedHeader(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* findUnitFromID(int unitID);
@@ -30,7 +31,8 @@ public:
 	Unit* spawnEnemy(int unitID, int type, int x, int y, int moveType, int dir, int campType);
 	Unit* spawnEnemy(int type);
 	Unit* getOrCreate(GameScene* gameScene, int unitID, int type, int dir, int campType);
-	Explosion* createExplode(Unit* unit, int type, const cocos2d::Vec2& pos, std::function<void()> callback);
+	Explosion* createExplode(cocos2d::Node* unit, int type, const cocos2d::Vec2& pos, std::function<void()> callback);
+	void clear();
 public:
 	static cocos2d::Vector<Tool*> _tools;
 	static cocos2d::Vector<Building*> _buildings;

@@ -165,7 +165,11 @@ bool MapManager::createFloor()
 	{
 		return false;
 	}
-	CC_SAFE_RELEASE(_floor);
+	if (_floor)
+	{
+		_floor->removeFromParent();
+	}
+	CC_SAFE_RELEASE_NULL(_floor);
 	_floor = Node::create();
 	auto count = iPrepareLoadMap->getFloorCount();
 	for (int i = 0; i < count; i++)

@@ -55,7 +55,7 @@ void AIBase::perform( float dt )
   		break;
   	case ORDER_MOVE:
 		_unit->AI(dt);
-		_unit->unitMove(dt);
+		_unit->unitMoveTo(_unit->getPosition() + _unit->getVec() * dt);
   		break;
   	default:
 		break;
@@ -146,8 +146,14 @@ void AIBase::followPoint(float dt, bool cycle)
 		movepos = _patrol;
 		movefinish = true;
 	}
-	_unit->setPosition(movepos);
-
+	_unit->unitMoveTo(movepos);
+	/*if (_dir == 1)
+	{
+		auto oldAngle = _unit->getRotation();
+		auto angle = (_unit->getPositionInCamera() - oldPos).getAngle();
+		angle = -CC_RADIANS_TO_DEGREES(angle);
+		if (oldAngle != angle)_unit->setRotation( angle - 90);
+	}*/
 	if (movefinish && !_unit->getPointItemData().empty())
 	{
 		_pointIndex++;

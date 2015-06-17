@@ -77,6 +77,7 @@ Unit::Unit(GameScene* gameScene, int unitID, int type, int walkdir, int camptype
 	, _moveType(0)
 	, _maxHP(1000)
 	, _BodyLevel(0)
+	, _state(UniteState::INVALID)
 	, _orderType(0)
 	, _currentOrderIndex(0)
 	, _orderDelay(0)
@@ -226,59 +227,59 @@ void Unit::perform(float dt)
 	if (_shadowdata)
 	{
 		_shadowdata->updateShadow(dt);
-	}
-	if (!_active)
-	{
-		activateUnit();
-		if (_active)log("enter unit::perform...%s,unitid = %d, active", __FUNCTION__, _unitID);
-		return;
-	}
-	else if (isNeedDelete())
-	{
-		if (_castoff)
-		{
-			log("enter unit::perform...%s,unitid = %d, needDelete", __FUNCTION__, _unitID);
-			castoffStage();
-			return;
-		}
-		_castoff = true;
-		return;
-	}
+	}	
 	//处理已发射的武器
 	performWeapon(dt);
-
-	if (_beAttackTick > 0)
+	switch (_state)
 	{
-		_beAttackTick--;
-	}
-	if (_castoff)
-	{
-		castoffStage();
-		return;
-	}
-	if (_die)
-	{
-		_diaphaneity--;
-		if (_diaphaneity < 0)
+	case UniteState::INVALID:
+		_active = isActivate();
+		if (_active)
 		{
-			_diaphaneity = 0;
-			_castoff = true;
+			_state = UniteState::ACTIVATE;
 		}
-		return;
+		break;
+	case UniteState::ACTIVATE:
+	
+		if (_AI)
+		{
+			_AI->perform(dt);
+		}
+		//处理待发射的武器
+		fire(dt);
+		log("exit unit::perfrom...%s, %d", __FUNCTION__, _id);
+		break;
+	case UniteState::EXPLOSION:
+		processExplosion(dt);
+		break;
+	case UniteState::DEATH:
+		//死亡处理
+		processDie(dt);
+		break;
+	case UniteState::CASTOFF:
+		if (_castoff)
+		{
+			log("enter unit::perform...%s,unitid = %d, needDelete", __FUNCTION__, _id);
+			castoffStage();
+			if (_shadowdata)
+			{
+				_shadowdata->removeFromParent();
+			}
+			return;
+		}
+		break;
+	case UniteState::RELIVE:
+		_state = UniteState::ACTIVATE;
+		setVisible(true);
+		break;
+	default:
+		break;
 	}
-	//死亡处理
- 	processDie(dt);
- 	////人工智能
- 	//AI(dt);
- 	////移动
- 	//unitMove(dt);
-	if (_AI)
+	if (isNeedDelete())
 	{
-		_AI->perform(dt);
+		_state = UniteState::CASTOFF;
+		_castoff = true;
 	}
- 	//处理待发射的武器
- 	fire(dt);
-	log("exit unit::perfrom...%s, %d", __FUNCTION__, _unitID);
 }
 
 
@@ -489,49 +490,29 @@ void Unit::fireRequire(int logicType, int weaponResID)
 
 void Unit::processDie(float dt)
 {
-	if (_motion != 2)
+	_dieTick++;
+	if (_dieTick == 1)//播放音效
 	{
-		return;
-	}
-	auto explodeOK = false;
-	if (!_dieExplode[0])
-	{
-		_dieExplode[0] = true;
-		auto callback = [&](){
-			explodeOK = true;
-			processTool();
-		};
-		_gameScene->getUnitManager().createExplode(this, 0, this->getPositionInCamera(), callback);
-		if (_shadowdata)
-		{
-			_shadowdata->removeFromParent();
-			CC_SAFE_RELEASE_NULL(_shadowdata);
-		}
 	}
 
-	if (explodeOK)
+	if (_dieTick >= 320)
 	{
-		// 		_dieTick++;
-		// 		if (_dieTick == 1)//播放音效
-		// 		{
-		// 		}
-		// 		else if (_dieTick == 8)
-		// 		{
-		//处理道具产生
-		/*processTool();*/
-		/*}*/
+		_state = UniteState::CASTOFF;
+		_castoff = true;
+		_die = true;
 	}
-	_die = true;
 }
 //处理道具产生
 void Unit::processTool()
 {
+	CCLOG("%s", __FUNCTION__);
 	auto player = _gameScene->getPlayer();
 	if (player == nullptr)
 	{
 		return;
 	}
 	auto prob = 0;
+	log("processTool entry....,%d", __LINE__);
 	for (auto dropTool : _dropToolData)
 	{
 		//XDropTool*        
@@ -539,33 +520,30 @@ void Unit::processTool()
 		//int min;//表示类型对应的玩家属性在某个范围内，范围取值为 min <= prop < max，如果type == 3那么这两个属性无效
 		//int max;
 		//int prob;//掉落对应道具的可能性，如果type == 3那么就是任意道具，采用百分比概率
-		prob = rand_0_1() * 99;
-		if ((dropTool.prob + prob) >= 100)
+		log("processTool itertor....,%d, type %d", __LINE__, dropTool.type);
+		prob = CCRANDOM_0_1() * 100;
+		prob += dropTool.prob;
+		if (prob >= 100)
 		{
-			switch (dropTool.type)
-			{
-			case 0:
-				_gameScene->getUnitManager().createTool("blood", getPositionInCamera().x, getPositionInCamera().y, 0);
-				break;
-			default:
-				_gameScene->getUnitManager().createTool("blood", getPositionInCamera().x, getPositionInCamera().y, 0);
-				break;
-			}
+		switch (dropTool.type)
+		{
+		case 0:
+		_gameScene->getUnitManager().createTool("blood", getPositionInCamera().x, getPositionInCamera().y, 0);
+		break;
+		default:
+		_gameScene->getUnitManager().createTool("blood", getPositionInCamera().x, getPositionInCamera().y, 0);
+		break;
+		}
 		}
 	}
 }
 
-void Unit::unitMove(float dt)
+void Unit::unitMoveTo(const cocos2d::Vec2& pos)
 {
-	auto newX = getPositionX() + _moveX * dt;
-	auto newY = getPositionY() + _moveY * dt;
-	log("Unit::unitMove x,y:%f,%f", newX, newY);
-
-	_endableMove = enableMove(newX, newY);
+	_endableMove = enableMove(pos.x, pos.y);
 	if (_endableMove)
 	{
-		setPositionX(newX);
-		setPositionY(newY);
+		setPosition(pos);
 	}
 }
 
@@ -621,25 +599,22 @@ int Unit::beAttack(const cocos2d::Rect rect, int power)
 	auto m = dynamic_cast<Armature*>(_Model);
 	if (m)
 	{
-		auto a = m->getBoundingBox();
-		auto pos = getPosition();
-		if (_campType != Enemy)
-		{
-			pos.y += _gameScene->getCamera()->getY();
-			pos.x += _gameScene->getCamera()->getX();
-		}
-		auto tempRect = cocos2d::Rect(a.origin.x + getPositionX(), a.origin.y + getPositionY(), a.size.width, a.size.height);
+		auto tempRect = m->getBoundingBox();
+		auto pos = getPositionInCamera();
+		tempRect.origin.x += pos.x;
+		tempRect.origin.y += pos.y;
 		if (tempRect.intersectsRect(rect))
 		{
 			_beAttackTick = 1;
 			_power -= power;
-			if (_id == 0)
+			if (_type == 0)
 			{
 				_gameScene->setPlayerPower(_power);
 			}
 			if (_power <= 0)
 			{
 				_power = 0;
+				_state = UniteState::EXPLOSION;
 				setMotionAndDIR(2, D_S_DOWN);
 				_dieExplode.clear();
 				_dieExplode.push_back(false);
@@ -714,59 +689,62 @@ bool Unit::isSceneTopAbove()
 	return (getPositionY() <= _gameScene->getCamera()->getY() + 3 * _gameScene->getSceneHeight() / 2);
 }
 
-void Unit::activateUnit()
+bool Unit::isActivate()
 {
+	auto active = false;
 	switch (_AIType)
 	{
 	case 0://屏幕顶线
 		//#如果超出
 		if (isSceneTop())
 		{
-			_active = true;
+			active = true;
 		}
 		break;
 	case 1://上方线
 		if (isSceneAbove())
 		{
-			_active = true;
+			active = true;
 		}
 		break;
 	case 2://中线
 		if (isSceneCenter())
 		{
-			_active = true;
+			active = true;
 		}
 		break;
 	case 3://下方线
 		if (isSceneUnder())
 		{
-			_active = true;
+			active = true;
 		}
 		break;
 	case 4://底下线
 		if (isSceneButton())
 		{
-			_active = true;
+			active = true;
 		}
 		break;
 	default://屏幕外线（上方)
 		if (isSceneTopAbove())
 		{
-			_active = true;
+			active = true;
 		}
 		break;
 	}
-	return;
+	return active;
 }
 
 void Unit::fire(float dt)
 {
+	
 	if (_power <= 0)
 	{
 		return;
 	}
 	if (_unitFireRequire)
 	{
+		CCLOG("fire......");
 		_unitFireRequire = false;
 	/*	auto rad = CC_DEGREES_TO_RADIANS(-getRotation() + 90);
 		Vec2 vec = Vec2(cosf(rad), sinf(rad)) * -1;
@@ -803,6 +781,27 @@ void Unit::drawDebug(const cocos2d::Rect& rect)
 	bound->drawRect(rect.origin, Vec2(rect.getMaxX(), rect.getMaxY()), Color4F::RED);
 	addChild(bound);
 #endif
+}
+
+
+void Unit::processExplosion(float dt)
+{
+	if (_motion != 2)
+	{
+		return;
+	}
+	if (!_dieExplode[0])
+	{
+		setVisible(false);
+		_state = UniteState::DEATH;
+		_dieExplode[0] = true;
+		_gameScene->getUnitManager().createExplode(this, -1, this->getPositionInCamera(), CC_CALLBACK_0(Unit::processTool, this));
+		if (_shadowdata)
+		{
+			_shadowdata->removeFromParent();
+			CC_SAFE_RELEASE_NULL(_shadowdata);
+		}
+	}
 }
 
 void Unit::setMoveSpeed(std::vector<int> speed)
@@ -902,6 +901,13 @@ Rect Unit::getHitRect() const
 // 		_AI->setPatrolY(y);
 // 	}
 // }
+
+
+void Unit::relive()
+{
+	_dieTick = 0;
+	_state = UniteState::RELIVE;
+}
 
 // 
 // void Unit::setPosition(const Vec2& pos)

@@ -48,7 +48,7 @@ public:
 	bool getDrawFlip() const { return _drawFlip; }
 	void setDrawFlip(bool aDrawFlip) { _drawFlip = aDrawFlip; }
 	bool getBump() const { return _bump; }
-	void setBump() { _bump = true; }
+	void setBump();
 	bool isCastoff();
 	bool isBump();
 	Rect getHitRect();

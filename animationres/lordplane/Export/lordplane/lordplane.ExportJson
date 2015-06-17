@@ -92,7 +92,7 @@
       "name": "lordplane",
       "mov_data": [
         {
-          "name": "idle",
+          "name": "000",
           "dr": 36,
           "lp": true,
           "to": 0,

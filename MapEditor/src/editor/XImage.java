@@ -1,7 +1,10 @@
 package editor;
 
 import java.io.*;
+
 import javax.imageio.*;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -479,6 +482,22 @@ public class XImage {
 		if (flip) {
 			img = flippedImage;
 		}
+//		BufferedImage rotateimg = null;
+//		try {
+//			rotateimg  = Thumbnails.of(img).size(img.getWidth(), img.getHeight()).rotate(45).asBufferedImage();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		IntPair rotateCenter = new IntPair(left + img.getWidth() / 2, top + img.getHeight()/2);
+//		IntPair pair = IntPair.PointRotate(rotateCenter, new IntPair(left, top), 45);
+//		left = pair.x;
+//		top = pair.y;
 		g.drawImage(img, left, top, null);
+//		Color oldColor = g.getColor();
+//		g.setColor(Color.gray);
+//		int x[] = {left, left + rotateimg.getWidth(), left + rotateimg.getWidth(), left};
+//		int y[] = {top, top, top + rotateimg.getHeight(), top + rotateimg.getHeight()};
+//		g.drawPolygon(x, y, 4);
+//		g.setColor(oldColor);
 	}
 }

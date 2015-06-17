@@ -10,11 +10,7 @@ bool TriggerUnitToRect::perform()
 	{
 		return false;
 	}
-	auto p = _unit->getPosition();
-	if (_unit->getType() == 0)
-	{
-		p.y += _gameLayer->getCamera()->getY();
-	}
+	auto p = _unit->getPositionInCamera();
 	if (_rect.containsPoint(p))
 	{
 		return true;

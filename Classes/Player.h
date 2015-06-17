@@ -49,9 +49,16 @@ public:
     virtual void onTouchMoved(Touch *touch, Event *event);
     virtual void onTouchEnded(Touch *touch, Event *event);
     void update(float dt);
-    
-    void hideWarningLayer(Node* node);
+	void perform(float dt) override;
+
+	void perfromWeapon(float dt);
+	void fire(float dt);
+	void deleteCastoffShot();
+
+	void hideWarningLayer(Node* node);
 	Vec2 getPositionInCamera();
+	void processDie(float dt);
+	void processBump(float dt);
 
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     //对游戏手柄的响应
@@ -69,7 +76,8 @@ protected:
     float axisX;
     float axisY;
 #endif
-    
+	float _shotTick;
+	float _shotDelay;
 };
 
 #endif /* defined(__Moon3d__Player__) */

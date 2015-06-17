@@ -433,7 +433,10 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/Player.o: \
  jni/../../Classes/Head.h jni/../../Classes/ShadowController.h \
  D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebuilt-mk/../../cocostudio\CCArmature.h \
  jni/../../Classes/AnimationLoader.h \
- jni/../../Classes/AnimationResLoader.h
+ jni/../../Classes/AnimationResLoader.h jni/../../Classes/Weapon.h \
+ jni/../../Classes/shotlogic.h jni/../../Classes/mathconst.h \
+ jni/../../Classes/shotlogicmanager.h jni/../../Classes/WeaponRes.h \
+ jni/../../Classes/weaponresmanager.h
 
 jni/../../Classes/Player.h:
 
@@ -1320,3 +1323,15 @@ D:\projects\cocos\frameworks/cocos2d-x-3.5/cocos/editor-support/cocostudio/prebu
 jni/../../Classes/AnimationLoader.h:
 
 jni/../../Classes/AnimationResLoader.h:
+
+jni/../../Classes/Weapon.h:
+
+jni/../../Classes/shotlogic.h:
+
+jni/../../Classes/mathconst.h:
+
+jni/../../Classes/shotlogicmanager.h:
+
+jni/../../Classes/WeaponRes.h:
+
+jni/../../Classes/weaponresmanager.h:

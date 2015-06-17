@@ -12,6 +12,9 @@ import java.awt.event.*;
 
 import javax.swing.event.*;
 
+import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
+
 class SIGroup {
 	private int id;
 	private String name;

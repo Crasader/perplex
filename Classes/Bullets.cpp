@@ -33,7 +33,8 @@
 #include "WeaponRes.h"
 #include "GameScene.h"
 #include "CameraExt.h"
-
+#include "UnitManager.h"
+#include "Explosion.h"
 
 Bullet::Bullet()
 	:GameEntity()
@@ -68,7 +69,7 @@ bool Bullet::init(GameScene* gameScene, std::shared_ptr<WeaponRes> weaponRes, Ve
 		_vector = move;
 		_id = kEnemyBullet;
 		_owner = kEnemy;
-		_damage = 0;
+		_power = 10;
 		_liveTick = 4;
 		_castoff = false;
 		_castoffStage = 0;
@@ -146,6 +147,11 @@ void Bullet::reset()
 }
 
 
+void Bullet::setBump()
+{
+	_bump = true;
+}
+
 bool Bullet::isCastoff()
 {
 	return _castoff;
@@ -174,6 +180,14 @@ void Bullet::perform(float dt)
 	if (_castoff)
 	{
 		_castoffStage++;
+		return;
+	}
+	if (_bump)
+	{
+		auto callback = [&](){
+		};
+		_gameScene->getUnitManager().createExplode(this, 0, this->getPosition(), callback);
+		_castoff = true;
 		return;
 	}
 	setPosition(getPosition() + _vector * _speed * dt);
@@ -208,7 +222,7 @@ bool Missile::init()
 		_Model->setRotation(180);
         _Model->setScale(0.3f);
         //_Model->setRotation3D(Vec3(0,0,180));
-        _damage = 20;
+        _power = 20;
 		_target = nullptr;
         //GameEntity::UseOutlineEffect(static_cast<Sprite3D*>(_Model), 0.01, Color3B(0,0,0));
         _left = (CCRANDOM_MINUS1_1()>0);

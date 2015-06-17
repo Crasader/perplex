@@ -33,15 +33,21 @@
 #include "ShadowController.h"
 #include "cocostudio/CCArmature.h"
 #include "AnimationLoader.h"
+#include "Weapon.h"
+#include "shotlogic.h"
+#include "shotlogicmanager.h"
+#include "WeaponRes.h"
+#include "weaponresmanager.h"
 
 bool Player::init()
 {
 	_Model = AnimationLoader::getInstance().createAnimation("lordplane");
-    if(_Model)
+	if (_Model && Unit::init(_gameScene, _id, _type, _walkDir, _campType))
     {
         addChild(_Model);
         _alive = true;
-
+		_shotTick = 0;
+		_shotDelay = 0.5;
 		auto rect = _Model->getBoundingBox();
 		setMoveRect(rect);
 
@@ -139,7 +145,7 @@ void Player::onKeyRepeat()
 	setPosition(shiftPosition.getClampPoint(camera->GetCameraOriginToGL(), camera->GetCameraOriginToGL()+Vec2(camera->getCameraSize().width, camera->getMapSize().height)));
 }
 
-void Player::onAxisEvent(Controller* controller, int keyCode,Event* event)
+void Player::onAxisEvent(Controller* controller, int keyCode, Event* event)
 {
     const auto & keyStatus = controller->getKeyStatus(keyCode);
 #if(CC_TARGET_PLATFORM == CC_TARGET_OS_MAC)
@@ -191,6 +197,107 @@ void Player::update(float dt)
 #endif
     
 }
+
+void Player::perform(float dt)
+{
+	if (_shadowdata)
+	{
+		_shadowdata->update(dt);
+	}
+	perfromWeapon(dt);
+
+	switch (_state)
+	{
+	case UniteState::INVALID:
+	case UniteState::ACTIVATE:
+		fire(dt);
+		break;
+	case UniteState::EXPLOSION:
+		Unit::processExplosion(dt);
+		break;
+	case UniteState::DEATH:
+		Unit::processDie(dt);
+		break;
+	case UniteState::CASTOFF:
+		if (_castoff)
+		{
+			_castoffStage++;
+		}
+		break;
+	case UniteState::BEATTAK:
+		break;
+	case UniteState::RELIVE:
+		_state = UniteState::ACTIVATE;
+		setVisible(true);
+		break;
+	default:
+		break;
+	}
+	processBump(dt);
+
+}
+
+
+void Player::perfromWeapon(float dt)
+{
+	for (auto weapon : _weapons)
+	{
+		if (weapon->getCastoffStage() > 0)
+		{
+			continue;
+		}
+		weapon->perform(dt);
+	}
+
+	for (int i = 0; i < _weapons.size(); i++)
+	{
+		if (_weapons.at(i)->getCastoffStage() > 0)
+		{
+			_weapons.eraseObject(_weapons.at(i));
+			--i;
+		}
+	}
+}
+
+void Player::fire(float dt)
+{
+	if (_shotTick < _shotDelay)
+	{
+		_shotTick += dt;
+		return;
+	}
+	_shotTick = 0;
+	auto weaponres = _gameScene->getWeaponResManager()->getWeapResFromID(_weaponResID);
+	auto speed = 200;
+	auto pos = getPositionInCamera();
+	auto vec = Vec2(0, 1);
+	auto weapon = Weapon::create(_gameScene, weaponres, this, pos, vec, speed, 0, Ally);
+	_weapons.pushBack(weapon);
+}
+
+void Player::deleteCastoffShot()
+{
+	auto shots = _shotLogicManager->getShotLogics();
+	auto b = find_if(shots.begin(), shots.end(), [](shared_ptr<ShotLogic> a){return (a->isEnd()); });
+	for (auto iter = b; iter != shots.end(); ++iter)
+	{
+		shots.erase(iter);
+	}
+}
+
+void Player::processBump(float dt)
+{
+	for (auto shot : _shotLogicManager->getShotLogics())
+	{
+		if (shot->isEnd())
+		{
+			continue;
+		}
+		shot->perform(dt);
+	}
+	deleteCastoffShot();
+}
+
 bool Player::onTouchBegan(Touch *touch, Event *event)
 {
     return true;

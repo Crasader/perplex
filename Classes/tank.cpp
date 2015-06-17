@@ -55,6 +55,8 @@ bool Tank::init(GameScene* gameScene, int unitID, int type, int dir, int campTyp
 		_turrent->changeDisplayWithIndex(1, true);
 		addChild(_Model);
 		auto rect = _Model->getBoundingBox();
+	
+
 		setMoveRect(rect);
 		setLocalZOrder(kZOrderLand);
 		_shadowdata = ShadowSprite::create();

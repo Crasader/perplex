@@ -92,7 +92,7 @@
       "name": "lordplane",
       "mov_data": [
         {
-          "name": "idle",
+          "name": "000",
           "dr": 36,
           "lp": true,
           "to": 0,
@@ -278,10 +278,6 @@
       "plistFile": ""
     }
   ],
-  "config_file_path": [
-    "lordplane0.plist"
-  ],
-  "config_png_path": [
-    "lordplane0.png"
-  ]
+  "config_file_path": [],
+  "config_png_path": []
 }

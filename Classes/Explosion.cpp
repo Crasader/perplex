@@ -256,3 +256,25 @@ void Explosion::setCallBack(std::function<void()> callback)
 {
 	_callback = callback;
 }
+
+BulletExlosion* BulletExlosion::create(const cocos2d::Vec2& pos, std::function<void()> callback)
+{
+	auto ret = new BulletExlosion();
+	if (ret && ret->init(pos, callback))
+	{
+		ret->autorelease();
+		return ret;
+	}
+	CC_SAFE_DELETE(ret);
+	return nullptr;
+}
+
+bool BulletExlosion::init(const cocos2d::Vec2& pos, std::function<void()> callback)
+{
+	if (!Explosion::init(pos, callback))
+	{
+		return false;
+	}
+	this->setScale(0.5f);
+	return true;
+}

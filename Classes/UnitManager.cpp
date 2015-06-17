@@ -36,6 +36,11 @@ UnitManager::UnitManager(GameScene* gameScene)
 
 }
 
+UnitManager::~UnitManager()
+{
+	clear();
+}
+
 Unit* UnitManager::createUnit(int unitID, int type, int x, int y, int moveType, int dir, int campType)
 {
 	Unit* pUnit = nullptr;
@@ -114,6 +119,7 @@ Building* UnitManager::findBuildingFromID(int buildingID)
 
 Tool* UnitManager::createTool(const char* name, int x, int y, int type)
 {
+	CCLOG("%s", __FUNCTION__);
 	auto tool = Tool::create(_gameScene, name, x, y, type);
 	if (tool == nullptr)
 	{
@@ -208,6 +214,7 @@ Unit* UnitManager::spawnEnemy(int unitID, int type, int x, int y, int moveType, 
 		pUnit->setPosition(Vec2(x, y));
 		pUnit->setPatrol(Vec2(x, y));
 		pUnit->setMoveType(moveType);
+		pUnit->setLocalZOrder(kZOrderSky);
 		_sprites.pushBack(pUnit);
 		_sortSprites.pushBack(pUnit);
 		if (campType == Ally)
@@ -300,13 +307,13 @@ Bullet* UnitManager::createBullet(std::shared_ptr<WeaponRes> weaponRes, const co
 	return pBullet;
 }
 
-Explosion* UnitManager::createExplode(Unit* unit, int type, const cocos2d::Vec2& pos, std::function<void()> callback)
+Explosion* UnitManager::createExplode(cocos2d::Node* unit, int type, const cocos2d::Vec2& pos, std::function<void()> callback)
 {
 	Explosion* explosion = nullptr;
 	switch (type)
 	{
 	case 0:
-
+		explosion = BulletExlosion::create(pos, callback);
 		break;
 	default:
 		explosion = Explosion::create(pos, callback);
@@ -317,8 +324,88 @@ Explosion* UnitManager::createExplode(Unit* unit, int type, const cocos2d::Vec2&
 		return nullptr;
 	}
 	explosion->setCallBack(callback);
-	explosion->setLocalZOrder(unit->getLocalZOrder());
+	explosion->setLocalZOrder(kZorderExplosion);
 	_gameScene->addUnit(explosion);
-	_explodes.pushBack(explosion);
 	return explosion;
+}
+
+void UnitManager::clear()
+{
+	for (auto i = 0; i < _tools.size(); ++i)
+	{
+		auto o = _tools.at(i);
+		o->removeFromParent();
+		_tools.eraseObject(o);
+		--i;
+	}
+	for (auto i = 0; i < _buildings.size(); ++i)
+	{
+		auto o = _buildings.at(i);
+		o->removeFromParent();
+		_buildings.eraseObject(o);
+		--i;
+	}
+	for (auto i = 0; i < _sprites.size(); ++i)
+	{
+		auto o = _sprites.at(i);
+		o->removeFromParent();
+		_sprites.eraseObject(o);
+		--i;
+	}
+	for (auto i = 0; i < _sortSprites.size(); ++i)
+	{
+		auto o = _sortSprites.at(i);
+		o->removeFromParent();
+		_sortSprites.eraseObject(o);
+		--i;
+	}
+
+	for (auto i = 0; i < _allys.size(); ++i)
+	{
+		auto o = _allys.at(i);
+		o->removeFromParent();
+		_allys.eraseObject(o);
+		--i;
+	}
+
+	for (auto i = 0; i < _enemies.size(); ++i)
+	{
+		auto o = _enemies.at(i);
+		o->removeFromParent();
+		_enemies.eraseObject(o);
+		--i;
+	}
+
+	for (auto i = 0; i < _enemyBullets.size(); ++i)
+	{
+		auto o = _enemyBullets.at(i);
+		o->removeFromParent();
+		_enemyBullets.eraseObject(o);
+		--i;
+	}
+
+	for (auto i = 0; i < _allyBullets.size(); ++i)
+	{
+		auto o = _allyBullets.at(i);
+		o->removeFromParent();
+		_allyBullets.eraseObject(o);
+		--i;
+	}
+
+	for (auto i = 0; i < _explodes.size(); ++i)
+	{
+		auto o = _explodes.at(i);
+		o->removeFromParent();
+		_explodes.eraseObject(o);
+		--i;
+	}
+
+	for (auto i = 0; i < _explodeReals.size(); ++i)
+	{
+		auto o = _explodeReals.at(i);
+		o->removeFromParent();
+		_explodeReals.eraseObject(o);
+		--i;
+	}
+	
 }

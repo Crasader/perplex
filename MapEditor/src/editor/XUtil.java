@@ -168,6 +168,22 @@ class IntPair {
 		}
 		return false;
 	}
+	
+	static IntPair PointRotate(IntPair rotateCenter, IntPair pt,  double angle)
+	{
+		IntPair newPt = new IntPair();
+		double x, y;
+		int distx, disty;
+		distx = pt.x - rotateCenter.x;
+		disty = pt.y - rotateCenter.y;
+		
+		x = distx * Math.cos(angle) + disty * Math.sin(angle) + rotateCenter.x;
+		y = -distx  * Math.sin(angle) + disty * Math.cos(angle) + rotateCenter.y;
+		
+		newPt.x = (int) x;
+		newPt.y = (int) y;
+		return newPt;
+	}
 }
 
 class DoublePair {

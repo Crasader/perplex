@@ -26,9 +26,9 @@
 			<key>主角01/mscrew0_0.png</key>
 			<dict>
 				<key>width</key>
-				<integer>25</integer>
+				<integer>85</integer>
 				<key>height</key>
-				<integer>3</integer>
+				<integer>71</integer>
 				<key>originalWidth</key>
 				<integer>85</integer>
 				<key>originalHeight</key>
@@ -38,28 +38,28 @@
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>-1</real>
+				<real>0</real>
 				<key>offsetY</key>
-				<real>31</real>
+				<real>0</real>
 			</dict>
 			<key>主角01/mscrew0_1.png</key>
 			<dict>
 				<key>width</key>
-				<integer>24</integer>
+				<integer>85</integer>
 				<key>height</key>
-				<integer>3</integer>
+				<integer>71</integer>
 				<key>originalWidth</key>
 				<integer>85</integer>
 				<key>originalHeight</key>
 				<integer>71</integer>
 				<key>x</key>
-				<integer>114</integer>
+				<integer>174</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
-				<real>-0.5</real>
+				<real>0</real>
 				<key>offsetY</key>
-				<real>31</real>
+				<real>0</real>
 			</dict>
 		</dict>
 		<key>metadata</key>

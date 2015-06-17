@@ -103,4 +103,15 @@ private:
 	std::function<void()> _callback;
 };
 
+class BulletExlosion : public Explosion
+{
+public:
+	static BulletExlosion* create(const cocos2d::Vec2& pos, std::function<void()> callback);
+	bool init(const cocos2d::Vec2& pos, std::function<void()> callback);
+
+private:
+
+};
+
+
 #endif /* defined(__Moon3d__Explosion__) */

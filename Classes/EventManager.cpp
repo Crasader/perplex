@@ -126,6 +126,10 @@ void EventManager::loadEvent(std::string eventRes)
 				{
 					int trunitID, trl, trt, trw, trh;
 					fs >> trunitID >> trl >> trt >> trw >> trh;
+					trl *= CC_CONTENT_SCALE_FACTOR();
+					trt *= CC_CONTENT_SCALE_FACTOR();
+					trw *= CC_CONTENT_SCALE_FACTOR();
+					trh *= CC_CONTENT_SCALE_FACTOR();
 					event->createTriggerUnitToRect(trunitID, cocos2d::Rect(trl, trt, trw, trh));
 					break;
 				}
@@ -310,6 +314,10 @@ void EventManager::loadEvent(std::string eventRes)
 				{
 					int l, t, w, h;
 					fs >> l >> t >> w >> h;
+					l *= CC_CONTENT_SCALE_FACTOR();
+					t *= CC_CONTENT_SCALE_FACTOR();
+					w *= CC_CONTENT_SCALE_FACTOR();
+					h *= CC_CONTENT_SCALE_FACTOR();
 					event->createEffectCameraC(cocos2d::Rect(l, t, w, h));
 					break;
 				}

@@ -55,12 +55,13 @@
 'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\crypt32.dll'. Cannot find or open the PDB file.
 'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msasn1.dll'. Cannot find or open the PDB file.
 'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntmarta.dll'. Cannot find or open the PDB file.
+The thread 0xc40 has exited with code 0 (0x0).
 'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\powrprof.dll'. Cannot find or open the PDB file.
-The thread 0xefc has exited with code 0 (0x0).
+The thread 0x1128 has exited with code 0 (0x0).
 'perplex.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\powrprof.dll'
-The thread 0xaf4 has exited with code 0 (0x0).
-The thread 0xbec has exited with code 0 (0x0).
-The thread 0x1658 has exited with code 0 (0x0).
+'perplex.exe' (Win32): Loaded 'D:\Program Files (x86)\Dict\6.3.66.3251\WordStrokeHelper32.dll'. Cannot find or open the PDB file.
+The thread 0xe20 has exited with code 0 (0x0).
+The thread 0xea0 has exited with code 0 (0x0).
 'perplex.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ole32.dll'. Cannot find or open the PDB file.
 'perplex.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ole32.dll'
 Ready for GLSL
@@ -94,1672 +95,970 @@ GameScene::gameInitPerform,0,0
 enter GameScene::gamePlayingPerform....
 Sprite size:2
 enter unit::perform...Unit::perform,unitid = 1
-enter unit::perform...Unit::perform,unitid = 1, active
+enter unit::perform...Unit::perform,unitid = -1163005939, active
 Sprite size:2
 enter unit::perform...Unit::perform,unitid = 5
-enter unit::perform...Unit::perform,unitid = 5, active
+enter unit::perform...Unit::perform,unitid = -1163005939, active
 enter GameScene::gamePlayingPerform....
 Sprite size:2
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,532.000000
-perform ShotLogicF::perform, 282
-perform ShotLogicF::perform, 282
-exit unit::perfrom...Unit::perform, 1
-Sprite size:12
+Unit::unitMove x,y:201.000000,531.000000
+fire......
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:12
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,532.000000
-exit unit::perfrom...Unit::perform, 1
-Sprite size:12
+Unit::unitMove x,y:201.000000,531.000000
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
-Sprite size:12
+enter unit::perform...Unit::perform,unitid = -1163005939, needDelete
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:12
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,530.023193
-perform ShotLogicF::perform, 282
-perform ShotLogicF::perform, 282
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
+Unit::unitMove x,y:201.000000,529.329590
+fire......
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:4
 enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+enter unit::perform...Unit::perform,unitid = -1163005939, needDelete
+Sprite size:4
+Sprite size:4
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:4
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,528.036316
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,527.729004
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:4
+delete sprite...
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,527.192810
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,526.028503
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,525.025085
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,524.328186
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,523.859558
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,522.718872
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,521.686340
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,521.025269
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,520.519653
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,519.329041
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,519.435364
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,517.728333
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,517.708679
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,516.026245
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,516.136475
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,514.326843
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,514.436462
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,512.723938
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,512.837280
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,511.027740
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,511.137268
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,509.328735
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,509.436768
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,507.726929
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,507.835876
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,506.025726
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,506.136963
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,504.328522
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,504.434357
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,502.726318
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,502.832062
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,501.027008
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,501.136749
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,499.325806
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,499.433746
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,497.728302
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,497.836548
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,496.028290
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,496.136353
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,494.327698
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,494.435059
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,492.727905
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,492.233673
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,491.026703
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,489.057587
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,489.326111
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,487.575684
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,487.726501
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,486.135895
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,486.027802
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,484.434692
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,484.237701
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,482.835205
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,482.727112
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,481.135712
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,481.027527
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,479.435516
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,479.286438
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,477.835327
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,477.723450
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,476.135315
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,476.026154
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,474.434723
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,474.326965
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,472.835327
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,472.727173
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,471.135620
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,471.024658
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,469.434235
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,469.325745
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,467.835327
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,467.725555
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,466.135132
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,466.026642
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,464.433838
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,464.324036
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,462.835144
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,462.698730
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,461.134735
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,460.589539
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,459.434845
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,459.101929
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,457.834656
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,457.448120
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,456.134369
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,455.947906
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,454.502167
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,454.320709
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,452.834473
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,452.725006
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,451.134674
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,451.025696
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,449.432678
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,449.324982
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,447.825989
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,447.726074
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,446.134277
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,446.019470
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,444.433990
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,444.358063
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,442.833801
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,442.689575
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,441.133789
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,441.024170
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,439.500702
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,439.323883
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,437.829895
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,437.725372
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,436.132904
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,436.024567
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 enter GameScene::gamePlayingPerform....
-Sprite size:22
+Sprite size:3
 enter unit::perform...Unit::perform,unitid = 1
-Unit::unitMove x,y:201.000000,434.433105
-exit unit::perfrom...Unit::perform, 1
-Sprite size:22
-enter unit::perform...Unit::perform,unitid = 5
-exit unit::perfrom...Unit::perform, 5
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
-Sprite size:22
+Unit::unitMove x,y:201.000000,434.325378
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,432.725189
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,431.025391
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,429.324005
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,427.722809
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,426.022919
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,424.323730
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,422.723938
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,421.025146
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,419.324738
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,417.724945
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,416.024445
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,414.324554
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,412.724548
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,411.024261
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,409.323364
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,407.718658
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,406.022156
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,404.323944
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,402.723450
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,401.024261
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,399.323761
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,397.722351
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,396.023560
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,394.321167
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,392.723267
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,391.023468
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,389.323364
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,387.723450
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,386.023560
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,384.323059
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,382.722046
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,381.023254
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,379.322052
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,377.721466
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,376.023163
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,374.322662
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,372.722565
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,371.018768
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,369.321075
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,367.722687
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,366.021301
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,364.322510
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,362.721802
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,361.022400
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,359.322296
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,357.722382
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,356.022369
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,354.320374
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,352.721466
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,351.021454
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,349.321564
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,347.721375
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,346.021881
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,344.321686
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,342.721100
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,341.021698
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,339.320007
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,337.717316
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,335.776917
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,332.557220
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,331.021210
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,329.320099
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,327.302185
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,326.020782
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,324.320587
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,322.720673
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,321.020569
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,319.320282
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,317.720367
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,316.020569
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,314.320068
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,312.719177
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,311.020081
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,309.311676
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,307.719788
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
+enter GameScene::gamePlayingPerform....
+Sprite size:3
+enter unit::perform...Unit::perform,unitid = 1
+Unit::unitMove x,y:201.000000,306.019897
+exit unit::perfrom...Unit::perform, -1163005939
+Sprite size:3
+Sprite size:3
 keyListner...48

@@ -43,10 +43,10 @@ GameScene::GameScene()
 	, _playerInCamara(false)
 	, _pauseTick(0)
 	, _pauseTickCount(0)
-	, _life(1)
+	, _life(2)
 	, _playerDie(false)
 	, _playerID(0)
-	, _difficulty(0)
+	, _difficulty(3)
 	, _stage(0)
 	, _mapSectonID(0)
 	, _bullets(0)
@@ -213,7 +213,8 @@ float GameScene::getSceneWidth()
 void GameScene::loadEvent(int stage, int mapSectonID)
 {
 	char filename[256];
-	sprintf(filename, "/mapdat/l%d_event_mobile.dat", MAPID_EVENT[stage][mapSectonID]);
+	sprintf(filename, "l%d_event_mobile.dat", MAPID_EVENT[stage][mapSectonID]);
+	_eventManager = nullptr;
 	_eventManager = std::shared_ptr<EventManager>(new EventManager(this, filename));
 }
 
@@ -415,10 +416,10 @@ void GameScene::bulletCollision()
 			{
 				continue;
 			}
+			eb->setLocalZOrder(a->getLocalZOrder());
 			if (a->beAttack(hitRect, power) != 0)
 			{
 				eb->setBump();
-				eb->setCastoff();
 				eb->removeFromParent();
 				break;
 			}
@@ -674,7 +675,7 @@ void GameScene::gamePlayingPerform(float dt)
 	//player¸´»î
 	if (_player != nullptr && _player->getPower() <= 0 && _state == EGS_GamePlaying && _life > 0)
 	{
-		_playerDelay += dt;
+		_playerDelay ++;
 		if (_playerDelay > RELIFE_DEADLINE)
 		{
 			if (_difficulty == 3 && _life > 1)
@@ -706,8 +707,8 @@ void GameScene::performUnit(float dt)
 		{
 			iter->removeFromParent();
 			log("delete sprite...");
-			UnitManager::_sprites.eraseObject(iter);
-			i--;
+			UnitManager::_sprites.eraseObject(iter, true);
+			continue;
 		}
 		else
 		{
@@ -728,8 +729,10 @@ void GameScene::changeMapByEvent(int stage, int mapFileID)
 	}
 	else
 	{
-		_stage = EGS_LoadMap;
-		_stateStep = mapFileID;
+		CCASSERT(_mapSectonID != mapFileID, "map id is same");
+		_state = EGS_LoadMap;
+		_stateStep = 0;
+		_mapSectonID = mapFileID;
 		/*save();*/
 
 	}
@@ -794,6 +797,8 @@ void GameScene::refreshMap(float offY, bool move)
 
 void GameScene::startGameState()
 {
+	_state = EGS_Stat;
+	_stateStep = 0;
 }
 
 void GameScene::startGameEnd()
@@ -839,7 +844,7 @@ void GameScene::doPeroidicTick(float dt)
 			_stateStep = 1;
 			break;
 		case 1:
-
+			setGameState(EGS_GamePlaying);
 			break;
 		default:
 			break;
@@ -857,6 +862,7 @@ void GameScene::gameLoadMapPerform()
 	case 1:
 		_levelEnemyCount = 0;
 		_cameraUnit = nullptr;
+		_unitManager = nullptr;
 		_unitManager = std::shared_ptr<UnitManager>(new UnitManager(this));
 		break;
 	case 2:
@@ -866,7 +872,7 @@ void GameScene::gameLoadMapPerform()
 		}
 		break;
 	case 3:
-		loadEvent(_state, _mapSectonID);
+		loadEvent(_stage, _mapSectonID);
 		break;
 	case 4:
 		_gameEnd = false;
@@ -1026,7 +1032,11 @@ void GameScene::gameOver()
 
 void GameScene::playerRelife()
 {
-	
+	_playerDie = false;
+	_player->setPower(1000);
+	_playerPower = _player->getPower();
+	_scoreLevel += 1;
+	_player->relive();
 }
 
 

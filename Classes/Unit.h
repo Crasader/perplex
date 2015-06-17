@@ -57,6 +57,16 @@ enum UnitSDIR
 	D_S_RIGHT_DOWN = 7,
 };
 
+enum class UniteState
+{
+	INVALID,
+	ACTIVATE,
+	EXPLOSION,
+	DEATH,
+	CASTOFF,
+	BEATTAK,
+	RELIVE,
+};
 class Unit : public GameEntity
 {
 public:
@@ -114,8 +124,9 @@ public:
 	void setMotionAndDIR(int motion, int wdir);
 	void fireRequire(int logicType, int weaponResID);
 	void processDie(float dt);
+
 	void processTool();
-	void unitMove(float dt);
+	void unitMoveTo(const cocos2d::Vec2& pos);
 	bool enableMove(int newX, int newY);
 	int getCastoffStage() { return _castoffStage; }
 	void setEventUnit(bool eventUnit);
@@ -137,8 +148,7 @@ public:
 	cocos2d::Vec2 getShotPos(int posIndex);
 	Rect getHitRect() const;
 	virtual Vec2 getPositionInCamera() { return getPosition(); };
-// 	void setPosition(float x, float y) override;
-// 	void setPosition(const Vec2& pos);
+	void relive();
 	void setPatrol(const Vec2& pos);
 	float getSpeed();
 	void setMotionData(std::vector<int> ids);
@@ -152,6 +162,7 @@ public:
 	void setMoveDir(std::vector<int> dir);
 	void setMoveDelay(std::vector<int> delay);
 	Vec2 getShotPositionInWorld(int index, float angle, const cocos2d::Vec2& pos = Vec2::ZERO);
+	Vec2 getVec() { return Vec2(_moveX, _moveY); }
 private:
 	bool isSceneTop();
 	bool isSceneButton();
@@ -159,10 +170,11 @@ private:
 	bool isSceneUnder();
 	bool isSceneAbove();
 	bool isSceneTopAbove();
-	void activateUnit();
+	bool isActivate();
 	void fire(float dt);
 protected:
 	void drawDebug(const cocos2d::Rect& rect);
+	void processExplosion(float dt);
 protected:
     bool		_alive;
 	bool		_active;//是否被激活
@@ -175,10 +187,10 @@ protected:
 	int			_iDieExplodCount;//死亡爆炸动画个数
 	int			_startExplodeTick;//爆炸开始时间
 	int			_campType;
-	int			_unitID;	//在事件系统的ID
 	int			_moveType;	//运动方式
 	int			_maxHP;		//血的最大值
 	int			_BodyLevel;//身体的重量级数
+	UniteState	_state;
 	//指令集
 	int			_orderType;//指令类型 0 －－ 初始指令    1 －－ 循环指令
 	int			_currentOrderIndex;

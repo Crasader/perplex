@@ -23,7 +23,7 @@ private:
 class ShadowSprite : public Node, public IShadow
 {
 public:
-	ShadowSprite() :_offset(50, -50), _type(0), _target(nullptr), _model(nullptr){}
+	ShadowSprite() :_offset(100, -100), _type(0), _target(nullptr), _model(nullptr){}
 	CREATE_FUNC(ShadowSprite);
 	void setOffset(Point p) { _offset = p; }
 	Point getOffset() { return _offset; }

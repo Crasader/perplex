@@ -434,6 +434,7 @@ public class Animation {
 		if (flip) {
 			tmpx = this.originX * 2 - (frame.getLeft() + frame.getWidth()) - this.left;
 		}
+		
 		frame.paint(g,
 					left + tmpx,
 					top + tmpy,
@@ -529,6 +530,7 @@ class AnimFrame {
 			if (flip) {
 				tmpx = this.width - (tmpx + image.getWidth());
 			}
+			
 			image.paint(g,
 						left + tmpx,
 						top + tmpy,

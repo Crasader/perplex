@@ -9,10 +9,6 @@ D:\projects\perplex\proj.android\bin\res\drawable-mdpi\icon.png \
 D:\projects\perplex\proj.android\assets\anim \
 D:\projects\perplex\proj.android\assets\b.png \
 D:\projects\perplex\proj.android\assets\changjing01-01.jpg \
-D:\projects\perplex\proj.android\assets\lordplane.csb \
-D:\projects\perplex\proj.android\assets\lordplane.ExportJson \
-D:\projects\perplex\proj.android\assets\lordplane0.plist \
-D:\projects\perplex\proj.android\assets\lordplane0.png \
 D:\projects\perplex\proj.android\assets\map \
 D:\projects\perplex\proj.android\assets\mapdat \
 D:\projects\perplex\proj.android\assets\res \
@@ -68,12 +64,6 @@ D:\projects\perplex\proj.android\assets\mapdat\l2_floor_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l2_mapinfo_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l2_rect_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\l2_unit_mobile.dat \
-D:\projects\perplex\proj.android\assets\mapdat\newmap_building_mobile.dat \
-D:\projects\perplex\proj.android\assets\mapdat\newmap_event_mobile.dat \
-D:\projects\perplex\proj.android\assets\mapdat\newmap_floor_mobile.dat \
-D:\projects\perplex\proj.android\assets\mapdat\newmap_mapinfo_mobile.dat \
-D:\projects\perplex\proj.android\assets\mapdat\newmap_rect_mobile.dat \
-D:\projects\perplex\proj.android\assets\mapdat\newmap_unit_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\unitres_mobile.dat \
 D:\projects\perplex\proj.android\assets\mapdat\version_mobile.dat \
 D:\projects\perplex\proj.android\assets\res\Default \

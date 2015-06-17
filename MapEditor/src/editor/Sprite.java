@@ -70,7 +70,7 @@ interface Flipable {
 abstract class BasicSprite
 	implements Sprite {
 
-	private int id, x, y, movingX, movingY;
+	private int id, x, y, movingX, movingY, rotate;
 	private boolean selected, moving;
 	private String name;
 	MapInfo info = MainFrame.self.getMapInfo();
@@ -84,6 +84,7 @@ abstract class BasicSprite
 		this.x = x;
 		this.y = y;
 		this.name = name;
+		this.rotate = 90;
 	}
 
 	public int compareTo(Object o) {
